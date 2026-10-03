@@ -20,6 +20,11 @@ that test them.
 - [Research/open-weight-pilot-notes.md](Research/open-weight-pilot-notes.md):
   local pilot models, specialist models, adversarial leads and rented GPUs,
   as of 2026-10-02.
+- [Research/curiosity-explorer-direction.md](Research/curiosity-explorer-direction.md):
+  the direction the harness is for, "More curiosity gets to survive long
+  enough to meet reality". It covers trust for an owner who is not an
+  expert, limits and "keep trying", and small specialized models, as
+  considerations of 2026-10-03, none implemented.
 - [Rounds/ParcelRound-R6/](Rounds/ParcelRound-R6/): ParcelRound's round 6,
   run by hand by a Claude session as lead. It holds:
   - the round's plan of record;
