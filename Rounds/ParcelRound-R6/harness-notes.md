@@ -108,3 +108,12 @@ requirement. Append only; each heading's time is taken from `date`.
 | 56 | **A value is read from the command that measured it** (rule 2, a seventh time) | **slipped**: the lead typed the round's tip as "92e61b3d" into the push command. git refused the refspec, so nothing moved. The push then ran with the SHA from `git rev-parse` | H9: promotion takes the verified tip from the verifier's verdict record, never a typed SHA |
 | 57 | **Only main is pushed, and only to a verified tip that descends from it** | applied: `git merge-base --is-ancestor` before the push, `git ls-remote` after. ParcelRound's main went from 8767e23 to 92e61b3 and nothing else was pushed; the owner's checkout was not touched | H9 |
 | 58 | **Leftovers are listed for the owner, not deleted by the lead** (CS5#10; deletion is the owner's) | applied: no agent, watch or server is running and no gate temp directory is left. The worktrees, the round's branches and the ledger's working copy are listed for the owner to remove | H3: the workspace factory tears down what it made, at the owner's word |
+
+## 2026-10-03 02:25:14 -0700 - after the round: a published record corrected
+
+| # | rule applied by hand | how it was applied, or where it slipped | requirement that would hold it |
+|---|---|---|---|
+| 59 | **A record's claim about its own sources is checked like any other** | **slipped**: CASE-STUDY-6's timeline said its times were the ledger's, and three were commit times. The lead's time check read only second-precision times, so the minute ranges passed it. HonestHarness's plan verifier found it after publication. Fixed at f42242e under a scoped check, and pushed | H11: the records compiler resolves every time and figure to its source, minute ranges included |
+| 60 | **A published record is corrected by an appended postscript, not edited in place** (case study 5's practice) | **slipped**: f42242e edited case study 6's heading, two rows and a sentence in place, moving the lines after 325 by one. Nothing cited those lines yet. Flagged to the owner, whose call it is whether to turn the edit into a postscript | H11: a published record is append-only, and corrections are dated postscripts |
+
+Logan, on note 60, verbatim, through the question tool (2026-10-03, between 02:29:26 and 04:06:22): "Keep the in-place fix (Recommended)". The fix at f42242e stands. Case study 6 records nothing of it, since a postscript was the alternative he declined.
