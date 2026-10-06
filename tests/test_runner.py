@@ -637,3 +637,30 @@ def test_a_caught_peak_stop_is_recorded_as_stopped(tmp_path, prices):
     run = lines(tmp_path / "records" / "runs" / "catchespeak.jsonl")[0]
     assert run["outcome"]["status"] == "stopped" and "peak" in run["stop_reason"]
     assert "the suite returned fail" in run["outcome"]["detail"]
+
+
+class Appends(Echo):
+    """Keeps one message list and appends to it between calls, as a
+    multi-turn suite does."""
+    name = "appends"
+
+    def run_item(self, ctx, item):
+        msgs = [{"role": "user", "content": "one"}]
+        t = ctx.chat(msgs)
+        msgs.append({"role": "assistant", "content": t.content})
+        msgs.append({"role": "user", "content": "two"})
+        ctx.chat(msgs)
+        return ItemResult("pass", "")
+
+
+def test_the_transcript_keeps_each_request_as_sent(tmp_path, prices, off_peak_clock):
+    # P2's finding (P2.md 12:52:07): a request recorded by reference showed the
+    # final history for every earlier call.
+    fake = FakeServer(prices=prices, clock=off_peak_clock)
+    with fake as url:
+        r, _ = runner(tmp_path, url, prices, off_peak_clock)
+        s = r.run_batch(Appends(1))
+    path = tmp_path / "transcripts" / s["batch"] / f"{s['batch']}.i0.r0.json"
+    calls = json.loads(path.read_text(encoding="utf-8"))["calls"]
+    assert [c["request"] for c in calls] == [b for b in fake.requests if not is_probe(b)]
+    assert [len(c["request"]["messages"]) for c in calls] == [1, 3]

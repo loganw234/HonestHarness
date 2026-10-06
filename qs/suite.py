@@ -52,6 +52,7 @@ Limits, each stated by the behaviour it concedes:
 """
 from __future__ import annotations
 
+import copy
 import json
 import re
 import time as _time
@@ -203,6 +204,9 @@ class Context:
         self.sampling = self.provider.sampling_record(kw["thinking"], kw.get("temperature"),
                                                       kw.get("top_p"))
         body = self.provider.build_request(self.endpoint.model, messages, **kw)
+        # The record keeps each request as it was sent, whatever the suite later
+        # does to the lists it passed (P2's finding, P2.md 12:52:07).
+        sent = copy.deepcopy(body)
         if self.before_call is not None:
             try:
                 self.before_call()
@@ -212,12 +216,12 @@ class Context:
         try:
             turn = self.provider.chat(self.client, body)
         except ProviderError as e:
-            self.calls.append({"request": body, "error": {"status": e.status, "body": e.body}})
+            self.calls.append({"request": sent, "error": {"status": e.status, "body": e.body}})
             if stops_batch(e.status):
                 self._stop(f"the provider returned HTTP {e.status}")
             raise
         except Exception as e:
-            self.calls.append({"request": body,
+            self.calls.append({"request": sent,
                                "error": {"type": type(e).__name__, "message": str(e)}})
             self._stop(f"a reply did not arrive whole ({type(e).__name__}), "
                        "so its cost is unmetered")
@@ -231,11 +235,11 @@ class Context:
             self.models_reported.append(turn.model)
         if turn.system_fingerprint and turn.system_fingerprint not in self.fingerprints:
             self.fingerprints.append(turn.system_fingerprint)
-        self.calls.append({"request": body, "turn": {
+        self.calls.append({"request": sent, "turn": copy.deepcopy({
             "content": turn.content, "reasoning_content": turn.reasoning_content,
             "tool_calls": turn.tool_calls, "finish_reason": turn.finish_reason,
             "model": turn.model, "system_fingerprint": turn.system_fingerprint,
-            "usage": vars(turn.usage)}, "cost_usd": usd(cost), "rate_period": period})
+            "usage": vars(turn.usage)}), "cost_usd": usd(cost), "rate_period": period})
         return turn
 
 
