@@ -55,7 +55,14 @@ Limits, each stated by the behaviour it concedes:
   needs;
 - host paths in Docker's error text are replaced by labels before they reach a
   record. A path in a form the redaction does not match would pass into a run's
-  detail, where the gate's privacy check reads it before any push.
+  detail, where the gate's privacy check reads it before any push;
+- a shell command longer than INLINE_COMMAND_CHARS runs from a file in /tmp, so
+  bash's own messages about it name that file where a shorter one's say
+  "line N", and it needs room in /tmp;
+- a NUL in a shell command or a read_file path, and a lone surrogate in
+  write_file content or in a command longer than INLINE_COMMAND_CHARS, raise in
+  the handler (ValueError or UnicodeEncodeError), and the loop ends the run as
+  error.
 """
 from __future__ import annotations
 
@@ -111,6 +118,7 @@ BACKSTOP_S = 15          # how long past a call's timeout the host itself waits
 HEAD_BYTES = 64 * 1024   # kept from the start of a call's output
 TAIL_BYTES = 16 * 1024   # and from its end
 DOCKER_TIMEOUT_S = 120   # for docker's own commands: run, rm, ps, inspect
+INLINE_COMMAND_CHARS = 8000   # a longer shell command goes in through stdin, not the command line
 
 READ_SCRIPT = """\
 import sys
@@ -394,7 +402,11 @@ class DockerSandbox:
         except (OSError, subprocess.TimeoutExpired):
             return None
 
-    def start(self) -> dict:
+    def start(self, lifetime_s: float | None = None) -> dict:
+        """Start the container. lifetime_s, when given (the agent loop gives
+        its budget's), replaces the one the sandbox was made with."""
+        if lifetime_s is not None:
+            self.lifetime_s = int(lifetime_s)
         ok, why = docker_status(self.image, self.docker)
         if not ok:
             raise SandboxUnavailable(why)
@@ -444,7 +456,26 @@ class DockerSandbox:
 
     # -- calls ------------------------------------------------------------------------
     def shell(self, command: str, limit_s: float) -> ExecResult:
-        return self._exec(["bash", "-o", "pipefail", "-c", command], limit_s)
+        """A command up to INLINE_COMMAND_CHARS goes to `bash -c` as an argument.
+        A longer one would pass Windows' 32767-character command line, so it is
+        written through stdin to a file in /tmp and run from there, then the
+        file is removed. A NUL is refused in either form, as Popen refuses one."""
+        if "\x00" in command:
+            raise ValueError("embedded null character in the command")
+        if len(command) <= INLINE_COMMAND_CHARS:
+            return self._exec(["bash", "-o", "pipefail", "-c", command], limit_s)
+        path = f"/tmp/.hh-command-{secrets.token_hex(6)}"
+        wrote = self._exec(["sh", "-c", 'cat > "$1"', "sh", path], limit_s,
+                           stdin=command.encode("utf-8"))
+        if wrote.exit_code != 0 or wrote.timed_out:
+            return wrote
+        try:
+            return self._exec(["bash", "-o", "pipefail", path], limit_s)
+        finally:
+            try:
+                self._exec(["rm", "-f", path], 30)
+            except SandboxError:
+                pass       # the call's own result, or its error, is what the run records
 
     def read_file(self, path: str, start: int, count: int, limit_s: float) -> ExecResult:
         return self._exec(["python3", "-c", READ_SCRIPT, path, str(start), str(count)], limit_s)

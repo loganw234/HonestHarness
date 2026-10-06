@@ -5,8 +5,8 @@ import pytest
 from qs.agent import Budgets, ScriptedSandbox, Tool, ToolEnv, ToolOutcome, builtin_tools
 from qs.agent.sandbox import HEAD_BYTES, TAIL_BYTES, Capture
 from qs.agent.scripted import result
-from qs.agent.tools import (REMOVED, check_tools, find_leaks, format_result, parse_arguments,
-                            render_output, strip_control)
+from qs.agent.tools import (MALFORMED_KINDS, REMOVED, check_tools, find_leaks, format_result,
+                            parse_arguments, render_output, strip_control)
 
 
 def schema_of(name):
@@ -43,26 +43,37 @@ def test_a_bad_tool_set_is_refused(tools, says):
     assert says in str(e.value)
 
 
-@pytest.mark.parametrize("raw, says", [
-    ('{"command": ', "not valid JSON: Expecting value at line 1, column 13"),
-    ("[1]", "must be a JSON object, not an array"),
-    ('"ls"', "must be a JSON object, not a string"),
-    ("{}", "at /: 'command' is a required property"),
-    ('{"command": 5}', "at /command: 5 is not of type 'string'"),
-    ('{"command": "ls", "x": 1}', "Additional properties are not allowed ('x' was unexpected)"),
-    ('{"command": ""}', "at /command:"),
-    (None, "carried no arguments"),
+@pytest.mark.parametrize("raw, says, kind", [
+    ('{"command": ', "not valid JSON: Expecting value: line 1 column 13 (char 12)", "not valid JSON"),
+    ('{"command": "ls', "Unterminated string starting at: line 1 column 13", "not valid JSON"),
+    ("[1]", "must be a JSON object, not an array", "not a JSON object"),
+    ('"ls"', "must be a JSON object, not a string", "not a JSON object"),
+    ("{}", "at /: 'command' is a required property", "against the schema"),
+    ('{"command": 5}', "at /command: 5 is not of type 'string'", "against the schema"),
+    ('{"command": "ls", "x": 1}', "Additional properties are not allowed ('x' was unexpected)",
+     "against the schema"),
+    ('{"command": ""}', "at /command:", "against the schema"),
+    (None, "carried no arguments", "no arguments"),
 ])
-def test_malformed_arguments_name_what_failed(raw, says):
-    args, err = parse_arguments(raw, schema_of("shell"))
-    assert args is None and says in err
+def test_malformed_arguments_name_what_failed(raw, says, kind):
+    args, err, got = parse_arguments(raw, schema_of("shell"))
+    assert args is None and says in err and got == kind and got in MALFORMED_KINDS
+
+
+@pytest.mark.parametrize("raw, kind", [
+    ('{"command": ' + "[" * 50_000, "nested too deeply"),     # past the JSON parser's depth
+    ('{"command": ' + "9" * 5_000 + "}", "not valid JSON"),    # past Python's integer digits
+], ids=["deep", "long-number"])
+def test_arguments_too_deep_or_too_long_to_read_are_answered_not_raised(raw, kind):
+    args, err, got = parse_arguments(raw, schema_of("shell"))
+    assert args is None and err and got == kind
 
 
 def test_well_formed_arguments_pass():
-    assert parse_arguments('{"command": "ls -la"}', schema_of("shell")) == ({"command": "ls -la"}, None)
+    assert parse_arguments('{"command": "ls -la"}', schema_of("shell")) == ({"command": "ls -la"}, None, None)
     assert parse_arguments('{"path": "a", "start_line": 3}', schema_of("read_file"))[1] is None
-    args, err = parse_arguments('{"path": "a", "start_line": 0}', schema_of("read_file"))
-    assert args is None and "/start_line" in err
+    args, err, kind = parse_arguments('{"path": "a", "start_line": 0}', schema_of("read_file"))
+    assert args is None and "/start_line" in err and kind == "against the schema"
 
 
 # TC §7.9's and §7.4's tokens, and DeepSeek's own forms (TC §3.4).

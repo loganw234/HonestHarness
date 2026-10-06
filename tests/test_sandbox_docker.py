@@ -184,6 +184,36 @@ def test_git_and_python_run_inside(started):
     assert code == 0 and "the first commit" in out
 
 
+def test_a_command_past_the_command_line_limit_runs(started):
+    b, _ = started
+    payload = "x" * 100_000                       # Windows' command line holds 32767 characters
+    r = b.shell(f"printf '%s' '{payload}' | wc -c", 60)
+    out = (r.head + r.tail).decode()
+    assert r.exit_code == 0 and out.strip() == "100000" and b.alive()
+    code, listing = sh(b, "ls -A /tmp")
+    assert ".hh-command-" not in listing                 # the command's file is removed
+
+
+def test_a_start_that_raises_after_docker_run_still_removes_the_container(tmp_path, monkeypatch):
+    _, _, scratch = make_dirs(tmp_path)
+    b = DockerSandbox(scratch, [], limits=SMALL)
+    real_shell = DockerSandbox.shell
+
+    def shell_that_breaks(self, command, limit_s):
+        if "git config --global" in command:      # the setup start() runs after docker run
+            raise RuntimeError("a fault that is not a SandboxError")
+        return real_shell(self, command, limit_s)
+    monkeypatch.setattr(DockerSandbox, "shell", shell_that_breaks)
+    try:
+        with FakeServer(ScriptedModel(calls(tool_call("r", "report", {"text": "x"})))) as url:
+            res = run_agent(context(url), messages=[{"role": "user", "content": "go"}],
+                            tools=builtin_tools(), sandbox=b)
+        assert res.outcome == "error" and "RuntimeError" in res.cause
+        assert res.sandbox["removed"] is True and gone(b.name)
+    finally:
+        subprocess.run(["docker", "rm", "-f", b.name], capture_output=True)   # only if the test failed
+
+
 def test_a_missing_source_is_refused_and_never_created(tmp_path):
     _, _, scratch = make_dirs(tmp_path)
     b = DockerSandbox(scratch, [Mount(tmp_path / "missing", "repo")], limits=SMALL)

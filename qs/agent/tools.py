@@ -17,13 +17,18 @@ a mount or a permission.
 Malformed arguments are answered as tool-result errors that name what failed:
 the JSON parse error with its position, or a schema violation's JSON pointer and
 what the schema expected (TC §7.4, step 6). Arguments are never repaired: a
-malformed call is the model's, and is recorded as it was sent.
+malformed call is the model's, and is recorded as it was sent. The error may
+quote the model's text, so it goes to the model and the local log only; a
+published record names only its kind, from MALFORMED_KINDS.
 
 Limits, each stated by the behaviour it concedes:
 - a control token in a form not listed passes; all other content is verbatim;
 - the delimiters mark output as data; they do not stop its text addressing the
   model;
-- a token split across the point where the output was cut is not seen.
+- a token split across the point where the output was cut is not seen;
+- write_file content holding a lone surrogate (JSON's "\\ud800" escape, say)
+  cannot be encoded as UTF-8: the handler raises UnicodeEncodeError, and the
+  loop ends the run as error, recording a model-made input as a broken tool.
 """
 from __future__ import annotations
 
@@ -104,24 +109,43 @@ def check_tools(tools: list[Tool]) -> dict[str, tuple[Tool, Draft202012Validator
     return table
 
 
-def parse_arguments(raw, validator: Draft202012Validator) -> tuple[dict | None, str | None]:
-    """The arguments as a dict, or None and what failed, for the model to read."""
+def parse_arguments(raw, validator: Draft202012Validator) -> tuple[dict | None, str | None, str | None]:
+    """(arguments, None, None), or (None, what failed, its kind).
+
+    What failed is for the model to read, and may quote what the model sent.
+    Its kind is one of a fixed few, MALFORMED_KINDS, and is all a published
+    record may say about it. Everything json or the schema check raises on an
+    argument string is answered here, including JSON nested too deeply for the
+    parser and numbers too long for it to read."""
     if not isinstance(raw, str):
-        return None, "the call carried no arguments; send a JSON object, {} for none"
+        return None, "the call carried no arguments; send a JSON object, {} for none", "no arguments"
     try:
         args = json.loads(raw)
     except json.JSONDecodeError as e:
-        return None, f"the arguments are not valid JSON: {e.msg} at line {e.lineno}, column {e.colno}"
+        return None, f"the arguments are not valid JSON: {e}", "not valid JSON"
+    except RecursionError:
+        return None, "the arguments are nested too deeply to read", "nested too deeply"
+    except ValueError as e:      # such as a number with more digits than Python will convert
+        return None, f"the arguments cannot be read: {e}", "not valid JSON"
     if not isinstance(args, dict):
-        return None, f"the arguments must be a JSON object, not {JSON_TYPES.get(type(args), 'that')}"
-    err = best_match(validator.iter_errors(args))
+        return (None, f"the arguments must be a JSON object, not {JSON_TYPES.get(type(args), 'that')}",
+                "not a JSON object")
+    try:
+        err = best_match(validator.iter_errors(args))
+    except RecursionError:
+        return None, "the arguments are nested too deeply to check", "nested too deeply"
     if err is not None:
         pointer = "/" + "/".join(str(p) for p in err.absolute_path)
         expected = json.dumps(err.validator_value, ensure_ascii=False)
         if len(expected) > 200:
             expected = expected[:200] + "..."
-        return None, f"at {pointer}: {err.message} (the schema's {err.validator}: {expected})"
-    return args, None
+        return (None, f"at {pointer}: {err.message} (the schema's {err.validator}: {expected})",
+                "against the schema")
+    return args, None, None
+
+
+MALFORMED_KINDS = frozenset({"no arguments", "not valid JSON", "nested too deeply", "not a JSON object",
+                             "against the schema", "an unknown tool"})
 
 
 # -- untrusted output ----------------------------------------------------------------

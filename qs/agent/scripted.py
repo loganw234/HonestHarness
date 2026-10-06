@@ -65,6 +65,7 @@ class ScriptedSandbox:
                       for k, v in (files or {}).items()}
         self.mount_names = tuple(mounts)
         self.started = self.stopped = self.dead = False
+        self.lifetime_s: float | None = None          # what start() was given
         self.commands: list[tuple[str, str]] = []    # every call, in order: (kind, command or path)
 
     def mounts(self) -> list[dict]:
@@ -76,8 +77,9 @@ class ScriptedSandbox:
     def redact(self, text) -> str:
         return text if isinstance(text, str) else (text or b"").decode("utf-8", "replace")
 
-    def start(self) -> dict:
+    def start(self, lifetime_s: float | None = None) -> dict:
         self.started = True
+        self.lifetime_s = lifetime_s
         return {**self.describe(), "image_id": None, "running_at_start": 0}
 
     def alive(self) -> bool:

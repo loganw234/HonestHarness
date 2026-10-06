@@ -2,7 +2,8 @@
 
     python sandbox/controls.py --parcelround <ParcelRound checkout> --work <a new directory>
 
-1. It reads `docker ps`, and refuses if Docker or the pinned image is absent.
+1. It refuses, with exit 2, if Docker or the pinned image is absent, before it
+   runs anything else; then it reads `docker ps`.
 2. It runs tests/test_sandbox_docker.py. A skip there counts as a failure here.
 3. It runs the mounted-gate control: round 6's gate, ParcelRound's
    tools/check_method.py at f42242e, on the host and inside the sandbox.
@@ -23,6 +24,15 @@
 It exits 0 only when every control holds. Its output names no absolute path:
 the source is <source>, and the work directory <work>. ParcelRound's gate masks
 what it refuses, so its output holds none either.
+
+Limits, each stated by the behaviour it concedes:
+- G2 asserts the clone before the host run, G3, and not again before the mount,
+  G4: a gate that wrote into its own tree on the host would reach the container
+  unasserted. Round 6's gate writes nothing there (P2.md 14:56:59, measured on
+  the clone after a real run);
+- G5 holds when the two verdicts match, whatever they are: a gate that fails the
+  same way on both sides reads "held". The control compares the two places; it
+  does not judge round 6's tree.
 """
 from __future__ import annotations
 
@@ -46,7 +56,10 @@ GATE_TIMEOUT_S = 900
 
 def git(*args: str) -> subprocess.CompletedProcess:
     env = dict(os.environ, GIT_OPTIONAL_LOCKS="0")
-    return subprocess.run(["git", *args], capture_output=True, text=True, encoding="utf-8", env=env)
+    try:
+        return subprocess.run(["git", *args], capture_output=True, text=True, encoding="utf-8", env=env)
+    except OSError:
+        return subprocess.CompletedProcess(["git", *args], 127, "", "git could not be run")
 
 
 def verdict(text: str) -> tuple[dict, dict, str | None]:
@@ -136,6 +149,9 @@ def gate_control(source: Path, work: Path) -> bool:
     match = bool(hf) and hs == cs and hf == cf and host.returncode == inside_code and complete
     if match:
         print(f"   G5 held: the verdicts match ({hf})")
+    elif not complete:
+        print("   G5 NOT HELD: the container's output was cut short or timed out, so the verdicts "
+              "cannot be compared")
     else:
         print(f"   G5 NOT HELD: verdicts differ, a finding: host {hf!r} exit {host.returncode}; "
               f"container {cf!r} exit {inside_code}")
@@ -148,14 +164,19 @@ def main(argv: list[str]) -> int:
     ap.add_argument("--work", required=True, help="a new or empty directory for the clone")
     a = ap.parse_args(argv)
     source, work = Path(a.parcelround), Path(a.work)
-    print("== docker ps")
-    ps = subprocess.run(["docker", "ps", "--format", "{{.Names}}"], capture_output=True, text=True)
-    names = ps.stdout.split()
-    print(f"   {len(names)} containers running; of them named hh-sbx-: {[n for n in names if n.startswith('hh-sbx-')]}")
-    ok, why = docker_status()
+    ok, why = docker_status()          # first: nothing runs docker before this says it is there
     if not ok:
         print(f"REFUSED: {why}")
         return 2
+    print("== docker ps")
+    try:
+        ps = subprocess.run(["docker", "ps", "--format", "{{.Names}}"], capture_output=True, text=True,
+                            timeout=60)
+    except (OSError, subprocess.TimeoutExpired) as e:
+        print(f"REFUSED: docker ps did not answer ({type(e).__name__})")
+        return 2
+    names = ps.stdout.split()
+    print(f"   {len(names)} containers running; of them named hh-sbx-: {[n for n in names if n.startswith('hh-sbx-')]}")
     if not source.is_dir():
         print("REFUSED: <source> is not a directory")
         return 2

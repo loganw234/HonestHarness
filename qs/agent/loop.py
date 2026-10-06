@@ -30,11 +30,13 @@ How a run ends, and what it is recorded as:
   aborted, D10) or a tool call without a usable id; a tool's handler raised; or
   the loop itself raised. When Context has set stop_reason, the outcome is its
   stop_kind, and the runner stops the batch whatever this returns.
-The loop starts the sandbox before the first call and stops it in a finally
-block, so the container is removed on every path. run_agent never raises: every
-ending is an AgentResult. item_result() maps stopped and error to those statuses
-and never asks the suite's judge about them, so a run a budget stopped is never
-scored as "found nothing".
+The loop starts the sandbox before the first call, giving it a lifetime of the
+run's max_run_seconds, plus one call's limit, plus LIFETIME_MARGIN_S, so the
+container outlasts any run the budget allows. It stops the sandbox in a finally
+block whatever start() raised, so the container is removed on every path.
+run_agent never raises: every ending is an AgentResult. item_result() maps
+stopped and error to those statuses and never asks the suite's judge about them,
+so a run a budget stopped is never scored as "found nothing".
 
 What is recorded:
 - every model call and reply: Context.calls, in the local transcript;
@@ -43,14 +45,22 @@ What is recorded:
   so it reaches the local transcript only (P0, 0692de3);
 - a summary in ItemResult.data, which the published record holds: counts, the
   budgets, the image and its id, the mounts' targets and labels, the limits, and
-  whether the container was removed. No tool output, no model text, no host path.
+  whether the container was removed. No tool output, no model text, no host path:
+  a malformed call's error, which may quote the model, stays in the log, and the
+  published cause names only its kind; every cause is cut to CAUSE_CHARS.
 
 Limits, each stated by the behaviour it concedes:
 - the time budget is checked between calls, so a run can pass it by one model
   call and one tool call;
 - the scratch's size is checked after each turn, so a turn can pass it by what
   its calls write within their limits;
-- the calls of one turn run one after another, never in parallel.
+- the calls of one turn run one after another, never in parallel;
+- a NUL in a shell command or a read_file path, and a lone surrogate in
+  write_file content or in a shell command longer than the sandbox's
+  INLINE_COMMAND_CHARS, make the handler raise; the run ends as error, recording
+  a model-made input as a broken tool;
+- a cause from a provider or a failed call keeps up to 300 characters of the
+  provider's or the exception's text, after the key is redacted.
 """
 from __future__ import annotations
 
@@ -71,6 +81,8 @@ NUDGE = ("You did not call a tool. Continue your work with the tools, or call {r
          "the run with your report.")
 PROVIDER_CONDITIONS = frozenset({"content_filter", "insufficient_system_resource", "aborted"})
 JUDGED = frozenset({"pass", "fail", "error", "refused", "skipped"})
+CAUSE_CHARS = 500            # a cause is cut to this before anything records it
+LIFETIME_MARGIN_S = 3600     # how long the container outlives the run's budget
 
 
 @dataclass
@@ -169,6 +181,8 @@ def run_agent(ctx: Context, *, messages: list[dict], tools: list[Tool], sandbox,
                 res.cause = f"{cause}; {ctx.stop_reason}"
             if res.outcome == "error":
                 res.budget = None
+        if res.cause is not None:
+            res.cause = res.cause[:CAUSE_CHARS]
 
     started = False
     try:
@@ -181,12 +195,13 @@ def run_agent(ctx: Context, *, messages: list[dict], tools: list[Tool], sandbox,
         nudge_text = (nudge or NUDGE).format(report=" or ".join(reporting))
         declarations = [t.declaration() for t, _ in table.values()]
         env = ToolEnv(sandbox=sandbox, budgets=budgets)
+        started = True     # from here stop() runs, whatever start() raises: it may leave a container
         try:
-            facts = sandbox.start()
-            started = True
-        except SandboxError as e:
-            started = True     # stop() still runs: start may have left something behind
-            end("error", cause=f"the sandbox did not start: {redact(e)}")
+            facts = sandbox.start(lifetime_s=budgets.max_run_seconds + budgets.call_timeout_seconds
+                                  + LIFETIME_MARGIN_S)
+        except Exception as e:  # noqa: BLE001 - any failure to start ends the run, and is recorded
+            why = redact(e) if isinstance(e, SandboxError) else f"{type(e).__name__}: {redact(e)}"
+            end("error", cause=f"the sandbox did not start: {why}")
             return res
         res.sandbox.update(facts)
         log.append({"kind": "sandbox", "event": "start", "facts": facts})
@@ -281,22 +296,24 @@ def run_agent(ctx: Context, *, messages: list[dict], tools: list[Tool], sandbox,
                     continue
                 tool, validator = table.get(name, (None, None))
                 if tool is None:
-                    args, err = None, (f"there is no tool named {name!r}; the tools are "
-                                       f"{', '.join(sorted(table))}")
+                    args, err, kind = None, (f"there is no tool named {name!r}; the tools are "
+                                             f"{', '.join(sorted(table))}"), "an unknown tool"
                 else:
-                    args, err = parse_arguments(raw, validator)
+                    args, err, kind = parse_arguments(raw, validator)
                 if err is not None:
                     streak += 1
                     res.malformed += 1
                     if streak > budgets.malformed_retries:
+                        # The error may quote the model: the log keeps it; the cause names its kind.
                         end("stopped", budget="malformed_retries",
-                            cause=f"{streak} malformed calls in a row; the last: {err}")
+                            cause=f"{streak} malformed calls in a row; the last was {kind}")
                         ended = True
-                        log.append({**entry, "status": "malformed", "error": err})
+                        log.append({**entry, "status": "malformed", "error": err, "kind": kind})
                         continue
                     content = f"[{name} {call['id']}] error: {err}"
                     msgs.append({"role": "tool", "tool_call_id": call["id"], "content": content})
-                    log.append({**entry, "status": "malformed", "error": err, "sent": content})
+                    log.append({**entry, "status": "malformed", "error": err, "kind": kind,
+                                "sent": content})
                     continue
                 streak = 0
                 try:

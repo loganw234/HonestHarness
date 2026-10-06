@@ -4,6 +4,7 @@ home path here is built at run time from pieces, so this file holds none."""
 import importlib.util
 import re
 import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -145,6 +146,69 @@ def test_a_missing_source_is_refused_before_docker_runs_and_nothing_is_created(d
         b.start()
     assert [c[1] for c in rec.commands] == ["version", "image"]     # never ps, never run
     assert not (dirs / "missing").exists() and b.stop()["removed"]
+
+
+def started_box(dirs, monkeypatch, recorder, **kw):
+    """A DockerSandbox started against stand-ins: subprocess.run answers as a
+    working daemon would, and every call is recorded, never run."""
+    calls = []
+
+    def fake_exec(self, argv, limit_s, stdin=None):
+        calls.append((list(argv), limit_s, stdin))
+        return sb.ExecResult(0, b"Python 3.12.15\ngit version 2.47.3\n", total_bytes=33, total_lines=2)
+    monkeypatch.setattr(sb.subprocess, "run", recorder.run)
+    monkeypatch.setattr(DockerSandbox, "_exec", fake_exec)
+    b = box(dirs, **kw)
+    return b, calls
+
+
+def test_start_takes_its_lifetime_from_the_loop(dirs, monkeypatch):
+    rec = Recorder()
+    b, _ = started_box(dirs, monkeypatch, rec, lifetime_s=5400)
+    b.start(lifetime_s=12_345)
+    run = next(c for c in rec.commands if c[1] == "run")
+    assert run[-2:] == ["sleep", "12345"] and b.lifetime_s == 12_345
+
+
+def test_a_long_command_goes_in_by_stdin_never_on_the_command_line(dirs, monkeypatch):
+    b, calls = started_box(dirs, monkeypatch, Recorder())
+    b.start()
+    calls.clear()
+    short = "echo " + "s" * 100
+    b.shell(short, 30)
+    assert calls == [(["bash", "-o", "pipefail", "-c", short], 30, None)]
+    calls.clear()
+    long = "echo " + "x" * 100_000
+    b.shell(long, 30)
+    (write, w_limit, w_in), (run, r_limit, r_in), (rm, _, _) = calls
+    path = write[-1]
+    assert write[:4] == ["sh", "-c", 'cat > "$1"', "sh"] and path.startswith("/tmp/.hh-command-")
+    assert w_in == long.encode("utf-8") and run == ["bash", "-o", "pipefail", path] and r_in is None
+    assert rm == ["rm", "-f", path]
+    assert all(len(arg) <= sb.INLINE_COMMAND_CHARS for argv, _, _ in calls for arg in argv)
+    assert max(len(" ".join(b.exec_args(argv, 30))) for argv, _, _ in calls) < 32_767
+
+
+@pytest.mark.parametrize("command", ["echo a\x00b", "echo " + "y" * 10_000 + "\x00"], ids=["short", "long"])
+def test_a_nul_in_a_command_is_refused_on_both_paths(dirs, monkeypatch, command):
+    b, calls = started_box(dirs, monkeypatch, Recorder())
+    b.start()
+    calls.clear()
+    with pytest.raises(ValueError, match="null character"):
+        b.shell(command, 30)
+    assert calls == []
+
+
+def test_the_one_command_refuses_when_docker_is_missing(tmp_path, monkeypatch):
+    empty = tmp_path / "no-tools"
+    empty.mkdir()
+    monkeypatch.setenv("PATH", str(empty))           # a PATH of my own, where no docker is found
+    r = subprocess.run([sys.executable, str(ROOT / "sandbox" / "controls.py"), "--parcelround",
+                        str(tmp_path), "--work", str(tmp_path / "work")],
+                       capture_output=True, text=True, encoding="utf-8", timeout=120)
+    assert r.returncode == 2, r.stdout + r.stderr
+    assert "REFUSED: docker: the docker command is not installed" in r.stdout
+    assert "Traceback" not in r.stderr and "== docker ps" not in r.stdout
 
 
 def test_docker_status_says_why_when_docker_is_missing():

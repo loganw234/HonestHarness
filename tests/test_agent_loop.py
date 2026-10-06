@@ -208,6 +208,56 @@ def test_malformed_calls_past_the_retry_limit_stop_the_run():
     assert len(model.bodies) == 4 and res.malformed == 4 and box.commands == []
 
 
+MARK = "MODEL-TEXT-" + "x" * 60_000
+
+
+@pytest.mark.parametrize("last", [
+    tool_call("c4", "shell", {"command": [MARK]}),            # a schema error quotes the value
+    tool_call("c4", "unknown_" + "Q" * 50, {}),               # an unknown tool's name is the model's
+    tool_call("c4", "shell", '{"command": "' + MARK),          # a parse error
+], ids=["schema", "unknown-tool", "parse"])
+def test_no_model_text_reaches_the_published_record(last):
+    model = ScriptedModel(*[calls(tool_call(f"c{i}", "shell", "{")) for i in range(3)], calls(last))
+    res, ctx, box = run(model, budgets=Budgets(malformed_retries=3))
+    assert (res.outcome, res.budget) == ("stopped", "malformed_retries")
+    item = res.item_result()
+    published = json.dumps({"status": item.status, "detail": item.detail, "data": item.data})
+    assert "MODEL-TEXT" not in published and "Q" * 50 not in published and len(published) < 5_000
+    assert res.cause.startswith("4 malformed calls in a row; the last was ")
+    kept = json.dumps(item.local)                     # the local log keeps what the model sent
+    assert "MODEL-TEXT" in kept or "Q" * 50 in kept
+
+
+@pytest.mark.parametrize("raw", ['{"command": ' + "[" * 50_000, '{"command": ' + "9" * 5_000 + "}"],
+                         ids=["deep", "long-number"])
+def test_arguments_too_deep_or_too_long_are_answered_and_the_run_goes_on(raw):
+    model = ScriptedModel(calls(tool_call("c1", "shell", raw)),
+                          calls(tool_call("c2", "shell", {"command": "ls"})),
+                          calls(tool_call("c3", "report", {"text": "done"})))
+    res, ctx, box = run(model)
+    assert res.outcome == "reported" and res.malformed == 1 and box.commands == [("shell", "ls")]
+    assert "error:" in model.bodies[1]["messages"][-1]["content"]
+
+
+def test_stop_runs_whatever_start_raises():
+    class Breaks(ScriptedSandbox):
+        def start(self, lifetime_s=None):
+            super().start(lifetime_s)
+            raise RuntimeError("a fault that is not a SandboxError")
+    model = ScriptedModel(calls(tool_call("c1", "report", {"text": "done"})))
+    res, ctx, box = run(model, Breaks())
+    assert res.outcome == "error" and "RuntimeError" in res.cause and model.bodies == []
+    assert box.stopped and res.sandbox["removed"] is True
+
+
+def test_the_sandbox_lives_as_long_as_the_budget_allows():
+    from qs.agent.loop import LIFETIME_MARGIN_S
+    budgets = Budgets(max_run_seconds=7_200, call_timeout_seconds=300)
+    model = ScriptedModel(calls(tool_call("c1", "report", {"text": "done"})))
+    res, ctx, box = run(model, budgets=budgets)
+    assert box.lifetime_s == 7_200 + 300 + LIFETIME_MARGIN_S
+
+
 def test_an_unknown_tool_is_named_with_the_tools_there_are():
     model = ScriptedModel(calls(tool_call("c1", "delete_everything", {})),
                           calls(tool_call("c2", "report", {"text": "done"})))
