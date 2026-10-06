@@ -1,0 +1,797 @@
+{
+  "format": 1,
+  "about": "QS1's cases and their goldens, read by qs/suites/qs1.py. Written by hand from DeepSeek's documented format (D10: ds/chat_completion_full.txt:561-590 for a reply, :826-871 for a stream) and each case's prompt, never recorded from a model (METHOD section 5). Each golden turn says what makes it right, and what may vary and is accepted. A case runs as one item per entry in streams: <id> unstreamed, <id>.stream streamed.",
+  "system": "You are a helpful assistant. When a request needs information or an action that a tool provides, call the tool. Pass only the arguments the request gives values for. When no tool is needed, answer directly and briefly.",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_weather",
+        "description": "Get the current weather for a city, or its forecast for a date.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {"type": "string", "description": "The city, for example Paris."},
+            "unit": {"type": "string", "enum": ["celsius", "fahrenheit"], "description": "The temperature unit. Celsius when omitted."},
+            "date": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$", "description": "A date in the form YYYY-MM-DD, for a forecast. Today when omitted."}
+          },
+          "required": ["location"],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_date",
+        "description": "Get today's date, in the form YYYY-MM-DD.",
+        "parameters": {"type": "object", "properties": {}, "additionalProperties": false}
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_time",
+        "description": "Get the current time of day, in the form HH:MM."
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file",
+        "description": "Write text to a file in the workspace, replacing any file at that path.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {"type": "string", "description": "The file's path, relative to the workspace."},
+            "content": {"type": "string", "description": "The file's full text."}
+          },
+          "required": ["path", "content"],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "translate",
+        "description": "Translate a text into another language.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "text": {"type": "string", "description": "The text to translate, exactly as given."},
+            "target_language": {"type": "string", "enum": ["fr", "de", "ja", "es"], "description": "The language to translate into, as an ISO 639-1 code."}
+          },
+          "required": ["text", "target_language"],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "create_event",
+        "description": "Create a calendar event.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "title": {"type": "string", "description": "The event's title."},
+            "priority": {"type": "string", "enum": ["low", "normal", "high"]},
+            "location": {
+              "type": "object",
+              "properties": {"city": {"type": "string"}, "room": {"type": "string"}},
+              "required": ["city", "room"],
+              "additionalProperties": false
+            },
+            "attendees": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {"name": {"type": "string"}, "email": {"type": "string"}},
+                "required": ["name", "email"],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": ["title", "priority", "location", "attendees"],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "cases": [
+    {
+      "id": "single.weather",
+      "shape": "single",
+      "streams": [false, true],
+      "tool_choice": null,
+      "messages": [{"role": "user", "content": "What is the weather in Paris?"}],
+      "documented": null,
+      "turns": [
+        {
+          "expect": "calls",
+          "order": "any",
+          "calls": [
+            {
+              "name": "get_weather",
+              "args": {
+                "location": {"match": "(?i)\\s*paris(\\s*,\\s*(france|fr))?\\s*"},
+                "unit": {"absent_or": {"equals": "celsius"}}
+              },
+              "canonical": {"location": "Paris"}
+            }
+          ],
+          "right": "One call, to get_weather, for Paris: the only city asked about. No date, since none is asked for.",
+          "may_vary": "The city's case and surrounding spaces, an added country (Paris, France), and unit omitted or celsius, the tool's stated default."
+        }
+      ]
+    },
+    {
+      "id": "parallel.weather",
+      "shape": "parallel",
+      "streams": [false, true],
+      "tool_choice": null,
+      "messages": [{"role": "user", "content": "Compare the weather in Paris and Tokyo. Call get_weather once for each city, both calls in this one turn."}],
+      "documented": null,
+      "turns": [
+        {
+          "expect": "calls",
+          "order": "any",
+          "calls": [
+            {
+              "name": "get_weather",
+              "args": {
+                "location": {"match": "(?i)\\s*paris(\\s*,\\s*(france|fr))?\\s*"},
+                "unit": {"absent_or": {"equals": "celsius"}}
+              },
+              "canonical": {"location": "Paris"},
+              "result": "Sunny, 18°C"
+            },
+            {
+              "name": "get_weather",
+              "args": {
+                "location": {"match": "(?i)\\s*tokyo(\\s*,\\s*(japan|jp))?\\s*"},
+                "unit": {"absent_or": {"equals": "celsius"}}
+              },
+              "canonical": {"location": "Tokyo"},
+              "result": "Rain, 22°C"
+            }
+          ],
+          "right": "Two calls to get_weather in the one turn: one for Paris, one for Tokyo.",
+          "may_vary": "The calls' order; each city's case, surrounding spaces and an added country; unit omitted or celsius."
+        },
+        {
+          "expect": "none",
+          "right": "With both results back, an answer, and no further call.",
+          "may_vary": "The answer's wording."
+        }
+      ]
+    },
+    {
+      "id": "parallel.mixed",
+      "shape": "parallel",
+      "streams": [false],
+      "tool_choice": null,
+      "messages": [{"role": "user", "content": "In this one turn, call get_date, and also call get_weather for Oslo."}],
+      "documented": null,
+      "turns": [
+        {
+          "expect": "calls",
+          "order": "any",
+          "calls": [
+            {
+              "name": "get_date",
+              "args": {},
+              "canonical": {},
+              "result": "2026-10-06"
+            },
+            {
+              "name": "get_weather",
+              "args": {
+                "location": {"match": "(?i)\\s*oslo(\\s*,\\s*(norway|no))?\\s*"},
+                "unit": {"absent_or": {"equals": "celsius"}}
+              },
+              "canonical": {"location": "Oslo"},
+              "result": "Snow, -2°C"
+            }
+          ],
+          "right": "Two calls of two tools in the one turn: get_date with no arguments, and get_weather for Oslo.",
+          "may_vary": "The calls' order; the city's case, surrounding spaces and an added country; unit omitted or celsius; whitespace inside get_date's {}."
+        },
+        {
+          "expect": "none",
+          "right": "With both results back, an answer, and no further call.",
+          "may_vary": "The answer's wording."
+        }
+      ]
+    },
+    {
+      "id": "parallel.three",
+      "shape": "parallel",
+      "streams": [true],
+      "tool_choice": null,
+      "messages": [{"role": "user", "content": "Look up the weather in Paris, Tokyo and Lima: three get_weather calls, all in this one turn."}],
+      "documented": null,
+      "turns": [
+        {
+          "expect": "calls",
+          "order": "any",
+          "calls": [
+            {
+              "name": "get_weather",
+              "args": {
+                "location": {"match": "(?i)\\s*paris(\\s*,\\s*(france|fr))?\\s*"},
+                "unit": {"absent_or": {"equals": "celsius"}}
+              },
+              "canonical": {"location": "Paris"},
+              "result": "Sunny, 18°C"
+            },
+            {
+              "name": "get_weather",
+              "args": {
+                "location": {"match": "(?i)\\s*tokyo(\\s*,\\s*(japan|jp))?\\s*"},
+                "unit": {"absent_or": {"equals": "celsius"}}
+              },
+              "canonical": {"location": "Tokyo"},
+              "result": "Rain, 22°C"
+            },
+            {
+              "name": "get_weather",
+              "args": {
+                "location": {"match": "(?i)\\s*lima(\\s*,\\s*(peru|pe))?\\s*"},
+                "unit": {"absent_or": {"equals": "celsius"}}
+              },
+              "canonical": {"location": "Lima"},
+              "result": "Cloudy, 16°C"
+            }
+          ],
+          "right": "Three calls to get_weather in the one turn, one per city, each with its own id. Streamed, so the three calls' deltas are told apart by their index.",
+          "may_vary": "The calls' order; each city's case, surrounding spaces and an added country; unit omitted or celsius."
+        },
+        {
+          "expect": "none",
+          "right": "With the three results back, an answer, and no further call.",
+          "may_vary": "The answer's wording."
+        }
+      ]
+    },
+    {
+      "id": "multiturn.weather",
+      "shape": "multiturn",
+      "streams": [false, true],
+      "tool_choice": null,
+      "messages": [{"role": "user", "content": "How is the weather in Hangzhou?"}],
+      "documented": null,
+      "turns": [
+        {
+          "expect": "calls",
+          "order": "any",
+          "calls": [
+            {
+              "name": "get_weather",
+              "args": {
+                "location": {"match": "(?i)\\s*hangzhou(\\s*,\\s*(zhejiang|china|cn)){0,2}\\s*"},
+                "unit": {"absent_or": {"equals": "celsius"}}
+              },
+              "canonical": {"location": "Hangzhou"},
+              "result": "Cloudy 7~13°C"
+            }
+          ],
+          "right": "One call, to get_weather, for Hangzhou.",
+          "may_vary": "The city's case and surrounding spaces; an added province or country (Hangzhou, Zhejiang, as in D9's own example); unit omitted or celsius."
+        },
+        {
+          "expect": "none",
+          "right": "With the model's own turn 1 sent back, its reasoning included in thinking mode (D8), and the result after it: an answer, and no further call.",
+          "may_vary": "The answer's wording."
+        }
+      ]
+    },
+    {
+      "id": "multiturn.chain",
+      "shape": "multiturn",
+      "streams": [false, true],
+      "tool_choice": null,
+      "messages": [{"role": "user", "content": "What will the weather be in Hangzhou tomorrow? First call get_date to learn today's date, then call get_weather with tomorrow's date."}],
+      "documented": null,
+      "turns": [
+        {
+          "expect": "calls",
+          "order": "any",
+          "calls": [
+            {
+              "name": "get_date",
+              "args": {},
+              "canonical": {},
+              "result": "2026-10-06"
+            }
+          ],
+          "right": "One call, get_date, alone: the request asks for the date first, and get_weather needs it.",
+          "may_vary": "Whitespace inside {}."
+        },
+        {
+          "expect": "calls",
+          "order": "any",
+          "calls": [
+            {
+              "name": "get_weather",
+              "args": {
+                "location": {"match": "(?i)\\s*hangzhou(\\s*,\\s*(zhejiang|china|cn)){0,2}\\s*"},
+                "date": {"equals": "2026-10-07"},
+                "unit": {"absent_or": {"equals": "celsius"}}
+              },
+              "canonical": {"location": "Hangzhou", "date": "2026-10-07"},
+              "result": "Cloudy 7~13°C"
+            }
+          ],
+          "right": "One call to get_weather for Hangzhou, with date 2026-10-07: the day after the date get_date returned. This is D8's own pattern (ds/thinking.txt:59, 72).",
+          "may_vary": "The city's case, surrounding spaces and an added province or country; unit omitted or celsius."
+        },
+        {
+          "expect": "none",
+          "right": "With both of the model's turns sent back and both results, an answer, and no further call.",
+          "may_vary": "The answer's wording."
+        }
+      ]
+    },
+    {
+      "id": "multiturn.followup",
+      "shape": "multiturn",
+      "streams": [false, true],
+      "tool_choice": null,
+      "messages": [{"role": "user", "content": "What's the weather like in Hangzhou?"}],
+      "documented": null,
+      "turns": [
+        {
+          "expect": "calls",
+          "order": "any",
+          "calls": [
+            {
+              "name": "get_weather",
+              "args": {
+                "location": {"match": "(?i)\\s*hangzhou(\\s*,\\s*(zhejiang|china|cn)){0,2}\\s*"},
+                "unit": {"absent_or": {"equals": "celsius"}}
+              },
+              "canonical": {"location": "Hangzhou"},
+              "result": "Cloudy 7~13°C"
+            }
+          ],
+          "right": "One call, to get_weather, for Hangzhou.",
+          "may_vary": "The city's case, surrounding spaces and an added province or country; unit omitted or celsius."
+        },
+        {
+          "expect": "none",
+          "right": "With the result back, an answer, and no further call.",
+          "may_vary": "The answer's wording."
+        },
+        {
+          "user": "And in Guangzhou?",
+          "expect": "calls",
+          "order": "any",
+          "calls": [
+            {
+              "name": "get_weather",
+              "args": {
+                "location": {"match": "(?i)\\s*guangzhou(\\s*,\\s*(guangdong|china|cn)){0,2}\\s*"},
+                "unit": {"absent_or": {"equals": "celsius"}}
+              },
+              "canonical": {"location": "Guangzhou"}
+            }
+          ],
+          "right": "A new user question after a finished exchange, with every earlier turn sent back, reasoning included in thinking mode, even the turn without a call (D8, ds/thinking.txt:54, 69): one call to get_weather, for Guangzhou.",
+          "may_vary": "The city's case, surrounding spaces and an added province or country; unit omitted or celsius."
+        }
+      ]
+    },
+    {
+      "id": "multiturn.handwritten",
+      "shape": "handwritten",
+      "streams": [false],
+      "tool_choice": null,
+      "messages": [
+        {"role": "user", "content": "How's the weather in Paris?"},
+        {"role": "assistant", "content": null, "tool_calls": [{"id": "call_qs1_handwritten_0", "type": "function", "function": {"name": "get_weather", "arguments": "{\"location\": \"Paris\"}"}}]},
+        {"role": "tool", "tool_call_id": "call_qs1_handwritten_0", "content": "Sunny, 18°C"}
+      ],
+      "documented": {
+        "thinking": {
+          "status": 400,
+          "source": "D8, ds/thinking.txt:54",
+          "says": "In thinking mode, a request carrying tools must pass back the reasoning_content of every earlier assistant turn, or the API returns 400. This hand-written turn carries none."
+        },
+        "non_thinking": {
+          "status": null,
+          "source": "D9, ds/tool_calls.txt:29-32",
+          "says": "The Chat Completion API does not support inserting tool calls mid-conversation. The docs name no status for it."
+        }
+      },
+      "turns": [
+        {
+          "expect": "none",
+          "right": "The one hand-written history QS1 keeps: an assistant tool call the model did not make, written without reasoning, and its result. If the API accepts it, an answer, and no further call.",
+          "may_vary": "The answer's wording."
+        }
+      ]
+    },
+    {
+      "id": "code.multiline",
+      "shape": "code",
+      "streams": [false, true],
+      "tool_choice": null,
+      "messages": [{"role": "user", "content": "Save a file with write_file. Use the path tools/escape_demo.py exactly, and as its content exactly the lines between the BEGIN and END marker lines, without the marker lines themselves.\nBEGIN\nimport json\nimport re\n\nNUMBER = re.compile(r\"^(\\d+)\\.(\\d*)\\s*$\")\nOUT_DIR = \"C:\\\\temp\\\\qs1\"\nQUOTED = 'She said \"it\\'s done\" and left.'\n\n\ndef render(value):\n    \"\"\"Wrap value as JSON, keeping \"quotes\" and \\\\ escapes.\"\"\"\n    return json.dumps({\"value\": value, \"note\": \"tab\\there\\nnext line\"})\nEND"}],
+      "documented": null,
+      "turns": [
+        {
+          "expect": "calls",
+          "order": "any",
+          "calls": [
+            {
+              "name": "write_file",
+              "args": {
+                "path": {"equals": "tools/escape_demo.py", "strip": true},
+                "content": {"equals": "import json\nimport re\n\nNUMBER = re.compile(r\"^(\\d+)\\.(\\d*)\\s*$\")\nOUT_DIR = \"C:\\\\temp\\\\qs1\"\nQUOTED = 'She said \"it\\'s done\" and left.'\n\n\ndef render(value):\n    \"\"\"Wrap value as JSON, keeping \"quotes\" and \\\\ escapes.\"\"\"\n    return json.dumps({\"value\": value, \"note\": \"tab\\there\\nnext line\"})", "trailing_newline": true}
+              },
+              "canonical": {"path": "tools/escape_demo.py", "content": "import json\nimport re\n\nNUMBER = re.compile(r\"^(\\d+)\\.(\\d*)\\s*$\")\nOUT_DIR = \"C:\\\\temp\\\\qs1\"\nQUOTED = 'She said \"it\\'s done\" and left.'\n\n\ndef render(value):\n    \"\"\"Wrap value as JSON, keeping \"quotes\" and \\\\ escapes.\"\"\"\n    return json.dumps({\"value\": value, \"note\": \"tab\\there\\nnext line\"})"}
+            }
+          ],
+          "right": "One call, to write_file, whose content is the code character for character: both quote kinds, an escaped quote, a raw regex, doubled backslashes, the two-character escapes for tab and newline inside a string literal, and braces, each escaped once more inside the arguments' JSON string.",
+          "may_vary": "One trailing newline on the content, added or left off; surrounding spaces on the path."
+        }
+      ]
+    },
+    {
+      "id": "code.json_text",
+      "shape": "code",
+      "streams": [false],
+      "tool_choice": null,
+      "messages": [{"role": "user", "content": "Save a file with write_file. Use the path data/sample.json exactly, and as its content exactly the line between the BEGIN and END marker lines, keeping every backslash as it is.\nBEGIN\n{\"name\": \"caf\\u00e9\", \"dir\": \"C:\\\\data\", \"quote\": \"say \\\"hi\\\"\"}\nEND"}],
+      "documented": null,
+      "turns": [
+        {
+          "expect": "calls",
+          "order": "any",
+          "calls": [
+            {
+              "name": "write_file",
+              "args": {
+                "path": {"equals": "data/sample.json", "strip": true},
+                "content": {"equals": "{\"name\": \"caf\\u00e9\", \"dir\": \"C:\\\\data\", \"quote\": \"say \\\"hi\\\"\"}", "trailing_newline": true}
+              },
+              "canonical": {"path": "data/sample.json", "content": "{\"name\": \"caf\\u00e9\", \"dir\": \"C:\\\\data\", \"quote\": \"say \\\"hi\\\"\"}"}
+            }
+          ],
+          "right": "One call, to write_file, whose content is a JSON text kept as text: its backslash-u escape, its doubled backslash and its escaped quotes are literal characters, so the arguments' JSON string escapes each of them once more.",
+          "may_vary": "One trailing newline on the content, added or left off; surrounding spaces on the path."
+        }
+      ]
+    },
+    {
+      "id": "unicode.text",
+      "shape": "unicode",
+      "streams": [false, true],
+      "tool_choice": null,
+      "messages": [{"role": "user", "content": "Use translate to put a text into French. Pass the text exactly as it appears between the BEGIN and END marker lines.\nBEGIN\nnaïve café — 東京で会いましょう 🎉\nEND"}],
+      "documented": null,
+      "turns": [
+        {
+          "expect": "calls",
+          "order": "any",
+          "calls": [
+            {
+              "name": "translate",
+              "args": {
+                "text": {"equals": "naïve café — 東京で会いましょう 🎉", "nfc": true, "strip": true},
+                "target_language": {"equals": "fr"}
+              },
+              "canonical": {"text": "naïve café — 東京で会いましょう 🎉", "target_language": "fr"}
+            }
+          ],
+          "right": "One call, to translate, with the text unchanged: Latin letters with diacritics, an em dash, Japanese and an emoji outside the Basic Multilingual Plane; and target_language fr, the enum's code for French.",
+          "may_vary": "Unicode normalization (compared in NFC), surrounding whitespace, and whether the arguments' JSON escapes the characters or carries them raw."
+        }
+      ]
+    },
+    {
+      "id": "unicode.prompt",
+      "shape": "unicode",
+      "streams": [false],
+      "tool_choice": null,
+      "messages": [{"role": "user", "content": "北京的天气怎么样？"}],
+      "documented": null,
+      "turns": [
+        {
+          "expect": "calls",
+          "order": "any",
+          "calls": [
+            {
+              "name": "get_weather",
+              "args": {
+                "location": {"one_of": ["北京", "北京市", "Beijing"], "strip": true, "casefold": true},
+                "unit": {"absent_or": {"equals": "celsius"}}
+              },
+              "canonical": {"location": "北京"}
+            }
+          ],
+          "right": "A request in Chinese, for Beijing's weather: one call to get_weather, for Beijing.",
+          "may_vary": "The city's name in Chinese, with or without 市, or in English; unit omitted or celsius."
+        }
+      ]
+    },
+    {
+      "id": "empty.args",
+      "shape": "empty",
+      "streams": [false],
+      "tool_choice": null,
+      "messages": [{"role": "user", "content": "What is today's date? Use a tool to find out."}],
+      "documented": null,
+      "turns": [
+        {
+          "expect": "calls",
+          "order": "any",
+          "calls": [
+            {
+              "name": "get_date",
+              "args": {},
+              "canonical": {}
+            }
+          ],
+          "right": "One call, to get_date, declared with an empty properties object, with arguments that parse as an empty JSON object (D8's own example shows '{}', ds/thinking.txt:72).",
+          "may_vary": "Whitespace inside {}."
+        }
+      ]
+    },
+    {
+      "id": "empty.noparams",
+      "shape": "empty",
+      "streams": [false],
+      "tool_choice": null,
+      "messages": [{"role": "user", "content": "What time is it right now? Use a tool to find out."}],
+      "documented": null,
+      "turns": [
+        {
+          "expect": "calls",
+          "order": "any",
+          "calls": [
+            {
+              "name": "get_time",
+              "args": {},
+              "canonical": {}
+            }
+          ],
+          "right": "One call, to get_time, declared with parameters omitted, which D10 defines as an empty parameter list (ds/chat_completion_full.txt:434-436): arguments that parse as an empty JSON object.",
+          "may_vary": "Whitespace inside {}."
+        }
+      ]
+    },
+    {
+      "id": "nested.event",
+      "shape": "nested",
+      "streams": [false, true],
+      "tool_choice": null,
+      "messages": [{"role": "user", "content": "Create a calendar event with create_event. The title is Design review, the priority is high, the location is room 4B in Oslo, and the attendees are Ada Lovelace (ada@example.com) and Alan Turing (alan@example.com)."}],
+      "documented": null,
+      "turns": [
+        {
+          "expect": "calls",
+          "order": "any",
+          "calls": [
+            {
+              "name": "create_event",
+              "args": {
+                "title": {"equals": "Design review", "strip": true, "casefold": true},
+                "priority": {"equals": "high"},
+                "location": {"object": {
+                  "city": {"equals": "Oslo", "strip": true, "casefold": true},
+                  "room": {"equals": "4B", "strip": true, "casefold": true}
+                }},
+                "attendees": {"items_any_order": [
+                  {"object": {
+                    "name": {"equals": "Ada Lovelace", "strip": true},
+                    "email": {"equals": "ada@example.com", "strip": true, "casefold": true}
+                  }},
+                  {"object": {
+                    "name": {"equals": "Alan Turing", "strip": true},
+                    "email": {"equals": "alan@example.com", "strip": true, "casefold": true}
+                  }}
+                ]}
+              },
+              "canonical": {
+                "title": "Design review",
+                "priority": "high",
+                "location": {"city": "Oslo", "room": "4B"},
+                "attendees": [
+                  {"name": "Ada Lovelace", "email": "ada@example.com"},
+                  {"name": "Alan Turing", "email": "alan@example.com"}
+                ]
+              }
+            }
+          ],
+          "right": "One call, to create_event, with every value the request gives: a nested location object, an array of attendee objects, and the priority enum's value high. No key beyond those the schema names.",
+          "may_vary": "The attendees' order; the case of the title, the city, the room and the addresses; surrounding spaces."
+        }
+      ]
+    },
+    {
+      "id": "enum.unit",
+      "shape": "enum",
+      "streams": [false],
+      "tool_choice": null,
+      "messages": [{"role": "user", "content": "What is the weather in Oslo, in Fahrenheit?"}],
+      "documented": null,
+      "turns": [
+        {
+          "expect": "calls",
+          "order": "any",
+          "calls": [
+            {
+              "name": "get_weather",
+              "args": {
+                "location": {"match": "(?i)\\s*oslo(\\s*,\\s*(norway|no))?\\s*"},
+                "unit": {"equals": "fahrenheit"}
+              },
+              "canonical": {"location": "Oslo", "unit": "fahrenheit"}
+            }
+          ],
+          "right": "One call to get_weather for Oslo, with unit fahrenheit: the enum's own value, in its case.",
+          "may_vary": "The city's case, surrounding spaces and an added country."
+        }
+      ]
+    },
+    {
+      "id": "enum.language",
+      "shape": "enum",
+      "streams": [false],
+      "tool_choice": null,
+      "messages": [{"role": "user", "content": "Translate the phrase good morning into Japanese with the translate tool."}],
+      "documented": null,
+      "turns": [
+        {
+          "expect": "calls",
+          "order": "any",
+          "calls": [
+            {
+              "name": "translate",
+              "args": {
+                "text": {"match": "(?i)\\s*good morning[.!]?\\s*"},
+                "target_language": {"equals": "ja"}
+              },
+              "canonical": {"text": "good morning", "target_language": "ja"}
+            }
+          ],
+          "right": "One call, to translate, for the phrase good morning, with target_language ja: the enum's code for Japanese, not the language's name.",
+          "may_vary": "The phrase's case, a closing full stop or exclamation mark, and surrounding spaces."
+        }
+      ]
+    },
+    {
+      "id": "nocall.arithmetic",
+      "shape": "nocall",
+      "streams": [false, true],
+      "tool_choice": null,
+      "messages": [{"role": "user", "content": "What is 17 + 25? Reply with the number only."}],
+      "documented": null,
+      "turns": [
+        {
+          "expect": "none",
+          "right": "Tools are offered and none fits: an answer, and no call.",
+          "may_vary": "The answer's wording."
+        }
+      ]
+    },
+    {
+      "id": "nocall.related",
+      "shape": "nocall",
+      "streams": [false],
+      "tool_choice": null,
+      "messages": [{"role": "user", "content": "In one sentence, what does a weather forecast tell you?"}],
+      "documented": null,
+      "turns": [
+        {
+          "expect": "none",
+          "right": "A question about weather that needs no lookup, with get_weather offered: an answer, and no call.",
+          "may_vary": "The answer's wording."
+        }
+      ]
+    },
+    {
+      "id": "choice.none",
+      "shape": "choice",
+      "streams": [false, true],
+      "tool_choice": "none",
+      "messages": [{"role": "user", "content": "What is the weather in Paris?"}],
+      "documented": null,
+      "turns": [
+        {
+          "expect": "none",
+          "right": "tool_choice none: the model will not call any tool, and generates a message instead (D10, ds/chat_completion_full.txt:450-451). Allowed in both modes.",
+          "may_vary": "The answer's wording."
+        }
+      ]
+    },
+    {
+      "id": "choice.auto",
+      "shape": "choice",
+      "streams": [false],
+      "tool_choice": "auto",
+      "messages": [{"role": "user", "content": "What is the weather in Paris?"}],
+      "documented": null,
+      "turns": [
+        {
+          "expect": "calls",
+          "order": "any",
+          "calls": [
+            {
+              "name": "get_weather",
+              "args": {
+                "location": {"match": "(?i)\\s*paris(\\s*,\\s*(france|fr))?\\s*"},
+                "unit": {"absent_or": {"equals": "celsius"}}
+              },
+              "canonical": {"location": "Paris"}
+            }
+          ],
+          "right": "tool_choice auto, sent explicitly: the model picks between a message and calls (D10, ds/chat_completion_full.txt:452-453), and the request needs get_weather for Paris.",
+          "may_vary": "The city's case, surrounding spaces and an added country; unit omitted or celsius."
+        }
+      ]
+    },
+    {
+      "id": "choice.required",
+      "shape": "choice",
+      "streams": [false, true],
+      "tool_choice": "required",
+      "messages": [{"role": "user", "content": "Hello! How are you today?"}],
+      "documented": {
+        "thinking": {
+          "status": 400,
+          "source": "D10, ds/chat_completion_full.txt:463-466",
+          "says": "required and named tool choices are not supported in thinking mode; the API returns a 400 error."
+        },
+        "non_thinking": null
+      },
+      "turns": [
+        {
+          "expect": "any_declared",
+          "calls": [
+            {
+              "name": "get_date",
+              "args": {},
+              "canonical": {}
+            }
+          ],
+          "right": "tool_choice required: the model must call one or more tools (D10, ds/chat_completion_full.txt:454-455), here on a greeting that needs none. Every call names a declared tool, with schema-valid arguments. The listed call is an example the fake sends, not the only right one.",
+          "may_vary": "Which declared tools are called, and how many."
+        }
+      ]
+    },
+    {
+      "id": "choice.named",
+      "shape": "choice",
+      "streams": [false, true],
+      "tool_choice": {"type": "function", "function": {"name": "get_date"}},
+      "messages": [{"role": "user", "content": "What is the weather in Paris?"}],
+      "documented": {
+        "thinking": {
+          "status": 400,
+          "source": "D10, ds/chat_completion_full.txt:463-466",
+          "says": "required and named tool choices are not supported in thinking mode; the API returns a 400 error."
+        },
+        "non_thinking": null
+      },
+      "turns": [
+        {
+          "expect": "calls",
+          "order": "any",
+          "calls": [
+            {
+              "name": "get_date",
+              "args": {},
+              "canonical": {}
+            }
+          ],
+          "right": "A named tool_choice forces that tool (D10, ds/chat_completion_full.txt:456-458): one call, to get_date, though the request is about the weather.",
+          "may_vary": "Whitespace inside {}."
+        }
+      ]
+    }
+  ]
+}
