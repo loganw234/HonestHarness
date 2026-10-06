@@ -16,7 +16,8 @@ def good(**over):
         calls=1,
         usage={"cache_hit": 0, "cache_miss": 10, "output": 5, "reasoning": 0},
         price_table="t", rate_period="off_peak", cost_usd="0.0000045",
-        outcome={"status": "pass", "detail": ""}, transcript_sha256="0" * 64)
+        outcome={"status": "pass", "detail": ""}, stop_reason=None,
+        transcript_sha256="0" * 64)
     r.update(over)
     return r
 
@@ -26,7 +27,7 @@ def test_good_record_validates():
 
 
 @pytest.mark.parametrize("field", ["usage", "cost_usd", "model_sent", "transcript_sha256",
-                                   "caps"])
+                                   "caps", "stop_reason"])
 def test_missing_field_fails(field):
     r = good()
     del r[field]

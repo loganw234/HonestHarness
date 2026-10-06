@@ -172,10 +172,13 @@ class Context:
         self.fingerprints: list[str] = []
         self.sampling = {"sent": {}, "ignored": []}
         self.stop_reason: str | None = None
+        self.stop_kind: str | None = None
 
-    def _stop(self, reason: str) -> None:
+    def _stop(self, reason: str, kind: str = "error") -> None:
+        """kind is the status a pass or fail after this stop is recorded as:
+        "stopped" for a limit the harness sets, "error" for a failed call."""
         if self.stop_reason is None:
-            self.stop_reason = reason
+            self.stop_reason, self.stop_kind = reason, kind
 
     def chat(self, messages: list[dict], **kw):
         if self.stop_reason is not None:
@@ -204,7 +207,7 @@ class Context:
             try:
                 self.before_call()
             except RunStopped as e:
-                self._stop(str(e))
+                self._stop(str(e), kind="stopped")
                 raise
         try:
             turn = self.provider.chat(self.client, body)
@@ -552,6 +555,14 @@ class Runner:
                                   redact=client.redact)
         periods = set(ctx.periods)
         period = "none" if not periods else (periods.pop() if len(periods) == 1 else "mixed")
+        outcome = {"status": result.status, "detail": result.detail, "data": result.data}
+        if ctx.stop_reason and result.status in ("pass", "fail"):
+            # A pass or fail after a stop is not the model's: the stop is recorded
+            # as what the run was, with the suite's own verdict kept beside it.
+            outcome = {"status": ctx.stop_kind or "error",
+                       "detail": (f"{ctx.stop_reason}; the suite returned "
+                                  f"{result.status}: {result.detail}"),
+                       "data": result.data}
         line = rec.new_record(
             record_id=record_id, batch=batch, live=self.live, suite=suite.name,
             suite_version=suite.version, item=item.id, repeat=r,
@@ -563,8 +574,7 @@ class Runner:
             usage={"cache_hit": ctx.used.cache_hit, "cache_miss": ctx.used.cache_miss,
                    "output": ctx.used.output, "reasoning": ctx.used.reasoning},
             price_table=self.prices.id, rate_period=period, cost_usd=usd(ctx.cost),
-            outcome={"status": result.status, "detail": result.detail, "data": result.data},
-            transcript_sha256=sha)
+            outcome=outcome, stop_reason=ctx.stop_reason, transcript_sha256=sha)
         rec.append(self.records_dir / "runs" / f"{suite.name}.jsonl", line)
 
     @staticmethod

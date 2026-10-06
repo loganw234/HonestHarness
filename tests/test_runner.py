@@ -258,6 +258,10 @@ def test_a_swallowed_unmetered_error_still_stops_the_batch(tmp_path, prices, off
         r, _ = runner(tmp_path, url, prices, off_peak_clock)
         s = r.run_batch(Swallows(3))
     assert s["runs"] == 1 and "did not arrive whole" in s["stopped_for"]
+    # The suite's "pass" after an unmetered reply is not the model's.
+    run = lines(tmp_path / "records" / "runs" / "swallows.jsonl")[0]
+    assert run["outcome"]["status"] == "error" and run["stop_reason"] == s["stopped_for"]
+    assert "the suite returned pass" in run["outcome"]["detail"]
 
 
 def test_a_reply_without_usage_stops_the_batch(tmp_path, prices, off_peak_clock):
@@ -375,6 +379,7 @@ def test_no_call_is_sent_into_the_peak_margin(tmp_path, prices):
     runs = lines(tmp_path / "records" / "runs" / "calls.jsonl")
     assert len(runs) == 1 and runs[0]["outcome"]["status"] == "stopped"
     assert "peak" in s["stopped_for"] and s["reconciliation"] == "ok"
+    assert runs[0]["stop_reason"] == s["stopped_for"]
     assert {x["period"] for x in lines(tmp_path / "records" / "spend.jsonl")} == {"off_peak"}
 
 
@@ -549,6 +554,8 @@ def test_a_retrying_suite_cannot_send_past_a_stop(tmp_path, prices, off_peak_clo
         s = r.run_batch(Retries(3))
     assert len([b for b in fake.requests if not is_probe(b)]) == 1
     assert s["runs"] == 1 and s["stopped_for"]
+    run = lines(tmp_path / "records" / "runs" / "retries.jsonl")[0]
+    assert run["outcome"]["status"] == "error" and run["stop_reason"] == s["stopped_for"]
 
 
 def test_one_call_crossing_into_peak_stays_inside_the_reservation(tmp_path, prices):
@@ -604,3 +611,29 @@ def test_an_id_ending_in_a_newline_is_refused(tmp_path, prices, off_peak_clock):
         r, _ = runner(tmp_path, url, prices, off_peak_clock)
         with pytest.raises(ValueError):
             r.run_batch(Echo(1), batch="b1" + chr(10))
+
+
+class CatchesPeak(Calls):
+    """Catches the peak stop and calls its run a failure: a harness limit is
+    still recorded as stopped."""
+    name = "catchespeak"
+
+    def run_item(self, ctx, item):
+        try:
+            return super().run_item(ctx, item)
+        except Exception:  # noqa: BLE001
+            return ItemResult("fail", "caught the stop")
+
+
+def test_a_caught_peak_stop_is_recorded_as_stopped(tmp_path, prices):
+    clock = Clock(datetime(2026, 10, 5, 0, 40, tzinfo=timezone.utc))
+
+    def respond(body):
+        clock.advance(6)
+        return reply("ready") if is_probe(body) else reply("x", usage=(0, 1000, 100))
+    with FakeServer(respond, prices=prices, clock=clock) as url:
+        r, _ = runner(tmp_path, url, prices, clock)
+        s = r.run_batch(CatchesPeak(items=1, calls=3))
+    run = lines(tmp_path / "records" / "runs" / "catchespeak.jsonl")[0]
+    assert run["outcome"]["status"] == "stopped" and "peak" in run["stop_reason"]
+    assert "the suite returned fail" in run["outcome"]["detail"]

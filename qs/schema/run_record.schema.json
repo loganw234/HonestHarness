@@ -10,7 +10,7 @@
     "provider", "base_url", "model_sent", "model_reported", "system_fingerprint",
     "thinking", "effort", "sampling", "harness_version", "prompt_version",
     "caps", "calls", "usage", "price_table", "rate_period", "cost_usd",
-    "outcome", "transcript_sha256"
+    "outcome", "stop_reason", "transcript_sha256"
   ],
   "properties": {
     "record_version": {"const": 1},
@@ -75,6 +75,7 @@
         "data": {"type": "object"}
       }
     },
+    "stop_reason": {"type": ["string", "null"]},
     "transcript_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"}
   }
 }
