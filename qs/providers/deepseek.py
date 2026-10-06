@@ -51,6 +51,10 @@ class Turn:
     usage: Usage = field(default_factory=lambda: Usage(0, 0, 0, 0))
     model: str | None = None
     system_fingerprint: str | None = None
+    # Set by Context.chat from the request: whether thinking was on. None for a
+    # turn made outside a Context, such as a test's. Last, so positional use of
+    # the fields above is unchanged.
+    thinking: bool | None = None
 
 
 def build_request(model: str, messages: list[dict], *, thinking: bool = True,
@@ -186,12 +190,19 @@ def parse_stream(lines: Iterable[str]) -> Turn:
 
 def assistant_message(turn: Turn, *, tools_in_request: bool) -> dict:
     """The assistant turn to carry into the next request. With tools in the
-    request, its reasoning_content goes back too (D8)."""
+    request, its reasoning_content goes back too (D8). A thinking-mode turn the
+    model gave no reasoning goes back with "", as D8's own streaming sample
+    builds the field (thinking.txt:49): a stream that carried no reasoning
+    parses to None, and leaving the field out would meet D8's 400 (P1's
+    finding, P1.md 15:03:47)."""
     msg: dict = {"role": "assistant", "content": turn.content}
     if turn.tool_calls:
         msg["tool_calls"] = turn.tool_calls
-    if tools_in_request and turn.reasoning_content is not None:
-        msg["reasoning_content"] = turn.reasoning_content
+    if tools_in_request:
+        if turn.reasoning_content is not None:
+            msg["reasoning_content"] = turn.reasoning_content
+        elif turn.thinking:
+            msg["reasoning_content"] = ""
     return msg
 
 

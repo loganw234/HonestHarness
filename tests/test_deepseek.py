@@ -125,3 +125,13 @@ def test_a_stream_cut_short_raises():
     with pytest.raises(ds.IncompleteReply):
         ds.parse_stream([content, "data: [DONE]"])      # no usage
     assert ds.parse_stream([content, usage, "data: [DONE]"]).content == "a"
+
+
+def test_a_thinking_turn_without_reasoning_goes_back_with_an_empty_field():
+    # P1's finding (P1.md 15:03:47): a stream with no reasoning parses to None.
+    t = ds.Turn(content="c", reasoning_content=None, tool_calls=[{"id": "x"}], thinking=True)
+    assert ds.assistant_message(t, tools_in_request=True)["reasoning_content"] == ""
+    assert "reasoning_content" not in ds.assistant_message(t, tools_in_request=False)
+    for thinking in (False, None):
+        t2 = ds.Turn(content="c", reasoning_content=None, tool_calls=[{"id": "x"}], thinking=thinking)
+        assert "reasoning_content" not in ds.assistant_message(t2, tools_in_request=True)

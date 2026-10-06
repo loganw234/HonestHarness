@@ -684,3 +684,32 @@ def test_local_results_stay_out_of_the_record(tmp_path, prices, off_peak_clock):
     path = tmp_path / "transcripts" / s["batch"] / f"{s['batch']}.i0.r0.json"
     result = json.loads(path.read_text(encoding="utf-8"))["result"]
     assert result["local"] == {"tool_log": ["only-in-the-transcript"]}
+
+
+class StreamsTwice(Echo):
+    """Streams a turn, then sends it back, as a multi-turn suite does."""
+    name = "streamstwice"
+
+    def run_item(self, ctx, item):
+        tools = [{"type": "function", "function": {"name": "f", "parameters": {"type": "object"}}}]
+        msgs = [{"role": "user", "content": "one"}]
+        t = ctx.chat(msgs, tools=tools, stream=True)
+        msgs.append(ctx.provider.assistant_message(t, tools_in_request=True))
+        msgs.append({"role": "user", "content": "two"})
+        ctx.chat(msgs, tools=tools)
+        return ItemResult("pass", "")
+
+
+def test_a_streamed_thinking_turn_without_reasoning_goes_back_with_an_empty_field(
+        tmp_path, prices, off_peak_clock):
+    def respond(body):
+        if is_probe(body):
+            return reply("ready")
+        return stream_reply("x") if body.get("stream") else reply("y")
+    fake = FakeServer(respond, prices=prices, clock=off_peak_clock)
+    with fake as url:
+        r, _ = runner(tmp_path, url, prices, off_peak_clock)
+        r.run_batch(StreamsTwice(1), thinking=True)
+    second = [b for b in fake.requests if not is_probe(b)][1]
+    assistant = [m for m in second["messages"] if m["role"] == "assistant"][0]
+    assert assistant["reasoning_content"] == ""

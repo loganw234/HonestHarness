@@ -220,6 +220,7 @@ class Context:
                 raise
         try:
             turn = self.provider.chat(self.client, body)
+            turn.thinking = kw["thinking"]
         except ProviderError as e:
             self.calls.append({"request": sent, "error": {"status": e.status, "body": e.body}})
             if stops_batch(e.status):
