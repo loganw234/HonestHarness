@@ -1,10 +1,11 @@
 """The run record: one JSON line per item run, held to a schema.
 
 Every number a table shows comes from these lines, and every line names the
-stack that produced it: provider, model sent and reported, fingerprint,
-thinking setting, sampling sent and what the API ignores, the price table and
-rate period behind its cost. A transcript is kept locally (gitignored) and
-only its hash is published.
+stack that produced it: provider, model sent, every distinct model and
+fingerprint the responses reported, thinking setting, sampling sent and what
+the API ignores, the suite's caps, and the price table and rate period behind
+its cost ("mixed" when a run's calls fell in more than one). A transcript is
+kept locally (gitignored) and only its hash is published.
 """
 from __future__ import annotations
 

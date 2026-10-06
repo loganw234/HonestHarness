@@ -11,7 +11,14 @@ From DeepSeek's docs, read 2026-10-06 (the plan's D8-D18):
 - usage reports prompt_cache_hit_tokens and prompt_cache_miss_tokens, and
   completion_tokens_details.reasoning_tokens;
 - finish reasons include insufficient_system_resource and aborted;
-- streams carry ": keep-alive" comments, and usage arrives on the last chunk.
+- streams carry ": keep-alive" comments, and usage arrives on the last chunk
+  before "data: [DONE]";
+- max_tokens must be between 1 and 393216 (D10; the model list's
+  max_output_tokens, D17).
+
+A reply without its usage, or a stream that ends before its usage and
+[DONE], raises IncompleteReply: the call may have been billed, and the meter
+cannot say for how much.
 
 What the docs leave open is marked where the code meets it: P0's first live
 calls confirm or correct each.
@@ -28,6 +35,11 @@ from ..prices import Usage
 FINISH_REASONS = frozenset({"stop", "length", "tool_calls", "content_filter",
                             "insufficient_system_resource", "aborted"})
 EFFORTS = frozenset({"low", "high", "max"})
+MAX_TOKENS = 393216   # "between 1 and 384K (393216)", D10
+
+
+class IncompleteReply(Exception):
+    """A reply that arrived without its usage: billed, perhaps, but unmetered."""
 
 
 @dataclass
@@ -108,6 +120,8 @@ def parse_usage(u: dict | None) -> Usage:
 
 
 def parse_response(data: dict) -> Turn:
+    if not data.get("usage"):
+        raise IncompleteReply("the reply carried no usage")
     choice = (data.get("choices") or [{}])[0]
     msg = choice.get("message") or {}
     return Turn(content=msg.get("content"), reasoning_content=msg.get("reasoning_content"),
@@ -119,10 +133,12 @@ def parse_response(data: dict) -> Turn:
 def parse_stream(lines: Iterable[str]) -> Turn:
     """Accumulate a server-sent-event stream into one turn. Blank lines and
     comment lines (": keep-alive") are skipped; usage is taken from whichever
-    chunk carries it."""
+    chunk carries it. A stream that ends before [DONE], or without usage,
+    raises IncompleteReply."""
     content, reasoning = [], []
     calls: dict[int, dict] = {}
     turn = Turn(content=None, reasoning_content=None)
+    done = usage_seen = False
     for line in lines:
         s = line.strip()
         if not s or s.startswith(":"):
@@ -131,12 +147,14 @@ def parse_stream(lines: Iterable[str]) -> Turn:
             continue
         payload = s[5:].strip()
         if payload == "[DONE]":
+            done = True
             break
         chunk = json.loads(payload)
         turn.model = chunk.get("model", turn.model)
         turn.system_fingerprint = chunk.get("system_fingerprint", turn.system_fingerprint)
         if chunk.get("usage"):
             turn.usage = parse_usage(chunk["usage"])
+            usage_seen = True
         for choice in chunk.get("choices") or []:
             delta = choice.get("delta") or {}
             if delta.get("content"):
@@ -156,6 +174,10 @@ def parse_stream(lines: Iterable[str]) -> Turn:
                     slot["function"]["arguments"] += fn["arguments"]
             if choice.get("finish_reason"):
                 turn.finish_reason = choice["finish_reason"]
+    if not done:
+        raise IncompleteReply("the stream ended before [DONE]")
+    if not usage_seen:
+        raise IncompleteReply("the stream carried no usage")
     turn.content = "".join(content) if content else None
     turn.reasoning_content = "".join(reasoning) if reasoning else None
     turn.tool_calls = [calls[i] for i in sorted(calls)]

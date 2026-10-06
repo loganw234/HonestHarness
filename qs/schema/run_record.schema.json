@@ -9,24 +9,24 @@
     "suite", "suite_version", "item", "repeat",
     "provider", "base_url", "model_sent", "model_reported", "system_fingerprint",
     "thinking", "effort", "sampling", "harness_version", "prompt_version",
-    "calls", "usage", "price_table", "rate_period", "cost_usd",
+    "caps", "calls", "usage", "price_table", "rate_period", "cost_usd",
     "outcome", "transcript_sha256"
   ],
   "properties": {
     "record_version": {"const": 1},
-    "record_id": {"type": "string", "pattern": "^[A-Za-z0-9._:-]+$"},
-    "batch": {"type": "string", "pattern": "^[A-Za-z0-9._:-]+$"},
+    "record_id": {"type": "string", "pattern": "^[A-Za-z0-9._-]+$"},
+    "batch": {"type": "string", "pattern": "^[A-Za-z0-9._-]+$"},
     "ts_utc": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?\\+00:00$"},
     "live": {"type": "boolean"},
     "suite": {"type": "string"},
     "suite_version": {"type": "string"},
-    "item": {"type": "string"},
+    "item": {"type": "string", "pattern": "^[A-Za-z0-9._-]+$"},
     "repeat": {"type": "integer", "minimum": 0},
     "provider": {"type": "string"},
     "base_url": {"type": "string"},
     "model_sent": {"type": "string"},
-    "model_reported": {"type": ["string", "null"]},
-    "system_fingerprint": {"type": ["string", "null"]},
+    "model_reported": {"type": "array", "items": {"type": "string"}},
+    "system_fingerprint": {"type": "array", "items": {"type": "string"}},
     "thinking": {"type": "boolean"},
     "effort": {"type": ["string", "null"]},
     "sampling": {
@@ -40,6 +40,16 @@
     },
     "harness_version": {"type": "string"},
     "prompt_version": {"type": "string"},
+    "caps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_prompt_tokens", "max_output_tokens", "max_call_prompt_tokens"],
+      "properties": {
+        "max_prompt_tokens": {"type": "integer", "minimum": 1},
+        "max_output_tokens": {"type": "integer", "minimum": 1},
+        "max_call_prompt_tokens": {"type": "integer", "minimum": 1}
+      }
+    },
     "calls": {"type": "integer", "minimum": 0},
     "usage": {
       "type": "object",
@@ -53,7 +63,7 @@
       }
     },
     "price_table": {"type": "string"},
-    "rate_period": {"enum": ["peak", "off_peak", "none"]},
+    "rate_period": {"enum": ["peak", "off_peak", "mixed", "none"]},
     "cost_usd": {"type": "string", "pattern": "^\\d+(\\.\\d+)?$"},
     "outcome": {
       "type": "object",

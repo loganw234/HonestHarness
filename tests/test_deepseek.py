@@ -88,6 +88,8 @@ def test_parse_stream_accumulates_tool_calls_by_index():
     lines = [d({"index": 0, "id": "a", "function": {"name": "get_", "arguments": "{\"x\""}}),
              d({"index": 1, "id": "b", "function": {"name": "other", "arguments": "{}"}}),
              d({"index": 0, "function": {"name": "time", "arguments": ": 1}"}}),
+             "data: " + json.dumps({"choices": [{"delta": {}, "finish_reason": "tool_calls"}],
+                                    "usage": {"prompt_tokens": 9, "completion_tokens": 6}}),
              "data: [DONE]"]
     t = ds.parse_stream(lines)
     assert [c["id"] for c in t.tool_calls] == ["a", "b"]
@@ -103,3 +105,23 @@ def test_assistant_message_passes_reasoning_back_only_with_tools():
 
 def test_finish_reasons_include_deepseeks_own():
     assert {"insufficient_system_resource", "aborted"} <= ds.FINISH_REASONS
+
+
+def test_max_tokens_is_deepseeks_documented_limit():
+    assert ds.MAX_TOKENS == 393216
+
+
+def test_a_reply_without_usage_raises():
+    with pytest.raises(ds.IncompleteReply):
+        ds.parse_response({"choices": [{"message": {"content": "x"}, "finish_reason": "stop"}]})
+
+
+def test_a_stream_cut_short_raises():
+    content = "data: " + json.dumps({"choices": [{"delta": {"content": "a"}}]})
+    usage = "data: " + json.dumps({"choices": [{"delta": {}, "finish_reason": "stop"}],
+                                   "usage": {"prompt_tokens": 1, "completion_tokens": 1}})
+    with pytest.raises(ds.IncompleteReply):
+        ds.parse_stream([content, usage])               # no [DONE]
+    with pytest.raises(ds.IncompleteReply):
+        ds.parse_stream([content, "data: [DONE]"])      # no usage
+    assert ds.parse_stream([content, usage, "data: [DONE]"]).content == "a"

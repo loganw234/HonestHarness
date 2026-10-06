@@ -4,21 +4,54 @@ A suite declares its items and its caps, and runs one item through a Context
 that meters every call as it happens. The runner does the rest, the same way
 against the fake endpoint and a live provider:
 
-1. refuse to start inside a peak window, unless told otherwise;
-2. read the balance and the model list, under a read-only reservation;
-3. reserve the batch's worst case from the guard, which refuses what does not
-   fit the ceiling or the balance;
-4. probe identity, then run each item and repeat, checking the reservation
-   before each run, and recording each run's line, cost and transcript;
-5. read the balance again and reconcile what was computed against what was
-   billed. A mismatch stops the caller's next batch.
+1. refuse to start while the last batch's reconciliation is not ok, until the
+   lead acknowledges that batch by its id, or a later balance read reconciles
+   it (a recheck);
+2. refuse to start in a peak window, or within the peak margin before one,
+   unless peak is allowed;
+3. read the balance and the model list, under a read-only reservation. A
+   failure here raises: nothing has been reserved or spent;
+4. reserve the batch's worst case from the guard, which refuses what does not
+   fit the ceiling or the balance. The worst case is priced at the dearest
+   rate period the batch may be billed in: the start's, or with peak allowed,
+   the dearest in the table;
+5. probe identity, then run each item and repeat:
+   - the reservation is checked before each run;
+   - before each call, unless peak is allowed, a call that would fall in a
+     peak window, or within the margin before one, is refused, and the run
+     and the batch stop;
+   - after each call, its cost is priced at the period its reply arrived in
+     and written to the spend file at once, so a later error loses no
+     metered spend;
+   - an error the meter cannot see past stops the batch: a transport failure,
+     a reply without usage, or a stream cut short. So does a provider status
+     the next request would meet too;
+6. read the balance again, reconcile what was computed against what was
+   billed, and write the batch's summary, whatever stopped the batch. When the
+   bill exceeds the meter beyond tolerance, an adjustment line brings the
+   spend file up to the bill. A mismatch raises after the summary is written,
+   and so does a run record that could not be written.
+
+Limits, each stated by the behaviour it concedes:
+- an interrupt (Ctrl-C) ends a batch without its summary. Every call metered
+  before it is in the spend file, and the next batch is not held;
+- a call whose reply never arrives is billed, if at all, without a meter
+  reading. The batch stops there, and its reconciliation shows the bill;
+- the balance's precision and how soon it reflects a call are not documented
+  (D18). A batch that moves the balance by less than the tolerance reconciles
+  ok whatever its meter says, and a slow balance shows as a mismatch until a
+  recheck;
+- public holidays are not in the price table's schedule, so a holiday is
+  priced as an ordinary weekday.
 """
 from __future__ import annotations
 
+import json
+import re
 import time as _time
 from abc import ABC, abstractmethod
-from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from dataclasses import asdict, dataclass, field
+from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 from pathlib import Path
 from typing import Callable
@@ -27,9 +60,19 @@ from . import identity
 from . import record as rec
 from .client import Client, ProviderError
 from .guard import Refused, SpendGuard, reconcile
-from .prices import PriceTable, Usage
+from .prices import PriceTable, Usage, usd
 from .providers import deepseek
 from .registry import Endpoint
+
+ID_PATTERN = re.compile(r"^[A-Za-z0-9._-]+$")
+DEFAULT_PEAK_MARGIN = timedelta(minutes=10)
+
+
+def stops_batch(status: int) -> bool:
+    """A provider status the next request would meet too: the key (401, 403),
+    the balance (402), the rate limit (429) or the service (5xx), per D13.
+    A 400 or 422 belongs to its one request."""
+    return status in (401, 402, 403, 429) or status >= 500
 
 
 @dataclass(frozen=True)
@@ -50,17 +93,31 @@ class Item:
 
 @dataclass
 class ItemResult:
-    status: str               # pass | fail | error | stopped | skipped
+    status: str               # pass | fail | error | stopped | refused | skipped
     detail: str
     data: dict = field(default_factory=dict)
 
 
-class CapReached(Exception):
+class RunStopped(Exception):
+    """A run ended by a limit the harness sets, not by the model or provider."""
+
+
+class CapReached(RunStopped):
+    pass
+
+
+class PeakReached(RunStopped):
     pass
 
 
 class MeterMismatch(Exception):
-    pass
+    def __init__(self, detail: str, summary: dict | None = None):
+        super().__init__(detail)
+        self.summary = summary
+
+
+class Held(Refused):
+    """A batch refused because the last batch's reconciliation is not ok."""
 
 
 def _add(a: Usage, b: Usage) -> Usage:
@@ -77,19 +134,40 @@ def estimate_tokens(text: str) -> int:
 
 
 class Context:
-    """One item run's calls, metered as they happen."""
+    """One item run's calls, metered as they happen.
+
+    The thinking setting and effort are the batch's, so chat() takes neither: a
+    record cannot claim a setting its calls did not use. max_tokens is the run's
+    remaining output or less, and never more than the provider accepts.
+
+    A failed call that leaves the meter uncertain, or a status the next request
+    would meet too, sets stop_reason. The runner reads it whatever the suite
+    returns, so a suite that catches the error cannot hide it."""
 
     def __init__(self, client: Client, endpoint: Endpoint, caps: Caps, *, thinking: bool,
-                 effort: str | None, provider=deepseek):
+                 effort: str | None, provider=deepseek,
+                 before_call: Callable[[], None] | None = None,
+                 after_call: Callable[[Usage], tuple[Decimal, str]] | None = None):
         self.client, self.endpoint, self.caps = client, endpoint, caps
         self.thinking, self.effort, self.provider = thinking, effort, provider
+        self.before_call, self.after_call = before_call, after_call
         self.used = Usage(0, 0, 0, 0)
+        self.cost = Decimal("0")
+        self.periods: list[str] = []
         self.calls: list[dict] = []
-        self.model_reported: str | None = None
-        self.fingerprint: str | None = None
+        self.models_reported: list[str] = []
+        self.fingerprints: list[str] = []
         self.sampling = {"sent": {}, "ignored": []}
+        self.stop_reason: str | None = None
+
+    def _stop(self, reason: str) -> None:
+        if self.stop_reason is None:
+            self.stop_reason = reason
 
     def chat(self, messages: list[dict], **kw):
+        for k in ("thinking", "effort"):
+            if k in kw:
+                raise ValueError(f"{k} is the batch's setting; Context.chat does not take it")
         if self.used.prompt >= self.caps.max_prompt_tokens:
             raise CapReached(f"prompt cap reached: {self.used.prompt} of {self.caps.max_prompt_tokens}")
         if self.used.output >= self.caps.max_output_tokens:
@@ -98,27 +176,48 @@ class Context:
         if est > self.caps.max_call_prompt_tokens:
             raise CapReached(f"a request of about {est} tokens exceeds the suite's declared "
                              f"largest, {self.caps.max_call_prompt_tokens}")
-        kw.setdefault("thinking", self.thinking)
-        if kw["thinking"] and self.effort:
-            kw.setdefault("effort", self.effort)
+        kw["thinking"] = self.thinking
+        if self.thinking and self.effort:
+            kw["effort"] = self.effort
         left = self.caps.max_output_tokens - self.used.output
-        kw["max_tokens"] = min(kw["max_tokens"], left) if kw.get("max_tokens") else left
+        limit = getattr(self.provider, "MAX_TOKENS", None) or left
+        kw["max_tokens"] = min(kw.get("max_tokens") or left, left, limit)
         self.sampling = self.provider.sampling_record(kw["thinking"], kw.get("temperature"),
                                                       kw.get("top_p"))
         body = self.provider.build_request(self.endpoint.model, messages, **kw)
+        if self.before_call is not None:
+            try:
+                self.before_call()
+            except RunStopped as e:
+                self._stop(str(e))
+                raise
         try:
             turn = self.provider.chat(self.client, body)
         except ProviderError as e:
             self.calls.append({"request": body, "error": {"status": e.status, "body": e.body}})
+            if stops_batch(e.status):
+                self._stop(f"the provider returned HTTP {e.status}")
+            raise
+        except Exception as e:
+            self.calls.append({"request": body,
+                               "error": {"type": type(e).__name__, "message": str(e)}})
+            self._stop(f"a reply did not arrive whole ({type(e).__name__}), "
+                       "so its cost is unmetered")
             raise
         self.used = _add(self.used, turn.usage)
-        self.model_reported = turn.model or self.model_reported
-        self.fingerprint = turn.system_fingerprint or self.fingerprint
+        cost, period = (self.after_call(turn.usage) if self.after_call is not None
+                        else (Decimal("0"), "none"))
+        self.cost += cost
+        self.periods.append(period)
+        if turn.model and turn.model not in self.models_reported:
+            self.models_reported.append(turn.model)
+        if turn.system_fingerprint and turn.system_fingerprint not in self.fingerprints:
+            self.fingerprints.append(turn.system_fingerprint)
         self.calls.append({"request": body, "turn": {
             "content": turn.content, "reasoning_content": turn.reasoning_content,
             "tool_calls": turn.tool_calls, "finish_reason": turn.finish_reason,
             "model": turn.model, "system_fingerprint": turn.system_fingerprint,
-            "usage": vars(turn.usage)}})
+            "usage": vars(turn.usage)}, "cost_usd": usd(cost), "rate_period": period})
         return turn
 
 
@@ -136,136 +235,314 @@ class Suite(ABC):
         ...
 
 
+@dataclass
+class _Tally:
+    """A batch's metered spend, and the same usage priced as each other model."""
+    spent: Decimal = Decimal("0")
+    alts: dict = field(default_factory=dict)
+    lines: int = 0
+
+
 class Runner:
     def __init__(self, endpoint: Endpoint, prices: PriceTable, guard: SpendGuard, *,
                  records_dir: str | Path = "records", transcripts_dir: str | Path = "transcripts",
                  live: bool = False, allow_peak: bool = False,
                  clock: Callable[[], datetime] | None = None, settle_seconds: float = 0.0,
-                 provider=deepseek):
+                 provider=deepseek, peak_margin: timedelta = DEFAULT_PEAK_MARGIN):
         self.endpoint, self.prices, self.guard = endpoint, prices, guard
         self.records_dir, self.transcripts_dir = Path(records_dir), Path(transcripts_dir)
         self.live, self.allow_peak, self.provider = live, allow_peak, provider
         self.clock = clock or (lambda: datetime.now(timezone.utc))
         self.settle_seconds = settle_seconds
+        self.peak_margin = peak_margin
+
+    @property
+    def batches_file(self) -> Path:
+        return self.records_dir / "batches.jsonl"
 
     def _client(self, reservation) -> Client:
         return Client(self.endpoint.base_url, key_env=self.endpoint.key_env, live=self.live,
                       reservation=reservation)
 
-    def _balance(self, batch: str) -> Decimal | None:
-        with self._client(self.guard.readonly(batch)) as c:
-            return self.provider.get_balance(c)
+    def _read_balance(self, batch: str) -> tuple[Decimal | None, str | None]:
+        """The balance, or None and the redacted reason it could not be read."""
+        try:
+            c = self._client(self.guard.readonly(batch))
+        except Exception as e:  # noqa: BLE001 - reported, never raised past here
+            return None, f"{type(e).__name__}: {e}"
+        try:
+            return self.provider.get_balance(c), None
+        except Exception as e:  # noqa: BLE001
+            return None, f"{type(e).__name__}: {c.redact(str(e))}"
+        finally:
+            c.close()
 
+    # -- the hold -------------------------------------------------------------------
+    def _lines(self) -> list[dict]:
+        p = self.batches_file
+        if not p.exists():
+            return []
+        return [json.loads(x) for x in p.read_text(encoding="utf-8").splitlines() if x.strip()]
+
+    def hold(self) -> dict | None:
+        """The last batch's latest reconciliation, if it is not ok and the lead
+        has not acknowledged it; otherwise None."""
+        lines = self._lines()
+        last = next((x for x in reversed(lines) if x.get("kind", "batch") == "batch"), None)
+        if last is None:
+            return None
+        latest = last
+        for x in lines:
+            if x.get("batch") != last["batch"]:
+                continue
+            if x.get("kind") == "acknowledge":
+                return None
+            if x.get("kind") == "recheck":
+                latest = x
+        return None if latest.get("reconciliation") == "ok" else latest
+
+    def _check_hold(self, acknowledge: str | None) -> dict | None:
+        """The hold this batch's acknowledgment lifts, or None if there is no
+        hold. A hold the caller does not name refuses the batch."""
+        h = self.hold()
+        if h is None:
+            return None
+        if acknowledge != h["batch"]:
+            raise Held(f"batch {h['batch']} reconciled as {h['reconciliation']} "
+                       f"({h.get('detail')}); acknowledge it by its id, or recheck it")
+        return h
+
+    def _acknowledge(self, h: dict, batch: str) -> None:
+        """Written once the acknowledging batch holds its reservation, so a
+        batch refused at its start lifts nothing."""
+        self._append_json(self.batches_file, {
+            "kind": "acknowledge", "batch": h["batch"], "ts_utc": rec.now_utc(),
+            "reconciliation": h["reconciliation"], "by_batch": batch})
+
+    def recheck(self, batch: str | None = None) -> dict:
+        """Read the balance now and reconcile the last batch again, against
+        its own opening balance. It is valid only while no later batch, and no
+        other use of the key, has spent since: a stated limit."""
+        lines = self._lines()
+        last = next((x for x in reversed(lines) if x.get("kind", "batch") == "batch"), None)
+        if last is None:
+            raise Refused("there is no batch to recheck")
+        if batch is not None and batch != last["batch"]:
+            raise Refused(f"only the last batch, {last['batch']}, can be rechecked")
+        after, err = self._read_balance(last["batch"])
+        before = None if last.get("balance_before") in (None, "None") else Decimal(last["balance_before"])
+        computed = Decimal(last["computed_usd"])
+        alts = {k: Decimal(v) for k, v in (last.get("alternatives_usd") or {}).items()}
+        recon = reconcile(before, after, computed, alternatives=alts)
+        adjusted = self._adjust(last["batch"], recon)
+        line = {"kind": "recheck", "batch": last["batch"], "ts_utc": rec.now_utc(),
+                "balance_after": None if after is None else str(after),
+                "computed_usd": usd(computed),
+                "billed_usd": None if recon.billed is None else usd(recon.billed),
+                "adjustment_usd": usd(adjusted), "reconciliation": recon.status,
+                "tolerance_usd": usd(recon.tolerance),
+                "detail": recon.detail if err is None else f"{recon.detail}; the read failed: {err}"}
+        self._append_json(self.batches_file, line)
+        return line
+
+    def _adjust(self, batch: str, recon) -> Decimal:
+        """When the bill exceeds what the spend file holds for the batch beyond
+        tolerance, add the difference as an adjustment line, so the ceiling
+        counts what was billed. A bill below the meter adds nothing."""
+        if recon.billed is None or recon.status in ("ok", "topup"):
+            return Decimal("0")
+        held = self.guard.spent_in(batch)
+        diff = recon.billed - held
+        if diff <= recon.tolerance:
+            return Decimal("0")
+        self.guard.record(batch=batch, record_id=f"{batch}.adjustment", model=self.endpoint.model,
+                          period="none", price_table=self.prices.id, cost=diff, kind="adjustment")
+        return diff
+
+    # -- metering -------------------------------------------------------------------
+    def _gate(self) -> None:
+        """Before each call: unless peak is allowed, no call in a peak window or
+        within the margin before one."""
+        if self.allow_peak:
+            return
+        now = self.clock()
+        if self.prices.peak_within(now, self.peak_margin):
+            raise PeakReached(f"a call at {now.isoformat()} would fall in a peak window, or "
+                              f"within {self.peak_margin} of one")
+
+    def _meter(self, batch: str, spend_id: str, usage: Usage, tally: _Tally) -> tuple[Decimal, str]:
+        """Price one reply at the period it arrived in, and write its spend line."""
+        model = self.endpoint.model
+        period = self.prices.period(self.clock())
+        cost = self.prices.cost(model, period, usage)
+        for m in tally.alts:
+            tally.alts[m] += self.prices.cost(m, period, usage)
+        tally.spent += cost
+        tally.lines += 1
+        self.guard.record(batch=batch, record_id=spend_id, model=model, period=period,
+                          price_table=self.prices.id, cost=cost)
+        return cost, period
+
+    def _meter_for(self, batch: str, record_id: str, tally: _Tally):
+        n = 0
+
+        def meter(usage: Usage) -> tuple[Decimal, str]:
+            nonlocal n
+            n += 1
+            return self._meter(batch, f"{record_id}.c{n}", usage, tally)
+        return meter
+
+    # -- the batch ------------------------------------------------------------------
     def run_batch(self, suite: Suite, *, repeats: int = 1, thinking: bool = True,
-                  effort: str | None = None, batch: str | None = None) -> dict:
+                  effort: str | None = None, batch: str | None = None,
+                  acknowledge: str | None = None) -> dict:
         start = self.clock()
         batch = batch or f"{suite.name}-{start.strftime('%Y%m%dT%H%M%SZ')}"
-        period = self.prices.period(start)
-        if period == "peak" and not self.allow_peak:
-            raise Refused(f"{start.isoformat()} is in the provider's peak window")
-        model = self.endpoint.model
         items = suite.items()
+        for name in [batch] + [i.id for i in items]:
+            if not ID_PATTERN.match(name):
+                raise ValueError(f"{name!r} is not a valid id: use letters, digits, '.', '_' or '-'")
+        held = self._check_hold(acknowledge)
+        if not self.allow_peak and self.prices.peak_within(start, self.peak_margin):
+            raise Refused(f"{start.isoformat()} is in the provider's peak window, or within "
+                          f"{self.peak_margin} of one")
+        model = self.endpoint.model
         caps = suite.caps
-        run_worst = self.prices.worst_case(model, period, caps.max_prompt_tokens
-                                           + caps.max_call_prompt_tokens, caps.max_output_tokens)
-        probe_worst = self.prices.worst_case(model, period, identity.PROBE_MAX_PROMPT,
-                                             identity.PROBE_MAX_OUTPUT)
+        periods = (sorted(self.prices.models[model]) if self.allow_peak
+                   else [self.prices.period(start)])
+
+        def worst(prompt: int, output: int) -> Decimal:
+            return max(self.prices.worst_case(model, p, prompt, output) for p in periods)
+
+        run_worst = worst(caps.max_prompt_tokens + caps.max_call_prompt_tokens,
+                          caps.max_output_tokens)
+        probe_worst = worst(identity.PROBE_MAX_PROMPT, identity.PROBE_MAX_OUTPUT)
         batch_worst = run_worst * len(items) * repeats + probe_worst
 
         with self._client(self.guard.readonly(batch)) as c:
             before = self.provider.get_balance(c)
             names = identity.display_names(self.provider.list_models(c))
         reservation = self.guard.reserve(batch, batch_worst, before)
+        acknowledged = None
+        if held is not None:
+            self._acknowledge(held, batch)
+            acknowledged = held["batch"]
 
-        spent = Decimal("0")
-        alts = {m: Decimal("0") for m in self.prices.models if m != model}
-        runs, stopped_for = 0, None
+        tally = _Tally(alts={m: Decimal("0") for m in self.prices.models if m != model})
+        runs, stopped_for, record_error = 0, None, None
         with self._client(reservation) as client:
-            turn = identity.probe(client, self.provider, model)
-            cost = self.prices.cost(model, period, turn.usage)
-            for m in alts:
-                alts[m] += self.prices.cost(m, period, turn.usage)
-            spent += cost
-            self.guard.record(batch=batch, record_id=f"{batch}.identity", model=model,
-                              period=period, price_table=self.prices.id, cost=cost)
-            self._identity_line(batch, names, turn, period, cost)
-
-            for item in items:
+            stopped_for = self._probe(batch, client, names, tally)
+            for item in items if stopped_for is None else []:
                 for r in range(repeats):
                     now = self.clock()
-                    p_now = self.prices.period(now)
-                    if p_now == "peak" and not self.allow_peak:
-                        stopped_for = f"a peak window began at or before {now.isoformat()}"
+                    if not self.allow_peak and self.prices.peak_within(now, self.peak_margin):
+                        stopped_for = (f"a peak window begins within {self.peak_margin} of "
+                                       f"{now.isoformat()}")
                         break
                     try:
-                        self.guard.check_run(reservation, run_worst, spent)
+                        self.guard.check_run(reservation, run_worst, tally.spent)
                     except Refused as e:
                         stopped_for = f"the guard refused the next run: {e}"
                         break
+                    record_id = f"{batch}.{item.id}.r{r}"
                     ctx = Context(client, self.endpoint, caps, thinking=thinking, effort=effort,
-                                  provider=self.provider)
-                    try:
-                        result = suite.run_item(ctx, item)
-                    except CapReached as e:
-                        result = ItemResult("stopped", str(e))
-                    except ProviderError as e:
-                        result = ItemResult("error", client.redact(str(e)))
-                    cost = self.prices.cost(model, p_now, ctx.used)
-                    for m in alts:
-                        alts[m] += self.prices.cost(m, p_now, ctx.used)
-                    spent += cost
+                                  provider=self.provider, before_call=self._gate,
+                                  after_call=self._meter_for(batch, record_id, tally))
+                    result = self._run_one(suite, ctx, item, client)
                     runs += 1
-                    self._run_line(batch, suite, item, r, ctx, result, thinking, effort,
-                                   p_now, cost, client)
+                    try:
+                        self._run_line(batch, suite, item, r, record_id, ctx, result, thinking,
+                                       effort, client)
+                    except Exception as e:  # noqa: BLE001 - raised after the summary
+                        record_error = e
+                        stopped_for = f"a run record could not be written: {type(e).__name__}"
+                    if ctx.stop_reason and not stopped_for:
+                        stopped_for = ctx.stop_reason
+                    if stopped_for:
+                        break
                 if stopped_for:
                     break
 
         if self.settle_seconds:
             _time.sleep(self.settle_seconds)
-        after = self._balance(batch)
-        recon = reconcile(before, after, spent, alternatives=alts)
-        summary = {"batch": batch, "ts_utc": rec.now_utc(), "suite": suite.name, "runs": runs,
-                   "stopped_for": stopped_for, "balance_before": str(before),
-                   "balance_after": str(after), "computed_usd": str(spent),
-                   "billed_usd": None if recon.billed is None else str(recon.billed),
-                   "reconciliation": recon.status, "tolerance_usd": str(recon.tolerance),
-                   "detail": recon.detail, "reserved_usd": str(reservation.amount),
+        after, read_error = self._read_balance(batch)
+        recon = reconcile(before, after, tally.spent, alternatives=tally.alts)
+        adjusted = self._adjust(batch, recon)
+        detail = recon.detail if read_error is None else (
+            f"{recon.detail}; the closing balance read failed: {read_error}")
+        summary = {"kind": "batch", "batch": batch, "ts_utc": rec.now_utc(), "suite": suite.name,
+                   "suite_version": suite.version, "runs": runs, "stopped_for": stopped_for,
+                   "balance_before": str(before), "balance_after": None if after is None else str(after),
+                   "computed_usd": usd(tally.spent),
+                   "alternatives_usd": {m: usd(v) for m, v in tally.alts.items()},
+                   "billed_usd": None if recon.billed is None else usd(recon.billed),
+                   "adjustment_usd": usd(adjusted), "reconciliation": recon.status,
+                   "tolerance_usd": usd(recon.tolerance), "detail": detail,
+                   "reserved_usd": usd(reservation.amount), "reserved_at": periods,
+                   "allow_peak": self.allow_peak,
+                   "peak_margin_minutes": int(self.peak_margin.total_seconds() // 60),
+                   "spend_lines": tally.lines, "acknowledged": acknowledged,
                    "price_table": self.prices.id, "live": self.live}
-        self._append_json(self.records_dir / "batches.jsonl", summary)
+        self._append_json(self.batches_file, summary)
+        if record_error is not None:
+            raise record_error
         if recon.status == "mismatch":
-            raise MeterMismatch(recon.detail)
+            raise MeterMismatch(recon.detail, summary)
         return summary
 
-    # -- record lines -----------------------------------------------------------
-    def _identity_line(self, batch, names, turn, period, cost) -> None:
+    def _probe(self, batch: str, client: Client, names: dict, tally: _Tally) -> str | None:
+        """The identity probe: metered like any call. A failure is recorded and
+        stops the batch before its runs."""
+        try:
+            self._gate()
+            turn = identity.probe(client, self.provider, self.endpoint.model)
+        except Exception as e:  # noqa: BLE001 - recorded, and it stops the batch
+            msg = f"{type(e).__name__}: {client.redact(str(e))}"
+            self._identity_line(batch, names, None, "none", Decimal("0"), error=msg)
+            return f"the identity probe failed: {msg}"
+        cost, period = self._meter(batch, f"{batch}.identity", turn.usage, tally)
+        self._identity_line(batch, names, turn, period, cost)
+        return None
+
+    def _run_one(self, suite: Suite, ctx: Context, item: Item, client: Client) -> ItemResult:
+        try:
+            return suite.run_item(ctx, item)
+        except RunStopped as e:
+            return ItemResult("stopped", str(e))
+        except ProviderError as e:
+            return ItemResult("error", client.redact(str(e)))
+        except Exception as e:  # noqa: BLE001 - a run's error is its record's outcome
+            return ItemResult("error", f"{type(e).__name__}: {client.redact(str(e))}")
+
+    # -- record lines -----------------------------------------------------------------
+    def _identity_line(self, batch, names, turn, period, cost, error: str | None = None) -> None:
         self._append_json(self.records_dir / "identity.jsonl", {
             "batch": batch, "ts_utc": rec.now_utc(), "model_sent": self.endpoint.model,
-            "display_names": names, "model_reported": turn.model,
-            "system_fingerprint": turn.system_fingerprint, "rate_period": period,
-            "cost_usd": str(cost), "live": self.live})
+            "display_names": names, "model_reported": turn.model if turn else None,
+            "system_fingerprint": turn.system_fingerprint if turn else None,
+            "rate_period": period, "cost_usd": usd(cost), "error": error, "live": self.live})
 
-    def _run_line(self, batch, suite, item, r, ctx, result, thinking, effort, period, cost,
+    def _run_line(self, batch, suite, item, r, record_id, ctx, result, thinking, effort,
                   client) -> None:
-        record_id = f"{batch}.{item.id}.r{r}"
         sha = rec.save_transcript(self.transcripts_dir / batch, record_id,
                                   {"calls": ctx.calls, "result": vars(result)},
                                   redact=client.redact)
+        periods = set(ctx.periods)
+        period = "none" if not periods else (periods.pop() if len(periods) == 1 else "mixed")
         line = rec.new_record(
             record_id=record_id, batch=batch, live=self.live, suite=suite.name,
             suite_version=suite.version, item=item.id, repeat=r,
             provider=self.endpoint.provider, base_url=self.endpoint.base_url,
-            model_sent=self.endpoint.model, model_reported=ctx.model_reported,
-            system_fingerprint=ctx.fingerprint, thinking=thinking,
+            model_sent=self.endpoint.model, model_reported=ctx.models_reported,
+            system_fingerprint=ctx.fingerprints, thinking=thinking,
             effort=effort if thinking else None, sampling=ctx.sampling,
-            prompt_version=suite.version, calls=len(ctx.calls),
+            prompt_version=suite.version, caps=asdict(suite.caps), calls=len(ctx.calls),
             usage={"cache_hit": ctx.used.cache_hit, "cache_miss": ctx.used.cache_miss,
                    "output": ctx.used.output, "reasoning": ctx.used.reasoning},
-            price_table=self.prices.id, rate_period=period, cost_usd=str(cost),
+            price_table=self.prices.id, rate_period=period, cost_usd=usd(ctx.cost),
             outcome={"status": result.status, "detail": result.detail, "data": result.data},
             transcript_sha256=sha)
         rec.append(self.records_dir / "runs" / f"{suite.name}.jsonl", line)
-        self.guard.record(batch=batch, record_id=record_id, model=self.endpoint.model,
-                          period=period, price_table=self.prices.id, cost=cost)
 
     @staticmethod
     def _append_json(path: Path, obj: dict) -> None:

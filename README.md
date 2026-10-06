@@ -5,9 +5,10 @@ and [HonestFramework](https://github.com/loganw234/HonestFramework) on
 open-weight models. Its core is a non-LLM orchestrator that turns the rules
 agents now have to remember into mechanisms they cannot route around.
 
-**Status: research.** There is no code yet. This repository holds the
-requirements, the research behind them, and the record of rounds run by hand
-that test them.
+**Status: research, with its first code in progress.** This repository holds
+the requirements, the research behind them, and the record of rounds run by
+hand that test them. Since round 1 it also holds `qs/`, the qualification
+suites' runner, described below.
 
 ## What is here
 

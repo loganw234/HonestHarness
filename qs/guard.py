@@ -6,10 +6,21 @@ Three things hold the ceiling, from the outside in:
    of the ceiling or of the balance last read;
 3. reconciliation, which checks the guard's own arithmetic against the
    provider's balance after every batch. The meter is checked against
-   something that can say no.
+   something that can say no. A bill above the meter is added to the spend
+   file as an adjustment, so the ceiling counts what was billed. The runner
+   holds the next batch until a reconciliation that is not ok is acknowledged
+   or rechecked.
 
-The spend file is append-only JSON lines, one per paid call, and the total
-spent is always recomputed from it, never cached.
+Limits, each stated by the behaviour it concedes: a top-up smaller than a
+batch's bill hides that much of the bill from its reconciliation, and the
+balance's precision is not documented (D18). The tolerance below assumes two
+decimals, as D18's example shows; P0's first live batch large enough to move
+the balance tests it.
+
+The spend file is append-only JSON lines, one per metered call, written as
+each reply arrives, and the total spent is always recomputed from it, never
+cached. A call whose reply never arrives cannot be metered; reconciliation is
+what sees its bill.
 """
 from __future__ import annotations
 
@@ -18,6 +29,8 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from decimal import Decimal
 from pathlib import Path
+
+from .prices import usd
 
 DEFAULT_ABS_TOLERANCE = Decimal("0.02")   # two reads of a two-decimal balance, plus rounding
 DEFAULT_REL_TOLERANCE = Decimal("0.05")
@@ -62,6 +75,18 @@ class SpendGuard:
                 total += Decimal(json.loads(line)["cost_usd"])
         return total
 
+    def spent_in(self, batch: str) -> Decimal:
+        """What the spend file holds for one batch: its calls and adjustments."""
+        if not self.spend_file.exists():
+            return Decimal("0")
+        total = Decimal("0")
+        for line in self.spend_file.read_text(encoding="utf-8").splitlines():
+            if line.strip():
+                d = json.loads(line)
+                if d["batch"] == batch:
+                    total += Decimal(d["cost_usd"])
+        return total
+
     def remaining(self) -> Decimal:
         return self.ceiling - self.spent()
 
@@ -90,15 +115,18 @@ class SpendGuard:
                           f"reservation of ${reservation.amount} (spent ${batch_spent})")
 
     def record(self, *, batch: str, record_id: str, model: str, period: str,
-               price_table: str, cost: Decimal) -> None:
+               price_table: str, cost: Decimal, kind: str = "call") -> None:
+        """Append one spend line. kind is "call" for a metered reply, or
+        "adjustment" for a bill found above the meter at reconciliation."""
         line = {
             "ts": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            "kind": kind,
             "batch": batch,
             "record": record_id,
             "model": model,
             "period": period,
             "price_table": price_table,
-            "cost_usd": str(cost),
+            "cost_usd": usd(cost),
         }
         self.spend_file.parent.mkdir(parents=True, exist_ok=True)
         with self.spend_file.open("a", encoding="utf-8", newline="\n") as f:

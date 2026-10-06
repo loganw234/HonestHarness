@@ -31,8 +31,11 @@ Checks:
             values computed by hand: costs, rate periods, reconciliation
             classes and refusals.
   privacy   no personal path, address or key-shaped token appears in a file
-            git would commit (tracked, or untracked and not ignored), nor in
-            a commit message on HEAD's history. A finding is printed masked.
+            git would commit (tracked, or untracked and not ignored), this
+            gate's own source included, nor in a commit message on HEAD's
+            history. A finding is printed masked. The home-path forms are
+            listed at PATTERNS: Windows, drive-less, Git Bash, WSL, Cygwin,
+            Docker Desktop's host mounts, macOS and Linux.
   livegate  no Python file sets live=True except the lead's live entry point,
             tools/live.py, and the live gate's own tests,
             tests/test_client_and_keys.py, which set it to prove the refusals
@@ -40,13 +43,18 @@ Checks:
 
 What it cannot see (each limit stated by the behaviour it concedes):
   - tests: a behaviour no test exercises can change unseen. The tests are
-    content, and verifiers judge them.
+    content, and verifiers judge them. The spending guard's bounds each have
+    a test: the reconciliation tolerance, the worst case with
+    max_call_prompt_tokens, the token estimate, the max_tokens clamp, the
+    per-call size check, the peak stop inside a batch, and redaction of
+    provider errors.
   - schema: a record that matches its schema and says something false
     passes.
   - guard: the price table itself is checked only against the fixtures, and
     the fixtures only against hand arithmetic. A price that is wrong in both
     passes. The live reconciliation is what checks prices against a bill.
   - privacy:
+    - a home path in a form not listed at PATTERNS passes;
     - a value spelled out, split across lines, or encoded passes;
     - an address in an allowed or reserved domain passes;
     - a key in a shape not listed passes;
@@ -73,9 +81,18 @@ ALLOWED_ADDRESSES = {"noreply@anthropic.com"}
 RESERVED = re.compile(r"(?i)(^|\.)(example\.(com|org|net)|invalid|test|localhost)$")
 _HOME_NAME = r"[A-Za-z0-9][A-Za-z0-9._-]*"
 PATTERNS = {
+    # A home directory, in the forms one reaches this desktop by: Windows
+    # (C:\Users\<name>, C:/Users/<name>), drive-less (\Users\<name>), Git Bash
+    # (/c/Users/<name>), WSL (/mnt/c/Users/<name>), Cygwin
+    # (/cygdrive/c/Users/<name>), Docker Desktop's host mounts
+    # (/run/desktop/mnt/host/c/Users/<name>, /host_mnt/c/Users/<name>), and
+    # macOS and Linux (/Users/<name>, /home/<name>).
     "path": re.compile(
         r"(?i)(?<![A-Za-z0-9])[a-z]:[\\/]+(users|documents and settings)[\\/]+" + _HOME_NAME
-        + r"|(?<![A-Za-z0-9.])/(c/users|users|home)/" + _HOME_NAME),
+        + r"|(?<![A-Za-z0-9.:\\])\\users\\" + _HOME_NAME
+        + r"|(?<![A-Za-z0-9.])(/mnt|/cygdrive|/host_mnt|/run/desktop/mnt/host)?/[a-z]/users/"
+        + _HOME_NAME
+        + r"|(?<![A-Za-z0-9.])/(users|home)/" + _HOME_NAME),
     "address": re.compile(r"[A-Za-z0-9._%+-]+@([A-Za-z0-9-]+\.)+[A-Za-z]{2,}"),
     "key": re.compile(r"\bsk-[A-Za-z0-9_-]{20,}|(?i:\bbearer\s+)[A-Za-z0-9._~+/-]{24,}"
                       r"|(?i:DEEPSEEK_API_KEY\s*[=:]\s*)[\"']?[A-Za-z0-9_-]{16,}"),
@@ -129,7 +146,8 @@ def findings(text: str) -> list[tuple[str, str]]:
 
 # -- checks -------------------------------------------------------------------
 def check_tests(root: Path) -> tuple[list[str], str]:
-    r = subprocess.run([sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider",
+    # pyproject's addopts already give -q; a second -q would drop the count line.
+    r = subprocess.run([sys.executable, "-m", "pytest", "-p", "no:cacheprovider",
                         "-W", "ignore"], cwd=root, capture_output=True, text=True)
     tail = (r.stdout.strip().splitlines() or [""])[-1]
     return ([] if r.returncode == 0 else [f"pytest failed: {tail}"]), tail
@@ -230,8 +248,6 @@ def check_guard(root: Path) -> tuple[list[str], str]:
 def check_privacy(root: Path) -> tuple[list[str], str]:
     bad, n = [], 0
     for p in files(root):
-        if p.name == "check.py" and p.parent.name == "tools":
-            continue  # the gate names its own patterns
         text = read(p)
         if text is None:
             continue
@@ -317,11 +333,23 @@ def _plant_key(r: Path):
 
 
 def _plant_address(r: Path):
-    (r / "notes.md").write_text("mail someone@personal-domain.net\n")
+    # Built at run time, so the gate's own source holds no address: the
+    # privacy check reads this file too.
+    (r / "notes.md").write_text("mail someone" + "@" + "personal-domain.net\n")
 
 
 def _plant_path(r: Path):
     (r / "notes.md").write_text("see " + "C:" + "\\" + "Users" + "\\" + "someone\\x.txt\n")
+
+
+def _plant_wsl_path(r: Path):
+    (r / "notes.md").write_text("see /mnt/c/" + "Users" + "/someone/x.txt\n")
+
+
+def _plant_path_in_gate(r: Path):
+    p = r / "tools" / "check.py"
+    p.write_text(p.read_text(encoding="utf-8") + "# pasted: /c/" + "Users" + "/someone/x\n",
+                 encoding="utf-8")
 
 
 def _plant_live(r: Path):
@@ -336,6 +364,8 @@ CONTROLS = [
     ("privacy", "a key-shaped token", _plant_key),
     ("privacy", "a personal address", _plant_address),
     ("privacy", "a home-directory path", _plant_path),
+    ("privacy", "a home path in WSL's form", _plant_wsl_path),
+    ("privacy", "a home path pasted into the gate itself", _plant_path_in_gate),
     ("livegate", "live mode switched on outside the live entry point", _plant_live),
 ]
 

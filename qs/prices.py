@@ -8,11 +8,17 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass
-from datetime import datetime, time, timezone
+from datetime import datetime, time, timedelta, timezone
 from decimal import Decimal
 from pathlib import Path
 
 WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+
+
+def usd(amount) -> str:
+    """A dollar amount as fixed-point text, never in exponent form: Decimal
+    renders 0.0000006 as "6E-7", which the run record's pattern refuses."""
+    return format(Decimal(amount), "f")
 
 
 @dataclass(frozen=True)
@@ -72,6 +78,20 @@ class PriceTable:
             if start <= t < end:
                 return "peak"
         return "off_peak"
+
+    def peak_within(self, when: datetime, margin: timedelta) -> bool:
+        """True if `when` is in a peak window, or one begins before
+        `when + margin`. Windows start on whole minutes, so testing each
+        whole minute in the span is exact."""
+        if self.period(when) == "peak":
+            return True
+        end = when + margin
+        t = when.replace(second=0, microsecond=0) + timedelta(minutes=1)
+        while t <= end:
+            if self.period(t) == "peak":
+                return True
+            t += timedelta(minutes=1)
+        return self.period(end) == "peak"
 
     def rates(self, model: str, period: str) -> Rates:
         if model not in self.models:

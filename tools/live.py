@@ -3,16 +3,28 @@
     python tools/live.py --probe
     python tools/live.py <module>:<SuiteClass> [--repeats N] [--thinking on|off]
                          [--effort low|high|max] [--endpoint NAME] [--ceiling USD]
-                         [--allow-peak] [--settle SECONDS]
+                         [--allow-peak] [--peak-margin MINUTES] [--settle SECONDS]
+                         [--acknowledge BATCH]
+    python tools/live.py --recheck
 
 --probe runs an empty batch: the balance read, the model list, one identity
 probe, the balance read again and the reconciliation. It is the cheapest live
-step there is, and the first one of the round.
+step there is, and the first one of the round. It costs about $0.00001, too
+little to move a two-decimal balance, so it cannot test the balance's
+precision or how soon a bill shows; the first batch that moves the balance by
+several cents does, with a long --settle and a --recheck after it.
 
 Every batch goes through the runner and the spending guard: a worst case that
 does not fit the ceiling's remainder or the balance is refused before anything
-is spent, and a batch inside the provider's peak window is refused unless
---allow-peak is given. Parcels never run this file; their tests use the fake.
+is spent, and a batch is refused inside the provider's peak window, or within
+the margin before one, unless --allow-peak is given. A batch whose
+reconciliation is not ok holds the next one: --recheck reads the balance again
+and reconciles the last batch anew, and --acknowledge BATCH lifts the hold by
+naming that batch. Errors are printed redacted, with an exit status that says
+which kind they are. Parcels never run this file; their tests use the fake.
+
+The spend file is this checkout's, records/spend.jsonl. Round 1's live runs
+are made from one checkout only, so one file holds the round's spend.
 """
 from __future__ import annotations
 
@@ -26,10 +38,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
+from datetime import timedelta  # noqa: E402
+
 from qs import registry  # noqa: E402
-from qs.guard import SpendGuard  # noqa: E402
+from qs.guard import Refused, SpendGuard  # noqa: E402
 from qs.prices import PriceTable  # noqa: E402
-from qs.suite import Caps, Item, Runner, Suite  # noqa: E402
+from qs.suite import Caps, Item, MeterMismatch, Runner, Suite  # noqa: E402
 
 DEFAULT_CEILING = "250"   # Logan, 2026-10-06: the pilot testing's ceiling
 
@@ -62,19 +76,39 @@ def main(argv: list[str]) -> int:
     ap.add_argument("--effort", choices=["low", "high", "max"])
     ap.add_argument("--ceiling", default=DEFAULT_CEILING)
     ap.add_argument("--allow-peak", action="store_true")
+    ap.add_argument("--peak-margin", type=int, default=10, metavar="MINUTES")
+    # How soon the balance shows a bill is undocumented (D18): an open point
+    # the first batch that moves the balance settles.
     ap.add_argument("--settle", type=float, default=5.0)
+    ap.add_argument("--acknowledge", metavar="BATCH")
+    ap.add_argument("--recheck", action="store_true")
     a = ap.parse_args(argv)
-    if not a.probe and not a.suite:
-        ap.error("give a suite, or --probe")
+    if not (a.probe or a.suite or a.recheck):
+        ap.error("give a suite, --probe or --recheck")
     ep = registry.load(ROOT / "registry.json")[a.endpoint]
     prices = PriceTable.load(ROOT / ep.price_table)
     guard = SpendGuard(Decimal(a.ceiling), ROOT / "records" / "spend.jsonl")
     runner = Runner(ep, prices, guard, records_dir=ROOT / "records",
                     transcripts_dir=ROOT / "transcripts", live=True,
-                    allow_peak=a.allow_peak, settle_seconds=a.settle)
-    suite = Probe() if a.probe else load_suite(a.suite)
-    summary = runner.run_batch(suite, repeats=a.repeats, thinking=a.thinking == "on",
-                               effort=a.effort)
+                    allow_peak=a.allow_peak, settle_seconds=a.settle,
+                    peak_margin=timedelta(minutes=a.peak_margin))
+    try:
+        if a.recheck:
+            print(json.dumps(runner.recheck(), indent=2))
+            return 0
+        suite = Probe() if a.probe else load_suite(a.suite)
+        summary = runner.run_batch(suite, repeats=a.repeats, thinking=a.thinking == "on",
+                                   effort=a.effort, acknowledge=a.acknowledge)
+    except MeterMismatch as e:
+        print(json.dumps(e.summary, indent=2))
+        print(f"MISMATCH: {e}", file=sys.stderr)
+        return 2
+    except Refused as e:
+        print(f"REFUSED: {e}", file=sys.stderr)
+        return 3
+    except Exception as e:  # noqa: BLE001 - the client's errors are redacted at source
+        print(f"ERROR: {type(e).__name__}: {e}", file=sys.stderr)
+        return 4
     print(json.dumps(summary, indent=2))
     return 0
 

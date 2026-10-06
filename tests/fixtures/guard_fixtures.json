@@ -22,7 +22,11 @@
     {"before": "12.00", "after": "11.00", "computed": "0.10", "alternatives": {}, "status": "mismatch"},
     {"before": "12.00", "after": "12.50", "computed": "0.10", "alternatives": {}, "status": "topup"},
     {"before": null, "after": "11.90", "computed": "0.10", "alternatives": {}, "status": "unread"},
-    {"before": "12.00", "after": "11.56", "computed": "0.10", "alternatives": {"deepseek-v4-pro": "0.44"}, "status": "matches:deepseek-v4-pro"}
+    {"before": "12.00", "after": "11.56", "computed": "0.10", "alternatives": {"deepseek-v4-pro": "0.44"}, "status": "matches:deepseek-v4-pro"},
+    {"before": "12.00", "after": "11.98", "computed": "0.00", "alternatives": {}, "status": "ok"},
+    {"before": "12.00", "after": "11.97", "computed": "0.00", "alternatives": {}, "status": "mismatch"},
+    {"before": "12.00", "after": "10.95", "computed": "1.00", "alternatives": {}, "status": "ok"},
+    {"before": "12.00", "after": "10.94", "computed": "1.00", "alternatives": {}, "status": "mismatch"}
   ],
   "refusals": [
     {"ceiling": "250", "spent": "0", "balance": "12.00", "worst": "12.01", "refused": true},

@@ -16,11 +16,16 @@ class KeyUnavailable(Exception):
 
 
 def read_key(env_name: str, *, live: bool) -> str:
+    """The key, stripped of surrounding whitespace. A key with whitespace or a
+    control character inside is refused without naming it: an HTTP library
+    would reject the header and quote the value in its error."""
     if not live:
         raise KeyUnavailable("a key is read only in live mode")
-    value = os.environ.get(env_name) or _windows_env(env_name)
+    value = (os.environ.get(env_name) or _windows_env(env_name) or "").strip()
     if not value:
         raise KeyUnavailable(f"{env_name} is not set")
+    if any(c.isspace() or ord(c) < 32 or ord(c) == 127 for c in value):
+        raise KeyUnavailable(f"{env_name} holds whitespace or a control character inside it")
     return value
 
 

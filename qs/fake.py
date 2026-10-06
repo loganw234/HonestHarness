@@ -24,6 +24,8 @@ class FakeReply:
     status: int = 200
     body: dict | None = None
     stream: list[str] | None = None     # raw SSE lines, sent as they are
+    drop: bool = False                  # bill, then close the connection with no reply
+    cut_after: int | None = None        # send this many stream lines, then close
 
 
 def usage_dict(hit: int = 0, miss: int = 10, out: int = 5, reasoning: int = 0) -> dict:
@@ -141,13 +143,20 @@ class FakeServer:
                 fake.requests.append(body)
                 fr = fake.responder(body)
                 fake._bill(body, fake._usage_of(fr))
+                if fr.drop:
+                    # A reply lost after the provider billed it.
+                    self.close_connection = True
+                    return
                 if fr.stream is not None and fr.status < 400:
                     self.send_response(200)
                     self.send_header("Content-Type", "text/event-stream")
                     self.end_headers()
-                    for line in fr.stream:
+                    lines = fr.stream if fr.cut_after is None else fr.stream[:fr.cut_after]
+                    for line in lines:
                         self.wfile.write((line + "\n\n").encode("utf-8"))
                     self.wfile.flush()
+                    if fr.cut_after is not None:
+                        self.close_connection = True
                 else:
                     self._send(fr.status, fr.body or {})
 

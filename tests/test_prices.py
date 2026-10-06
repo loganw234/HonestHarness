@@ -1,9 +1,9 @@
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 
 import pytest
 
-from qs.prices import Usage
+from qs.prices import Usage, usd
 
 
 def utc(y, mo, d, h, mi=0, s=0):
@@ -56,3 +56,24 @@ def test_worst_case_is_all_miss(prices):
 def test_unknown_model(prices):
     with pytest.raises(KeyError):
         prices.cost("no-such-model", "peak", Usage(1, 1, 1))
+
+
+def test_usd_is_fixed_point():
+    assert usd(Decimal("6E-7")) == "0.0000006"
+    assert "E" not in usd(Decimal("0.60") / Decimal("1000000"))
+    assert Decimal(usd(Decimal("0.60") / Decimal("1000000"))) == Decimal("0.0000006")
+
+
+@pytest.mark.parametrize("when,minutes,expected", [
+    (utc(2026, 10, 5, 0, 49, 59), 10, False),   # Monday: the margin ends at 00:59:59
+    (utc(2026, 10, 5, 0, 50, 0), 10, True),     # 01:00 is inside the margin
+    (utc(2026, 10, 5, 0, 55, 30), 10, True),
+    (utc(2026, 10, 5, 2, 0, 0), 10, True),      # inside a window
+    (utc(2026, 10, 5, 4, 0, 0), 10, False),     # a window's end
+    (utc(2026, 10, 5, 5, 49, 0), 10, False),
+    (utc(2026, 10, 5, 5, 50, 0), 10, True),     # 06:00 is inside the margin
+    (utc(2026, 10, 9, 23, 55, 0), 10, False),   # Friday night into Saturday
+    (utc(2026, 10, 11, 23, 55, 0), 70, True),   # Sunday night into Monday's 01:00
+])
+def test_peak_within(prices, when, minutes, expected):
+    assert prices.peak_within(when, timedelta(minutes=minutes)) is expected
