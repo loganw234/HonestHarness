@@ -32,6 +32,22 @@ that test them.
   - the harness notes, which list every rule the lead applied by hand, with
     the requirement that would make it a mechanism.
 
+## The code (round 1, in progress)
+
+`qs/` is the first code: the qualification suites' runner, which measures a
+model through any OpenAI-compatible endpoint and records every number against
+the stack that produced it. Round 1's plan of record is
+[Rounds/HonestHarness-R1/PLAN.md](Rounds/HonestHarness-R1/PLAN.md).
+
+- **The front door.** `python tools/check.py` runs the gate: the tests, the
+  records' schema, the spending guard's arithmetic, privacy and the live
+  gate. `python tools/check.py --control` shows each check fail on a planted
+  fault.
+- **Live mode.** `tools/live.py` is the only place live mode is switched on,
+  and only the round's lead runs it. Every batch passes the spending guard
+  first.
+- **Tests** use `qs/fake.py`, a local endpoint that never forwards anywhere.
+
 ## The other repositories
 
 - **[ParcelRound](https://github.com/loganw234/ParcelRound)**: the method for
