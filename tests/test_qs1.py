@@ -429,6 +429,8 @@ def test_thinking_modes_documented_400_is_recorded_as_documented(tmp_path, serve
     assert data["documented"]["matches"] is True and data["documented"]["observed"] == "HTTP 400"
     source = "D8" if item == "multiturn.handwritten" else "D10"
     assert data["documented"]["source"].startswith(source)
+    reason = "must be passed back" if source == "D8" else "not supported in thinking mode"
+    assert reason in out["detail"]          # the provider's own reason, for a reader to check
     assert data["metric_inputs"] == {"trigger": {"tp": 0, "fp": 0, "fn": 0, "tn": 0},
                                      "schema": {"calls": 0, "valid": 0}}
     assert s["stopped_for"] is None and rec["stop_reason"] is None
@@ -458,6 +460,19 @@ def test_the_handwritten_history_refused_in_non_thinking_mode_is_documented_with
     out, data = rec["outcome"], rec["outcome"]["data"]
     assert out["status"] == "refused" and data["documented"]["matches"] is None
     assert data["documented"]["source"].startswith("D9") and data["failed"] == []
+    assert "inserted mid-conversation" in out["detail"]
+
+
+def test_a_documented_refusal_is_known_by_its_status_alone(tmp_path, server):
+    # Limit 12, pinned: a 400 at turn 1 of a documented case reads as the
+    # documented refusal whatever its cause. The detail keeps the provider's
+    # reason, so a reader can tell the two apart.
+    rec, _, _ = one(tmp_path, server, "choice.required",
+                    at("choice.required", 0, lambda r, b: error(400, "messages[1] is malformed")),
+                    refuse_documented=False)
+    out = rec["outcome"]
+    assert out["status"] == "refused" and out["data"]["documented"]["matches"] is True
+    assert "messages[1] is malformed" in out["detail"]
 
 
 def test_the_handwritten_history_accepted_in_non_thinking_mode_is_judged(tmp_path, server):

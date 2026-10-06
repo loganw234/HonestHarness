@@ -124,6 +124,11 @@ Limits, each stated by the behaviour it concedes:
     default temperature, 1 (D10:393-398), and repeats vary as that makes them.
 11. The documented expectations are DeepSeek's, from its docs as read on
     2026-10-06. Another provider needs its own.
+12. A documented refusal is known by its status alone. A 400 at turn 1 of a
+    documented case is recorded refused whatever its cause, so a request
+    refused for another reason reads as the documented refusal. The record's
+    detail keeps the provider's reason, cut to ERROR_BODY characters, for a
+    reader to check.
 """
 from __future__ import annotations
 
@@ -566,11 +571,12 @@ class _Run:
                 rec["matches"] = e.status == doc["status"]
                 if rec["matches"]:
                     return self.finish("refused", "documented",
-                                       f"HTTP {e.status} at turn 1, as {doc['source']} documents")
+                                       f"HTTP {e.status} at turn 1, as {doc['source']} "
+                                       f"documents: {body}")
             elif e.status in REFUSALS:
                 return self.finish("refused", "documented",
                                    f"HTTP {e.status} at turn 1; {doc['source']} calls this "
-                                   "unsupported, and names no status")
+                                   f"unsupported, and names no status: {body}")
             return self.finish("error", "provider_error",
                                f"HTTP {e.status} at turn 1, not the documented outcome: {body}")
         if awaiting and e.status in REFUSALS:
