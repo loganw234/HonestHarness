@@ -12,9 +12,11 @@ against the fake endpoint and a live provider:
 3. read the balance and the model list, under a read-only reservation. A
    failure here raises: nothing has been reserved or spent;
 4. reserve the batch's worst case from the guard, which refuses what does not
-   fit the ceiling or the balance. The worst case is priced at the dearest
-   rate period the batch may be billed in: the start's, or with peak allowed,
-   the dearest in the table;
+   fit the ceiling or the balance. Without peak allowed, every run is priced
+   at the start's rate period, plus one call's premium at the dearest period:
+   the one call in flight when a window opens may be billed at peak, and the
+   gate stops the batch at the call after it. With peak allowed, every run is
+   priced at the dearest period in the table;
 5. probe identity, then run each item and repeat:
    - the reservation is checked before each run;
    - before each call, unless peak is allowed, a call that would fall in a
@@ -42,7 +44,11 @@ Limits, each stated by the behaviour it concedes:
   ok whatever its meter says, and a slow balance shows as a mismatch until a
   recheck;
 - public holidays are not in the price table's schedule, so a holiday is
-  priced as an ordinary weekday.
+  priced as an ordinary weekday;
+- when the provider bills a call that spans a window's start is not
+  documented. The meter prices a call at its reply's period. If the bill uses
+  the send time, the meter over-counts that call, and a difference beyond the
+  tolerance holds the next batch.
 """
 from __future__ import annotations
 
@@ -64,7 +70,7 @@ from .prices import PriceTable, Usage, usd
 from .providers import deepseek
 from .registry import Endpoint
 
-ID_PATTERN = re.compile(r"^[A-Za-z0-9._-]+$")
+ID_PATTERN = re.compile(r"[A-Za-z0-9._-]+")   # matched whole, so no trailing newline
 DEFAULT_PEAK_MARGIN = timedelta(minutes=10)
 
 
@@ -110,6 +116,11 @@ class PeakReached(RunStopped):
     pass
 
 
+class BatchStopping(RunStopped):
+    """A call refused because the run has already met a reason to stop the
+    batch: a suite that retries cannot send past it."""
+
+
 class MeterMismatch(Exception):
     def __init__(self, detail: str, summary: dict | None = None):
         super().__init__(detail)
@@ -141,8 +152,10 @@ class Context:
     remaining output or less, and never more than the provider accepts.
 
     A failed call that leaves the meter uncertain, or a status the next request
-    would meet too, sets stop_reason. The runner reads it whatever the suite
-    returns, so a suite that catches the error cannot hide it."""
+    would meet too, sets stop_reason. From then on every call is refused with
+    BatchStopping, before anything is sent, and the runner reads stop_reason
+    whatever the suite returns: a suite that catches the error, or retries,
+    can neither hide it nor send past it."""
 
     def __init__(self, client: Client, endpoint: Endpoint, caps: Caps, *, thinking: bool,
                  effort: str | None, provider=deepseek,
@@ -165,6 +178,8 @@ class Context:
             self.stop_reason = reason
 
     def chat(self, messages: list[dict], **kw):
+        if self.stop_reason is not None:
+            raise BatchStopping(f"no further call: {self.stop_reason}")
         for k in ("thinking", "effort"):
             if k in kw:
                 raise ValueError(f"{k} is the batch's setting; Context.chat does not take it")
@@ -400,7 +415,7 @@ class Runner:
         batch = batch or f"{suite.name}-{start.strftime('%Y%m%dT%H%M%SZ')}"
         items = suite.items()
         for name in [batch] + [i.id for i in items]:
-            if not ID_PATTERN.match(name):
+            if not ID_PATTERN.fullmatch(name):
                 raise ValueError(f"{name!r} is not a valid id: use letters, digits, '.', '_' or '-'")
         held = self._check_hold(acknowledge)
         if not self.allow_peak and self.prices.peak_within(start, self.peak_margin):
@@ -417,7 +432,14 @@ class Runner:
         run_worst = worst(caps.max_prompt_tokens + caps.max_call_prompt_tokens,
                           caps.max_output_tokens)
         probe_worst = worst(identity.PROBE_MAX_PROMPT, identity.PROBE_MAX_OUTPUT)
-        batch_worst = run_worst * len(items) * repeats + probe_worst
+        # The one call in flight when a window opens may be billed at peak; the
+        # gate stops the batch at the call after it. Zero when peak is allowed.
+        call_out = min(caps.max_output_tokens,
+                       getattr(self.provider, "MAX_TOKENS", None) or caps.max_output_tokens)
+        crossing = max(self.prices.worst_case(model, p, caps.max_call_prompt_tokens, call_out)
+                       for p in self.prices.models[model]) - worst(caps.max_call_prompt_tokens,
+                                                                   call_out)
+        batch_worst = run_worst * len(items) * repeats + probe_worst + crossing
 
         with self._client(self.guard.readonly(batch)) as c:
             before = self.provider.get_balance(c)
@@ -479,6 +501,7 @@ class Runner:
                    "adjustment_usd": usd(adjusted), "reconciliation": recon.status,
                    "tolerance_usd": usd(recon.tolerance), "detail": detail,
                    "reserved_usd": usd(reservation.amount), "reserved_at": periods,
+                   "crossing_margin_usd": usd(crossing),
                    "allow_peak": self.allow_peak,
                    "peak_margin_minutes": int(self.peak_margin.total_seconds() // 60),
                    "spend_lines": tally.lines, "acknowledged": acknowledged,

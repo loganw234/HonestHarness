@@ -401,8 +401,11 @@ def test_the_reservation_is_the_hand_computed_worst_case(tmp_path, prices, off_p
         r, _ = runner(tmp_path, url, prices, off_peak_clock)
         s = r.run_batch(Echo(1))
     # (10,000 + 5,000) prompt at $0.15 and 2,000 output at $0.60 per million,
-    # plus the probe's 64 and 16 at the same rates: 0.00345 + 0.0000192.
-    assert Decimal(s["reserved_usd"]) == Decimal("0.0034692")
+    # plus the probe's 64 and 16 at the same rates: 0.00345 + 0.0000192. Plus
+    # one call's peak premium: 5,000 and 2,000 at $0.30 and $1.20 (0.0039)
+    # less the same at off-peak rates (0.00195): 0.00195.
+    assert Decimal(s["reserved_usd"]) == Decimal("0.0054192")
+    assert Decimal(s["crossing_margin_usd"]) == Decimal("0.00195")
     assert s["reserved_at"] == ["off_peak"]
 
 
@@ -516,3 +519,88 @@ def test_an_acknowledgment_refused_at_the_start_lifts_nothing(tmp_path, prices, 
     assert r.hold()["batch"] == "b1"
     assert [x for x in lines(tmp_path / "records" / "batches.jsonl")
             if x["kind"] == "acknowledge"] == []
+
+
+class Retries(Echo):
+    """Retries a failed call up to five times, catching everything."""
+    name = "retries"
+
+    def run_item(self, ctx, item):
+        for _ in range(6):
+            try:
+                ctx.chat([{"role": "user", "content": "x"}])
+                return ItemResult("pass", "")
+            except Exception:  # noqa: BLE001
+                continue
+        return ItemResult("fail", "gave up")
+
+
+@pytest.mark.parametrize("failure", ["drop", "503"])
+def test_a_retrying_suite_cannot_send_past_a_stop(tmp_path, prices, off_peak_clock, failure):
+    def respond(body):
+        if is_probe(body):
+            return reply("ready")
+        if failure == "drop":
+            return FakeReply(body=reply("x").body, drop=True)
+        return error(503, "Server Overloaded")
+    fake = FakeServer(respond, prices=prices, clock=off_peak_clock)
+    with fake as url:
+        r, _ = runner(tmp_path, url, prices, off_peak_clock)
+        s = r.run_batch(Retries(3))
+    assert len([b for b in fake.requests if not is_probe(b)]) == 1
+    assert s["runs"] == 1 and s["stopped_for"]
+
+
+def test_one_call_crossing_into_peak_stays_inside_the_reservation(tmp_path, prices):
+    clock = Clock(datetime(2026, 10, 5, 0, 40, tzinfo=timezone.utc))   # Monday, off-peak
+
+    def respond(body):
+        if is_probe(body):
+            clock.advance(9)          # the probe answers at 00:49
+            return reply("ready")
+        clock.advance(15)             # the run's call, sent at 00:49, answers at 01:04
+        return reply("x", usage=(0, 5_000, 2_000))
+    with FakeServer(respond, prices=prices, clock=clock) as url:
+        r, _ = runner(tmp_path, url, prices, clock)
+        s = r.run_batch(Calls(items=1, calls=1))
+    run = lines(tmp_path / "records" / "runs" / "calls.jsonl")[0]
+    assert run["rate_period"] == "peak" and s["reconciliation"] == "ok"
+    # Billed at peak: 5,000 at $0.30 and 2,000 at $1.20 per million, 0.0039,
+    # with the probe's 0.0000045. Without the crossing margin the reservation
+    # would be 0.0034692, below it.
+    assert Decimal(s["computed_usd"]) == Decimal("0.0039045")
+    assert Decimal(s["computed_usd"]) <= Decimal(s["reserved_usd"])
+
+
+class Fingerprints(Echo):
+    name = "fingerprints"
+
+    def run_item(self, ctx, item):
+        for _ in range(3):
+            ctx.chat([{"role": "user", "content": "x"}])
+        return ItemResult("pass", "")
+
+
+def test_the_record_lists_every_model_and_fingerprint_reported(tmp_path, prices,
+                                                              off_peak_clock):
+    seen = iter([("deepseek-flash", "fp_1"), ("deepseek-v4-pro", "fp_2"),
+                 ("deepseek-flash", "fp_3")])
+
+    def respond(body):
+        if is_probe(body):
+            return reply("ready")
+        model, fp = next(seen)
+        return reply("x", model=model, fingerprint=fp)
+    with FakeServer(respond, prices=prices, clock=off_peak_clock) as url:
+        r, _ = runner(tmp_path, url, prices, off_peak_clock)
+        r.run_batch(Fingerprints(1))
+    run = lines(tmp_path / "records" / "runs" / "fingerprints.jsonl")[0]
+    assert run["model_reported"] == ["deepseek-flash", "deepseek-v4-pro"]
+    assert run["system_fingerprint"] == ["fp_1", "fp_2", "fp_3"]
+
+
+def test_an_id_ending_in_a_newline_is_refused(tmp_path, prices, off_peak_clock):
+    with FakeServer(prices=prices, clock=off_peak_clock) as url:
+        r, _ = runner(tmp_path, url, prices, off_peak_clock)
+        with pytest.raises(ValueError):
+            r.run_batch(Echo(1), batch="b1" + chr(10))

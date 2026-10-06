@@ -39,6 +39,7 @@ def test_bad_values_fail():
                  {"outcome": {"status": "maybe", "detail": ""}}, {"extra": 1},
                  {"ts_utc": "2026-10-06 17:25"}, {"cost_usd": "6E-7"},
                  {"model_reported": "m"}, {"record_id": "b:i.r0"}, {"item": "a:b"},
+                 {"record_id": "b.i.r0" + chr(10)}, {"batch": "b" + chr(10)},
                  {"caps": {"max_prompt_tokens": 1}}):
         with pytest.raises(jsonschema.ValidationError):
             rec.validate(good(**over))
