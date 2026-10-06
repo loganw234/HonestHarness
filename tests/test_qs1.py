@@ -97,7 +97,7 @@ class Conformant:
             if isinstance(out, FakeReply):
                 return out
         fr = self.render(r, bool(body.get("stream")))
-        self.produced.append(self.sent_back(fr))
+        self.produced.append(self.sent_back(fr, thinking))
         return fr
 
     def answer(self, case, k, golden, thinking):
@@ -159,11 +159,16 @@ class Conformant:
         return FakeReply(stream=out)
 
     @staticmethod
-    def sent_back(fr):
-        """What the suite will send back for this reply, through P0's own parser."""
+    def sent_back(fr, thinking):
+        """What a client following D8 sends back for this reply: P0's parse, and
+        in thinking mode a reasoning_content even when the model emitted none,
+        empty, as D8's own streaming sample builds it (thinking.txt:49)."""
         turn = (deepseek.parse_stream(fr.stream) if fr.stream is not None
                 else deepseek.parse_response(fr.body))
-        return deepseek.assistant_message(turn, tools_in_request=True)
+        msg = deepseek.assistant_message(turn, tools_in_request=True)
+        if thinking and msg.get("reasoning_content") is None:
+            msg["reasoning_content"] = ""
+        return msg
 
 
 def at(item, k, change):
@@ -261,6 +266,16 @@ def test_the_conformant_fake_passes_every_item_but_the_documented_refusals(
     assert m["trigger"] == {"tp": 29, "fp": 0, "fn": 0, "tn": tn, "n": 29 + tn,
                             "f1_denominator": 58, "f1": 1.0, "agreement": 1.0}
     assert m["schema"] == {"calls": calls, "valid": calls, "accuracy": 1.0}
+    # judged thinking-mode turns: the 49 asked less the 5 documented 400s, and
+    # the conformant fake reasons on every one; none counts in non-thinking mode
+    assert m["reasoning"] == ({"turns": 44, "emitted": 44, "share": 1.0} if thinking
+                              else {"turns": 0, "emitted": 0, "share": None})
+    # 14 turns go back into a later request: a parallel case's first turn (4
+    # items), multiturn.weather's first (2), and the first two of chain and of
+    # followup (2 items each). Their reasoning goes back as given, or not at all.
+    carried = [t["reasoning_sent_back"] for r in records
+               for t in r["outcome"]["data"]["turns"] if "reasoning_sent_back" in t]
+    assert carried == ["text" if thinking else "absent"] * 14
 
 
 def test_the_transcript_holds_each_request_as_sent_and_reasoning_goes_back(tmp_path, server):
@@ -353,11 +368,11 @@ BREAKS = [
     ("named, with a call to another tool", "choice.named", 0, False,
      lambda r, b: (r["calls"][0]["function"].update(name="get_weather"),
                    _args(r, {"location": "Paris"})), ["name_args"]),
-    # reasoning
-    ("no reasoning in thinking mode", "single.weather", 0, True,
+    # reasoning (the conformant fake counts 80 reasoning tokens in thinking mode)
+    ("reasoning tokens counted with no reasoning text", "single.weather", 0, True,
      lambda r, b: r.update(reasoning=None), ["reasoning"]),
-    ("no reasoning in thinking mode, streamed", "single.weather.stream", 0, True,
-     lambda r, b: r.update(reasoning=None), ["reasoning"]),
+    ("reasoning tokens counted with no reasoning text, streamed", "single.weather.stream", 0,
+     True, lambda r, b: r.update(reasoning=""), ["reasoning"]),
     ("reasoning in non-thinking mode", "single.weather", 0, False,
      lambda r, b: r.update(reasoning="I should call the weather tool."), ["reasoning"]),
     ("a think marker in content", "nocall.arithmetic", 0, False,
@@ -420,6 +435,74 @@ def test_a_special_token_in_reasoning_is_recorded_not_failed(tmp_path, server):
     assert rec["outcome"]["data"]["turns"][0]["special_tokens_in_reasoning"] == 1
 
 
+# -- reasoning emitted or not, in thinking mode (lead.md 15:00:40) -------------------------------
+def _no_reasoning(form):
+    """The model emits no reasoning, and its usage counts 0 reasoning tokens:
+    form is "" (the field present and empty) or None (the field left out)."""
+    def change(r, body):
+        r["reasoning"] = form
+        r["usage"][3] = 0
+    return change
+
+
+@pytest.mark.parametrize("item,form", [("single.weather", ""), ("single.weather", None),
+                                       ("single.weather.stream", ""),
+                                       ("nocall.arithmetic.stream", None)])
+def test_no_reasoning_with_no_reasoning_tokens_passes_in_thinking_mode(tmp_path, server, item,
+                                                                       form):
+    # Live, DeepSeek emitted reasoning_content "" with 0 reasoning tokens on 43 of
+    # 101 thinking-mode turns. D8 never promises the field is non-empty.
+    rec, _, _ = one(tmp_path, server, item, at(item, 0, _no_reasoning(form)))
+    out, data = rec["outcome"], rec["outcome"]["data"]
+    assert out["status"] == "pass", out["detail"]
+    turn = data["turns"][0]
+    assert turn["reasoning_emitted"] is False and turn["reasoning_tokens"] == 0
+    assert turn["checks"]["reasoning"] == {
+        "result": "pass", "why": "no reasoning emitted, with 0 reasoning tokens counted"}
+    assert data["metric_inputs"]["reasoning"] == {"turns": 1, "emitted": 0}
+
+
+@pytest.mark.parametrize("item,form", [("multiturn.weather.stream", ""),
+                                       ("multiturn.weather", ""),
+                                       ("multiturn.weather", None)])
+def test_a_turn_with_no_reasoning_goes_back_with_reasoning_content_empty(tmp_path, server, item,
+                                                                         form):
+    # D8: in thinking mode with tools, every earlier turn's reasoning_content goes
+    # back, or a 400 (thinking.txt:54). A stream with no reasoning parses to None;
+    # the adapter sends such a thinking-mode turn back with "" (P0 fix 5, from
+    # P1.md 15:03:47), as D8's own streaming sample builds it (thinking.txt:49).
+    # The conformant fake refuses a turn sent back without the field.
+    rec, _, fake = one(tmp_path, server, item, at(item, 0, _no_reasoning(form)))
+    data = rec["outcome"]["data"]
+    assert rec["outcome"]["status"] == "pass", rec["outcome"]["detail"]
+    assert fake.foreign == []
+    back = [m for m in server[0].requests[-1]["messages"] if m["role"] == "assistant"]
+    assert len(back) == 1 and back[0]["reasoning_content"] == ""
+    assert data["turns"][0]["reasoning_sent_back"] == "empty"
+    assert "reasoning_sent_back" not in data["turns"][1]       # the last turn goes nowhere
+    assert [t["reasoning_emitted"] for t in data["turns"]] == [False, True]
+    assert data["metric_inputs"]["reasoning"] == {"turns": 2, "emitted": 1}
+
+
+def test_reasoning_tokens_with_no_reasoning_text_fail_and_say_so(tmp_path, server):
+    rec, _, _ = one(tmp_path, server, "single.weather",
+                    at("single.weather", 0, lambda r, b: r.update(reasoning="")))
+    out = rec["outcome"]
+    assert out["status"] == "fail" and out["data"]["failed"] == ["reasoning"]
+    assert "80 reasoning tokens counted, but no reasoning text" in out["detail"]
+    assert out["data"]["turns"][0]["reasoning_emitted"] is False
+
+
+def test_non_thinking_mode_is_unchanged_by_the_reasoning_fix(tmp_path, server):
+    rec, _, _ = one(tmp_path, server, "single.weather",
+                    at("single.weather", 0, lambda r, b: r.update(reasoning="Some reasoning.")),
+                    thinking=False)
+    data = rec["outcome"]["data"]
+    assert data["failed"] == ["reasoning"]
+    assert data["turns"][0]["checks"]["reasoning"]["why"] == "reasoning_content in non-thinking mode"
+    assert data["metric_inputs"]["reasoning"] == {"turns": 0, "emitted": 0}
+
+
 # -- documented behaviour, never a model failure ------------------------------------------------
 @pytest.mark.parametrize("item", sorted(DOCUMENTED_IN_THINKING))
 def test_thinking_modes_documented_400_is_recorded_as_documented(tmp_path, server, item):
@@ -432,7 +515,8 @@ def test_thinking_modes_documented_400_is_recorded_as_documented(tmp_path, serve
     reason = "must be passed back" if source == "D8" else "not supported in thinking mode"
     assert reason in out["detail"]          # the provider's own reason, for a reader to check
     assert data["metric_inputs"] == {"trigger": {"tp": 0, "fp": 0, "fn": 0, "tn": 0},
-                                     "schema": {"calls": 0, "valid": 0}}
+                                     "schema": {"calls": 0, "valid": 0},
+                                     "reasoning": {"turns": 0, "emitted": 0}}
     assert s["stopped_for"] is None and rec["stop_reason"] is None
 
 
@@ -658,7 +742,14 @@ def test_the_assertions_on_edge_values():
     assert qs1.judge_ids([_c("get_date", "{}", id="")])[0] == "fail"
     assert qs1.judge_ids([])[0] == "not_judged"
     assert qs1.judge_reasoning("x", "   ", thinking=False)[0] == "pass"
-    assert qs1.judge_reasoning("x", "   ", thinking=True)[0] == "fail"
+    assert qs1.judge_reasoning("x", "   ", thinking=False, reasoning_tokens=3)[0] == "pass"
+    for empty in (None, "", "   "):       # D8 promises no non-empty field
+        assert qs1.judge_reasoning("x", empty, thinking=True)[0] == "pass"
+        result, why = qs1.judge_reasoning("x", empty, thinking=True, reasoning_tokens=3)
+        assert result == "fail" and why == "3 reasoning tokens counted, but no reasoning text"
+    assert qs1.judge_reasoning("x", ["a"], thinking=True)[0] == "fail"
+    assert qs1.judge_reasoning("<think>x</think>", "", thinking=True)[0] == "fail"
+    assert not qs1.emitted(None) and not qs1.emitted(" ") and qs1.emitted("a")
     short = "a" * (qs1.LEAK_MIN - 1)
     assert qs1.judge_reasoning(short + " and more", short, thinking=True)[0] == "pass"
     assert qs1.judge_special_tokens(None, [])[0] == "pass"
@@ -667,17 +758,24 @@ def test_the_assertions_on_edge_values():
 
 def test_the_metrics_and_their_denominators():
     d = [{"metric_inputs": {"trigger": {"tp": 3, "fp": 1, "fn": 1, "tn": 5},
-                            "schema": {"calls": 4, "valid": 3}}},
+                            "schema": {"calls": 4, "valid": 3},
+                            "reasoning": {"turns": 5, "emitted": 3}}},
          {"metric_inputs": {"trigger": {"tp": 0, "fp": 0, "fn": 0, "tn": 0},
-                            "schema": {"calls": 0, "valid": 0}}},
+                            "schema": {"calls": 0, "valid": 0},
+                            "reasoning": {"turns": 3, "emitted": 0}}},
+         {"metric_inputs": {"trigger": {"tp": 1, "fp": 0, "fn": 0, "tn": 0},
+                            "schema": {"calls": 1, "valid": 1}}},     # a record made before the fix
          None]
     m = qs1.metrics(d)
-    assert m["trigger"] == {"tp": 3, "fp": 1, "fn": 1, "tn": 5, "n": 10, "f1_denominator": 8,
-                            "f1": 0.75, "agreement": 0.8}
-    assert m["schema"] == {"calls": 4, "valid": 3, "accuracy": 0.75}
+    assert m["trigger"] == {"tp": 4, "fp": 1, "fn": 1, "tn": 5, "n": 11, "f1_denominator": 10,
+                            "f1": 0.8, "agreement": 9 / 11}
+    assert m["schema"] == {"calls": 5, "valid": 4, "accuracy": 0.8}
+    # reasoning emitted: 3 of the 8 judged thinking-mode turns
+    assert m["reasoning"] == {"turns": 8, "emitted": 3, "share": 3 / 8}
     empty = qs1.metrics([])
     assert empty["trigger"]["f1"] is None and empty["trigger"]["agreement"] is None
     assert empty["schema"]["accuracy"] is None
+    assert empty["reasoning"] == {"turns": 0, "emitted": 0, "share": None}
     # F1 ignores TN: all-negative turns leave it undefined, and agreement says 1
     neg = qs1.metrics([{"metric_inputs": {"trigger": {"tp": 0, "fp": 0, "fn": 0, "tn": 4},
                                           "schema": {"calls": 0, "valid": 0}}}])

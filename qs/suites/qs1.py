@@ -25,6 +25,13 @@ A run
   per call follows, in the model's call order, each the canned result of the
   golden call it matched. QS1 writes no assistant message itself, except in the
   one hand-written history kept as a case, multiturn.handwritten.
+- In thinking mode, a turn that emitted no reasoning goes back with
+  reasoning_content "": the adapter's assistant_message sets it, for a turn
+  Context marked as thinking (P0 fix 5, 726e618, from this suite's finding).
+  D8 wants every earlier turn's reasoning back in a request carrying tools, or
+  a 400 (ds/thinking.txt:54), and its own streaming sample builds the field
+  from an empty string (ds/thinking.txt:49). Each turn carried forward records
+  how its reasoning went back, reasoning_sent_back: text, empty or absent.
 - An item stops at its first failing turn: later turns are not reached.
 
 The statuses, in order of precedence
@@ -63,11 +70,16 @@ finish_reason is neither `length` nor a provider condition.
     the request declared, with schema-valid arguments.
 - special_tokens: none of SPECIAL_TOKENS in content, nor in a call's name or
   arguments. Reasoning is scanned and its hits recorded, not asserted.
-- reasoning: in thinking mode, reasoning_content is a non-blank string, and
-  content holds no <think> or </think> and does not repeat the reasoning's
-  first LEAK_SPAN characters, when the reasoning has LEAK_MIN or more. In
-  non-thinking mode, reasoning_content is absent, null or blank, and content
-  holds neither marker.
+- reasoning: content holds no <think> or </think>. Then, by mode:
+  - thinking: a reasoning_content that is a non-blank string must not be
+    repeated in content: its first LEAK_SPAN characters, when it has LEAK_MIN
+    or more. An empty one (absent, null or blank) passes when the usage counts
+    0 reasoning tokens: the model emitted none, which D8 allows, for it never
+    promises the field is non-empty. Live, DeepSeek did so on 43 of 101
+    thinking-mode turns (lead.md 15:00:40), correcting the brief's "present".
+    An empty one with reasoning tokens counted fails, naming that case. Each
+    turn records reasoning_emitted.
+  - non-thinking: reasoning_content is absent, null or blank.
 - ids: every call has a non-empty string id, the ids in a turn are distinct,
   and a later request that carries them, with one tool result per call, is
   accepted. A 400 or 422 there fails this assertion on the last turn whose
@@ -90,6 +102,10 @@ thinking setting, across items and repeats.
   that denominator is 0. Trigger agreement = (TP + TN) / N, with N = TP + FP +
   FN + TN, null at 0. Forced turns (none, required and named) are left out:
   their calls are the API's doing, and name_args judges them.
+- Reasoning emitted = judged thinking-mode turns whose reasoning_content is a
+  non-blank string / all judged thinking-mode turns; null when there are none.
+  It describes the model, and is no pass rate: an empty reasoning with 0
+  reasoning tokens passes.
 
 outcome.data holds no model-generated text: only the suite's own words, enums,
 numbers and booleans. A provider's error body is kept, cut to ERROR_BODY
@@ -129,6 +145,13 @@ Limits, each stated by the behaviour it concedes:
     refused for another reason reads as the documented refusal. The record's
     detail keeps the provider's reason, cut to ERROR_BODY characters, for a
     reader to check.
+13. Reasoning tokens a reply does not report are read as 0, the adapter's
+    default (deepseek.py's parse_usage). So an empty reasoning with its count
+    left out passes as "none emitted". A reasoning text with 0 tokens counted
+    passes too; each turn records both, reasoning_chars and reasoning_tokens.
+14. A thinking-mode turn that emitted no reasoning goes back with
+    reasoning_content "", which the adapter adds. Whether DeepSeek would also
+    accept the field left out is not tested.
 """
 from __future__ import annotations
 
@@ -382,14 +405,24 @@ def judge_special_tokens(content, calls: list):
     return "pass", "no special token"
 
 
-def judge_reasoning(content, reasoning, thinking: bool):
+def emitted(reasoning) -> bool:
+    """Whether a turn carried reasoning text: a non-blank string."""
+    return isinstance(reasoning, str) and bool(reasoning.strip())
+
+
+def judge_reasoning(content, reasoning, thinking: bool, reasoning_tokens: int = 0):
     text = content if isinstance(content, str) else ""
     for mark in THINK_MARKERS:
         if mark in text:
             return "fail", f"content holds {mark}"
     if thinking:
-        if not isinstance(reasoning, str) or not reasoning.strip():
-            return "fail", "no reasoning_content in thinking mode"
+        if not emitted(reasoning):
+            if reasoning is not None and not isinstance(reasoning, str):
+                return "fail", "reasoning_content is not a string"
+            if reasoning_tokens > 0:
+                return "fail", (f"{reasoning_tokens} reasoning tokens counted, "
+                                "but no reasoning text")
+            return "pass", "no reasoning emitted, with 0 reasoning tokens counted"
         r = reasoning.strip()
         if len(r) >= LEAK_MIN and r[:LEAK_SPAN] in text:
             return "fail", "content repeats the reasoning"
@@ -424,15 +457,18 @@ def judge_finish(finish, calls: list, documented: frozenset):
 # -- the metrics ------------------------------------------------------------------------
 def metrics(datas) -> dict:
     """Pool the outcome.data of QS1 records (one model, provider and thinking
-    setting) into schema accuracy and trigger similarity, with their counts."""
+    setting) into schema accuracy, trigger similarity and reasoning emitted,
+    each with its counts and denominator."""
     t = {"tp": 0, "fp": 0, "fn": 0, "tn": 0}
-    calls = valid = 0
+    calls = valid = turns = emitted_turns = 0
     for d in datas:
         mi = (d or {}).get("metric_inputs") or {}
         for k in t:
             t[k] += int((mi.get("trigger") or {}).get(k, 0))
         calls += int((mi.get("schema") or {}).get("calls", 0))
         valid += int((mi.get("schema") or {}).get("valid", 0))
+        turns += int((mi.get("reasoning") or {}).get("turns", 0))
+        emitted_turns += int((mi.get("reasoning") or {}).get("emitted", 0))
     f1_den = 2 * t["tp"] + t["fp"] + t["fn"]
     n = t["tp"] + t["fp"] + t["fn"] + t["tn"]
     return {
@@ -441,6 +477,8 @@ def metrics(datas) -> dict:
                         agreement=None if n == 0 else (t["tp"] + t["tn"]) / n),
         "schema": {"calls": calls, "valid": valid,
                    "accuracy": None if calls == 0 else valid / calls},
+        "reasoning": {"turns": turns, "emitted": emitted_turns,
+                      "share": None if turns == 0 else emitted_turns / turns},
     }
 
 
@@ -547,7 +585,11 @@ class _Run:
             if ended is not None:
                 return ended
             if k + 1 < len(case["turns"]):
-                messages.append(ctx.provider.assistant_message(turn, tools_in_request=True))
+                back = ctx.provider.assistant_message(turn, tools_in_request=True)
+                sent = back.get("reasoning_content")
+                t["reasoning_sent_back"] = ("absent" if sent is None else
+                                            "text" if emitted(sent) else "empty")
+                messages.append(back)
                 calls = list(turn.tool_calls or [])
                 if calls:
                     pairs = t.pop("_pairs")
@@ -597,6 +639,7 @@ class _Run:
             "finish_reason": finish if isinstance(finish, str) and finish in self.finishes
             else "undocumented",
             "calls": len(calls), "content": _content_form(turn.content),
+            "reasoning_emitted": emitted(turn.reasoning_content),
             "reasoning_chars": (len(turn.reasoning_content)
                                 if isinstance(turn.reasoning_content, str) else 0),
             "special_tokens_in_reasoning": len(find_tokens(turn.reasoning_content)),
@@ -625,7 +668,8 @@ class _Run:
         t["_pairs"] = pairs
         checks = {"name_args": (name_args, why),
                   "special_tokens": judge_special_tokens(turn.content, calls),
-                  "reasoning": judge_reasoning(turn.content, turn.reasoning_content, self.thinking),
+                  "reasoning": judge_reasoning(turn.content, turn.reasoning_content, self.thinking,
+                                               turn.usage.reasoning),
                   "ids": judge_ids(calls),
                   "finish_reason": judge_finish(finish, calls, self.finishes)}
         t["checks"] = {a: {"result": r, "why": w} for a, (r, w) in checks.items()}
@@ -661,8 +705,11 @@ class _Run:
             if t.get("trigger"):
                 trigger[t["trigger"]] += 1
         valid = [v for t in turns for v in t.get("schema_valid", [])]
-        self.data["metric_inputs"] = {"trigger": trigger,
-                                      "schema": {"calls": len(valid), "valid": sum(valid)}}
+        judged = [t for t in turns if t["judged"]] if self.thinking else []
+        self.data["metric_inputs"] = {
+            "trigger": trigger, "schema": {"calls": len(valid), "valid": sum(valid)},
+            "reasoning": {"turns": len(judged),
+                          "emitted": sum(1 for t in judged if t["reasoning_emitted"])}}
         self.data["ids_distinct_in_conversation"] = (len(set(self.seen_ids)) == len(self.seen_ids)
                                                      if self.seen_ids else None)
         self.data["status_basis"] = basis
