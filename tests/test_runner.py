@@ -664,3 +664,23 @@ def test_the_transcript_keeps_each_request_as_sent(tmp_path, prices, off_peak_cl
     calls = json.loads(path.read_text(encoding="utf-8"))["calls"]
     assert [c["request"] for c in calls] == [b for b in fake.requests if not is_probe(b)]
     assert [len(c["request"]["messages"]) for c in calls] == [1, 3]
+
+
+class KeepsLocal(Echo):
+    name = "keepslocal"
+
+    def run_item(self, ctx, item):
+        t = ctx.chat([{"role": "user", "content": "x"}])
+        return ItemResult("pass", "", {"n": 1}, local={"tool_log": ["only-in-the-transcript"]})
+
+
+def test_local_results_stay_out_of_the_record(tmp_path, prices, off_peak_clock):
+    with FakeServer(prices=prices, clock=off_peak_clock) as url:
+        r, _ = runner(tmp_path, url, prices, off_peak_clock)
+        s = r.run_batch(KeepsLocal(1))
+    record = (tmp_path / "records" / "runs" / "keepslocal.jsonl").read_text(encoding="utf-8")
+    assert "only-in-the-transcript" not in record
+    assert json.loads(record)["outcome"]["data"] == {"n": 1}
+    path = tmp_path / "transcripts" / s["batch"] / f"{s['batch']}.i0.r0.json"
+    result = json.loads(path.read_text(encoding="utf-8"))["result"]
+    assert result["local"] == {"tool_log": ["only-in-the-transcript"]}

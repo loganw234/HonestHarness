@@ -100,9 +100,14 @@ class Item:
 
 @dataclass
 class ItemResult:
+    """A run's outcome. status, detail and data go into the published record;
+    local goes into the run's local, gitignored transcript only, so bulky or
+    model-written material (tool output, a model's text) stays out of what is
+    published while its hash is."""
     status: str               # pass | fail | error | stopped | refused | skipped
     detail: str
     data: dict = field(default_factory=dict)
+    local: dict = field(default_factory=dict)
 
 
 class RunStopped(Exception):
