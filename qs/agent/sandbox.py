@@ -120,9 +120,9 @@ TAIL_BYTES = 16 * 1024   # and from its end
 DOCKER_TIMEOUT_S = 120   # for docker's own commands: run, rm, ps, inspect
 INLINE_COMMAND_CHARS = 8000   # a longer shell command goes in through stdin, not the command line
 
-# Lines are numbered as grep -n numbers them, "N: text". DeepSeek's content
-# filter refused a file in cat -n's form, every time, and answered the same file
-# in this one (HonestHarness round 1's ledger, 03:23:16).
+# Lines are numbered "N: text": the number, a colon and a space (grep -n puts no
+# space). DeepSeek's content filter refused a file in cat -n's form, every time,
+# and answered the same file in this one (HonestHarness round 1's ledger, 03:23:16).
 READ_SCRIPT = """\
 import sys
 path, start, count = sys.argv[1], int(sys.argv[2]), int(sys.argv[3])

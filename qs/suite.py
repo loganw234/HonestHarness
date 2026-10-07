@@ -47,7 +47,8 @@ Limits, each stated by the behaviour it concedes:
   and is counted nowhere but its stopped_for. A bill shows in the batch's
   reconciliation only beyond its tolerance: a billed drop inside it is in no
   spend line and no adjustment, so the spend file can fall short of the bill
-  by up to the tolerance a batch, and unmetered_attempts is the only trace.
+  by up to the tolerance a batch, and the summary's unmetered_attempts and
+  the run records' unmetered_calls are its only trace.
   When reconciliation is not ok, the summary's detail names the attempts
   closed with no reply; a recheck does not. Such a bill can even match
   another model's rates within tolerance, and read as a routing finding;
@@ -55,11 +56,13 @@ Limits, each stated by the behaviour it concedes:
   (D18). A batch that moves the balance by less than the tolerance reconciles
   ok whatever its meter says, and a slow balance shows as a mismatch until a
   recheck;
-- a batch run with concurrent=True, beside others from the same balance, is
-  not reconciled alone and holds nothing: its reconciliation reads
-  "concurrent", with no bill and no adjustment, and a recheck refuses it. Its
-  calls are metered as any batch's; the lead reconciles the concurrent
-  batches together, against the balance and the usage export;
+- a batch run with concurrent=True is not reconciled alone and holds nothing.
+  The flag is the operator's word that others spend from the same balance;
+  the code cannot know it. Its reconciliation reads "concurrent", with no
+  bill, no adjustment and a tolerance of "0", for nothing was checked, and a
+  recheck refuses it. Its calls are metered as any batch's. Reconciling the
+  marked batches together, against the balance and the usage export, is the
+  lead's practice: no code here does it, and no record says it was done;
 - public holidays are not in the price table's schedule, so a holiday is
   priced as an ordinary weekday;
 - when the provider bills a call that spans a window's start is not
@@ -364,8 +367,10 @@ class Runner:
         return [json.loads(x) for x in p.read_text(encoding="utf-8").splitlines() if x.strip()]
 
     def hold(self) -> dict | None:
-        """The last batch's latest reconciliation, if it is not ok and the lead
-        has not acknowledged it; otherwise None."""
+        """The last batch's latest reconciliation, if it is neither ok nor
+        concurrent and the lead has not acknowledged it; otherwise None. Only
+        the last batch line is read, so a held batch with others' lines after
+        it holds nothing."""
         lines = self._lines()
         last = next((x for x in reversed(lines) if x.get("kind", "batch") == "batch"), None)
         if last is None:
@@ -401,7 +406,8 @@ class Runner:
     def recheck(self, batch: str | None = None) -> dict:
         """Read the balance now and reconcile the last batch again, against
         its own opening balance. It is valid only while no later batch, and no
-        other use of the key, has spent since: a stated limit."""
+        other use of the key, has spent since: a stated limit. A concurrent
+        batch is refused, since its balance change is others' too."""
         lines = self._lines()
         last = next((x for x in reversed(lines) if x.get("kind", "batch") == "batch"), None)
         if last is None:
@@ -574,8 +580,9 @@ class Runner:
         after, read_error = self._read_balance(batch)
         if self.concurrent:
             recon = Reconciliation(CONCURRENT, tally.spent, None, Decimal("0"),
-                                   "not reconciled alone: other batches spent from the same "
-                                   "balance at the same time, so the lead reconciles them together")
+                                   "marked concurrent, so not reconciled alone: others may spend from "
+                                   "the same balance meanwhile; for the lead to reconcile with the "
+                                   "other marked batches")
             adjusted = Decimal("0")
         else:
             recon = reconcile(before, after, tally.spent, alternatives=tally.alts)

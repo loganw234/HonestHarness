@@ -5,11 +5,13 @@ Three things hold the ceiling, from the outside in:
 2. this guard, which refuses a run whose worst case would cross what is left,
    of the ceiling or of the balance last read;
 3. reconciliation, which checks the guard's own arithmetic against the
-   provider's balance after every batch. The meter is checked against
-   something that can say no. A bill above the meter is added to the spend
-   file as an adjustment, so the ceiling counts what was billed. The runner
-   holds the next batch until a reconciliation that is not ok is acknowledged
-   or rechecked.
+   provider's balance after every batch not marked concurrent. The meter is
+   checked against something that can say no. A bill above the meter is added
+   to the spend file as an adjustment, so the ceiling counts what was billed.
+   The runner holds the next batch until a reconciliation that is neither ok
+   nor concurrent is acknowledged or rechecked. A batch marked concurrent,
+   run beside others from the same balance, gets none of this alone: the
+   lead reconciles the marked batches together (qs/suite.py's limits).
 
 Limits, each stated by the behaviour it concedes: a top-up smaller than a
 batch's bill hides that much of the bill from its reconciliation, and the
@@ -20,7 +22,8 @@ the balance tests it.
 The spend file is append-only JSON lines, one per metered call, written as
 each reply arrives, and the total spent is always recomputed from it, never
 cached. A call whose reply never arrives cannot be metered; reconciliation is
-what sees its bill.
+what sees its bill, beyond its tolerance, and for a batch marked concurrent
+only the lead's combined reconciliation can.
 """
 from __future__ import annotations
 

@@ -36,13 +36,15 @@ not given: two retries). More delays retry a call more often; the batch's
 allowance still bounds the attempts, and the reservation does not change.
 
 --concurrent marks a batch run beside others from the same balance: it is
-not reconciled alone and holds nothing, and the lead reconciles the batches
-together afterwards.
+not reconciled alone and holds nothing. Reconciling the marked batches
+together afterwards is the lead's; no code here does it.
 
-The spend file is this checkout's, records/spend.jsonl. Round 1's live runs
-were made from one checkout until its concurrent lanes, each a clone with its
-own records; their spend, run records and batch lines are merged into this
-checkout's afterwards, so one file holds the round's spend.
+The spend file is this checkout's, records/spend.jsonl. Round 1's QS4 lanes
+each ran from a clone with its own records. The lead's practice is to append
+each lane's lines after the clone's committed prefix (spend, run records,
+batch and identity lines), and its transcripts, into the round's checkout, so
+that one file holds the round's spend (the round's ledger, 09:32:39). No code
+here performs or checks that merge.
 """
 from __future__ import annotations
 
