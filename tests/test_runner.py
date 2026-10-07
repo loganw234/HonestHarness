@@ -826,3 +826,41 @@ def test_a_retry_waits_its_delay_and_passes_the_peak_gate_again(tmp_path, prices
     run = lines(tmp_path / "records" / "runs" / "echo.jsonl")[0]
     assert run["outcome"]["status"] == "stopped" and "peak" in s["stopped_for"]
     assert run["unmetered_calls"] == 1
+
+
+def test_a_concurrent_batch_is_not_reconciled_alone_and_holds_nothing(tmp_path, prices, off_peak_clock):
+    # Another lane spends from the same balance while this batch runs.
+    fake = FakeServer(prices=prices, clock=off_peak_clock)
+
+    def respond(body):
+        if not is_probe(body):
+            fake.balance -= Decimal("1.00")
+        return reply("x")
+    fake.responder = respond
+    with fake as url:
+        r, _ = runner(tmp_path, url, prices, off_peak_clock, concurrent=True)
+        s = r.run_batch(Echo(2))
+        assert s["reconciliation"] == "concurrent" and s["billed_usd"] is None
+        assert s["adjustment_usd"] == "0" and s["concurrent"] is True
+        assert "not reconciled alone" in s["detail"]
+        assert r.hold() is None
+        s2 = r.run_batch(Echo(1))
+        assert s2["reconciliation"] == "concurrent"
+        with pytest.raises(Refused, match="concurrently"):
+            r.recheck()
+    assert "adjustment" not in [x["kind"] for x in lines(tmp_path / "records" / "spend.jsonl")]
+
+
+def test_the_same_batch_not_marked_concurrent_is_held_on_the_mismatch(tmp_path, prices, off_peak_clock):
+    fake = FakeServer(prices=prices, clock=off_peak_clock)
+
+    def respond(body):
+        if not is_probe(body):
+            fake.balance -= Decimal("1.00")
+        return reply("x")
+    fake.responder = respond
+    with fake as url:
+        r, _ = runner(tmp_path, url, prices, off_peak_clock)
+        with pytest.raises(MeterMismatch):
+            r.run_batch(Echo(2))
+        assert r.hold()["reconciliation"] == "mismatch"

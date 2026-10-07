@@ -55,3 +55,8 @@ def test_retry_delays_outside_one_to_six_waits_of_0_to_120_s_are_refused(bad, ca
     with pytest.raises(SystemExit):
         load_live().parser().parse_args(["--probe", "--retry-delays", bad])
     assert "--retry-delays" in capsys.readouterr().err
+
+
+def test_concurrent_reaches_the_runner(tmp_path):
+    assert build(tmp_path, ["--probe", "--concurrent"]).concurrent is True
+    assert build(tmp_path, ["--probe"]).concurrent is False

@@ -5,7 +5,7 @@
                          [--effort low|high|max] [--endpoint NAME] [--ceiling USD]
                          [--allow-peak] [--peak-margin MINUTES] [--settle SECONDS]
                          [--acknowledge BATCH] [--max-unmetered N]
-                         [--retry-delays S,S,...]
+                         [--retry-delays S,S,...] [--concurrent]
     python tools/live.py --recheck
 
 --probe runs an empty batch: the balance read, the model list, one identity
@@ -35,8 +35,14 @@ period, since each may be billed without a meter reading.
 not given: two retries). More delays retry a call more often; the batch's
 allowance still bounds the attempts, and the reservation does not change.
 
+--concurrent marks a batch run beside others from the same balance: it is
+not reconciled alone and holds nothing, and the lead reconciles the batches
+together afterwards.
+
 The spend file is this checkout's, records/spend.jsonl. Round 1's live runs
-are made from one checkout only, so one file holds the round's spend.
+were made from one checkout until its concurrent lanes, each a clone with its
+own records; their spend, run records and batch lines are merged into this
+checkout's afterwards, so one file holds the round's spend.
 """
 from __future__ import annotations
 
@@ -121,6 +127,8 @@ def parser() -> argparse.ArgumentParser:
     # retries as delays (the round's ledger, 08:57:42 and 08:58:08).
     ap.add_argument("--retry-delays", type=_delays, default=DEFAULT_RETRY_DELAYS,
                     metavar="S,S,...")
+    # Logan, 2026-10-07: exact per-batch tracking may go, for parallel runs.
+    ap.add_argument("--concurrent", action="store_true")
     return ap
 
 
@@ -129,7 +137,7 @@ def make_runner(a: argparse.Namespace, ep, prices: PriceTable, guard: SpendGuard
                   transcripts_dir=ROOT / "transcripts", live=True,
                   allow_peak=a.allow_peak, settle_seconds=a.settle,
                   peak_margin=timedelta(minutes=a.peak_margin), max_unmetered=a.max_unmetered,
-                  retry_delays=a.retry_delays)
+                  retry_delays=a.retry_delays, concurrent=a.concurrent)
 
 
 def main(argv: list[str]) -> int:

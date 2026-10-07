@@ -55,6 +55,11 @@ Limits, each stated by the behaviour it concedes:
   (D18). A batch that moves the balance by less than the tolerance reconciles
   ok whatever its meter says, and a slow balance shows as a mismatch until a
   recheck;
+- a batch run with concurrent=True, beside others from the same balance, is
+  not reconciled alone and holds nothing: its reconciliation reads
+  "concurrent", with no bill and no adjustment, and a recheck refuses it. Its
+  calls are metered as any batch's; the lead reconciles the concurrent
+  batches together, against the balance and the usage export;
 - public holidays are not in the price table's schedule, so a holiday is
   priced as an ordinary weekday;
 - when the provider bills a call that spans a window's start is not
@@ -78,7 +83,7 @@ from typing import Callable
 from . import identity
 from . import record as rec
 from .client import Client, ProviderError
-from .guard import Refused, SpendGuard, reconcile
+from .guard import Reconciliation, Refused, SpendGuard, reconcile
 from .prices import PriceTable, Usage, usd
 from .providers import deepseek
 from .registry import Endpoint
@@ -91,6 +96,9 @@ DEFAULT_PEAK_MARGIN = timedelta(minutes=10)
 DISCONNECTED = "Server disconnected without sending a response"
 DEFAULT_RETRY_DELAYS = (2.0, 5.0)     # seconds before the first and second retry
 MAX_UNMETERED_PER_BATCH = 3           # failed attempts a batch may make before it stops
+# A batch run beside others from the same balance: its balance change is
+# theirs too, so it is not reconciled alone (the round's ledger, 09:32:39).
+CONCURRENT = "concurrent"
 
 
 def stops_batch(status: int) -> bool:
@@ -317,7 +325,7 @@ class Runner:
                  clock: Callable[[], datetime] | None = None, settle_seconds: float = 0.0,
                  provider=deepseek, peak_margin: timedelta = DEFAULT_PEAK_MARGIN,
                  retry_delays: tuple = DEFAULT_RETRY_DELAYS,
-                 max_unmetered: int = MAX_UNMETERED_PER_BATCH):
+                 max_unmetered: int = MAX_UNMETERED_PER_BATCH, concurrent: bool = False):
         self.endpoint, self.prices, self.guard = endpoint, prices, guard
         self.records_dir, self.transcripts_dir = Path(records_dir), Path(transcripts_dir)
         self.live, self.allow_peak, self.provider = live, allow_peak, provider
@@ -325,6 +333,7 @@ class Runner:
         self.settle_seconds = settle_seconds
         self.peak_margin = peak_margin
         self.retry_delays, self.max_unmetered = tuple(retry_delays), max_unmetered
+        self.concurrent = concurrent
 
     @property
     def batches_file(self) -> Path:
@@ -369,7 +378,7 @@ class Runner:
                 return None
             if x.get("kind") == "recheck":
                 latest = x
-        return None if latest.get("reconciliation") == "ok" else latest
+        return None if latest.get("reconciliation") in ("ok", CONCURRENT) else latest
 
     def _check_hold(self, acknowledge: str | None) -> dict | None:
         """The hold this batch's acknowledgment lifts, or None if there is no
@@ -399,6 +408,9 @@ class Runner:
             raise Refused("there is no batch to recheck")
         if batch is not None and batch != last["batch"]:
             raise Refused(f"only the last batch, {last['batch']}, can be rechecked")
+        if last.get("reconciliation") == CONCURRENT:
+            raise Refused(f"batch {last['batch']} ran concurrently with others: its balance "
+                          "change is theirs too, so it is reconciled with them, not alone")
         after, err = self._read_balance(last["batch"])
         before = None if last.get("balance_before") in (None, "None") else Decimal(last["balance_before"])
         computed = Decimal(last["computed_usd"])
@@ -560,11 +572,17 @@ class Runner:
         if self.settle_seconds:
             _time.sleep(self.settle_seconds)
         after, read_error = self._read_balance(batch)
-        recon = reconcile(before, after, tally.spent, alternatives=tally.alts)
-        adjusted = self._adjust(batch, recon)
+        if self.concurrent:
+            recon = Reconciliation(CONCURRENT, tally.spent, None, Decimal("0"),
+                                   "not reconciled alone: other batches spent from the same "
+                                   "balance at the same time, so the lead reconciles them together")
+            adjusted = Decimal("0")
+        else:
+            recon = reconcile(before, after, tally.spent, alternatives=tally.alts)
+            adjusted = self._adjust(batch, recon)
         detail = recon.detail if read_error is None else (
             f"{recon.detail}; the closing balance read failed: {read_error}")
-        if tally.unmetered and recon.status != "ok":
+        if tally.unmetered and recon.status not in ("ok", CONCURRENT):
             # A bill raised by such attempts can even match another model's rates.
             detail += (f"; {tally.unmetered} attempt(s) closed with no reply may have "
                        "been billed without a meter reading")
@@ -580,7 +598,7 @@ class Runner:
                    "crossing_margin_usd": usd(crossing),
                    "unmetered_margin_usd": usd(unmetered_margin),
                    "unmetered_attempts": tally.unmetered,
-                   "allow_peak": self.allow_peak,
+                   "allow_peak": self.allow_peak, "concurrent": self.concurrent,
                    "peak_margin_minutes": int(self.peak_margin.total_seconds() // 60),
                    "spend_lines": tally.lines, "acknowledged": acknowledged,
                    "price_table": self.prices.id, "live": self.live}
