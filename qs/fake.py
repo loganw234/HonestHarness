@@ -24,8 +24,9 @@ class FakeReply:
     status: int = 200
     body: dict | None = None
     stream: list[str] | None = None     # raw SSE lines, sent as they are
-    drop: bool = False                  # bill, then close the connection with no reply
+    drop: bool = False                  # close the connection with no reply, billed as bill says
     cut_after: int | None = None        # send this many stream lines, then close
+    bill: bool = True                   # False: a dropped request the provider never billed
 
 
 def usage_dict(hit: int = 0, miss: int = 10, out: int = 5, reasoning: int = 0) -> dict:
@@ -142,7 +143,8 @@ class FakeServer:
                 body = json.loads(self.rfile.read(n) or b"{}")
                 fake.requests.append(body)
                 fr = fake.responder(body)
-                fake._bill(body, fake._usage_of(fr))
+                if fr.bill:
+                    fake._bill(body, fake._usage_of(fr))
                 if fr.drop:
                     # A reply lost after the provider billed it.
                     self.close_connection = True

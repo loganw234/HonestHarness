@@ -223,7 +223,8 @@ def batch(tmp_path, server, responder, suite, *, thinking=True, repeats=1):
     srv.requests.clear()
     guard = SpendGuard(Decimal("250"), tmp_path / "records" / "spend.jsonl")
     runner = Runner(endpoint(url), PRICES, guard, records_dir=tmp_path / "records",
-                    transcripts_dir=tmp_path / "transcripts", clock=lambda: OFF_PEAK)
+                    transcripts_dir=tmp_path / "transcripts", clock=lambda: OFF_PEAK,
+                    retry_delays=(0, 0))
     summary = runner.run_batch(suite, repeats=repeats, thinking=thinking)
     records = lines(tmp_path / "records" / "runs" / "qs1.jsonl")
     return summary, {r["item"]: r for r in records}, records
@@ -640,6 +641,8 @@ def test_a_reply_dropped_after_billing_is_an_error_and_stops_the_batch(tmp_path,
     rec = by_item["single.weather"]
     assert rec["outcome"]["status"] == "error" and "did not arrive whole" in s["stopped_for"]
     assert rec["outcome"]["data"]["status_basis"] == "transport" and s["runs"] == 1
+    # The same turn dropped three times: retried twice, then the batch stops.
+    assert rec["unmetered_calls"] == 3 and s["unmetered_attempts"] == 3
 
 
 # -- the reservation ---------------------------------------------------------------------------
@@ -648,9 +651,11 @@ def test_the_reservation_at_three_repeats_is_under_the_limit(tmp_path, server):
     # by hand: (20,000 + 16,000) prompt at $0.15 and 12,000 output at $0.60 per
     # million is $0.0126 a run, $1.323 over 105 runs; the probe's 64 and 16 add
     # $0.0000192; one call's peak premium, 16,000 and 12,000 at peak less the
-    # same off-peak, adds $0.0096.
-    assert Decimal(s["reserved_usd"]) == Decimal("1.3326192") < Decimal("1.50")
+    # same off-peak, adds $0.0096; P0's three unmetered attempts, each 16,000 at
+    # $0.30 and 12,000 at $1.20 per million, add $0.0576.
+    assert Decimal(s["reserved_usd"]) == Decimal("1.3902192") < Decimal("1.50")
     assert Decimal(s["crossing_margin_usd"]) == Decimal("0.0096")
+    assert Decimal(s["unmetered_margin_usd"]) == Decimal("0.0576")
     assert s["reserved_at"] == ["off_peak"] and len(records) == 105
 
 
@@ -663,8 +668,9 @@ def test_with_peak_allowed_the_reservation_is_priced_at_peak(tmp_path):
                    allow_peak=True)
         s = r.run_batch(Dry(), repeats=3)
     # by hand: (36,000 at $0.30 and 12,000 at $1.20 per million) is $0.0252 a run,
-    # $2.646 over 105; the probe at peak adds $0.0000384.
-    assert Decimal(s["reserved_usd"]) == Decimal("2.6460384")
+    # $2.646 over 105; the probe at peak adds $0.0000384; three unmetered
+    # attempts at peak add $0.0576.
+    assert Decimal(s["reserved_usd"]) == Decimal("2.7036384")
     assert s["reserved_at"] == ["off_peak", "peak"]
 
 
