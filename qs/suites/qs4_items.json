@@ -191,7 +191,7 @@
           "file": "tools/check_method.py",
           "lines": [],
           "in_view": true,
-          "recorded": "verifier-P1.md 22:47:18, faults: METHOD.md's own brief-errors clause is held by no check",
+          "recorded": "verifier-P1.md 22:47:18, faults: no check covers what METHOD.md says of brief errors",
           "copy_only": false
         },
         {
@@ -385,7 +385,7 @@
         },
         {
           "id": "P3-r2",
-          "class": "other",
+          "class": "restate",
           "file": "tools/check_method.py",
           "lines": [
             [
@@ -439,7 +439,7 @@
         },
         {
           "id": "P3-r5",
-          "class": "other",
+          "class": "known limit",
           "file": "tools/check_method.py",
           "lines": [],
           "in_view": false,
@@ -543,7 +543,7 @@
         },
         {
           "id": "P4-r4",
-          "class": "other",
+          "class": "known limit",
           "file": "tools/check_method.py",
           "lines": [],
           "in_view": false,
@@ -552,7 +552,7 @@
         },
         {
           "id": "P4-r5",
-          "class": "other",
+          "class": "known limit",
           "file": "tools/check_method.py",
           "lines": [],
           "in_view": false,
@@ -703,7 +703,7 @@
         },
         {
           "id": "P5-r3",
-          "class": "other",
+          "class": "known limit",
           "file": "tools/check_method.py",
           "lines": [],
           "in_view": true,
@@ -750,6 +750,15 @@
           ],
           "in_view": false,
           "recorded": "verifier-P5.md 00:45:48, finding 4 (its other half, P5.md:832, is withheld)",
+          "copy_only": false
+        },
+        {
+          "id": "P5-r7",
+          "class": "known limit",
+          "file": "tools/check_method.py",
+          "lines": [],
+          "in_view": true,
+          "recorded": "verifier-P5.md 00:41:06: how the templates' placeholders render, which no gate holds",
           "copy_only": false
         }
       ]

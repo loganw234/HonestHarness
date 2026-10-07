@@ -21,7 +21,8 @@ checked, not rewritten.
 
 It also writes <local>/archive/round6-ledger.zip and <local>/cuts.json. <local>
 defaults to local/qs4 in this checkout, which is gitignored. It prints no absolute
-path, and exits 0 only when every cut is as pinned.
+path of its own: an OSError's text names a path as it was given on the command
+line (verifier-P4's N1). It exits 0 only when every cut is as pinned.
 """
 from __future__ import annotations
 

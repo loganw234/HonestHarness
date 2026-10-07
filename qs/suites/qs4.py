@@ -130,6 +130,10 @@ Limits, each stated by the behaviour it concedes:
     where P2's scratch manifest calls it a regular file whose hash matches.
 20. Round 6's record has been public since 2026-10-03. Both models predate it by
     release date, unless upgraded in place since (plan §4).
+21. The replay repositories' commits carry the owner's address in their author
+    lines, as ParcelRound's public history does. A model's git log shows it,
+    so the provider receives it: plan §3's K6 lets every repository's content
+    go to the providers used (verifier-P4's L2).
 """
 from __future__ import annotations
 
@@ -584,7 +588,11 @@ def parse_gate(text: str) -> dict:
 def compare_gate(host: dict, box: dict) -> tuple[bool, str]:
     """Whether round 6's gate means the same on the host and in the sandbox: each
     check's ok or FAIL, each verdict line and each exit code, for the gate and
-    its --control."""
+    its --control. A control line is compared as a line only when it ends
+    "caught" or "NOT CAUGHT"; the gate's other endings ("caught, and masked",
+    "NOT CAUGHT: ...", "REFUSED", "CRASHED", "SKIPPED") are compared through the
+    controls' summary count alone (verifier-P4's L1: 47 of 48 lines at wave 1's
+    copies, 49 of 50 at P5's, are compared as lines)."""
     for mode in ("gate", "control"):
         h, b = host[mode], box[mode]
         if not b.get("complete", False):
@@ -927,6 +935,10 @@ def score_report(report: dict | None, items: dict, item: dict, expected: dict, p
     return {"reported": True, "verdict": report.get("verdict"), "findings": found, "plants": plants, "r6": r6}, detail
 
 
+def _n(k: int, noun: str) -> str:
+    return f"{k} {noun}" + ("" if k == 1 else "s")
+
+
 def counts(sc: dict) -> dict:
     found = sc["findings"]
     by_class: dict = {}
@@ -1005,8 +1017,9 @@ class QS4(Suite):
             if kind == "planted":
                 return (("pass" if c["plants_caught"] == c["plants"] else "fail"),
                         f"reported: {c['plants_caught']} of {c['plants']} plants caught by the screen, in "
-                        f"{c['findings']} findings; the lead's judgement is the score of record")
-            return "pass", f"reported: {c['findings']} findings, for the lead to adjudicate against round 6's record"
+                        f"{_n(c['findings'], 'finding')}; the lead's judgement is the score of record")
+            return "pass", (f"reported: {_n(c['findings'], 'finding')}, for the lead to adjudicate against "
+                            f"round 6's record")
 
         result = res.item_result(judge)
         basis = ("agent" if res.outcome in ("stopped", "error") else
