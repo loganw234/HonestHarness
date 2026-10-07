@@ -906,3 +906,31 @@ def test_a_run_that_sends_tools_records_their_digest(tmp_path, prices, off_peak_
     sent = json.loads((tmp_path / "transcripts" / line["batch"] / f"{line['record_id']}.json")
                       .read_text(encoding="utf-8"))["calls"]
     assert line["code"]["tools_sha256"] == rec.tools_digest(sent) is not None
+
+
+
+def test_a_bad_code_is_refused_before_anything_is_spent(tmp_path, prices, off_peak_clock):
+    import jsonschema
+    with FakeServer(lambda body: reply("hi"), prices=prices, clock=off_peak_clock) as url:
+        r, g = runner(tmp_path, url, prices, off_peak_clock, code={"commit": "xyz", "changed": False})
+        with pytest.raises(jsonschema.ValidationError):
+            r.run_batch(Echo(1))
+    assert not (tmp_path / "records" / "spend.jsonl").exists() or g.spent() == 0
+    assert not (tmp_path / "records" / "batches.jsonl").exists()
+
+
+def test_the_code_is_read_once_a_batch(tmp_path, prices, off_peak_clock, monkeypatch):
+    seen = []
+
+    def identity():
+        seen.append(1)
+        return {"commit": f"{len(seen):040x}", "changed": len(seen) > 1}
+
+    monkeypatch.setattr(rec, "code_identity", identity)
+    with FakeServer(lambda body: reply("hi"), prices=prices, clock=off_peak_clock) as url:
+        r, _ = runner(tmp_path, url, prices, off_peak_clock)
+        s = r.run_batch(Echo(3))
+    runs = lines(tmp_path / "records" / "runs" / "echo.jsonl")
+    assert len(seen) == 1 and len(runs) == 3
+    assert {(x["code"]["commit"], x["code"]["changed"]) for x in runs} == {(f"{1:040x}", False)}
+    assert s["code"] == {"commit": f"{1:040x}", "changed": False}

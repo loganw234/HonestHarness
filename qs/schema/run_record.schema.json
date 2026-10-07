@@ -83,9 +83,9 @@
       "additionalProperties": false,
       "required": ["commit", "changed", "tools_sha256"],
       "properties": {
-        "commit": {"type": ["string", "null"], "pattern": "^[0-9a-f]{40}([0-9a-f]{24})?$"},
+        "commit": {"type": ["string", "null"], "pattern": "^[0-9a-f]{40}([0-9a-f]{24})?$(?!\n)"},
         "changed": {"type": ["boolean", "null"]},
-        "tools_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"}
+        "tools_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$(?!\n)"}
       }
     }
   },

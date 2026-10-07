@@ -1,4 +1,5 @@
 import hashlib
+import os
 import subprocess
 
 import jsonschema
@@ -137,3 +138,69 @@ def test_tools_digest_is_of_the_distinct_tool_lists_as_sent():
     assert once == rec.tools_digest([call(t1), call(t1), call(None)])
     assert rec.tools_digest([call(t1), call(t2)]) == rec.tools_digest([call(t2), call(t1)])
     assert rec.tools_digest([call(t2)]) != once
+
+
+
+def _repo(tmp_path):
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    _git(repo, "init", "-q")
+    (repo / "a.py").write_text("x = 1\n", encoding="utf-8")
+    _git(repo, "add", "-A")
+    _git(repo, "commit", "-q", "-m", "one")
+    return repo
+
+
+def test_untracked_files_count_whatever_git_config_says(tmp_path):
+    repo = _repo(tmp_path)
+    _git(repo, "config", "status.showUntrackedFiles", "no")
+    (repo / "b.py").write_text("", encoding="utf-8")
+    assert rec.code_identity(repo)["changed"] is True
+
+
+def test_a_directory_inside_another_repository_is_unknown(tmp_path):
+    repo = _repo(tmp_path)
+    (repo / "sub").mkdir()
+    (repo / "sub" / "c.py").write_text("", encoding="utf-8")
+    assert rec.code_identity(repo / "sub") == {"commit": None, "changed": None}
+
+
+def test_git_output_that_is_not_a_hash_is_unknown(tmp_path, monkeypatch):
+    real = subprocess.run
+
+    def fake(args, **kw):
+        if args[-2:] == ["rev-parse", "HEAD"]:
+            return subprocess.CompletedProcess(args, 0, stdout=b"\x81 not a hash\n", stderr=b"")
+        return real(args, **kw)
+
+    repo = _repo(tmp_path)
+    monkeypatch.setattr(rec.subprocess, "run", fake)
+    assert rec.code_identity(repo) == {"commit": None, "changed": None}
+
+
+def test_code_identity_takes_no_lock_and_writes_no_index(tmp_path):
+    repo = _repo(tmp_path)
+    index = repo / ".git" / "index"
+    a = repo / "a.py"
+    st = a.stat()
+    os.utime(a, ns=(st.st_atime_ns, st.st_mtime_ns + 5_000_000_000))   # the index is now stale
+    before = (index.read_bytes(), index.stat().st_mtime_ns)
+    rec.code_identity(repo)
+    assert (index.read_bytes(), index.stat().st_mtime_ns) == before
+    _git(repo, "status", "--porcelain")                                 # the control: plain status
+    assert (index.read_bytes(), index.stat().st_mtime_ns) != before     # rewrites it
+
+
+def test_a_trailing_newline_does_not_validate():
+    for code in ({"commit": "a" * 40 + "\n", "changed": False, "tools_sha256": None},
+                 {"commit": None, "changed": None, "tools_sha256": "f" * 64 + "\n"}):
+        with pytest.raises(jsonschema.ValidationError):
+            rec.validate(good(code=code))
+
+
+def test_check_code_refuses_what_a_record_could_not_hold():
+    rec.check_code({"commit": None, "changed": None})
+    rec.check_code({"commit": "a" * 40, "changed": True})
+    for bad in ({"commit": "xyz", "changed": False}, {"commit": None}, {"commit": None, "changed": "no"}):
+        with pytest.raises(jsonschema.ValidationError):
+            rec.check_code(bad)

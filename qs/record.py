@@ -11,15 +11,23 @@ From version 2 a line also names its code: the commit the batch ran from,
 whether the checkout differed from it outside records/, and a digest of the
 tools as the run's requests sent them. harness_version is a constant, so
 before version 2 a change of code moved nothing in the record (HonestHarness
-round 1's harness note 43). Limits: the commit and the flag are read once, as
-the batch starts, so a change made during a batch is not seen; the flag says
-that something differed, not what; and they are None where the code is not in
-a git checkout, or git does not answer.
+round 1's ledger, 11:37:12). Limits, each stated by the behaviour it concedes:
+- the commit and the flag are read once, as the batch starts, so a change
+  made during a batch is not seen;
+- the flag says that something differed, not what. It counts every tracked
+  change and every untracked file git does not ignore, outside records/:
+  notes and tests as much as code. A file git ignores is not seen;
+- both are None where the code's directory is not the top of a git checkout
+  (one inside another repository included), or git does not answer;
+- the digest covers the tools as declared to the model. A change to what a
+  tool does under the same declaration moves the commit and the flag only.
 """
 from __future__ import annotations
 
 import hashlib
 import json
+import os
+import re
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
@@ -68,19 +76,39 @@ def canonical(obj) -> str:
     return json.dumps(obj, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
 
 
+COMMIT_PATTERN = re.compile(r"[0-9a-f]{40}(?:[0-9a-f]{24})?")
+
+
+def _same_dir(a: str | Path, b: str | Path) -> bool:
+    return os.path.normcase(os.path.realpath(a)) == os.path.normcase(os.path.realpath(b))
+
+
 def code_identity(root: str | Path = CODE_ROOT) -> dict:
-    """The code a batch runs from: HEAD's commit, and whether any file outside
-    records/ differs from it, untracked files included. Both None where root is
-    not a git checkout or git does not answer. Git takes no optional lock."""
+    """The code a batch runs from: HEAD's commit, and whether the checkout
+    differs from it outside records/, by a tracked change or an untracked file
+    git does not ignore. Both None where root is not the top of a git checkout,
+    or git does not answer. Git takes no optional lock, lists untracked files
+    whatever its config says, and its output is read as bytes."""
     git = ["git", "--no-optional-locks", "-C", str(root)]
+
+    def out(*args: str) -> bytes:
+        return subprocess.run(git + list(args), capture_output=True, timeout=60, check=True).stdout
+
     try:
-        head = subprocess.run(git + ["rev-parse", "HEAD"], capture_output=True, text=True,
-                              timeout=60, check=True).stdout.strip()
-        status = subprocess.run(git + ["status", "--porcelain", "--", ".", ":(exclude)records"],
-                                capture_output=True, text=True, timeout=60, check=True).stdout
+        top = out("rev-parse", "--show-toplevel").decode("utf-8", "replace").strip()
+        head = out("rev-parse", "HEAD").decode("ascii", "replace").strip()
+        status = out("status", "--porcelain", "--untracked-files=normal", "--", ".", ":(exclude)records")
     except (OSError, subprocess.SubprocessError):
         return {"commit": None, "changed": None}
+    if not COMMIT_PATTERN.fullmatch(head) or not _same_dir(top, root):
+        return {"commit": None, "changed": None}
     return {"commit": head, "changed": bool(status.strip())}
+
+
+def check_code(code: dict) -> None:
+    """Refuse, before a batch spends, a code identity its records could not
+    hold (the schema's "code", with the run's digest still to come)."""
+    jsonschema.validate(dict(code, tools_sha256=None), schema()["properties"]["code"])
 
 
 def tools_digest(calls: list[dict]) -> str | None:

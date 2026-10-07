@@ -507,6 +507,7 @@ class Runner:
             raise Refused(f"{start.isoformat()} is in the provider's peak window, or within "
                           f"{self.peak_margin} of one")
         code = dict(self.code) if self.code is not None else rec.code_identity()
+        rec.check_code(code)                # before anything is reserved or spent
         model = self.endpoint.model
         caps = suite.caps
         periods = (sorted(self.prices.models[model]) if self.allow_peak
