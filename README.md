@@ -25,6 +25,11 @@ that test them.
   enough to meet reality". It covers trust for an owner who is not an
   expert, limits and "keep trying", and small specialized models, as
   considerations of 2026-10-03, none implemented.
+- [Research/lead-test-for-round-2.md](Research/lead-test-for-round-2.md):
+  a lead test for round 2, extending REQ's QS5. Its first stage, the lead on
+  paper, needs only round 1's code. Its second, the lead operating, needs
+  harness mechanisms not built yet. A proposal of 2026-10-06, none of it
+  implemented.
 - [Rounds/ParcelRound-R6/](Rounds/ParcelRound-R6/): ParcelRound's round 6,
   run by hand by a Claude session as lead. It holds:
   - the round's plan of record;
