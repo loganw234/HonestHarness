@@ -1,0 +1,201 @@
+{
+ "qs6_source": 1,
+ "note": "ParcelRound round 6's archived ledger, the QS6 slice's only source. Hashes, sizes and kept times only: none of its text. keys/ members are named and never read. The zip keeps DOS times, with no zone; they are read as -07:00, the zone of every stamp, and each stamped member's kept time less its last stamp is recorded as the evidence (the zip's resolution is two seconds). Written by tools/qs6_extract.py --build-source.",
+ "repository": "github.com/loganw234/ParcelRound",
+ "commit": "f42242ecc1707a3d36c52e4b2a3b580ee2783e5b",
+ "path": "archive/round6-ledger.zip",
+ "git_blob": "c25bbaa216138c4eeaeb2a7de5d28783cb82d2ca",
+ "bytes": 203064,
+ "sha256": "286e7bd792ee4d33e7aa4c7d7d0ec9804190efd35982dd9f46a2a53cf87babbd",
+ "top": "parcelround-r6-ledger/",
+ "kept_time_zone": "-07:00",
+ "members": [
+  {
+   "name": "P1.md",
+   "bytes": 52853,
+   "sha256": "eec3533f6c5c2f73fa985d37394d10cf4033d395928e887faa911d144de81c3f",
+   "kept": "2026-10-02T22:27:10-07:00",
+   "stamped_entries": 7,
+   "last_stamp": "2026-10-02T22:27:10-07:00",
+   "kept_minus_last_stamp_s": 0
+  },
+  {
+   "name": "P2.md",
+   "bytes": 51937,
+   "sha256": "7a90ce0bb435b21ecf877e1fcc074437c81d422e63ecc9be2652407995d541cf",
+   "kept": "2026-10-02T22:28:32-07:00",
+   "stamped_entries": 6,
+   "last_stamp": "2026-10-02T22:28:32-07:00",
+   "kept_minus_last_stamp_s": 0
+  },
+  {
+   "name": "P3.md",
+   "bytes": 53604,
+   "sha256": "3db69083cd0956984c84bd4126cb089150797c45fb461b7ced82624e10515701",
+   "kept": "2026-10-02T22:22:14-07:00",
+   "stamped_entries": 6,
+   "last_stamp": "2026-10-02T22:22:15-07:00",
+   "kept_minus_last_stamp_s": -1
+  },
+  {
+   "name": "P4.md",
+   "bytes": 51833,
+   "sha256": "74e9922b45e4fd3642104536417c83a8703c922c96ebc9c99f944da442195017",
+   "kept": "2026-10-02T22:34:20-07:00",
+   "stamped_entries": 6,
+   "last_stamp": "2026-10-02T22:34:20-07:00",
+   "kept_minus_last_stamp_s": 0
+  },
+  {
+   "name": "P5.md",
+   "bytes": 115151,
+   "sha256": "e55e00fda47c3c2dc9ccbe587173ed39061c3c76783f324e229916519bbb75d3",
+   "kept": "2026-10-03T00:21:56-07:00",
+   "stamped_entries": 8,
+   "last_stamp": "2026-10-03T00:21:56-07:00",
+   "kept_minus_last_stamp_s": 0
+  },
+  {
+   "name": "README.md",
+   "bytes": 2756,
+   "sha256": "eb90db934a00d0a510f24df9830d180c864a11b926ecc76cfa89b3cfa6499f93",
+   "kept": "2026-10-02T18:15:42-07:00",
+   "stamped_entries": 0
+  },
+  {
+   "name": "briefs/P1.md",
+   "bytes": 5027,
+   "sha256": "b56ba0ebcde5e4a4165033d59f8760c6e953f948ecf3a2f33be3d21eb1ca1d6c",
+   "kept": "2026-10-02T18:15:26-07:00",
+   "stamped_entries": 0
+  },
+  {
+   "name": "briefs/P2.md",
+   "bytes": 5489,
+   "sha256": "354df23cccf04b5406ea6f86bac29f0d1fe7a0f62660adeb995d87583bd0a67c",
+   "kept": "2026-10-02T18:15:28-07:00",
+   "stamped_entries": 0
+  },
+  {
+   "name": "briefs/P3.md",
+   "bytes": 5740,
+   "sha256": "65d89b3badbff14a43e3180d38af490ac1cfe7c612d9cc637ab3cccde6aa4ec5",
+   "kept": "2026-10-02T18:15:34-07:00",
+   "stamped_entries": 0
+  },
+  {
+   "name": "briefs/P4.md",
+   "bytes": 5179,
+   "sha256": "0380511c41fc5fb33994555738220a154baa12eeea3e198379ae189e47658c39",
+   "kept": "2026-10-02T18:15:38-07:00",
+   "stamped_entries": 0
+  },
+  {
+   "name": "briefs/P5.md",
+   "bytes": 5736,
+   "sha256": "05c3be2abc696dd638df50779d6e7a30dd99f872432a8946d9e2df36c9ef80cd",
+   "kept": "2026-10-02T22:57:04-07:00",
+   "stamped_entries": 0
+  },
+  {
+   "name": "briefs/_common.md",
+   "bytes": 9387,
+   "sha256": "905201ac7fbd233bebd638061f2c8b7373e02951e7c331e55b5e04dffdd07405",
+   "kept": "2026-10-02T21:19:12-07:00",
+   "stamped_entries": 0
+  },
+  {
+   "name": "briefs/_verifier.md",
+   "bytes": 6477,
+   "sha256": "00cc97e36604baaa41de9c9bda83ebd303da47eaebcd3fe98c874ec961344977",
+   "kept": "2026-10-02T21:13:30-07:00",
+   "stamped_entries": 0
+  },
+  {
+   "name": "briefs/integration.md",
+   "bytes": 3909,
+   "sha256": "6ae96c180546ee22bcacb76f05148d2d051968e20fa7ab1321be2dbe4527b7a3",
+   "kept": "2026-10-02T23:16:42-07:00",
+   "stamped_entries": 0
+  },
+  {
+   "name": "lead.md",
+   "bytes": 74523,
+   "sha256": "01e50626463ca0f35046d616f3638837683da1217c2d30cbf007f500d53f9523",
+   "kept": "2026-10-03T01:18:18-07:00",
+   "stamped_entries": 48,
+   "last_stamp": "2026-10-03T01:18:19-07:00",
+   "kept_minus_last_stamp_s": -1
+  },
+  {
+   "name": "verifier-I.md",
+   "bytes": 33067,
+   "sha256": "d1172960877105c71c12f7890f11aba78e381fd40da935edbcb4f4299673681a",
+   "kept": "2026-10-03T01:17:56-07:00",
+   "stamped_entries": 7,
+   "last_stamp": "2026-10-03T01:17:56-07:00",
+   "kept_minus_last_stamp_s": 0
+  },
+  {
+   "name": "verifier-P0.md",
+   "bytes": 20916,
+   "sha256": "19e56bb8a583a955d919729196f9ade5e876cb13885849823a2710d88e223906",
+   "kept": "2026-10-02T22:16:02-07:00",
+   "stamped_entries": 10,
+   "last_stamp": "2026-10-02T22:16:02-07:00",
+   "kept_minus_last_stamp_s": 0
+  },
+  {
+   "name": "verifier-P1.md",
+   "bytes": 11315,
+   "sha256": "3ed07e9aefb9275d0789544397b2babef15d944a4354337f479d8490d05063e7",
+   "kept": "2026-10-02T22:50:32-07:00",
+   "stamped_entries": 3,
+   "last_stamp": "2026-10-02T22:50:32-07:00",
+   "kept_minus_last_stamp_s": 0
+  },
+  {
+   "name": "verifier-P2.md",
+   "bytes": 7302,
+   "sha256": "b787b0aa6523f39884525f70b6552bc053cdcd8bd148f3650a06fa502deebc8a",
+   "kept": "2026-10-02T22:48:08-07:00",
+   "stamped_entries": 3,
+   "last_stamp": "2026-10-02T22:48:08-07:00",
+   "kept_minus_last_stamp_s": 0
+  },
+  {
+   "name": "verifier-P3.md",
+   "bytes": 8072,
+   "sha256": "eac091a5b1cbc6f44f51484015d2a2e350758daff5cfeaed2bbcb775a2479204",
+   "kept": "2026-10-02T22:48:00-07:00",
+   "stamped_entries": 3,
+   "last_stamp": "2026-10-02T22:48:00-07:00",
+   "kept_minus_last_stamp_s": 0
+  },
+  {
+   "name": "verifier-P4.md",
+   "bytes": 8011,
+   "sha256": "b31cfc9831676d0db6a460289bb163a15ac8efa5af5064e1c445b15e3e4f2ccd",
+   "kept": "2026-10-02T23:03:08-07:00",
+   "stamped_entries": 3,
+   "last_stamp": "2026-10-02T23:03:09-07:00",
+   "kept_minus_last_stamp_s": -1
+  },
+  {
+   "name": "verifier-P5.md",
+   "bytes": 12212,
+   "sha256": "6cb6daf985f24a38837806dbeaeec9614d77e0f6c258ee8e194c867540055436",
+   "kept": "2026-10-03T00:45:48-07:00",
+   "stamped_entries": 3,
+   "last_stamp": "2026-10-03T00:45:48-07:00",
+   "kept_minus_last_stamp_s": 0
+  }
+ ],
+ "excluded": [
+  "keys/key-40df983.json",
+  "keys/key-9c306e9.json",
+  "keys/key-cd77587.json",
+  "keys/key-db08fdc.json",
+  "keys/key-f6ab37e.json"
+ ]
+}
