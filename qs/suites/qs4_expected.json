@@ -1,0 +1,795 @@
+{
+  "archive": {
+    "blob": "c25bbaa216138c4eeaeb2a7de5d28783cb82d2ca",
+    "bytes": 203064,
+    "members": {
+      "parcelround-r6-ledger/P1.md": "eec3533f6c5c2f73fa985d37394d10cf4033d395928e887faa911d144de81c3f",
+      "parcelround-r6-ledger/P2.md": "7a90ce0bb435b21ecf877e1fcc074437c81d422e63ecc9be2652407995d541cf",
+      "parcelround-r6-ledger/P3.md": "3db69083cd0956984c84bd4126cb089150797c45fb461b7ced82624e10515701",
+      "parcelround-r6-ledger/P4.md": "74e9922b45e4fd3642104536417c83a8703c922c96ebc9c99f944da442195017",
+      "parcelround-r6-ledger/P5.md": "e55e00fda47c3c2dc9ccbe587173ed39061c3c76783f324e229916519bbb75d3",
+      "parcelround-r6-ledger/README.md": "eb90db934a00d0a510f24df9830d180c864a11b926ecc76cfa89b3cfa6499f93",
+      "parcelround-r6-ledger/briefs/P1.md": "b56ba0ebcde5e4a4165033d59f8760c6e953f948ecf3a2f33be3d21eb1ca1d6c",
+      "parcelround-r6-ledger/briefs/P2.md": "354df23cccf04b5406ea6f86bac29f0d1fe7a0f62660adeb995d87583bd0a67c",
+      "parcelround-r6-ledger/briefs/P3.md": "65d89b3badbff14a43e3180d38af490ac1cfe7c612d9cc637ab3cccde6aa4ec5",
+      "parcelround-r6-ledger/briefs/P4.md": "0380511c41fc5fb33994555738220a154baa12eeea3e198379ae189e47658c39",
+      "parcelround-r6-ledger/briefs/P5.md": "05c3be2abc696dd638df50779d6e7a30dd99f872432a8946d9e2df36c9ef80cd",
+      "parcelround-r6-ledger/briefs/_common.md": "905201ac7fbd233bebd638061f2c8b7373e02951e7c331e55b5e04dffdd07405",
+      "parcelround-r6-ledger/briefs/_verifier.md": "00cc97e36604baaa41de9c9bda83ebd303da47eaebcd3fe98c874ec961344977",
+      "parcelround-r6-ledger/briefs/integration.md": "6ae96c180546ee22bcacb76f05148d2d051968e20fa7ab1321be2dbe4527b7a3",
+      "parcelround-r6-ledger/keys/key-40df983.json": "35816d90b2c43c8df0f606660d1477b901de106800fb599852e6daf9f8659ff8",
+      "parcelround-r6-ledger/keys/key-9c306e9.json": "66a20d88c89b96fc0eeb8fe42b6a5f803197d28104d8f50b3303deeb42a6aae6",
+      "parcelround-r6-ledger/keys/key-cd77587.json": "dab9f43738b06c848b605fa7d112be261c557ed2aaaef553cea86810271e8d81",
+      "parcelround-r6-ledger/keys/key-db08fdc.json": "9b0a549f859e90c9cac8a64880db5098ccf8af1cd38de8edff86ee64d3bcc870",
+      "parcelround-r6-ledger/keys/key-f6ab37e.json": "c5e03caa7eeee7347584e0dae0edbed97212d3d0ee20cba92ee00b260bcc7502",
+      "parcelround-r6-ledger/lead.md": "01e50626463ca0f35046d616f3638837683da1217c2d30cbf007f500d53f9523",
+      "parcelround-r6-ledger/verifier-I.md": "d1172960877105c71c12f7890f11aba78e381fd40da935edbcb4f4299673681a",
+      "parcelround-r6-ledger/verifier-P0.md": "19e56bb8a583a955d919729196f9ade5e876cb13885849823a2710d88e223906",
+      "parcelround-r6-ledger/verifier-P1.md": "3ed07e9aefb9275d0789544397b2babef15d944a4354337f479d8490d05063e7",
+      "parcelround-r6-ledger/verifier-P2.md": "b787b0aa6523f39884525f70b6552bc053cdcd8bd148f3650a06fa502deebc8a",
+      "parcelround-r6-ledger/verifier-P3.md": "eac091a5b1cbc6f44f51484015d2a2e350758daff5cfeaed2bbcb775a2479204",
+      "parcelround-r6-ledger/verifier-P4.md": "b31cfc9831676d0db6a460289bb163a15ac8efa5af5064e1c445b15e3e4f2ccd",
+      "parcelround-r6-ledger/verifier-P5.md": "6cb6daf985f24a38837806dbeaeec9614d77e0f6c258ee8e194c867540055436"
+    },
+    "sha256": "286e7bd792ee4d33e7aa4c7d7d0ec9804190efd35982dd9f46a2a53cf87babbd"
+  },
+  "cuts": {
+    "p1-planted": {
+      "bytes": 247103,
+      "digest": "e0d1b54ba8ab3fed220c3678c68173cb06829f6d3c2de6164a537bde335ee8df",
+      "files": [
+        "P2.md",
+        "P3.md",
+        "P4.md",
+        "README.md",
+        "briefs/P1.md",
+        "briefs/P2.md",
+        "briefs/P3.md",
+        "briefs/P4.md",
+        "briefs/_common.md",
+        "briefs/_verifier.md",
+        "lead.md",
+        "verifier-P0.md",
+        "verifier-P3.md"
+      ]
+    },
+    "p1-real": {
+      "bytes": 247103,
+      "digest": "c264c71e516646da8affdfbb028d5c64830259fcdfe85ad9bbecfb08258d76a0",
+      "files": [
+        "P2.md",
+        "P3.md",
+        "P4.md",
+        "README.md",
+        "briefs/P1.md",
+        "briefs/P2.md",
+        "briefs/P3.md",
+        "briefs/P4.md",
+        "briefs/_common.md",
+        "briefs/_verifier.md",
+        "lead.md",
+        "verifier-P0.md",
+        "verifier-P3.md"
+      ]
+    },
+    "p2-planted": {
+      "bytes": 249490,
+      "digest": "6681971cb2fd3acffb8b1e2588a51c3c1b61494b91f8433109e341415926d5cc",
+      "files": [
+        "P1.md",
+        "P3.md",
+        "P4.md",
+        "README.md",
+        "briefs/P1.md",
+        "briefs/P2.md",
+        "briefs/P3.md",
+        "briefs/P4.md",
+        "briefs/_common.md",
+        "briefs/_verifier.md",
+        "lead.md",
+        "verifier-P0.md",
+        "verifier-P1.md",
+        "verifier-P3.md"
+      ]
+    },
+    "p2-real": {
+      "bytes": 249490,
+      "digest": "74ed3cac98f47201e44e40c3f2d0a7125789a1f36afb75806cd32b5a25f761b1",
+      "files": [
+        "P1.md",
+        "P3.md",
+        "P4.md",
+        "README.md",
+        "briefs/P1.md",
+        "briefs/P2.md",
+        "briefs/P3.md",
+        "briefs/P4.md",
+        "briefs/_common.md",
+        "briefs/_verifier.md",
+        "lead.md",
+        "verifier-P0.md",
+        "verifier-P1.md",
+        "verifier-P3.md"
+      ]
+    },
+    "p3-planted": {
+      "bytes": 229465,
+      "digest": "aeb0fbd21005034ead648c19efd38ff9fa85cacf8aa1ae9f35efde53fbd0d970",
+      "files": [
+        "P1.md",
+        "P2.md",
+        "P4.md",
+        "README.md",
+        "briefs/P1.md",
+        "briefs/P2.md",
+        "briefs/P3.md",
+        "briefs/P4.md",
+        "briefs/_common.md",
+        "briefs/_verifier.md",
+        "lead.md",
+        "verifier-P0.md"
+      ]
+    },
+    "p3-real": {
+      "bytes": 229465,
+      "digest": "448900b6f204e8e0b3b1cf43f4f3a0013f139865c75ebbd2941f5dd6788c4d71",
+      "files": [
+        "P1.md",
+        "P2.md",
+        "P4.md",
+        "README.md",
+        "briefs/P1.md",
+        "briefs/P2.md",
+        "briefs/P3.md",
+        "briefs/P4.md",
+        "briefs/_common.md",
+        "briefs/_verifier.md",
+        "lead.md",
+        "verifier-P0.md"
+      ]
+    },
+    "p4-planted": {
+      "bytes": 260568,
+      "digest": "a0f6e272c5f188df39b9b06307f8a6708448fb6d4f9269c27a657d9f0bdd7e40",
+      "files": [
+        "P1.md",
+        "P2.md",
+        "P3.md",
+        "README.md",
+        "briefs/P1.md",
+        "briefs/P2.md",
+        "briefs/P3.md",
+        "briefs/P4.md",
+        "briefs/_common.md",
+        "briefs/_verifier.md",
+        "lead.md",
+        "verifier-P0.md",
+        "verifier-P1.md",
+        "verifier-P2.md",
+        "verifier-P3.md"
+      ]
+    },
+    "p4-real": {
+      "bytes": 260568,
+      "digest": "edfcebb6200285808c82261103d86d4fa97889b4eb12b97d4af93009c5c33044",
+      "files": [
+        "P1.md",
+        "P2.md",
+        "P3.md",
+        "README.md",
+        "briefs/P1.md",
+        "briefs/P2.md",
+        "briefs/P3.md",
+        "briefs/P4.md",
+        "briefs/_common.md",
+        "briefs/_verifier.md",
+        "lead.md",
+        "verifier-P0.md",
+        "verifier-P1.md",
+        "verifier-P2.md",
+        "verifier-P3.md"
+      ]
+    },
+    "p5-planted": {
+      "bytes": 402495,
+      "digest": "0f572900e9d84d7663d8ea14cab4b76c9cfd83ecccf0586eccbba0d2db636b1f",
+      "files": [
+        "P1.md",
+        "P2.md",
+        "P3.md",
+        "P4.md",
+        "README.md",
+        "briefs/P1.md",
+        "briefs/P2.md",
+        "briefs/P3.md",
+        "briefs/P4.md",
+        "briefs/P5.md",
+        "briefs/_common.md",
+        "briefs/_verifier.md",
+        "briefs/integration.md",
+        "lead.md",
+        "verifier-I.md",
+        "verifier-P0.md",
+        "verifier-P1.md",
+        "verifier-P2.md",
+        "verifier-P3.md",
+        "verifier-P4.md"
+      ]
+    },
+    "p5-real": {
+      "bytes": 402495,
+      "digest": "afd951a159e2ebc95be524ea10069f5c28074c6f3fa2892f5cd7a3a005bb26d5",
+      "files": [
+        "P1.md",
+        "P2.md",
+        "P3.md",
+        "P4.md",
+        "README.md",
+        "briefs/P1.md",
+        "briefs/P2.md",
+        "briefs/P3.md",
+        "briefs/P4.md",
+        "briefs/P5.md",
+        "briefs/_common.md",
+        "briefs/_verifier.md",
+        "briefs/integration.md",
+        "lead.md",
+        "verifier-I.md",
+        "verifier-P0.md",
+        "verifier-P1.md",
+        "verifier-P2.md",
+        "verifier-P3.md",
+        "verifier-P4.md"
+      ]
+    }
+  },
+  "format": 1,
+  "parcelround_tree": "bbc8b20d204f19c9e35a3fe219338cf0cdf4cee2",
+  "plan": {
+    "sha256": "a2b64d29fda7e63fa3bf3ed69ceeadae3ac081cdec07c0adafa8e97296bdac9b"
+  },
+  "plant_spans": {
+    "P1-p1": {
+      "file": "METHOD.md",
+      "lines": [
+        157,
+        157
+      ]
+    },
+    "P1-p2": {
+      "file": "METHOD.md",
+      "lines": [
+        369,
+        370
+      ]
+    },
+    "P2-p1": {
+      "file": "METHOD.md",
+      "lines": [
+        414,
+        414
+      ]
+    },
+    "P2-p2": {
+      "file": "METHOD.md",
+      "lines": [
+        648,
+        649
+      ]
+    },
+    "P3-p1": {
+      "file": "METHOD.md",
+      "lines": [
+        686,
+        686
+      ]
+    },
+    "P3-p2": {
+      "file": "METHOD.md",
+      "lines": [
+        850,
+        850
+      ]
+    },
+    "P4-p1": {
+      "file": "METHOD.md",
+      "lines": [
+        694,
+        695
+      ]
+    },
+    "P4-p2": {
+      "file": "METHOD.md",
+      "lines": [
+        712,
+        712
+      ]
+    },
+    "P5-p1": {
+      "file": "templates/verifier.md",
+      "lines": [
+        85,
+        85
+      ]
+    },
+    "P5-p2": {
+      "file": "templates/brief.md",
+      "lines": [
+        82,
+        83
+      ]
+    }
+  },
+  "r6_tip_lines": {
+    "P1-r1": [
+      [
+        247,
+        250
+      ]
+    ],
+    "P1-r2": [
+      [
+        296,
+        297
+      ]
+    ],
+    "P1-r3": [
+      [
+        292,
+        292
+      ]
+    ],
+    "P1-r4": [
+      [
+        142,
+        142
+      ]
+    ],
+    "P1-r5": [],
+    "P1-r6": [],
+    "P1-r7": [
+      [
+        98,
+        100
+      ]
+    ],
+    "P1-r8": [
+      [
+        431,
+        431
+      ]
+    ],
+    "P2-r1": [
+      [
+        340,
+        342
+      ]
+    ],
+    "P2-r2": [],
+    "P2-r3": [],
+    "P3-r1": [
+      [
+        796,
+        796
+      ]
+    ],
+    "P3-r2": [
+      [
+        953,
+        954
+      ],
+      [
+        980,
+        985
+      ]
+    ],
+    "P3-r3": [
+      [
+        849,
+        849
+      ]
+    ],
+    "P3-r4": [
+      [
+        820,
+        820
+      ],
+      [
+        566,
+        566
+      ],
+      [
+        689,
+        689
+      ]
+    ],
+    "P3-r5": [],
+    "P4-r1": [
+      [
+        696,
+        697
+      ]
+    ],
+    "P4-r2": [
+      [
+        761,
+        765
+      ]
+    ],
+    "P4-r3": [
+      [
+        727,
+        727
+      ]
+    ],
+    "P4-r4": [],
+    "P4-r5": [],
+    "P4-r6": [
+      [
+        694,
+        694
+      ],
+      [
+        697,
+        697
+      ],
+      [
+        747,
+        747
+      ],
+      [
+        751,
+        751
+      ],
+      [
+        797,
+        797
+      ]
+    ],
+    "P4-r7": [
+      [
+        801,
+        801
+      ],
+      [
+        805,
+        806
+      ]
+    ],
+    "P5-r1": [
+      [
+        132,
+        134
+      ]
+    ],
+    "P5-r2": [],
+    "P5-r3": [],
+    "P5-r4": [
+      [
+        169,
+        173
+      ]
+    ],
+    "P5-r5": [
+      [
+        125,
+        127
+      ]
+    ],
+    "P5-r6": [
+      [
+        817,
+        817
+      ]
+    ]
+  },
+  "repos": {
+    "p1-planted": {
+      "commit": "f6ab37e5990f7b90f1a5411b1666f233c4c9c27f",
+      "files": [
+        ".gitattributes",
+        ".gitignore",
+        "ADOPTION.md",
+        "CASE-STUDY-2.md",
+        "CASE-STUDY-3.md",
+        "CASE-STUDY-4.md",
+        "CASE-STUDY-5.md",
+        "CASE-STUDY.md",
+        "LICENSE",
+        "METHOD.md",
+        "README.md",
+        "archive/round2-ledger.zip",
+        "archive/round3-ledger.zip",
+        "archive/round4-ledger.zip",
+        "archive/round4-second-ledger.zip",
+        "archive/round5-ledger.zip",
+        "archive/round6-practice-survey.md",
+        "templates/brief.md",
+        "templates/checklists.md",
+        "templates/ledger.md",
+        "templates/verifier.md",
+        "tools/check_method.py"
+      ],
+      "objects": 344,
+      "tree": "4a0cd6f6d18021bbb37f0d8ff4e3359a09b02fa1"
+    },
+    "p1-real": {
+      "commit": "03561a74e8ff2ce18d481b217f14e8f36ac3ec68",
+      "files": [
+        ".gitattributes",
+        ".gitignore",
+        "ADOPTION.md",
+        "CASE-STUDY-2.md",
+        "CASE-STUDY-3.md",
+        "CASE-STUDY-4.md",
+        "CASE-STUDY-5.md",
+        "CASE-STUDY.md",
+        "LICENSE",
+        "METHOD.md",
+        "README.md",
+        "archive/round2-ledger.zip",
+        "archive/round3-ledger.zip",
+        "archive/round4-ledger.zip",
+        "archive/round4-second-ledger.zip",
+        "archive/round5-ledger.zip",
+        "archive/round6-practice-survey.md",
+        "templates/brief.md",
+        "templates/checklists.md",
+        "templates/ledger.md",
+        "templates/verifier.md",
+        "tools/check_method.py"
+      ],
+      "objects": 344,
+      "tree": "a452e2b85b7233529f0451de8c535f40af6cddaa"
+    },
+    "p2-planted": {
+      "commit": "40df9835a4dc91382b72a8ac4e2169e1a4f6de55",
+      "files": [
+        ".gitattributes",
+        ".gitignore",
+        "ADOPTION.md",
+        "CASE-STUDY-2.md",
+        "CASE-STUDY-3.md",
+        "CASE-STUDY-4.md",
+        "CASE-STUDY-5.md",
+        "CASE-STUDY.md",
+        "LICENSE",
+        "METHOD.md",
+        "README.md",
+        "archive/round2-ledger.zip",
+        "archive/round3-ledger.zip",
+        "archive/round4-ledger.zip",
+        "archive/round4-second-ledger.zip",
+        "archive/round5-ledger.zip",
+        "archive/round6-practice-survey.md",
+        "templates/brief.md",
+        "templates/checklists.md",
+        "templates/ledger.md",
+        "templates/verifier.md",
+        "tools/check_method.py"
+      ],
+      "objects": 344,
+      "tree": "f62538afec1891b90923acf6b8b60d90105a06b6"
+    },
+    "p2-real": {
+      "commit": "367678688da8d31626e9f9c6fcd3b183d36645e9",
+      "files": [
+        ".gitattributes",
+        ".gitignore",
+        "ADOPTION.md",
+        "CASE-STUDY-2.md",
+        "CASE-STUDY-3.md",
+        "CASE-STUDY-4.md",
+        "CASE-STUDY-5.md",
+        "CASE-STUDY.md",
+        "LICENSE",
+        "METHOD.md",
+        "README.md",
+        "archive/round2-ledger.zip",
+        "archive/round3-ledger.zip",
+        "archive/round4-ledger.zip",
+        "archive/round4-second-ledger.zip",
+        "archive/round5-ledger.zip",
+        "archive/round6-practice-survey.md",
+        "templates/brief.md",
+        "templates/checklists.md",
+        "templates/ledger.md",
+        "templates/verifier.md",
+        "tools/check_method.py"
+      ],
+      "objects": 344,
+      "tree": "a8275c0dd0fdd5b26885a29125974113ba961cae"
+    },
+    "p3-planted": {
+      "commit": "cd7758735b22f226e6c322fbb27e98a7a87cda3a",
+      "files": [
+        ".gitattributes",
+        ".gitignore",
+        "ADOPTION.md",
+        "CASE-STUDY-2.md",
+        "CASE-STUDY-3.md",
+        "CASE-STUDY-4.md",
+        "CASE-STUDY-5.md",
+        "CASE-STUDY.md",
+        "LICENSE",
+        "METHOD.md",
+        "README.md",
+        "archive/round2-ledger.zip",
+        "archive/round3-ledger.zip",
+        "archive/round4-ledger.zip",
+        "archive/round4-second-ledger.zip",
+        "archive/round5-ledger.zip",
+        "archive/round6-practice-survey.md",
+        "templates/brief.md",
+        "templates/checklists.md",
+        "templates/ledger.md",
+        "templates/verifier.md",
+        "tools/check_method.py"
+      ],
+      "objects": 344,
+      "tree": "3b41e5997ee7e65d0b38219cb82c67213a585d19"
+    },
+    "p3-real": {
+      "commit": "4ff28cacb0dbd44539beb467dfeeb7e8f2f53daa",
+      "files": [
+        ".gitattributes",
+        ".gitignore",
+        "ADOPTION.md",
+        "CASE-STUDY-2.md",
+        "CASE-STUDY-3.md",
+        "CASE-STUDY-4.md",
+        "CASE-STUDY-5.md",
+        "CASE-STUDY.md",
+        "LICENSE",
+        "METHOD.md",
+        "README.md",
+        "archive/round2-ledger.zip",
+        "archive/round3-ledger.zip",
+        "archive/round4-ledger.zip",
+        "archive/round4-second-ledger.zip",
+        "archive/round5-ledger.zip",
+        "archive/round6-practice-survey.md",
+        "templates/brief.md",
+        "templates/checklists.md",
+        "templates/ledger.md",
+        "templates/verifier.md",
+        "tools/check_method.py"
+      ],
+      "objects": 344,
+      "tree": "fbec5909d7608e65c5c2ae655cd5562d45f0d56d"
+    },
+    "p4-planted": {
+      "commit": "db08fdc94fb3232d2231352c957ea938f053996c",
+      "files": [
+        ".gitattributes",
+        ".gitignore",
+        "ADOPTION.md",
+        "CASE-STUDY-2.md",
+        "CASE-STUDY-3.md",
+        "CASE-STUDY-4.md",
+        "CASE-STUDY-5.md",
+        "CASE-STUDY.md",
+        "LICENSE",
+        "METHOD.md",
+        "README.md",
+        "archive/round2-ledger.zip",
+        "archive/round3-ledger.zip",
+        "archive/round4-ledger.zip",
+        "archive/round4-second-ledger.zip",
+        "archive/round5-ledger.zip",
+        "archive/round6-practice-survey.md",
+        "templates/brief.md",
+        "templates/checklists.md",
+        "templates/ledger.md",
+        "templates/verifier.md",
+        "tools/check_method.py"
+      ],
+      "objects": 344,
+      "tree": "69399dcf0fef377d7897e0e311e33597a0babe77"
+    },
+    "p4-real": {
+      "commit": "d38fea128369295e7be49e3a5f101be15fa8f584",
+      "files": [
+        ".gitattributes",
+        ".gitignore",
+        "ADOPTION.md",
+        "CASE-STUDY-2.md",
+        "CASE-STUDY-3.md",
+        "CASE-STUDY-4.md",
+        "CASE-STUDY-5.md",
+        "CASE-STUDY.md",
+        "LICENSE",
+        "METHOD.md",
+        "README.md",
+        "archive/round2-ledger.zip",
+        "archive/round3-ledger.zip",
+        "archive/round4-ledger.zip",
+        "archive/round4-second-ledger.zip",
+        "archive/round5-ledger.zip",
+        "archive/round6-practice-survey.md",
+        "templates/brief.md",
+        "templates/checklists.md",
+        "templates/ledger.md",
+        "templates/verifier.md",
+        "tools/check_method.py"
+      ],
+      "objects": 344,
+      "tree": "9deb4efe1b41017f8a5c43927c331273b9e614b3"
+    },
+    "p5-planted": {
+      "commit": "9c306e98fee0f3aed7aa2cd7094c4506f4e48fd1",
+      "files": [
+        ".gitattributes",
+        ".gitignore",
+        "ADOPTION.md",
+        "CASE-STUDY-2.md",
+        "CASE-STUDY-3.md",
+        "CASE-STUDY-4.md",
+        "CASE-STUDY-5.md",
+        "CASE-STUDY.md",
+        "LICENSE",
+        "METHOD.md",
+        "README.md",
+        "archive/round2-ledger.zip",
+        "archive/round3-ledger.zip",
+        "archive/round4-ledger.zip",
+        "archive/round4-second-ledger.zip",
+        "archive/round5-ledger.zip",
+        "archive/round6-practice-survey.md",
+        "templates/brief.md",
+        "templates/checklists.md",
+        "templates/ledger.md",
+        "templates/verifier.md",
+        "tools/check_method.py"
+      ],
+      "objects": 413,
+      "tree": "ae14ea70ddd3259c944f25d86cbd6eafc81f995a"
+    },
+    "p5-real": {
+      "commit": "43403e62081ee48103d7cf520e95405a632c0b74",
+      "files": [
+        ".gitattributes",
+        ".gitignore",
+        "ADOPTION.md",
+        "CASE-STUDY-2.md",
+        "CASE-STUDY-3.md",
+        "CASE-STUDY-4.md",
+        "CASE-STUDY-5.md",
+        "CASE-STUDY.md",
+        "LICENSE",
+        "METHOD.md",
+        "README.md",
+        "archive/round2-ledger.zip",
+        "archive/round3-ledger.zip",
+        "archive/round4-ledger.zip",
+        "archive/round4-second-ledger.zip",
+        "archive/round5-ledger.zip",
+        "archive/round6-practice-survey.md",
+        "templates/brief.md",
+        "templates/checklists.md",
+        "templates/ledger.md",
+        "templates/verifier.md",
+        "tools/check_method.py"
+      ],
+      "objects": 413,
+      "tree": "017ae54175201e2e88ed3170e4d333fdfa9400e4"
+    }
+  },
+  "sources": {
+    "digest": "832d9baeabd7d273a5129b05e18c03cb4e8bad10978d6731c84b101634884394",
+    "files": {
+      "HonestFramework/METHOD.md": "461274bd6055383e6d4597e89c161ca639d64f2acca3c1dd5d63a2da19308035",
+      "HonestFramework/WITH-PARCELROUND.md": "665861554e911ea3806277b519307335808ae7185bf7fd53c8cf77bfe74e81ad",
+      "cft-fp256/docs/ROADMAP.md": "16d7eaff142d9fcb0c49fc0db768730932aee852dab048d43d0fcd5380f5d168",
+      "cft-fp256/docs/VALIDATION.md": "dd9b575b7b9c7b91be9485ff156b2a6722a99ff43fbb87dcb2cf814ed56bfd71",
+      "loganw.dev/site/data/relations.json": "939048ff2312105b5b6769c2b75e9af99734263d9739e3d94c3c3c30bd8d2560",
+      "loganw.dev/site/facts.py": "75a3fb39bfefd36802568548caf186189830cbc88ea35d082e8449e226ce5414",
+      "loganw.dev/site/mapgen.py": "7c4fb84cbf2993ba75fb3021250a0591bbdea80705b541e254bf1f5da31b2446",
+      "loganw.dev/site/pages/home.py": "a8080ef22da9d56f800eebeb0363e85f2cf7ff32e2b82d5e8713ec6f824f0a16",
+      "loganw.dev/site/pages/method.py": "6d9b415b746a9b50b8093b499a8e0e7f743bbcc8dfd58bf1c30e2c13ddb0fabf",
+      "loganw.dev/site/pages/propose.py": "7cb8df90e29aa2d37f8336c2630cabc1778914f4f79b7c9c285799672a8d0534",
+      "loganw.dev/site/pages/thread_determinism.py": "9fe439c61ab145ec9a5df049724e53f331ec97ab6e18423dbbddefe5130f6d7c",
+      "loganw.dev/site/pages/work_parcelround.py": "a2a2c55e5d868cb906b6f1665c1a924a57cfb8340dbc1484e209a5d9abc11dc6"
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "format": 1,
+  "about": "The lead's judgements of QS4's live runs, each checked by a verifier, recorded as judgement (lead.md 17:47:24, answer 6). One entry per plant of a planted run (verdict caught or missed: whether the run's located finding states the plant's fault), and one per finding of a run that the lead adjudicates against round 6's recorded findings (verdict match, with the round-6 finding's id; new true; or false alarm). Each names the run's record_id, who judged and who checked, and a note in the judge's own words: never the model's text. Empty until the runs.",
+  "judgements": []
+}
