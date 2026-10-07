@@ -24,13 +24,14 @@ check = load_tool("check")
 PLANTED = [c for c in qs4.SUITES if c.ITEM.endswith("-planted")]
 
 
-def run(tmp_path, prices, clock, model, suite):
-    with FakeServer(model, prices=prices, clock=clock) as url:
+def run(tmp_path, prices, clock, model, suite, allow_peak=False, balance="12.00"):
+    with FakeServer(model, prices=prices, clock=clock, balance=balance) as url:
         ep = Endpoint(name="fake", provider="deepseek", base_url=url, model="deepseek-flash",
                       price_table="prices/deepseek-2026-10-06.json", key_env=None)
         guard = SpendGuard(Decimal("250"), tmp_path / "records" / "spend.jsonl")
         runner = Runner(ep, prices, guard, records_dir=tmp_path / "records",
-                        transcripts_dir=tmp_path / "transcripts", clock=clock)
+                        transcripts_dir=tmp_path / "transcripts", clock=clock, allow_peak=allow_peak,
+                        retry_delays=(0, 0))
         summary = runner.run_batch(suite)
     path = tmp_path / "records" / "runs" / f"{suite.name}.jsonl"
     records = [json.loads(x) for x in path.read_text(encoding="utf-8").splitlines() if x.strip()]
@@ -311,12 +312,40 @@ def test_the_version_names_the_data_and_the_code():
 
 
 def test_one_run_reserves_the_hand_computed_worst_case(tmp_path, prices, off_peak_clock):
+    # By hand. deepseek-flash, USD a million tokens (prices/deepseek-2026-10-06.json): off-peak
+    # 0.15 a prompt token missed and 0.6 an output token; peak 0.3 and 1.2. Every prompt token is
+    # priced as a miss. QS4's caps: 40,000,000 prompt, 500,000 output, 900,000 a call; one call's
+    # output is at most 393,216 (deepseek.MAX_TOKENS). One call at its caps costs
+    #   off-peak 0.9 x 0.15 + 0.393216 x 0.6 = 0.135 + 0.2359296 = 0.3709296
+    #   peak     0.9 x 0.3  + 0.393216 x 1.2 = 0.27  + 0.4718592 = 0.7418592
+    # Off-peak start:
+    #   the run        40.9 x 0.15 + 0.5 x 0.6               = 6.135 + 0.3     = 6.435
+    #   the probe      64 x 0.15 + 16 x 0.6, a millionth each                  = 0.0000192
+    #   the crossing   one call at peak less off-peak: 0.7418592 - 0.3709296   = 0.3709296
+    #   unmetered      3 attempts at the dearest call: 3 x 0.7418592           = 2.2255776
+    #   reserved       6.435 + 0.0000192 + 0.3709296 + 2.2255776               = 9.0315264
+    # With --allow-peak every run is priced at peak, and nothing crosses:
+    #   the run        40.9 x 0.3 + 0.5 x 1.2                = 12.27 + 0.6     = 12.87
+    #   the probe      64 x 0.3 + 16 x 1.2, a millionth each                   = 0.0000384
+    #   reserved       12.87 + 0.0000384 + 0 + 2.2255776                       = 15.0956160
+    # So the fake's balance is raised for the second batch, which 12.00 would refuse.
     caps = qs4.QS4.caps
     m, out = "deepseek-flash", min(caps.max_output_tokens, deepseek.MAX_TOKENS)
     wc = prices.worst_case
+    call = {p: wc(m, p, caps.max_call_prompt_tokens, out) for p in ("off_peak", "peak")}
     run_worst = wc(m, "off_peak", caps.max_prompt_tokens + caps.max_call_prompt_tokens, caps.max_output_tokens)
     probe = wc(m, "off_peak", identity.PROBE_MAX_PROMPT, identity.PROBE_MAX_OUTPUT)
-    crossing = wc(m, "peak", caps.max_call_prompt_tokens, out) - wc(m, "off_peak", caps.max_call_prompt_tokens, out)
-    s, _, _, _ = run(tmp_path, prices, off_peak_clock, ScriptedModel(turn(report_call("c1", []))),
-                     make(qs4.QS4P2Planted, tmp_path))
-    assert Decimal(s["reserved_usd"]) == run_worst + probe + crossing == Decimal("6.8059488")
+    crossing, unmetered = call["peak"] - call["off_peak"], 3 * call["peak"]
+    s, _, _, _ = run(tmp_path / "off", prices, off_peak_clock, ScriptedModel(turn(report_call("c1", []))),
+                     make(qs4.QS4P2Planted, tmp_path / "off"))
+    assert Decimal(s["reserved_usd"]) == run_worst + probe + crossing + unmetered == Decimal("9.0315264")
+    assert Decimal(s["unmetered_margin_usd"]) == unmetered == Decimal("2.2255776")
+    assert Decimal(s["crossing_margin_usd"]) == crossing == Decimal("0.3709296")
+    peak_run = wc(m, "peak", caps.max_prompt_tokens + caps.max_call_prompt_tokens, caps.max_output_tokens)
+    peak_probe = wc(m, "peak", identity.PROBE_MAX_PROMPT, identity.PROBE_MAX_OUTPUT)
+    s, _, _, _ = run(tmp_path / "peak", prices, off_peak_clock, ScriptedModel(turn(report_call("c1", []))),
+                     make(qs4.QS4P2Planted, tmp_path / "peak"), allow_peak=True, balance="40.00")
+    assert Decimal(s["reserved_usd"]) == peak_run + peak_probe + unmetered == Decimal("15.0956160")
+    assert Decimal(s["crossing_margin_usd"]) == 0
+    # What the module states is what the runner reserves.
+    assert all(f"${v}" in qs4.__doc__ for v in ("9.0315264", "15.0956160", "2.2255776"))

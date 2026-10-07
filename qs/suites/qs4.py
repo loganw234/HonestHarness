@@ -71,6 +71,22 @@ What is recorded:
 - ItemResult.local["qs4"] holds the report, the verifier's ledger file and
   each finding's statement, which stay in the local transcript.
 
+Cost and time. Each run is one batch through P0's runner. At QS4's caps
+(40,000,000 prompt tokens, 500,000 output, 900,000 a call) on deepseek-flash,
+a batch reserves $9.0315264 off-peak and $15.0956160 with --allow-peak. Both
+include P0's unmetered margin of $2.2255776: three times the dearest single
+call, for attempts the server closes with no reply. tests/test_qs4.py works
+both figures by hand.
+- A run's wall clock is budgets.max_run_seconds, 6,000 s. The lead's
+  background jobs stop at 2 hours, and a batch interrupted there writes no
+  summary. 6,000 s leaves about 20 minutes for the input checks, the probe,
+  the settle and the closing read (budgets_about in qs4_items.json).
+- The budget is checked before each model call and each tool call. So a run
+  can end later, by its last call: a tool call's call_timeout_seconds and
+  P2's grace, or one model call of up to max_tokens_per_turn tokens.
+- Without --allow-peak, P0's runner refuses a start within its margin of a
+  peak window, and stops the batch at the first call that would fall in one.
+
 Limits, each stated by the behaviour it concedes:
 1. There is no network: a check an original made over it (verifier-P5's render
    check through GitHub's API) cannot be made, and no link is fetched.

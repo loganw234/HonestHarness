@@ -73,6 +73,14 @@ def test_the_caps_fit_deepseeks_context_with_a_turns_output():
     assert b["max_tokens_per_turn"] == 65_536 and ITEMS["settings"]["stream"] is True
 
 
+def test_a_run_leaves_20_minutes_of_the_leads_two_hour_job():
+    # The lead's background jobs stop at 2 hours, and a batch interrupted there writes no summary.
+    # 6,000 s leaves 20 minutes for the input checks, the probe, the settle and the closing read.
+    b = ITEMS["budgets"]
+    assert b["max_run_seconds"] == 6_000 and b["max_run_seconds"] + 20 * 60 <= 2 * 60 * 60
+    assert "max_run_seconds is 6,000" in ITEMS["budgets_about"] and "max_run_seconds, 6,000 s" in qs4.__doc__
+
+
 def test_the_judgements_file_is_well_formed_and_its_check_can_fail():
     assert qs4.judgement_problems(qs4.load_judgements()) == []
     good = [{"record_id": "b.p2-planted.r0", "plant": "P2-p1", "finding": None, "verdict": "caught", "r6": None,

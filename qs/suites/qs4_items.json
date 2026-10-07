@@ -49,7 +49,7 @@
   },
   "budgets": {
     "max_turns": 300,
-    "max_run_seconds": 10800,
+    "max_run_seconds": 6000,
     "call_timeout_seconds": 300,
     "max_output_chars": 32000,
     "malformed_retries": 3,
@@ -58,6 +58,7 @@
     "max_scratch_bytes": 536870912,
     "max_tokens_per_turn": 65536
   },
+  "budgets_about": "budgets.max_run_seconds is 6,000. The lead's background jobs stop at 2 hours, and a batch interrupted there writes no summary, so 6,000 s leaves about 20 minutes of the 2 hours for the input checks, the probe, the settle and the closing read (the lead to P4, 2026-10-06, recorded at P4.md 19:51:21; it was 10,800 at 9a85a15). The budget is checked before each model call and each tool call, so a run ends later by its last call.",
   "settings": {
     "stream": true,
     "tolerance": 2,
