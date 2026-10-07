@@ -4,7 +4,7 @@
     python tools/live.py <module>:<SuiteClass> [--repeats N] [--thinking on|off]
                          [--effort low|high|max] [--endpoint NAME] [--ceiling USD]
                          [--allow-peak] [--peak-margin MINUTES] [--settle SECONDS]
-                         [--acknowledge BATCH]
+                         [--acknowledge BATCH] [--max-unmetered N]
     python tools/live.py --recheck
 
 --probe runs an empty batch: the balance read, the model list, one identity
@@ -22,6 +22,11 @@ reconciliation is not ok holds the next one: --recheck reads the balance again
 and reconciles the last batch anew, and --acknowledge BATCH lifts the hold by
 naming that batch. Errors are printed redacted, with an exit status that says
 which kind they are. Parcels never run this file; their tests use the fake.
+
+--max-unmetered N is the batch's allowance of attempts the server closes with
+no reply: such an attempt is retried, and the batch stops at the Nth (3 when
+not given). The reservation covers N calls more, each the dearest single call
+at either period, since each may be billed without a meter reading.
 
 The spend file is this checkout's, records/spend.jsonl. Round 1's live runs
 are made from one checkout only, so one file holds the round's spend.
@@ -43,7 +48,8 @@ from datetime import timedelta  # noqa: E402
 from qs import registry  # noqa: E402
 from qs.guard import Refused, SpendGuard  # noqa: E402
 from qs.prices import PriceTable  # noqa: E402
-from qs.suite import Caps, Item, MeterMismatch, Runner, Suite  # noqa: E402
+from qs.suite import (MAX_UNMETERED_PER_BATCH, Caps, Item, MeterMismatch, Runner,  # noqa: E402
+                      Suite)
 
 DEFAULT_CEILING = "250"   # Logan, 2026-10-06: the pilot testing's ceiling
 
@@ -66,7 +72,14 @@ def load_suite(spec: str) -> Suite:
     return getattr(importlib.import_module(module), cls)()
 
 
-def main(argv: list[str]) -> int:
+def _at_least_one(value: str) -> int:
+    n = int(value)
+    if n < 1:
+        raise argparse.ArgumentTypeError("must be 1 or more")
+    return n
+
+
+def parser() -> argparse.ArgumentParser:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("suite", nargs="?")
     ap.add_argument("--probe", action="store_true")
@@ -82,16 +95,29 @@ def main(argv: list[str]) -> int:
     ap.add_argument("--settle", type=float, default=5.0)
     ap.add_argument("--acknowledge", metavar="BATCH")
     ap.add_argument("--recheck", action="store_true")
+    # Attempts the server may close with no reply before the batch stops; the
+    # reservation covers this many calls more (the round's ledger, 20:01:46).
+    ap.add_argument("--max-unmetered", type=_at_least_one, default=MAX_UNMETERED_PER_BATCH,
+                    metavar="N")
+    return ap
+
+
+def make_runner(a: argparse.Namespace, ep, prices: PriceTable, guard: SpendGuard) -> Runner:
+    return Runner(ep, prices, guard, records_dir=ROOT / "records",
+                  transcripts_dir=ROOT / "transcripts", live=True,
+                  allow_peak=a.allow_peak, settle_seconds=a.settle,
+                  peak_margin=timedelta(minutes=a.peak_margin), max_unmetered=a.max_unmetered)
+
+
+def main(argv: list[str]) -> int:
+    ap = parser()
     a = ap.parse_args(argv)
     if not (a.probe or a.suite or a.recheck):
         ap.error("give a suite, --probe or --recheck")
     ep = registry.load(ROOT / "registry.json")[a.endpoint]
     prices = PriceTable.load(ROOT / ep.price_table)
     guard = SpendGuard(Decimal(a.ceiling), ROOT / "records" / "spend.jsonl")
-    runner = Runner(ep, prices, guard, records_dir=ROOT / "records",
-                    transcripts_dir=ROOT / "transcripts", live=True,
-                    allow_peak=a.allow_peak, settle_seconds=a.settle,
-                    peak_margin=timedelta(minutes=a.peak_margin))
+    runner = make_runner(a, ep, prices, guard)
     try:
         if a.recheck:
             print(json.dumps(runner.recheck(), indent=2))
