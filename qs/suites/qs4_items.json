@@ -1,0 +1,810 @@
+{
+  "format": 1,
+  "about": "QS4's items: round 6's five parcels, each as its planted copy and its real tip. SHAs come from round 6's keys and ParcelRound's history; stamps from round 6's lead.md; the originals' tokens from CASE-STUDY-6.md's cost table; markers and recorded findings are QS4's own, each finding cited by the ledger entry that records it. Line numbers are at the copy's commit.",
+  "archive": {
+    "parcelround": "f42242ecc1707a3d36c52e4b2a3b580ee2783e5b",
+    "path": "archive/round6-ledger.zip",
+    "root": "parcelround-r6-ledger/"
+  },
+  "plan": {
+    "commit": "809ed2f6caebd2bb4760512a6f05b13b2ec24274",
+    "path": "Rounds/ParcelRound-R6/PLAN.md"
+  },
+  "sources": [
+    {
+      "name": "cft-fp256",
+      "commit": "4190a47f5d99859a1af9a356cc7ed9e535ae74db",
+      "paths": [
+        "docs/VALIDATION.md",
+        "docs/ROADMAP.md"
+      ]
+    },
+    {
+      "name": "HonestFramework",
+      "commit": "65447fd4d8253034fd6d206479c5a5371c623c60",
+      "paths": [
+        "WITH-PARCELROUND.md",
+        "METHOD.md"
+      ]
+    },
+    {
+      "name": "loganw.dev",
+      "commit": "43c36a21f8d7bc8674b7813f9e4b35e93d53d07c",
+      "paths": [
+        "site/data/relations.json",
+        "site/facts.py",
+        "site/mapgen.py",
+        "site/pages/home.py",
+        "site/pages/method.py",
+        "site/pages/propose.py",
+        "site/pages/thread_determinism.py",
+        "site/pages/work_parcelround.py"
+      ]
+    }
+  ],
+  "caps": {
+    "max_prompt_tokens": 40000000,
+    "max_output_tokens": 500000,
+    "max_call_prompt_tokens": 900000
+  },
+  "budgets": {
+    "max_turns": 300,
+    "max_run_seconds": 6000,
+    "call_timeout_seconds": 300,
+    "max_output_chars": 32000,
+    "malformed_retries": 3,
+    "nudges": 2,
+    "max_calls_per_turn": 16,
+    "max_scratch_bytes": 536870912,
+    "max_tokens_per_turn": 65536
+  },
+  "budgets_about": "budgets.max_run_seconds is 6,000. The lead's background jobs stop at 2 hours, and a batch interrupted there writes no summary, so 6,000 s leaves about 20 minutes of the 2 hours for the input checks, the probe, the settle and the closing read (the lead to P4, 2026-10-06, recorded at P4.md 19:51:21; it was 10,800 at 9a85a15). The budget is checked before each model call and each tool call, so a run ends later by its last call.",
+  "settings": {
+    "stream": true,
+    "tolerance": 2,
+    "ledger_file_cap": 4194304,
+    "first_run": "p2-planted"
+  },
+  "parcels": {
+    "P1": {
+      "copy": "f6ab37e5990f7b90f1a5411b1666f233c4c9c27f",
+      "tip": "03561a74e8ff2ce18d481b217f14e8f36ac3ec68",
+      "base": "1dc5ed4f990777b4fcbbc0dd8feaa42fcf28a80c",
+      "key": "keys/key-f6ab37e.json",
+      "dispatch": "2026-10-02 22:29:09",
+      "original": {
+        "messages": 78,
+        "output": 44727,
+        "read": 17746448
+      },
+      "wave": 1,
+      "view": "22:47:18",
+      "report": "22:50:32",
+      "original_gate": {
+        "recorded": "verifier-P1.md 22:47:18",
+        "gate": [
+          10,
+          10
+        ],
+        "control": [
+          48,
+          48
+        ]
+      },
+      "plants": [
+        {
+          "id": "P1-p1",
+          "index": 0,
+          "shape": "rule",
+          "markers": [
+            [
+              "fixes"
+            ]
+          ]
+        },
+        {
+          "id": "P1-p2",
+          "index": 1,
+          "shape": "figure",
+          "markers": [
+            [
+              "twelve"
+            ],
+            [
+              "12 corrections"
+            ],
+            [
+              "12 brief"
+            ]
+          ]
+        }
+      ],
+      "r6_findings": [
+        {
+          "id": "P1-r1",
+          "class": "restate",
+          "file": "METHOD.md",
+          "lines": [
+            [
+              247,
+              250
+            ]
+          ],
+          "in_view": true,
+          "recorded": "verifier-P1.md 22:47:18, finding 3",
+          "copy_only": false
+        },
+        {
+          "id": "P1-r2",
+          "class": "restate",
+          "file": "METHOD.md",
+          "lines": [
+            [
+              296,
+              297
+            ]
+          ],
+          "in_view": true,
+          "recorded": "verifier-P1.md 22:47:18, finding 4",
+          "copy_only": false
+        },
+        {
+          "id": "P1-r3",
+          "class": "known limit",
+          "file": "METHOD.md",
+          "lines": [
+            [
+              292,
+              292
+            ]
+          ],
+          "in_view": true,
+          "recorded": "verifier-P1.md 22:47:18, finding 5",
+          "copy_only": false
+        },
+        {
+          "id": "P1-r4",
+          "class": "known limit",
+          "file": "METHOD.md",
+          "lines": [
+            [
+              142,
+              142
+            ]
+          ],
+          "in_view": true,
+          "recorded": "verifier-P1.md 22:47:18, finding 6",
+          "copy_only": false
+        },
+        {
+          "id": "P1-r5",
+          "class": "other",
+          "file": "tools/check_method.py",
+          "lines": [],
+          "in_view": true,
+          "recorded": "verifier-P1.md 22:47:18, faults: an observation number or section mark of another item passes, unstated",
+          "copy_only": false
+        },
+        {
+          "id": "P1-r6",
+          "class": "other",
+          "file": "tools/check_method.py",
+          "lines": [],
+          "in_view": true,
+          "recorded": "verifier-P1.md 22:47:18, faults: METHOD.md's own brief-errors clause is held by no check",
+          "copy_only": false
+        },
+        {
+          "id": "P1-r7",
+          "class": "restate",
+          "file": "METHOD.md",
+          "lines": [
+            [
+              98,
+              100
+            ]
+          ],
+          "in_view": false,
+          "recorded": "verifier-P1.md 22:50:32, anything else: B17",
+          "copy_only": false
+        },
+        {
+          "id": "P1-r8",
+          "class": "other",
+          "file": "METHOD.md",
+          "lines": [
+            [
+              431,
+              431
+            ]
+          ],
+          "in_view": false,
+          "recorded": "verifier-P1.md 22:50:32, anything else: CS5#10's agent half",
+          "copy_only": false
+        }
+      ]
+    },
+    "P2": {
+      "copy": "40df9835a4dc91382b72a8ac4e2169e1a4f6de55",
+      "tip": "367678688da8d31626e9f9c6fcd3b183d36645e9",
+      "base": "1dc5ed4f990777b4fcbbc0dd8feaa42fcf28a80c",
+      "key": "keys/key-40df983.json",
+      "dispatch": "2026-10-02 22:30:03",
+      "original": {
+        "messages": 74,
+        "output": 68067,
+        "read": 16595826
+      },
+      "wave": 1,
+      "view": "22:43:52",
+      "report": "22:48:08",
+      "original_gate": {
+        "recorded": "verifier-P2.md 22:43:52",
+        "gate": [
+          10,
+          10
+        ],
+        "control": [
+          48,
+          48
+        ]
+      },
+      "plants": [
+        {
+          "id": "P2-p1",
+          "index": 0,
+          "shape": "figure",
+          "markers": [
+            [
+              "38"
+            ]
+          ]
+        },
+        {
+          "id": "P2-p2",
+          "index": 1,
+          "shape": "rule",
+          "markers": [
+            [
+              "CS5#3"
+            ],
+            [
+              "pending"
+            ]
+          ]
+        }
+      ],
+      "r6_findings": [
+        {
+          "id": "P2-r1",
+          "class": "restate",
+          "file": "METHOD.md",
+          "lines": [
+            [
+              340,
+              342
+            ]
+          ],
+          "in_view": true,
+          "recorded": "verifier-P2.md 22:43:52, finding 3",
+          "copy_only": false
+        },
+        {
+          "id": "P2-r2",
+          "class": "restate",
+          "file": "<commit message>",
+          "lines": [],
+          "in_view": true,
+          "recorded": "verifier-P2.md 22:43:52, finding 4 (the copy's own: its extra line is the second plant's)",
+          "copy_only": true
+        },
+        {
+          "id": "P2-r3",
+          "class": "other",
+          "file": "tools/check_method.py",
+          "lines": [],
+          "in_view": true,
+          "recorded": "verifier-P2.md 22:43:52: an observation number or section mark of another item passes, unstated",
+          "copy_only": false
+        }
+      ]
+    },
+    "P3": {
+      "copy": "cd7758735b22f226e6c322fbb27e98a7a87cda3a",
+      "tip": "4ff28cacb0dbd44539beb467dfeeb7e8f2f53daa",
+      "base": "1dc5ed4f990777b4fcbbc0dd8feaa42fcf28a80c",
+      "key": "keys/key-cd77587.json",
+      "dispatch": "2026-10-02 22:23:50",
+      "original": {
+        "messages": 78,
+        "output": 67340,
+        "read": 18754450
+      },
+      "wave": 1,
+      "view": "22:43:27",
+      "report": "22:48:00",
+      "original_gate": {
+        "recorded": "verifier-P3.md 22:43:27",
+        "gate": [
+          10,
+          10
+        ],
+        "control": [
+          48,
+          48
+        ]
+      },
+      "plants": [
+        {
+          "id": "P3-p1",
+          "index": 0,
+          "shape": "rule",
+          "markers": [
+            [
+              "re-runs"
+            ],
+            [
+              "optional"
+            ],
+            [
+              "weaken*"
+            ],
+            [
+              "must"
+            ]
+          ]
+        },
+        {
+          "id": "P3-p2",
+          "index": 1,
+          "shape": "figure",
+          "markers": [
+            [
+              "five"
+            ],
+            [
+              "5 wrong"
+            ]
+          ]
+        }
+      ],
+      "r6_findings": [
+        {
+          "id": "P3-r1",
+          "class": "restate",
+          "file": "METHOD.md",
+          "lines": [
+            [
+              796,
+              796
+            ]
+          ],
+          "in_view": true,
+          "recorded": "verifier-P3.md 22:43:27, finding 3",
+          "copy_only": false
+        },
+        {
+          "id": "P3-r2",
+          "class": "other",
+          "file": "tools/check_method.py",
+          "lines": [
+            [
+              953,
+              954
+            ],
+            [
+              980,
+              985
+            ]
+          ],
+          "in_view": true,
+          "recorded": "verifier-P3.md 22:43:27 (lines from 22:48:00, F7b): a HonestFramework passage without its bold passes check 9",
+          "copy_only": false
+        },
+        {
+          "id": "P3-r3",
+          "class": "restate",
+          "file": "METHOD.md",
+          "lines": [
+            [
+              849,
+              849
+            ]
+          ],
+          "in_view": false,
+          "recorded": "verifier-P3.md 22:48:00, finding 4",
+          "copy_only": false
+        },
+        {
+          "id": "P3-r4",
+          "class": "known limit",
+          "file": "METHOD.md",
+          "lines": [
+            [
+              820,
+              820
+            ],
+            [
+              566,
+              566
+            ],
+            [
+              689,
+              689
+            ]
+          ],
+          "in_view": false,
+          "recorded": "verifier-P3.md 22:48:00, known limits: three pointers",
+          "copy_only": false
+        },
+        {
+          "id": "P3-r5",
+          "class": "other",
+          "file": "tools/check_method.py",
+          "lines": [],
+          "in_view": false,
+          "recorded": "verifier-P3.md 22:48:00: F3 and F4, observation numbers and section marks",
+          "copy_only": false
+        }
+      ]
+    },
+    "P4": {
+      "copy": "db08fdc94fb3232d2231352c957ea938f053996c",
+      "tip": "d38fea128369295e7be49e3a5f101be15fa8f584",
+      "base": "1dc5ed4f990777b4fcbbc0dd8feaa42fcf28a80c",
+      "key": "keys/key-db08fdc.json",
+      "dispatch": "2026-10-02 22:35:59",
+      "original": {
+        "messages": 85,
+        "output": 55203,
+        "read": 22201709
+      },
+      "wave": 1,
+      "view": "22:54:53",
+      "report": "23:03:09",
+      "original_gate": {
+        "recorded": "verifier-P4.md 22:54:53",
+        "gate": [
+          10,
+          10
+        ],
+        "control": [
+          48,
+          48
+        ]
+      },
+      "plants": [
+        {
+          "id": "P4-p1",
+          "index": 0,
+          "shape": "rule",
+          "markers": [
+            [
+              "records"
+            ]
+          ]
+        },
+        {
+          "id": "P4-p2",
+          "index": 1,
+          "shape": "figure",
+          "markers": [
+            [
+              "eight"
+            ],
+            [
+              "8 commits"
+            ]
+          ]
+        }
+      ],
+      "r6_findings": [
+        {
+          "id": "P4-r1",
+          "class": "wrong answer",
+          "file": "METHOD.md",
+          "lines": [
+            [
+              696,
+              697
+            ]
+          ],
+          "in_view": false,
+          "recorded": "verifier-P4.md 23:03:09, finding 3 (the lead's D1)",
+          "copy_only": false
+        },
+        {
+          "id": "P4-r2",
+          "class": "restate",
+          "file": "METHOD.md",
+          "lines": [
+            [
+              761,
+              765
+            ]
+          ],
+          "in_view": false,
+          "recorded": "verifier-P4.md 23:03:09, finding 4",
+          "copy_only": false
+        },
+        {
+          "id": "P4-r3",
+          "class": "restate",
+          "file": "METHOD.md",
+          "lines": [
+            [
+              727,
+              727
+            ]
+          ],
+          "in_view": false,
+          "recorded": "verifier-P4.md 23:03:09, finding 5",
+          "copy_only": false
+        },
+        {
+          "id": "P4-r4",
+          "class": "other",
+          "file": "tools/check_method.py",
+          "lines": [],
+          "in_view": false,
+          "recorded": "verifier-P4.md 23:03:09, known limits: observation numbers and section marks",
+          "copy_only": false
+        },
+        {
+          "id": "P4-r5",
+          "class": "other",
+          "file": "tools/check_method.py",
+          "lines": [],
+          "in_view": false,
+          "recorded": "verifier-P4.md 23:03:09, known limits: a link's text and its URL are not compared",
+          "copy_only": false
+        },
+        {
+          "id": "P4-r6",
+          "class": "known limit",
+          "file": "METHOD.md",
+          "lines": [
+            [
+              694,
+              694
+            ],
+            [
+              697,
+              697
+            ],
+            [
+              747,
+              747
+            ],
+            [
+              751,
+              751
+            ],
+            [
+              797,
+              797
+            ]
+          ],
+          "in_view": false,
+          "recorded": "verifier-P4.md 23:03:09, known limits: integration pointers",
+          "copy_only": false
+        },
+        {
+          "id": "P4-r7",
+          "class": "known limit",
+          "file": "METHOD.md",
+          "lines": [
+            [
+              801,
+              801
+            ],
+            [
+              805,
+              806
+            ]
+          ],
+          "in_view": false,
+          "recorded": "verifier-P4.md 23:03:09, known limits: the cost bullet",
+          "copy_only": false
+        }
+      ]
+    },
+    "P5": {
+      "copy": "9c306e98fee0f3aed7aa2cd7094c4506f4e48fd1",
+      "tip": "43403e62081ee48103d7cf520e95405a632c0b74",
+      "base": "a30aca59a4d736483153a3493700892c066fa951",
+      "key": "keys/key-9c306e9.json",
+      "dispatch": "2026-10-03 00:23:24",
+      "original": {
+        "messages": 83,
+        "output": 54897,
+        "read": 22551795
+      },
+      "wave": 2,
+      "view": "00:41:06",
+      "report": "00:45:48",
+      "original_gate": {
+        "recorded": "verifier-P5.md 00:41:06",
+        "gate": [
+          10,
+          10
+        ],
+        "control": [
+          50,
+          50
+        ]
+      },
+      "plants": [
+        {
+          "id": "P5-p1",
+          "index": 0,
+          "shape": "rule",
+          "markers": [
+            [
+              "§3"
+            ],
+            [
+              "section 3"
+            ]
+          ]
+        },
+        {
+          "id": "P5-p2",
+          "index": 1,
+          "shape": "rule",
+          "markers": [
+            [
+              "entry first"
+            ],
+            [
+              "entry comes first"
+            ],
+            [
+              "file first"
+            ],
+            [
+              "order"
+            ],
+            [
+              "revers*"
+            ],
+            [
+              "opposite"
+            ],
+            [
+              "S1"
+            ]
+          ]
+        }
+      ],
+      "r6_findings": [
+        {
+          "id": "P5-r1",
+          "class": "restate",
+          "file": "templates/checklists.md",
+          "lines": [
+            [
+              132,
+              134
+            ]
+          ],
+          "in_view": true,
+          "recorded": "verifier-P5.md 00:41:06, finding 3",
+          "copy_only": false
+        },
+        {
+          "id": "P5-r2",
+          "class": "known limit",
+          "file": "templates/brief.md",
+          "lines": [],
+          "in_view": true,
+          "recorded": "verifier-P5.md 00:41:06, known limit: no slot for section 3's cost model",
+          "copy_only": false
+        },
+        {
+          "id": "P5-r3",
+          "class": "other",
+          "file": "tools/check_method.py",
+          "lines": [],
+          "in_view": true,
+          "recorded": "verifier-P5.md 00:41:06, known limit: refs holds only that a section exists",
+          "copy_only": false
+        },
+        {
+          "id": "P5-r4",
+          "class": "other",
+          "file": "templates/ledger.md",
+          "lines": [
+            [
+              169,
+              173
+            ]
+          ],
+          "in_view": true,
+          "recorded": "verifier-P5.md 00:41:06, nit",
+          "copy_only": false
+        },
+        {
+          "id": "P5-r5",
+          "class": "known limit",
+          "file": "templates/verifier.md",
+          "lines": [
+            [
+              125,
+              127
+            ]
+          ],
+          "in_view": false,
+          "recorded": "verifier-P5.md 00:45:48, known limits: item 5 carries only the re-run half",
+          "copy_only": false
+        },
+        {
+          "id": "P5-r6",
+          "class": "restate",
+          "file": "ledger/lead.md",
+          "lines": [
+            [
+              817,
+              817
+            ]
+          ],
+          "in_view": false,
+          "recorded": "verifier-P5.md 00:45:48, finding 4 (its other half, P5.md:832, is withheld)",
+          "copy_only": false
+        }
+      ]
+    }
+  },
+  "items": [
+    {
+      "id": "p1-planted",
+      "parcel": "P1",
+      "kind": "planted"
+    },
+    {
+      "id": "p1-real",
+      "parcel": "P1",
+      "kind": "real"
+    },
+    {
+      "id": "p2-planted",
+      "parcel": "P2",
+      "kind": "planted"
+    },
+    {
+      "id": "p2-real",
+      "parcel": "P2",
+      "kind": "real"
+    },
+    {
+      "id": "p3-planted",
+      "parcel": "P3",
+      "kind": "planted"
+    },
+    {
+      "id": "p3-real",
+      "parcel": "P3",
+      "kind": "real"
+    },
+    {
+      "id": "p4-planted",
+      "parcel": "P4",
+      "kind": "planted"
+    },
+    {
+      "id": "p4-real",
+      "parcel": "P4",
+      "kind": "real"
+    },
+    {
+      "id": "p5-planted",
+      "parcel": "P5",
+      "kind": "planted"
+    },
+    {
+      "id": "p5-real",
+      "parcel": "P5",
+      "kind": "real"
+    }
+  ]
+}
