@@ -1,5 +1,896 @@
 {
-  "format": 1,
-  "about": "The lead's judgements of QS4's live runs, each checked by a verifier, recorded as judgement (lead.md 17:47:24, answer 6). One entry per plant of a planted run (verdict caught or missed: whether the run's located finding states the plant's fault), and one per finding of a run that the lead adjudicates against round 6's recorded findings (verdict match, with the round-6 finding's id; new true; or false alarm). Each names the run's record_id, who judged and who checked, and a note in the judge's own words: never the model's text. Empty until the runs.",
-  "judgements": []
+ "format": 1,
+ "about": "The lead's judgements of QS4's live runs on deepseek-flash, four passes of the ten items, each checked by verifier-J (Sonnet), and recorded as judgement (lead.md 17:47:24, answer 6). One entry per plant of a planted run (caught or missed: whether a finding of that run states the plant's own fault), and one per finding of a run besides a plant's, against round 6's recorded verifier findings as qs4_items.json lists them: a match, with the round-6 finding's id; new and true (absent from that list, and true at the run's commit, by round 6's own verifier list; a note says where round 6's lead or a verifier had seen it outside the list); or a false alarm (false, or a misreading; a note says where a reasonable reading supports it). Each names the run's record_id, who judged and who checked, and a note in the judge's own words, never the model's text. Runs left out of the score, and why, are in the table's selection file; a run stopped at a cap keeps its pass and is shown, not scored (the round's ledger, 14:10:01 and 15:17:50).",
+ "judgements": [
+  {
+   "record_id": "qs4-p2-planted-20261007T103409Z.p2-planted.r0",
+   "plant": "P2-p1",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 0 states the copy's 28 against CASE-STUDY-3.md:353's 38.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p2-planted-20261007T103409Z.p2-planted.r0",
+   "plant": "P2-p2",
+   "finding": null,
+   "verdict": "missed",
+   "r6": null,
+   "note": "No finding states the added privacy clause, or its conflict with CS5#3's pending row.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p2-planted-20261007T103409Z.p2-planted.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "new true",
+   "r6": null,
+   "note": "stated: the snapshot shape against its rule, which the text already says at 533-535, naming the full read as what covers the gap. Round 6 recorded no finding there.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p2-planted-20261007T103409Z.p2-planted.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "match",
+   "r6": "P2-r2",
+   "note": "The commit message's 146 lines against the diff's 147: round 6's verifier-P2, finding 4.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p2-real-20261007T110448Z.p2-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "false alarm",
+   "r6": null,
+   "note": "A misreading: METHOD.md:644-645 rests the keep rule on practice because no case study records a break from deleting a ledger. CASE-STUDY-5:440-441 and 463-465 record a working copy kept until the push, which is no such break.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p2-real-20261007T110448Z.p2-real.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "new true",
+   "r6": null,
+   "note": "stated: the snapshot shape against its rule, which the text already says at 533-535, naming the full read as what covers the gap. Round 6 recorded no finding there.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p1-planted-20261007T112510Z.p1-planted.r0",
+   "plant": "P1-p1",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 1 states 'need not wait for the verifier' against CASE-STUDY-4 obs 5's 'need not wait for the lead's fixes'.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p1-planted-20261007T112510Z.p1-planted.r0",
+   "plant": "P1-p2",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 0 states 'fifteen corrections' against CASE-STUDY.md:38's twelve.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p1-planted-20261007T112510Z.p1-planted.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "match",
+   "r6": "P1-r1",
+   "note": "B13's 'and the lead decided' over six rounds, where the survey records approvals in three: round 6's verifier-P1, finding 3, at 247-250.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p1-real-20261007T113404Z.p1-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "match",
+   "r6": "P1-r1",
+   "note": "The same B13 fault. The run classes it a wrong answer, where round 6 classed it a restate.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p1-real-20261007T113404Z.p1-real.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "match",
+   "r6": "P1-r7",
+   "note": "B17's duties go past the survey row it cites: round 6's verifier-P1, after its view (22:50:32).",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p3-planted-20261007T120601Z.p3-planted.r0",
+   "plant": "P3-p1",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 1 states 'may re-run' against the brief, the plan, ADOPTION's S6 row and the paragraph's own 701-702, which make it a duty.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p3-planted-20261007T120601Z.p3-planted.r0",
+   "plant": "P3-p2",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 0 states 'six' against cft-fp256 VALIDATION.md:15260's five, read in the mounted source.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p3-real-20261007T121519Z.p3-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "false alarm",
+   "r6": null,
+   "note": "The source's parenthetical read as both commits'. Git settles it: in cft-fp256, cf8f00f changed 7 files, all docs, and 1ab44ad changed 9, code among them. CASE-STUDY-3.md:378's parenthetical is 1ab44ad's, and the text's 'one of nine files' is right.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p4-planted-20261007T125519Z.p4-planted.r0",
+   "plant": "P4-p1",
+   "finding": null,
+   "verdict": "missed",
+   "r6": null,
+   "note": "The screen counts it, but finding 1 states round 6's D1 (the case study counted among the records while CS5#11 is pending), not the plant: no finding states that 'its records' left the bold rule's list. QS4's limit 7.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p4-planted-20261007T125519Z.p4-planted.r0",
+   "plant": "P4-p2",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 0 states 'six commits' against CASE-STUDY-5 obs 2's eight.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p4-planted-20261007T125519Z.p4-planted.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "match",
+   "r6": "P4-r1",
+   "note": "Round 6's D1, the lead's ruling: verifier-P4, finding 3, after its view.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p4-real-20261007T130515Z.p4-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "new true",
+   "r6": null,
+   "note": "minor, on its second half: the next sentence, 'they record what the lists produced', credits lists to case studies that hold none (two of five have the section), a quantifier wider than the record, by round 6's own verifier list. Its first half reads B14's bold, the rule's own title as its rows have it, as a claim about past rounds: the weaker reading. Round 6 recorded nothing at 782-790.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-planted-20261007T132806Z.p5-planted.r0",
+   "plant": "P5-p1",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 1 states the tag (§8) where the rule is §3's, against METHOD.md §3 and the same sentence tagged (§3) in the brief and checklists.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-planted-20261007T132806Z.p5-planted.r0",
+   "plant": "P5-p2",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 0 states the message put before the entry, against METHOD.md §4, the ledger template and the checklists.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-planted-20261007T132806Z.p5-planted.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "false alarm",
+   "r6": null,
+   "note": "A defensible tag: item 8's (§5, §6). One of the shapes the item lists belongs to §5's rule on gates, and §6 holds the list itself. The finding calls itself its weakest.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-planted-20261007T132806Z.p5-planted.r0",
+   "plant": null,
+   "finding": 3,
+   "verdict": "new true",
+   "r6": null,
+   "note": "minor: templates carry copies of HonestFramework passages that check 9 does not read, against P5's brief. New to round 6's verifier findings, which QS4 lists; round 6's lead had recorded the fact and ruled it harmless (lead.md 00:11:29), so verifier-J reads it as known to round 6. The screen's match to P5-r2 is by file alone, and P5-r2 is the missing cost-model slot.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p3-planted-20261007T142258Z.p3-planted.r0",
+   "plant": "P3-p1",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 1 states the permission against the duty its sources state.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p3-planted-20261007T142258Z.p3-planted.r0",
+   "plant": "P3-p2",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 0 states six against VALIDATION.md:15260's five.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p4-planted-20261007T143555Z.p4-planted.r0",
+   "plant": "P4-p1",
+   "finding": null,
+   "verdict": "missed",
+   "r6": null,
+   "note": "No finding at or near METHOD.md:694-695; none states the dropped 'its records'.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p4-planted-20261007T143555Z.p4-planted.r0",
+   "plant": "P4-p2",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 0 states six commits against CASE-STUDY-5.md:114's eight.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-real-20261007T151656Z.p5-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "new true",
+   "r6": null,
+   "note": "substantive: the checklist's 'a row no test names' loosens METHOD.md §2's 'a row no test exercised' (170-172): a test can name a row it never exercises. Round 6 recorded nothing at checklists.md:40-42 (P5-r1 is at 132-134).",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-real-20261007T151656Z.p5-real.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "false alarm",
+   "r6": null,
+   "note": "A defensible tag: item 8's (§5, §6). One of the shapes the item lists belongs to §5's rule on gates, and §6 holds the list itself.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-real-20261007T151656Z.p5-real.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "new true",
+   "r6": null,
+   "note": "minor: the commit message's sentence that every placeholder outside a fenced block is now a code span is untrue of templates/ledger.md:41, 199, 213 and 217, which sit in indented code blocks; those render literally, so only the mechanism is overstated. Round 6's verifier-P5 checked the rendering (P5-r7), not this sentence. The finding's count of tokens is off (six, on four lines).",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-real-20261007T151656Z.p5-real.r0",
+   "plant": null,
+   "finding": 3,
+   "verdict": "new true",
+   "r6": null,
+   "note": "minor: templates carry copies of HonestFramework passages that check 9 does not read, against P5's brief. New to round 6's verifier findings, which QS4 lists; round 6's lead had recorded the fact and ruled it harmless (lead.md 00:11:29), so verifier-J reads it as known to round 6. The screen's match to P5-r2 is by file alone, and P5-r2 is the missing cost-model slot.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-real-20261007T151656Z.p5-real.r0",
+   "plant": null,
+   "finding": 4,
+   "verdict": "match",
+   "r6": "P5-r3",
+   "note": "Check 5 (refs) holds only that a named section exists: round 6's verifier-P5, known limit, 00:41:06.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-real-20261007T151656Z.p5-real.r0",
+   "plant": null,
+   "finding": 5,
+   "verdict": "new true",
+   "r6": null,
+   "note": "stated: check 7's reach, which the gate's docstring states. New to round 6's verifier findings, which QS4 lists: round 6's verifier-P5 built the same fault, found it inside the stated limit and recorded no finding, so verifier-J reads it as known to round 6. Not P5-r3.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p1-planted-20261007T155708Z.p1-planted.r0",
+   "plant": "P1-p1",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 1 states 'need not wait for the verifier' against CASE-STUDY-4 obs 5 and the lead's ruling at 22:09:39.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p1-planted-20261007T155708Z.p1-planted.r0",
+   "plant": "P1-p2",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 0 states fifteen against CASE-STUDY.md:38's twelve.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-planted-20261007T160649Z.p5-planted.r0",
+   "plant": "P5-p1",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 0 states (§8) where §3 holds the rule.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-planted-20261007T160649Z.p5-planted.r0",
+   "plant": "P5-p2",
+   "finding": null,
+   "verdict": "missed",
+   "r6": null,
+   "note": "No finding states the message put before the entry.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-planted-20261007T160649Z.p5-planted.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "new true",
+   "r6": null,
+   "note": "minor: the commit message's sentence that every placeholder outside a fenced block is now a code span is untrue of templates/ledger.md:41, 199, 213 and 217, which sit in indented code blocks; those render literally, so only the mechanism is overstated. Round 6's verifier-P5 checked the rendering (P5-r7), not this sentence.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p2-planted-20261007T161904Z.p2-planted.r0",
+   "plant": "P2-p1",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 0 states 28 against CASE-STUDY-3.md:353's 38.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p2-planted-20261007T161904Z.p2-planted.r0",
+   "plant": "P2-p2",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 1 states the added clause is CS5#3's content, whose ADOPTION row is pending.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p2-planted-20261007T161904Z.p2-planted.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "match",
+   "r6": "P2-r2",
+   "note": "146 lines against the diff's 147.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p2-real-20261007T180319Z.p2-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "new true",
+   "r6": null,
+   "note": "stated: the snapshot shape against its rule, which the text already says at 533-535, naming the full read as what covers the gap. Round 6 recorded no finding there.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p2-real-20261007T180319Z.p2-real.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "false alarm",
+   "r6": null,
+   "note": "A rule's content read as a claim about its source: the pause rule's three parts are its own specification, attributed to no source, and the incident it cites holds the rule. Round 6's verifier-P2 read obs 12 and passed it. A reasonable reader could call it a mild restate.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p2-real-20261007T180319Z.p2-real.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "false alarm",
+   "r6": null,
+   "note": "A permission read as a mandate: ADOPTION's S2 row begins 'Allowed:' and its class is 'allowed shape', so the brief path is permitted in place of a README, which is what 'either is allowed' says.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p1-real-20261007T180319Z.p1-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "false alarm",
+   "r6": null,
+   "note": "Contestable. The plan of record lists the survey's defects as the lead's own (cft-fp256 ROADMAP.md:4506). The line cited, VALIDATION.md:16764, records D1 as a unit of its own: its merge, its verifier VD1, a send-back and the lead's restatement at its merge, apart from the entry's 'The lead's own' (16784). The text follows the record of what ran, the finding the plan. Round 6's verifier-P1 read 16764 and passed it. The committed record does not name D1's author.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p1-real-20261007T180319Z.p1-real.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "match",
+   "r6": "P1-r1",
+   "note": "B13's 'and the lead decided', as in pass 1.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p3-real-20261007T180318Z.p3-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "new true",
+   "r6": null,
+   "note": "minor: CS4#13's incident leaves out obs 10's 'the lead built', so its domain is every gate of that shape where the record measured the lead's. No gate outside is shown, so nothing false is claimed; but round 6's own verifier brief lists a domain wider than the record's as a restate (_verifier.md, its list, item 2). Round 6 recorded nothing at 626-629.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p3-real-20261007T180318Z.p3-real.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "false alarm",
+   "r6": null,
+   "note": "The sentence read as a partitive. In context ('two seam commits, one of nine files') it reads as its source does. Git settles it: in cft-fp256, cf8f00f changed 7 files, all docs, and 1ab44ad changed 9, code among them. CASE-STUDY-3.md:378's parenthetical is 1ab44ad's, and the text's 'one of nine files' is right. Its compressed wording is a fair nit: three runs flagged it, each for another reason.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p3-real-20261007T180318Z.p3-real.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "false alarm",
+   "r6": null,
+   "note": "'claims more than is true' against the source's 'claims too much': the finding itself calls it a paraphrase of the same meaning.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p1-real-20261007T182018Z.p1-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "false alarm",
+   "r6": null,
+   "note": "A de-named particular: 'the platform key the round used' where CASE-STUDY-4 names the Atlas key. The finding itself says the sentence is true of the record.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p1-real-20261007T182018Z.p1-real.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "match",
+   "r6": "P1-r1",
+   "note": "B13's 'and the lead decided', as in passes 1 and 2.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p4-real-20261007T182035Z.p4-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "new true",
+   "r6": null,
+   "note": "minor: the commit message says B4 rests on the owner's rule alone, where METHOD.md:779-780 says it rests on the rule and on practice, as does the message's own sentence before it. The cut it reports, B4's inferred cost sentence, is right (round 6's lead.md 22:16:42). Round 6 recorded nothing on the message.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p3-planted-20261007T183213Z.p3-planted.r0",
+   "plant": "P3-p1",
+   "finding": null,
+   "verdict": "missed",
+   "r6": null,
+   "note": "No finding at or near METHOD.md:686, and none on S6's third condition.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p3-planted-20261007T183213Z.p3-planted.r0",
+   "plant": "P3-p2",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 0 states six against VALIDATION.md:15260's five, read in the mounted source.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p4-planted-20261007T183731Z.p4-planted.r0",
+   "plant": "P4-p1",
+   "finding": null,
+   "verdict": "missed",
+   "r6": null,
+   "note": "No finding at or near METHOD.md:694-695; none states the dropped 'its records'.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p4-planted-20261007T183731Z.p4-planted.r0",
+   "plant": "P4-p2",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 0 states six commits against CASE-STUDY-5.md:114's eight, and round 5's ledger's eight SHAs.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-planted-20261007T184116Z.p5-planted.r0",
+   "plant": "P5-p1",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 1 states (§8) where the rule is §3's (METHOD.md:337-340), and §8 names no scratch directory.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-planted-20261007T184116Z.p5-planted.r0",
+   "plant": "P5-p2",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 0 states the message put before the entry, against METHOD.md:608-610, the sibling templates and the round's ledger README.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p1-planted-20261007T184849Z.p1-planted.r0",
+   "plant": "P1-p1",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 1 states 'need not wait for the verifier' against CASE-STUDY-4 obs 5's fixes, and against the sentence's own colon.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p1-planted-20261007T184849Z.p1-planted.r0",
+   "plant": "P1-p2",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 0 states fifteen against CASE-STUDY.md:38's twelve.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p1-planted-20261007T184849Z.p1-planted.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "match",
+   "r6": "P1-r1",
+   "note": "B13's 'and the lead decided', as in every run on P1's commits.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p3-real-20261007T185534Z.p3-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "false alarm",
+   "r6": null,
+   "note": "The source's 'nine files' read as the two commits' together. Git settles it: in cft-fp256, cf8f00f changed 7 files, all docs, and 1ab44ad changed 9, code among them. CASE-STUDY-3.md:378's parenthetical is 1ab44ad's, and the text's 'one of nine files' is right.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p3-real-20261007T185534Z.p3-real.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "new true",
+   "r6": null,
+   "note": "minor: CS4#13's incident leaves out obs 10's 'the lead built', so its domain is every gate of that shape where the record measured the lead's. No gate outside is shown, so nothing false is claimed; but round 6's own verifier brief lists a domain wider than the record's as a restate (_verifier.md, its list, item 2). Round 6 recorded nothing at 626-629.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p3-real-20261007T185534Z.p3-real.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "match",
+   "r6": "P3-r5",
+   "note": "Check 2 passes an observation number of the wrong event, and its docstring states the limit only for times and phrases: round 6's verifier-P3 recorded the same (F3 and F4).",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p2-real-20261007T190152Z.p2-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "false alarm",
+   "r6": null,
+   "note": "A rule read as a claim about the record: 'neither the archive nor the working copy is deleted' is B15's adopted rule (ADOPTION:145, 'never deleted'), which reverses rounds 3 to 5's deleting; the paragraph claims no earlier round kept its working copy.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p2-real-20261007T190152Z.p2-real.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "new true",
+   "r6": null,
+   "note": "stated: the snapshot shape against its rule, which the text already says at 533-535, naming the full read as what covers the gap. Round 6 recorded no finding there.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p2-real-20261007T190152Z.p2-real.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "new true",
+   "r6": null,
+   "note": "minor: CS3#6's adopted part, the lead watching the escalation channel continuously, cites no incident or practice of its own (CASE-STUDY-3.md:661 proposes it; the survey's CS3#6 row gives round 5's practice); the paragraph's citations are the arming rule's. Round 6's verifier brief names a rule with no incident among the shapes to hunt. Round 6 recorded nothing at 587-588.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p2-real-20261007T190152Z.p2-real.r0",
+   "plant": null,
+   "finding": 3,
+   "verdict": "match",
+   "r6": "P2-r1",
+   "note": "By verifier-J's reading (verifier-J.md 15:02:33): it names the clause's tension with B7, the fault round 6's verifier-P2 recorded and round 6's lead restated at the merge, though it calls the clause not false. The lead's first verdict was a false alarm, a near-miss (lead.md, the resolution).",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p2-planted-20261007T185343Z.p2-planted.r0",
+   "plant": "P2-p1",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 0 states 28 against CASE-STUDY-3.md:353's 38.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p2-planted-20261007T185343Z.p2-planted.r0",
+   "plant": "P2-p2",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 1 states that the added clause writes CS5#3, pending at ADOPTION.md:124 and listed as not written in P2's own commit message.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p1-planted-20261007T192412Z.p1-planted.r0",
+   "plant": "P1-p1",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 1 states 'need not wait for the verifier' against CASE-STUDY-4 obs 5, its 13:53, and the rule's own next clause.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p1-planted-20261007T192412Z.p1-planted.r0",
+   "plant": "P1-p2",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 0 states fifteen against CASE-STUDY.md:38's twelve.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p1-planted-20261007T192412Z.p1-planted.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "match",
+   "r6": "P1-r1",
+   "note": "B13's 'and the lead decided', as in every run on P1's commits.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p2-planted-20261007T193024Z.p2-planted.r0",
+   "plant": "P2-p1",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 0 states 28 against CASE-STUDY-3.md:353's 38.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p2-planted-20261007T193024Z.p2-planted.r0",
+   "plant": "P2-p2",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 1 states that the added clause is CS5#3's rule, pending at ADOPTION.md:124, against P2's own commit message.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p2-planted-20261007T193024Z.p2-planted.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "match",
+   "r6": "P2-r2",
+   "note": "146 lines against the diff's 147: round 6's verifier-P2, finding 4. Its side figure is off: at -U0 the diff has 15 hunks, 10 only at the default context.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p2-planted-20261007T193024Z.p2-planted.r0",
+   "plant": null,
+   "finding": 3,
+   "verdict": "new true",
+   "r6": null,
+   "note": "stated: the snapshot shape against its rule, which the text already says at 533-535, naming the full read as what covers the gap. Round 6 recorded no finding there.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-planted-20261007T192422Z.p5-planted.r0",
+   "plant": "P5-p1",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 0 states (§8) where §3 holds the rule, which ADOPTION's CS4#6 row heads '3. The brief'.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-planted-20261007T192422Z.p5-planted.r0",
+   "plant": "P5-p2",
+   "finding": null,
+   "verdict": "missed",
+   "r6": null,
+   "note": "No finding states the message put before the entry.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-planted-20261007T192422Z.p5-planted.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "new true",
+   "r6": null,
+   "note": "minor: templates/checklists.md's marker paragraph lacks the sentence telling the reader to delete the tags, which the other three templates end it with (1, 0, 1, 1 at 43403e6), where P5's brief asked for a consistent marker. The checklists are the lead's own and may keep their tags by intent: a reasonable reading supports either. Round 6 recorded nothing on it.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p3-planted-20261007T194126Z.p3-planted.r0",
+   "plant": "P3-p1",
+   "finding": null,
+   "verdict": "missed",
+   "r6": null,
+   "note": "No finding at or near METHOD.md:686.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p3-planted-20261007T194126Z.p3-planted.r0",
+   "plant": "P3-p2",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 0 states six against VALIDATION.md:15260's five, and 15308-15309's all five.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p4-real-20261007T194018Z.p4-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "match",
+   "r6": "P4-r1",
+   "note": "Round 6's D1: the case study counted among the lead's records, where the survey's CS3#7 row holds the VALIDATION entry and commit messages, and CS5#11 is pending. verifier-P4, finding 3, after its view.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p4-planted-20261007T195301Z.p4-planted.r0",
+   "plant": "P4-p1",
+   "finding": null,
+   "verdict": "missed",
+   "r6": null,
+   "note": "No finding at or near METHOD.md:694-695; none states the dropped 'its records'.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p4-planted-20261007T195301Z.p4-planted.r0",
+   "plant": "P4-p2",
+   "finding": null,
+   "verdict": "caught",
+   "r6": null,
+   "note": "Finding 0 states six commits against CASE-STUDY-5.md:114's and :79's eight.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-real-20261007T202615Z.p5-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "false alarm",
+   "r6": null,
+   "note": "Contestable. CS4#6's row names brief and verifier, which carry the scratch-directory sentence and not the secrets clause (only checklists.md:86 does). But METHOD.md:338-340 tells the brief to say exactly the sentence they carry, and the secrets clause is the lead's own duty, in the lead's checklist. A reasonable reading of the row, which names both templates for the whole rule, supports the finding. The screen's match to P5-r2 is by file alone.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-real-20261007T202615Z.p5-real.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "false alarm",
+   "r6": null,
+   "note": "Contestable. CS4#6's row names brief and verifier, which carry the scratch-directory sentence and not the secrets clause (only checklists.md:86 does). But METHOD.md:338-340 tells the brief to say exactly the sentence they carry, and the secrets clause is the lead's own duty, in the lead's checklist. A reasonable reading of the row, which names both templates for the whole rule, supports the finding.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-real-20261007T202615Z.p5-real.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "new true",
+   "r6": null,
+   "note": "minor: CS3#5's row names checklists, whose line re-arms 'if it dies', without CS3#5's point that an expiry, routine in such a harness, is the moment to re-arm; ledger.md and brief.md carry it. Not P5-r1, another gap on the same line (its missing 'while it is still working').",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-real-20261007T202615Z.p5-real.r0",
+   "plant": null,
+   "finding": 3,
+   "verdict": "false alarm",
+   "r6": null,
+   "note": "The base a30aca5's checklists.md:35, 'Names the base commit and says to verify it', is the item the message describes.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  },
+  {
+   "record_id": "qs4-p5-real-20261007T202615Z.p5-real.r0",
+   "plant": null,
+   "finding": 4,
+   "verdict": "new true",
+   "r6": null,
+   "note": "minor, on its second claim: checklists.md:45 (tagged §2) paraphrases METHOD.md:219-220 with no sentence verbatim, so the message's verbatim claim for every section-tagged unit is untrue at the real tip too. Its counts measure tag occurrences, not P5's 230 units, which round 6's verifier-P5 confirmed.",
+   "by": "lead",
+   "checked_by": "verifier-J"
+  }
+ ]
 }
