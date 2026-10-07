@@ -178,7 +178,24 @@ def test_git_output_that_is_not_a_hash_is_unknown(tmp_path, monkeypatch):
     assert rec.code_identity(repo) == {"commit": None, "changed": None}
 
 
-def test_code_identity_takes_no_lock_and_writes_no_index(tmp_path):
+def test_undecodable_status_output_still_reads_as_changed(tmp_path, monkeypatch):
+    real = subprocess.run
+
+    def fake(args, **kw):
+        if "status" in args:
+            return subprocess.CompletedProcess(args, 0, stdout=b"?? \x81\xff.py\n", stderr=b"")
+        return real(args, **kw)
+
+    repo = _repo(tmp_path)
+    head = _git(repo, "rev-parse", "HEAD")
+    monkeypatch.setattr(rec.subprocess, "run", fake)
+    assert rec.code_identity(repo) == {"commit": head, "changed": True}
+
+
+def test_code_identity_takes_no_lock_and_writes_no_index(tmp_path, monkeypatch):
+    # The control below needs plain git status to take its optional lock, which
+    # GIT_OPTIONAL_LOCKS=0 in the environment would forbid (verifier-P0v's F1).
+    monkeypatch.delenv("GIT_OPTIONAL_LOCKS", raising=False)
     repo = _repo(tmp_path)
     index = repo / ".git" / "index"
     a = repo / "a.py"
