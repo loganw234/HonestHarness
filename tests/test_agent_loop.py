@@ -80,7 +80,7 @@ def test_a_run_that_works_and_reports():
     assert [(e["name"], e["status"], e["exit_code"]) for e in tools] == [
         ("shell", "ok", 0), ("read_file", "ok", 0), ("write_file", "ok", 0), ("report", "ok", None)]
     assert tools[0]["output_bytes"] == len("abc123 first\n") and tools[0]["output_lines"] == 1
-    assert "     1\tline one\n     2\tline two\n" in tools[1]["sent"] and "line three" not in tools[1]["sent"]
+    assert "1: line one\n2: line two\n" in tools[1]["sent"] and "line three" not in tools[1]["sent"]
     # Each result went back under its call's id.
     second = model.bodies[1]["messages"]
     assert second[-1]["role"] == "tool" and second[-1]["tool_call_id"] == "c1"

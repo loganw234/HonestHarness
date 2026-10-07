@@ -315,7 +315,7 @@ def test_the_loop_end_to_end_in_the_sandbox(tmp_path, prices, off_peak_clock):
     assert "rc=2" in answers[0] and "Network is unreachable" in answers[1]
     assert "Read-only file system" in answers[2] and "Read-only file system" in answers[3]
     assert "refused" in answers[4] and "wrote 13 bytes" in answers[5]
-    assert "     1\ta repository the run is given" in answers[6]
+    assert "1: a repository the run is given" in answers[6] and "\t" not in answers[6]
     assert (scratch / "notes.md").read_bytes() == b"what I found\n"
     assert (repo / "README.md").read_bytes() == b"a repository the run is given\n"
     record_text = (tmp_path / "records" / "runs" / "sandboxed.jsonl").read_text(encoding="utf-8")

@@ -252,7 +252,8 @@ def builtin_tools(budgets: Budgets = Budgets(), *, report: bool = True) -> list[
                                                            "description": "The bash command."}},
               "required": ["command"], "additionalProperties": False},
              _shell),
-        Tool("read_file", f"Read a text file, with each line numbered. A relative path is "
+        Tool("read_file", f"Read a text file, each line prefixed with its number and a colon, "
+                          f"as grep -n prints it. A relative path is "
                           f"relative to {WORK}. Give start_line and line_count to read part of "
                           f"a long file; output longer than {cap} shows its start and end.",
              {"type": "object", "properties": {

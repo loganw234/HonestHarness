@@ -111,7 +111,7 @@ class ScriptedSandbox:
         if data is None:
             return result(2, f"read_file: No such file or directory: {path}\n", limit_s=limit_s)
         lines = data.splitlines(keepends=True)
-        out = b"".join(b"%6d\t" % n + line for n, line in enumerate(lines, 1)
+        out = b"".join(b"%d: " % n + line for n, line in enumerate(lines, 1)
                        if n >= start and (not count or n < start + count))
         return result(0, out, limit_s=limit_s)
 
