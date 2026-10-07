@@ -24,7 +24,9 @@ that holds it, and the key at every cut, for a reader such as the key's
 verifier.
 
 It prints no absolute path, and only ASCII (other characters escaped). Exit
-status: 0 when everything holds, 2 when something fails, 1 for a usage error.
+status: 0 when everything holds, 2 when something fails, and 2 also for a
+usage error, which argparse reports (restated at P3's merge, verifier-P3's
+N1).
 """
 from __future__ import annotations
 

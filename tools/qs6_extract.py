@@ -24,8 +24,10 @@ Two build modes write the data files from an archive, once, so their values
 come from code: --build-source <out> and --build-cuts <out>. Neither is needed
 to run the suite.
 
-It prints no absolute path, and only ASCII. Exit status: 0 when everything
-holds, 2 when something is refused or differs, 1 for a usage error.
+It prints no absolute path, and only ASCII, except that --cuts --zip naming a
+missing file ends in Python's traceback, which prints that path. Exit status: 0
+when everything holds, 2 when something is refused or differs, and 2 also for a
+usage error, which argparse reports (restated at P3's merge, verifier-P3's N1).
 """
 from __future__ import annotations
 

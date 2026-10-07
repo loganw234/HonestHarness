@@ -53,8 +53,10 @@ The key, and refusal before any call
 - A suite class refuses, before any call and so before any spend, when the
   local copy is missing or its hash or a member's differs, when its rendered
   cut's hash differs from qs6_cuts.json's, or when the key is missing, its hash
-  differs, or it lacks an entry for an item at this cut. So a key is scored
-  only against the exact text it was built from.
+  differs, or it lacks an entry for an item at this cut. The key's own record
+  of the cut and source hashes it was built from is checked by
+  tools/qs6_key.py --check, not by the suite, so that check is run before each
+  batch (restated at P3's merge, verifier-P3's F3).
 
 The score, by script, on the answer field of content alone
 - The answer field is the last line of content that reads "ANSWER: <value>"
@@ -130,8 +132,10 @@ Limits, each stated by the behaviour it concedes:
 9. The kept times are read as -07:00, which the zip cannot state; the stamped
    files' kept times are the evidence.
 10. Sizes before a run are estimates by bytes / 4; the API's prompt tokens are
-    recorded. P0's estimate is about twice the real count for this text, so
-    each reservation is about twice the real worst case.
+    recorded. P0's estimate is about twice the real count for this text, but
+    the output cap is priced exactly, so by DeepSeek's own 0.3 tokens a
+    character a run's reservation is about 1.1 to 1.4 times its real worst
+    case (restated at P3's merge, verifier-P3's F4).
 11. No sampling parameter is sent, so non-thinking mode samples at the API's
     default temperature, 1 (D10), and repeats vary as that makes them.
 12. Cache hits are best-effort (D11): a batch's cost is bounded by its
