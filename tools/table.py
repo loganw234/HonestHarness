@@ -20,7 +20,11 @@ Limits, each stated by the behaviour it concedes:
   says something false passes through;
 - a batch's billed figure has the balance's precision, two decimals, so a
   batch that cost less than a cent shows 0.00;
-- the selection file's reasons are the lead's words, judged by its verifier.
+- the selection file's reasons are the lead's words, judged by its verifier;
+- a batch is listed from its summary line in batches.jsonl. One interrupted
+  before its summary (Ctrl-C, or a job's limit) is in the spend file only, so
+  its metered cost is outside the table's total: the spend file's own sum is
+  the round's metered spend (verifier-I's R2).
 """
 from __future__ import annotations
 
@@ -93,7 +97,8 @@ def billed(lines: list[dict], batch: str) -> tuple[str | None, str | None]:
 
 
 def batch_rows(runs: list[dict], lines: list[dict], summaries: dict, selection: dict) -> list[dict]:
-    """Every live batch, included or not, with its cost and what its runs met."""
+    """Every live batch with a summary line, included or not, with its cost and
+    what its runs met."""
     include, exclude = selection.get("include") or {}, selection.get("exclude") or {}
     by_batch: dict[str, list[dict]] = {}
     for r in runs:
@@ -212,8 +217,10 @@ def markdown(t: dict) -> str:
                    f"{_counts(b['statuses'])} | {_num(b['unmetered_attempts'])} | "
                    f"{b['cache_hit']}/{b['cache_miss']} | {b['output']} | {b['computed_usd']} | "
                    f"{b['billed_usd']} | {b['reconciliation']} | {b['why']} |")
-    out += ["", f"Computed over every live batch: ${t['computed_usd_all_live_batches']}. Billed "
-                "figures are the balance's, to two decimals; the usage export is the authority."]
+    out += ["", f"Computed over every live batch with a summary line: "
+                f"${t['computed_usd_all_live_batches']}. A batch interrupted before its summary is in "
+                "the spend file only. Billed figures are the balance's, to two decimals; the usage "
+                "export is the authority."]
     return "\n".join(out) + "\n"
 
 
