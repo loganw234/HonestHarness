@@ -74,9 +74,12 @@ finish_reason is neither `length` nor a provider condition.
   - thinking: a reasoning_content that is a non-blank string must not be
     repeated in content: its first LEAK_SPAN characters, when it has LEAK_MIN
     or more. An empty one (absent, null or blank) passes when the usage counts
-    0 reasoning tokens: the model emitted none, which D8 allows, for it never
-    promises the field is non-empty. Live, DeepSeek did so on 43 of 101
-    thinking-mode turns (lead.md 15:00:40), correcting the brief's "present".
+    0 reasoning tokens: the model emitted none. D8's prose says each turn
+    outputs a chain of thought (thinking.txt:9, :39), but live, DeepSeek
+    emitted none on 43 of 101 thinking-mode turns (lead.md 15:00:40). That is
+    the API against its docs, not a tool-calling failure: by the lead's
+    decision it is recorded, as reasoning_emitted and metrics()' reasoning
+    rate, and does not fail the turn, correcting the brief's "present".
     An empty one with reasoning tokens counted fails, naming that case. Each
     turn records reasoning_emitted.
   - non-thinking: reasoning_content is absent, null or blank.

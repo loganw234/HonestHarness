@@ -451,7 +451,8 @@ def _no_reasoning(form):
 def test_no_reasoning_with_no_reasoning_tokens_passes_in_thinking_mode(tmp_path, server, item,
                                                                        form):
     # Live, DeepSeek emitted reasoning_content "" with 0 reasoning tokens on 43 of
-    # 101 thinking-mode turns. D8 never promises the field is non-empty.
+    # 101 thinking-mode turns, though D8's prose says each turn outputs one; QS1
+    # records it rather than failing the turn (lead.md 15:00:40).
     rec, _, _ = one(tmp_path, server, item, at(item, 0, _no_reasoning(form)))
     out, data = rec["outcome"], rec["outcome"]["data"]
     assert out["status"] == "pass", out["detail"]
@@ -743,7 +744,7 @@ def test_the_assertions_on_edge_values():
     assert qs1.judge_ids([])[0] == "not_judged"
     assert qs1.judge_reasoning("x", "   ", thinking=False)[0] == "pass"
     assert qs1.judge_reasoning("x", "   ", thinking=False, reasoning_tokens=3)[0] == "pass"
-    for empty in (None, "", "   "):       # D8 promises no non-empty field
+    for empty in (None, "", "   "):       # the live API's empty reasoning, recorded
         assert qs1.judge_reasoning("x", empty, thinking=True)[0] == "pass"
         result, why = qs1.judge_reasoning("x", empty, thinking=True, reasoning_tokens=3)
         assert result == "fail" and why == "3 reasoning tokens counted, but no reasoning text"
