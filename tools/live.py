@@ -5,6 +5,7 @@
                          [--effort low|high|max] [--endpoint NAME] [--ceiling USD]
                          [--allow-peak] [--peak-margin MINUTES] [--settle SECONDS]
                          [--acknowledge BATCH] [--max-unmetered N]
+                         [--retry-delays S,S,...]
     python tools/live.py --recheck
 
 --probe runs an empty batch: the balance read, the model list, one identity
@@ -24,11 +25,15 @@ naming that batch. Errors are printed redacted, with an exit status that says
 which kind they are. Parcels never run this file; their tests use the fake.
 
 --max-unmetered N is the batch's allowance of attempts the server closes with
-no reply (3 when not given). Such an attempt is retried, at most twice for one
-call. The batch stops at the Nth, or sooner, at one call's third failed
-attempt; at N = 1 nothing is retried. The reservation covers N calls more,
-each the dearest single call at either period, since each may be billed
-without a meter reading.
+no reply (3 when not given). Such an attempt is retried, once for each of the
+call's retry delays. The batch stops at the Nth, or sooner, when one call
+fails once more than it has delays; at N = 1 nothing is retried. The
+reservation covers N calls more, each the dearest single call at either
+period, since each may be billed without a meter reading.
+
+--retry-delays S,S,... are those delays, in seconds, one per retry (2,5 when
+not given: two retries). More delays retry a call more often; the batch's
+allowance still bounds the attempts, and the reservation does not change.
 
 The spend file is this checkout's, records/spend.jsonl. Round 1's live runs
 are made from one checkout only, so one file holds the round's spend.
@@ -50,8 +55,8 @@ from datetime import timedelta  # noqa: E402
 from qs import registry  # noqa: E402
 from qs.guard import Refused, SpendGuard  # noqa: E402
 from qs.prices import PriceTable  # noqa: E402
-from qs.suite import (MAX_UNMETERED_PER_BATCH, Caps, Item, MeterMismatch, Runner,  # noqa: E402
-                      Suite)
+from qs.suite import (DEFAULT_RETRY_DELAYS, MAX_UNMETERED_PER_BATCH, Caps, Item,  # noqa: E402
+                      MeterMismatch, Runner, Suite)
 
 DEFAULT_CEILING = "250"   # Logan, 2026-10-06: the pilot testing's ceiling
 
@@ -81,6 +86,17 @@ def _at_least_one(value: str) -> int:
     return n
 
 
+def _delays(value: str) -> tuple[float, ...]:
+    """One to six waits, each from 0 to 120 seconds, separated by commas."""
+    try:
+        out = tuple(float(x) for x in value.split(","))
+    except ValueError:
+        raise argparse.ArgumentTypeError("give seconds separated by commas, such as 2,5,15") from None
+    if not 1 <= len(out) <= 6 or any(not 0 <= d <= 120 for d in out):
+        raise argparse.ArgumentTypeError("give one to six delays, each from 0 to 120 seconds")
+    return out
+
+
 def parser() -> argparse.ArgumentParser:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("suite", nargs="?")
@@ -101,6 +117,10 @@ def parser() -> argparse.ArgumentParser:
     # reservation covers this many calls more (the round's ledger, 20:01:46).
     ap.add_argument("--max-unmetered", type=_at_least_one, default=MAX_UNMETERED_PER_BATCH,
                     metavar="N")
+    # The wait before each retry of a call closed with no reply: as many
+    # retries as delays (the round's ledger, 08:57:42 and 08:58:08).
+    ap.add_argument("--retry-delays", type=_delays, default=DEFAULT_RETRY_DELAYS,
+                    metavar="S,S,...")
     return ap
 
 
@@ -108,7 +128,8 @@ def make_runner(a: argparse.Namespace, ep, prices: PriceTable, guard: SpendGuard
     return Runner(ep, prices, guard, records_dir=ROOT / "records",
                   transcripts_dir=ROOT / "transcripts", live=True,
                   allow_peak=a.allow_peak, settle_seconds=a.settle,
-                  peak_margin=timedelta(minutes=a.peak_margin), max_unmetered=a.max_unmetered)
+                  peak_margin=timedelta(minutes=a.peak_margin), max_unmetered=a.max_unmetered,
+                  retry_delays=a.retry_delays)
 
 
 def main(argv: list[str]) -> int:
