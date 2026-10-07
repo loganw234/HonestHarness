@@ -146,7 +146,7 @@ class FakeServer:
                 if fr.bill:
                     fake._bill(body, fake._usage_of(fr))
                 if fr.drop:
-                    # A reply lost after the provider billed it.
+                    # A reply lost: billed first, unless bill is False.
                     self.close_connection = True
                     return
                 if fr.stream is not None and fr.status < 400:

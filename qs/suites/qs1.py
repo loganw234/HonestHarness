@@ -118,8 +118,9 @@ transcript, whose hash the record carries.
 
 Caps: Caps(max_prompt_tokens=20_000, max_output_tokens=12_000,
 max_call_prompt_tokens=16_000), the same in both modes. At 35 items and 3
-repeats, from an off-peak start, the runner reserves $1.3326192 per setting.
-With --allow-peak it reserves $2.6460384. tests/test_qs1.py holds both.
+repeats, from an off-peak start, the runner reserves $1.3902192 per setting.
+With --allow-peak it reserves $2.7036384. Each includes P0's margin for three
+requests closed with no reply. tests/test_qs1.py holds both.
 
 Limits, each stated by the behaviour it concedes:
 1. Reasoning paraphrased into content passes: the leak check is the markers and

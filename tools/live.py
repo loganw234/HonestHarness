@@ -24,9 +24,11 @@ naming that batch. Errors are printed redacted, with an exit status that says
 which kind they are. Parcels never run this file; their tests use the fake.
 
 --max-unmetered N is the batch's allowance of attempts the server closes with
-no reply: such an attempt is retried, and the batch stops at the Nth (3 when
-not given). The reservation covers N calls more, each the dearest single call
-at either period, since each may be billed without a meter reading.
+no reply (3 when not given). Such an attempt is retried, at most twice for one
+call. The batch stops at the Nth, or sooner, at one call's third failed
+attempt; at N = 1 nothing is retried. The reservation covers N calls more,
+each the dearest single call at either period, since each may be billed
+without a meter reading.
 
 The spend file is this checkout's, records/spend.jsonl. Round 1's live runs
 are made from one checkout only, so one file holds the round's spend.

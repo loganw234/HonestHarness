@@ -43,10 +43,14 @@ Limits, each stated by the behaviour it concedes:
   before it is in the spend file, and the next batch is not held;
 - a call whose reply never arrives is billed, if at all, without a meter
   reading. Each attempt the server closed with no reply is counted in the run
-  record's unmetered_calls; any other such failure stops the batch at once.
-  Either way the batch's reconciliation shows the bill, and when it is not ok
-  the summary's detail names the unmetered attempts. Such a bill can even
-  match another model's rates within tolerance, and read as a routing finding;
+  record's unmetered_calls; any other such failure stops the batch at once,
+  and is counted nowhere but its stopped_for. A bill shows in the batch's
+  reconciliation only beyond its tolerance: a billed drop inside it is in no
+  spend line and no adjustment, so the spend file can fall short of the bill
+  by up to the tolerance a batch, and unmetered_attempts is the only trace.
+  When reconciliation is not ok, the summary's detail names the attempts
+  closed with no reply; a recheck does not. Such a bill can even match
+  another model's rates within tolerance, and read as a routing finding;
 - the balance's precision and how soon it reflects a call are not documented
   (D18). A batch that moves the balance by less than the tolerance reconciles
   ok whatever its meter says, and a slow balance shows as a mismatch until a
@@ -172,7 +176,9 @@ class Context:
     remaining output or less, and never more than the provider accepts.
 
     A failed call that leaves the meter uncertain, or a status the next request
-    would meet too, sets stop_reason. From then on every call is refused with
+    would meet too, sets stop_reason. A request the server closed with no reply
+    sets it only once the call's retries, or the batch's allowance, are spent.
+    From then on every call is refused with
     BatchStopping, before anything is sent, and the runner reads stop_reason
     whatever the suite returns: a suite that catches the error, or retries,
     can neither hide it nor send past it."""
