@@ -328,8 +328,12 @@ class Runner:
                  clock: Callable[[], datetime] | None = None, settle_seconds: float = 0.0,
                  provider=deepseek, peak_margin: timedelta = DEFAULT_PEAK_MARGIN,
                  retry_delays: tuple = DEFAULT_RETRY_DELAYS,
-                 max_unmetered: int = MAX_UNMETERED_PER_BATCH, concurrent: bool = False):
+                 max_unmetered: int = MAX_UNMETERED_PER_BATCH, concurrent: bool = False,
+                 code: dict | None = None):
         self.endpoint, self.prices, self.guard = endpoint, prices, guard
+        # The code each batch records (record version 2): read from git as the
+        # batch starts, unless given, as tests give it.
+        self.code = code
         self.records_dir, self.transcripts_dir = Path(records_dir), Path(transcripts_dir)
         self.live, self.allow_peak, self.provider = live, allow_peak, provider
         self.clock = clock or (lambda: datetime.now(timezone.utc))
@@ -502,6 +506,7 @@ class Runner:
         if not self.allow_peak and self.prices.peak_within(start, self.peak_margin):
             raise Refused(f"{start.isoformat()} is in the provider's peak window, or within "
                           f"{self.peak_margin} of one")
+        code = dict(self.code) if self.code is not None else rec.code_identity()
         model = self.endpoint.model
         caps = suite.caps
         periods = (sorted(self.prices.models[model]) if self.allow_peak
@@ -564,7 +569,7 @@ class Runner:
                     runs += 1
                     try:
                         self._run_line(batch, suite, item, r, record_id, ctx, result, thinking,
-                                       effort, client)
+                                       effort, client, code)
                     except Exception as e:  # noqa: BLE001 - raised after the summary
                         record_error = e
                         stopped_for = f"a run record could not be written: {type(e).__name__}"
@@ -608,7 +613,7 @@ class Runner:
                    "allow_peak": self.allow_peak, "concurrent": self.concurrent,
                    "peak_margin_minutes": int(self.peak_margin.total_seconds() // 60),
                    "spend_lines": tally.lines, "acknowledged": acknowledged,
-                   "price_table": self.prices.id, "live": self.live}
+                   "price_table": self.prices.id, "live": self.live, "code": code}
         self._append_json(self.batches_file, summary)
         if record_error is not None:
             raise record_error
@@ -649,7 +654,7 @@ class Runner:
             "rate_period": period, "cost_usd": usd(cost), "error": error, "live": self.live})
 
     def _run_line(self, batch, suite, item, r, record_id, ctx, result, thinking, effort,
-                  client) -> None:
+                  client, code: dict) -> None:
         sha = rec.save_transcript(self.transcripts_dir / batch, record_id,
                                   {"calls": ctx.calls, "result": vars(result)},
                                   redact=client.redact)
@@ -675,7 +680,9 @@ class Runner:
                    "output": ctx.used.output, "reasoning": ctx.used.reasoning},
             price_table=self.prices.id, rate_period=period, cost_usd=usd(ctx.cost),
             outcome=outcome, stop_reason=ctx.stop_reason, unmetered_calls=ctx.unmetered,
-            transcript_sha256=sha)
+            transcript_sha256=sha,
+            code={"commit": code["commit"], "changed": code["changed"],
+                  "tools_sha256": rec.tools_digest(ctx.calls)})
         rec.append(self.records_dir / "runs" / f"{suite.name}.jsonl", line)
 
     @staticmethod

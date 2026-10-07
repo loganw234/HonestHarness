@@ -864,3 +864,45 @@ def test_the_same_batch_not_marked_concurrent_is_held_on_the_mismatch(tmp_path, 
         with pytest.raises(MeterMismatch):
             r.run_batch(Echo(2))
         assert r.hold()["reconciliation"] == "mismatch"
+
+
+def test_records_name_their_code(tmp_path, prices, off_peak_clock):
+    code = {"commit": "b" * 40, "changed": True}
+    with FakeServer(lambda body: reply("hi"), prices=prices, clock=off_peak_clock) as url:
+        r, _ = runner(tmp_path, url, prices, off_peak_clock, code=code)
+        s = r.run_batch(Echo(1))
+    line = lines(tmp_path / "records" / "runs" / "echo.jsonl")[0]
+    rec.validate(line)
+    assert line["record_version"] == 2
+    assert line["code"] == {"commit": "b" * 40, "changed": True, "tools_sha256": None}
+    assert s["code"] == code
+
+
+def test_records_read_their_code_from_git_when_not_given(tmp_path, prices, off_peak_clock):
+    with FakeServer(lambda body: reply("hi"), prices=prices, clock=off_peak_clock) as url:
+        r, _ = runner(tmp_path, url, prices, off_peak_clock)
+        s = r.run_batch(Echo(1))
+    line = lines(tmp_path / "records" / "runs" / "echo.jsonl")[0]
+    assert line["code"]["commit"] == rec.code_identity()["commit"]
+    assert s["code"] == {k: line["code"][k] for k in ("commit", "changed")}
+
+
+class WithTools(Echo):
+    name = "withtools"
+    TOOLS = [{"type": "function", "function": {
+        "name": "look", "description": "Look.",
+        "parameters": {"type": "object", "properties": {}, "additionalProperties": False}}}]
+
+    def run_item(self, ctx, item):
+        t = ctx.chat([{"role": "user", "content": "look"}], tools=self.TOOLS)
+        return ItemResult("pass", "", {"content": t.content})
+
+
+def test_a_run_that_sends_tools_records_their_digest(tmp_path, prices, off_peak_clock):
+    with FakeServer(lambda body: reply("hi"), prices=prices, clock=off_peak_clock) as url:
+        r, _ = runner(tmp_path, url, prices, off_peak_clock, code={"commit": None, "changed": None})
+        r.run_batch(WithTools(1))
+    line = lines(tmp_path / "records" / "runs" / "withtools.jsonl")[0]
+    sent = json.loads((tmp_path / "transcripts" / line["batch"] / f"{line['record_id']}.json")
+                      .read_text(encoding="utf-8"))["calls"]
+    assert line["code"]["tools_sha256"] == rec.tools_digest(sent) is not None

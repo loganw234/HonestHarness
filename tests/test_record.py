@@ -1,4 +1,5 @@
 import hashlib
+import subprocess
 
 import jsonschema
 import pytest
@@ -17,7 +18,8 @@ def good(**over):
         usage={"cache_hit": 0, "cache_miss": 10, "output": 5, "reasoning": 0},
         price_table="t", rate_period="off_peak", cost_usd="0.0000045",
         outcome={"status": "pass", "detail": ""}, stop_reason=None,
-        transcript_sha256="0" * 64)
+        transcript_sha256="0" * 64,
+        code={"commit": "a" * 40, "changed": False, "tools_sha256": None})
     r.update(over)
     return r
 
@@ -67,3 +69,71 @@ def test_transcript_is_redacted_before_hashing(tmp_path):
     text = (tmp_path / "r1.json").read_text(encoding="utf-8")
     assert "secret-xyz" not in text
     assert sha == hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def test_a_version_1_record_without_code_still_validates():
+    r = good(record_version=1)
+    del r["code"]
+    rec.validate(r)
+
+
+def test_a_version_2_record_must_name_its_code():
+    assert good()["record_version"] == 2
+    r = good()
+    del r["code"]
+    with pytest.raises(jsonschema.ValidationError):
+        rec.validate(r)
+
+
+def test_bad_code_values_fail():
+    for code in ({"commit": "xyz", "changed": False, "tools_sha256": None},
+                 {"commit": "a" * 39, "changed": False, "tools_sha256": None},
+                 {"commit": None, "changed": "no", "tools_sha256": None},
+                 {"commit": None, "changed": None},
+                 {"commit": None, "changed": None, "tools_sha256": "f" * 63},
+                 {"commit": None, "changed": None, "tools_sha256": None, "extra": 1}):
+        with pytest.raises(jsonschema.ValidationError):
+            rec.validate(good(code=code))
+
+
+def _git(cwd, *args):
+    return subprocess.run(["git", "-c", "user.name=test", "-c", "user.email=test",
+                           "-c", "commit.gpgsign=false", *args],
+                          cwd=cwd, capture_output=True, text=True, check=True).stdout.strip()
+
+
+def test_code_identity_reads_head_and_any_change_outside_records(tmp_path):
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    _git(repo, "init", "-q")
+    (repo / "a.py").write_text("x = 1\n", encoding="utf-8")
+    (repo / "records").mkdir()
+    (repo / "records" / "spend.jsonl").write_text("", encoding="utf-8")
+    _git(repo, "add", "-A")
+    _git(repo, "commit", "-q", "-m", "one")
+    head = _git(repo, "rev-parse", "HEAD")
+    assert rec.code_identity(repo) == {"commit": head, "changed": False}
+    (repo / "records" / "spend.jsonl").write_text("{}\n", encoding="utf-8")
+    (repo / "records" / "runs.jsonl").write_text("{}\n", encoding="utf-8")
+    assert rec.code_identity(repo) == {"commit": head, "changed": False}
+    (repo / "a.py").write_text("x = 2\n", encoding="utf-8")
+    assert rec.code_identity(repo) == {"commit": head, "changed": True}
+    _git(repo, "checkout", "--", "a.py")
+    (repo / "b.py").write_text("", encoding="utf-8")         # untracked counts
+    assert rec.code_identity(repo) == {"commit": head, "changed": True}
+
+
+def test_code_identity_outside_a_checkout_is_unknown(tmp_path):
+    assert rec.code_identity(tmp_path) == {"commit": None, "changed": None}
+
+
+def test_tools_digest_is_of_the_distinct_tool_lists_as_sent():
+    t1 = [{"type": "function", "function": {"name": "f", "description": "one"}}]
+    t2 = [{"type": "function", "function": {"name": "f", "description": "two"}}]
+    call = lambda tools: {"request": {"messages": [], **({"tools": tools} if tools else {})}}
+    assert rec.tools_digest([]) is None
+    assert rec.tools_digest([call(None), {"request": None}]) is None
+    once = rec.tools_digest([call(t1)])
+    assert once == rec.tools_digest([call(t1), call(t1), call(None)])
+    assert rec.tools_digest([call(t1), call(t2)]) == rec.tools_digest([call(t2), call(t1)])
+    assert rec.tools_digest([call(t2)]) != once
