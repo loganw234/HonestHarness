@@ -76,6 +76,7 @@
       }
     },
     "stop_reason": {"type": ["string", "null"]},
+    "unmetered_calls": {"type": "integer", "minimum": 0},
     "transcript_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"}
   }
 }

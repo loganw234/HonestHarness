@@ -25,9 +25,13 @@ against the fake endpoint and a live provider:
    - after each call, its cost is priced at the period its reply arrived in
      and written to the spend file at once, so a later error loses no
      metered spend;
-   - an error the meter cannot see past stops the batch: a transport failure,
-     a reply without usage, or a stream cut short. So does a provider status
-     the next request would meet too;
+   - a request the server closes with no reply at all is retried after a
+     delay, twice at most, and passes the peak gate again first. Each failed
+     attempt is counted, the batch stops at its third, and its reservation
+     covers three calls more for them;
+   - any other error the meter cannot see past stops the batch: a transport
+     failure, a reply without usage, or a stream cut short. So does a provider
+     status the next request would meet too;
 6. read the balance again, reconcile what was computed against what was
    billed, and write the batch's summary, whatever stopped the batch. When the
    bill exceeds the meter beyond tolerance, an adjustment line brings the
@@ -38,7 +42,11 @@ Limits, each stated by the behaviour it concedes:
 - an interrupt (Ctrl-C) ends a batch without its summary. Every call metered
   before it is in the spend file, and the next batch is not held;
 - a call whose reply never arrives is billed, if at all, without a meter
-  reading. The batch stops there, and its reconciliation shows the bill;
+  reading. Each attempt the server closed with no reply is counted in the run
+  record's unmetered_calls; any other such failure stops the batch at once.
+  Either way the batch's reconciliation shows the bill, and when it is not ok
+  the summary's detail names the unmetered attempts. Such a bill can even
+  match another model's rates within tolerance, and read as a routing finding;
 - the balance's precision and how soon it reflects a call are not documented
   (D18). A batch that moves the balance by less than the tolerance reconciles
   ok whatever its meter says, and a slow balance shows as a mismatch until a
@@ -73,6 +81,12 @@ from .registry import Endpoint
 
 ID_PATTERN = re.compile(r"[A-Za-z0-9._-]+")   # matched whole, so no trailing newline
 DEFAULT_PEAK_MARGIN = timedelta(minutes=10)
+# A request the server closed before sending any reply. Live, DeepSeek did this
+# to 2 of about 31 requests of 64K tokens, 18 to 25 s in, at peak (the round's
+# ledger, 19:11:24). Such a request is retried; any other transport error is not.
+DISCONNECTED = "Server disconnected without sending a response"
+DEFAULT_RETRY_DELAYS = (2.0, 5.0)     # seconds before the first and second retry
+MAX_UNMETERED_PER_BATCH = 3           # failed attempts a batch may make before it stops
 
 
 def stops_batch(status: int) -> bool:
@@ -166,10 +180,16 @@ class Context:
     def __init__(self, client: Client, endpoint: Endpoint, caps: Caps, *, thinking: bool,
                  effort: str | None, provider=deepseek,
                  before_call: Callable[[], None] | None = None,
-                 after_call: Callable[[Usage], tuple[Decimal, str]] | None = None):
+                 after_call: Callable[[Usage], tuple[Decimal, str]] | None = None,
+                 on_unmetered: Callable[[], bool] | None = None,
+                 retry_delays: tuple = DEFAULT_RETRY_DELAYS):
         self.client, self.endpoint, self.caps = client, endpoint, caps
         self.thinking, self.effort, self.provider = thinking, effort, provider
         self.before_call, self.after_call = before_call, after_call
+        # on_unmetered counts a failed attempt against the batch's allowance and
+        # says whether another may follow; without it, nothing is retried.
+        self.on_unmetered, self.retry_delays = on_unmetered, tuple(retry_delays)
+        self.unmetered = 0
         self.used = Usage(0, 0, 0, 0)
         self.cost = Decimal("0")
         self.periods: list[str] = []
@@ -212,26 +232,38 @@ class Context:
         # The record keeps each request as it was sent, whatever the suite later
         # does to the lists it passed (P2's finding, P2.md 12:52:07).
         sent = copy.deepcopy(body)
-        if self.before_call is not None:
+        attempt = 0
+        while True:
+            if self.before_call is not None:
+                try:
+                    self.before_call()
+                except RunStopped as e:
+                    self._stop(str(e), kind="stopped")
+                    raise
             try:
-                self.before_call()
-            except RunStopped as e:
-                self._stop(str(e), kind="stopped")
+                turn = self.provider.chat(self.client, body)
+                turn.thinking = kw["thinking"]
+                break
+            except ProviderError as e:
+                self.calls.append({"request": sent, "error": {"status": e.status, "body": e.body}})
+                if stops_batch(e.status):
+                    self._stop(f"the provider returned HTTP {e.status}")
                 raise
-        try:
-            turn = self.provider.chat(self.client, body)
-            turn.thinking = kw["thinking"]
-        except ProviderError as e:
-            self.calls.append({"request": sent, "error": {"status": e.status, "body": e.body}})
-            if stops_batch(e.status):
-                self._stop(f"the provider returned HTTP {e.status}")
-            raise
-        except Exception as e:
-            self.calls.append({"request": sent,
-                               "error": {"type": type(e).__name__, "message": str(e)}})
-            self._stop(f"a reply did not arrive whole ({type(e).__name__}), "
-                       "so its cost is unmetered")
-            raise
+            except Exception as e:
+                self.calls.append({"request": sent,
+                                   "error": {"type": type(e).__name__, "message": str(e)}})
+                if DISCONNECTED in str(e):
+                    # Closed with no reply: unmetered, perhaps billed. Retried
+                    # while the batch's allowance and this call's delays last.
+                    self.unmetered += 1
+                    allowed = self.on_unmetered() if self.on_unmetered is not None else False
+                    if allowed and attempt < len(self.retry_delays):
+                        _time.sleep(self.retry_delays[attempt])
+                        attempt += 1
+                        continue
+                self._stop(f"a reply did not arrive whole ({type(e).__name__}), "
+                           "so its cost is unmetered")
+                raise
         self.used = _add(self.used, turn.usage)
         cost, period = (self.after_call(turn.usage) if self.after_call is not None
                         else (Decimal("0"), "none"))
@@ -269,6 +301,7 @@ class _Tally:
     spent: Decimal = Decimal("0")
     alts: dict = field(default_factory=dict)
     lines: int = 0
+    unmetered: int = 0
 
 
 class Runner:
@@ -276,13 +309,16 @@ class Runner:
                  records_dir: str | Path = "records", transcripts_dir: str | Path = "transcripts",
                  live: bool = False, allow_peak: bool = False,
                  clock: Callable[[], datetime] | None = None, settle_seconds: float = 0.0,
-                 provider=deepseek, peak_margin: timedelta = DEFAULT_PEAK_MARGIN):
+                 provider=deepseek, peak_margin: timedelta = DEFAULT_PEAK_MARGIN,
+                 retry_delays: tuple = DEFAULT_RETRY_DELAYS,
+                 max_unmetered: int = MAX_UNMETERED_PER_BATCH):
         self.endpoint, self.prices, self.guard = endpoint, prices, guard
         self.records_dir, self.transcripts_dir = Path(records_dir), Path(transcripts_dir)
         self.live, self.allow_peak, self.provider = live, allow_peak, provider
         self.clock = clock or (lambda: datetime.now(timezone.utc))
         self.settle_seconds = settle_seconds
         self.peak_margin = peak_margin
+        self.retry_delays, self.max_unmetered = tuple(retry_delays), max_unmetered
 
     @property
     def batches_file(self) -> Path:
@@ -411,6 +447,14 @@ class Runner:
                           price_table=self.prices.id, cost=cost)
         return cost, period
 
+    def _unmetered_for(self, tally: _Tally):
+        """Count one failed attempt against the batch's allowance; True while
+        another may follow."""
+        def unmetered() -> bool:
+            tally.unmetered += 1
+            return tally.unmetered < self.max_unmetered
+        return unmetered
+
     def _meter_for(self, batch: str, record_id: str, tally: _Tally):
         n = 0
 
@@ -452,7 +496,14 @@ class Runner:
         crossing = max(self.prices.worst_case(model, p, caps.max_call_prompt_tokens, call_out)
                        for p in self.prices.models[model]) - worst(caps.max_call_prompt_tokens,
                                                                    call_out)
-        batch_worst = run_worst * len(items) * repeats + probe_worst + crossing
+        # Each attempt the server closes with no reply is unmetered and may be
+        # billed; a batch allows max_unmetered of them, each at most the
+        # dearest single call.
+        unmetered_margin = self.max_unmetered * max(
+            self.prices.worst_case(model, p, caps.max_call_prompt_tokens, call_out)
+            for p in self.prices.models[model])
+        batch_worst = (run_worst * len(items) * repeats + probe_worst + crossing
+                       + unmetered_margin)
 
         with self._client(self.guard.readonly(batch)) as c:
             before = self.provider.get_balance(c)
@@ -482,7 +533,9 @@ class Runner:
                     record_id = f"{batch}.{item.id}.r{r}"
                     ctx = Context(client, self.endpoint, caps, thinking=thinking, effort=effort,
                                   provider=self.provider, before_call=self._gate,
-                                  after_call=self._meter_for(batch, record_id, tally))
+                                  after_call=self._meter_for(batch, record_id, tally),
+                                  on_unmetered=self._unmetered_for(tally),
+                                  retry_delays=self.retry_delays)
                     result = self._run_one(suite, ctx, item, client)
                     runs += 1
                     try:
@@ -505,6 +558,10 @@ class Runner:
         adjusted = self._adjust(batch, recon)
         detail = recon.detail if read_error is None else (
             f"{recon.detail}; the closing balance read failed: {read_error}")
+        if tally.unmetered and recon.status != "ok":
+            # A bill raised by such attempts can even match another model's rates.
+            detail += (f"; {tally.unmetered} attempt(s) closed with no reply may have "
+                       "been billed without a meter reading")
         summary = {"kind": "batch", "batch": batch, "ts_utc": rec.now_utc(), "suite": suite.name,
                    "suite_version": suite.version, "runs": runs, "stopped_for": stopped_for,
                    "balance_before": str(before), "balance_after": None if after is None else str(after),
@@ -515,6 +572,8 @@ class Runner:
                    "tolerance_usd": usd(recon.tolerance), "detail": detail,
                    "reserved_usd": usd(reservation.amount), "reserved_at": periods,
                    "crossing_margin_usd": usd(crossing),
+                   "unmetered_margin_usd": usd(unmetered_margin),
+                   "unmetered_attempts": tally.unmetered,
                    "allow_peak": self.allow_peak,
                    "peak_margin_minutes": int(self.peak_margin.total_seconds() // 60),
                    "spend_lines": tally.lines, "acknowledged": acknowledged,
@@ -584,7 +643,8 @@ class Runner:
             usage={"cache_hit": ctx.used.cache_hit, "cache_miss": ctx.used.cache_miss,
                    "output": ctx.used.output, "reasoning": ctx.used.reasoning},
             price_table=self.prices.id, rate_period=period, cost_usd=usd(ctx.cost),
-            outcome=outcome, stop_reason=ctx.stop_reason, transcript_sha256=sha)
+            outcome=outcome, stop_reason=ctx.stop_reason, unmetered_calls=ctx.unmetered,
+            transcript_sha256=sha)
         rec.append(self.records_dir / "runs" / f"{suite.name}.jsonl", line)
 
     @staticmethod

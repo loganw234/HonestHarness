@@ -161,6 +161,8 @@ def test_a_reply_dropped_after_billing_is_error_and_stops_the_batch(tmp_path):
     d = by_item["S01"]["outcome"]["data"]
     assert by_item["S01"]["outcome"]["status"] == "error" and d["status_basis"] == "transport"
     assert s["runs"] == 1 and "did not arrive whole" in s["stopped_for"]
+    # Every attempt dropped: retried twice, then the batch stops.
+    assert by_item["S01"]["unmetered_calls"] == 3 and s["unmetered_attempts"] == 3
 
 
 def test_a_cap_reached_is_stopped_never_fail(tmp_path):
@@ -318,20 +320,24 @@ class Dry(Suite):
 
 def by_hand(max_call: int, peak: bool) -> Decimal:
     """The runner's worst case worked by hand, per million tokens: a run is
-    (1 + max_call) prompt and 32,000 output; 66 runs; the probe's 64 and 16; and,
-    off-peak only, one call's peak premium."""
+    (1 + max_call) prompt and 32,000 output; 66 runs; the probe's 64 and 16;
+    off-peak only, one call's peak premium; and three unmetered attempts, each
+    one call at peak (P0's retry allowance, the round's ledger 19:11:24)."""
     miss, out = (Decimal("0.30"), Decimal("1.20")) if peak else (Decimal("0.15"), Decimal("0.60"))
     m = Decimal(1_000_000)
     run_ = ((1 + max_call) * miss + 32_000 * out) / m
     probe = (64 * miss + 16 * out) / m
     crossing = Decimal(0) if peak else (max_call * Decimal("0.15") + 32_000 * Decimal("0.60")) / m
-    return run_ * 66 + probe + crossing
+    unmetered = 3 * (max_call * Decimal("0.30") + 32_000 * Decimal("1.20")) / m
+    return run_ * 66 + probe + crossing + unmetered
 
 
-# The figures P3.md's design gives (15:21:02), at the caps qs6_cuts.json holds.
-RESERVED = {"c016k": ("1.62812910", "3.2076582"), "c032k": ("1.91957910", "3.7818582"),
-            "c064k": ("2.52257910", "4.9698582"), "c128k": ("3.90947910", "7.7022582"),
-            "whole": ("4.17077910", "8.2170582")}
+# The figures P3.md's design gives (15:21:02), at the caps qs6_cuts.json holds,
+# each plus P0's unmetered margin of three calls at peak: 0.1458, 0.1719,
+# 0.2259, 0.3501 and 0.3735 (the round's ledger 19:11:24).
+RESERVED = {"c016k": ("1.77392910", "3.3534582"), "c032k": ("2.09147910", "3.9537582"),
+            "c064k": ("2.74847910", "5.1957582"), "c128k": ("4.25957910", "8.0523582"),
+            "whole": ("4.54427910", "8.5905582")}
 
 
 @pytest.mark.parametrize("cut", qs6.CUT_NAMES)

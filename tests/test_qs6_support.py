@@ -255,7 +255,7 @@ def run(tmp_path: Path, suite, responder, *, thinking: bool = False, repeats: in
         guard = SpendGuard(Decimal("250"), tmp_path / "records" / "spend.jsonl")
         runner = Runner(endpoint(url), PRICES, guard, records_dir=tmp_path / "records",
                         transcripts_dir=tmp_path / "transcripts", clock=lambda: clock,
-                        allow_peak=allow_peak)
+                        allow_peak=allow_peak, retry_delays=(0, 0))
         summary = runner.run_batch(suite, repeats=repeats, thinking=thinking)
     path = tmp_path / "records" / "runs" / f"{suite.name}.jsonl"
     records = ([json.loads(x) for x in path.read_text(encoding="utf-8").splitlines() if x.strip()]

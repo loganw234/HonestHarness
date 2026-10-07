@@ -3,6 +3,7 @@ reconciliation, routing, refusals and caps."""
 import json
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
+from types import SimpleNamespace
 
 import pytest
 
@@ -51,6 +52,7 @@ def endpoint(url):
 
 def runner(tmp_path, url, prices, clock, **kw):
     g = SpendGuard(Decimal(kw.pop("ceiling", "250")), tmp_path / "records" / "spend.jsonl")
+    kw.setdefault("retry_delays", (0, 0))
     return Runner(endpoint(url), prices, g, records_dir=tmp_path / "records",
                   transcripts_dir=tmp_path / "transcripts", clock=clock, **kw), g
 
@@ -221,17 +223,24 @@ def test_a_dropped_reply_keeps_metered_spend_and_stops_the_batch(tmp_path, price
         if is_probe(body):
             return reply("ready")
         n["run_calls"] += 1
-        r = reply("x", usage=(0, 200_000, 20_000))
-        return r if n["run_calls"] == 1 else FakeReply(body=r.body, drop=True)
+        if n["run_calls"] == 1:
+            return reply("x", usage=(0, 200_000, 20_000))
+        # Each drop is billed less than the metered call: four of that call's
+        # bill would match the batch priced at v4-pro's rates, within tolerance.
+        return FakeReply(body=reply("x", usage=(0, 100_000, 0)).body, drop=True)
 
     with FakeServer(respond, prices=prices, clock=off_peak_clock) as url:
         r, g = runner(tmp_path, url, prices, off_peak_clock)
         with pytest.raises(MeterMismatch) as e:
             r.run_batch(TwoCalls())
     s = e.value.summary
-    assert "did not arrive whole" in s["stopped_for"]
+    # The drop is retried twice; the third failed attempt uses up the batch's
+    # allowance of three, and the batch stops.
+    assert "did not arrive whole" in s["stopped_for"] and s["unmetered_attempts"] == 3
+    assert s["reconciliation"] == "mismatch" and "3 attempt(s) closed with no reply" in s["detail"]
     run = lines(tmp_path / "records" / "runs" / "two.jsonl")[0]
-    assert run["outcome"]["status"] == "error" and run["calls"] == 2
+    assert run["outcome"]["status"] == "error" and run["calls"] == 4
+    assert run["unmetered_calls"] == 3
     spend = lines(tmp_path / "records" / "spend.jsonl")
     assert [x["kind"] for x in spend] == ["call", "call", "adjustment"]
     # The bill's rest is added, so the ceiling counts what was billed.
@@ -291,10 +300,14 @@ def test_a_stream_cut_short_stops_the_batch(tmp_path, prices, off_peak_clock):
         fr = stream_reply("hello")
         fr.cut_after = 2           # the keep-alive and the content: no usage, no [DONE]
         return fr
-    with FakeServer(respond, prices=prices, clock=off_peak_clock) as url:
+    fake = FakeServer(respond, prices=prices, clock=off_peak_clock)
+    with fake as url:
         r, _ = runner(tmp_path, url, prices, off_peak_clock)
         s = r.run_batch(Streams(2))
     assert s["runs"] == 1 and "IncompleteReply" in s["stopped_for"]
+    # A reply begun and cut short is not retried: only one never begun is.
+    assert len([b for b in fake.requests if not is_probe(b)]) == 1
+    assert s["unmetered_attempts"] == 0
     run = lines(tmp_path / "records" / "runs" / "streams.jsonl")[0]
     assert run["outcome"]["status"] == "error"
 
@@ -396,8 +409,9 @@ def test_with_peak_allowed_the_reservation_is_priced_at_peak(tmp_path, prices):
     run = lines(tmp_path / "records" / "runs" / "calls.jsonl")[0]
     assert run["rate_period"] == "mixed" and run["outcome"]["status"] == "pass"
     # (10,000 + 5,000) prompt at $0.30 and 2,000 output at $1.20 per million,
-    # plus the probe's 64 and 16 at the same rates: 0.0069 + 0.0000384.
-    assert Decimal(s["reserved_usd"]) == Decimal("0.0069384")
+    # plus the probe's 64 and 16 at the same rates: 0.0069 + 0.0000384, plus
+    # three unmetered attempts at peak, 3 x 0.0039 = 0.0117.
+    assert Decimal(s["reserved_usd"]) == Decimal("0.0186384")
     assert Decimal(s["computed_usd"]) <= Decimal(s["reserved_usd"])
 
 
@@ -408,9 +422,11 @@ def test_the_reservation_is_the_hand_computed_worst_case(tmp_path, prices, off_p
     # (10,000 + 5,000) prompt at $0.15 and 2,000 output at $0.60 per million,
     # plus the probe's 64 and 16 at the same rates: 0.00345 + 0.0000192. Plus
     # one call's peak premium: 5,000 and 2,000 at $0.30 and $1.20 (0.0039)
-    # less the same at off-peak rates (0.00195): 0.00195.
-    assert Decimal(s["reserved_usd"]) == Decimal("0.0054192")
+    # less the same at off-peak rates (0.00195): 0.00195. Plus three unmetered
+    # attempts, each that call at peak: 3 x 0.0039 = 0.0117.
+    assert Decimal(s["reserved_usd"]) == Decimal("0.0171192")
     assert Decimal(s["crossing_margin_usd"]) == Decimal("0.00195")
+    assert Decimal(s["unmetered_margin_usd"]) == Decimal("0.0117")
     assert s["reserved_at"] == ["off_peak"]
 
 
@@ -552,7 +568,9 @@ def test_a_retrying_suite_cannot_send_past_a_stop(tmp_path, prices, off_peak_clo
     with fake as url:
         r, _ = runner(tmp_path, url, prices, off_peak_clock)
         s = r.run_batch(Retries(3))
-    assert len([b for b in fake.requests if not is_probe(b)]) == 1
+    # A drop is retried twice inside Context before the stop; a 503 is not.
+    sent = len([b for b in fake.requests if not is_probe(b)])
+    assert sent == (3 if failure == "drop" else 1)
     assert s["runs"] == 1 and s["stopped_for"]
     run = lines(tmp_path / "records" / "runs" / "retries.jsonl")[0]
     assert run["outcome"]["status"] == "error" and run["stop_reason"] == s["stopped_for"]
@@ -713,3 +731,98 @@ def test_a_streamed_thinking_turn_without_reasoning_goes_back_with_an_empty_fiel
     second = [b for b in fake.requests if not is_probe(b)][1]
     assistant = [m for m in second["messages"] if m["role"] == "assistant"][0]
     assert assistant["reasoning_content"] == ""
+
+
+def test_a_request_closed_with_no_reply_is_retried_and_counted(tmp_path, prices,
+                                                               off_peak_clock):
+    # Live, DeepSeek closed 2 of about 31 requests of 64K tokens with no reply
+    # at all (the round's ledger, 19:11:24). This one was not billed.
+    n = {"run_calls": 0}
+
+    def respond(body):
+        if is_probe(body):
+            return reply("ready")
+        n["run_calls"] += 1
+        r = reply("x")
+        return FakeReply(body=r.body, drop=True, bill=False) if n["run_calls"] == 1 else r
+    fake = FakeServer(respond, prices=prices, clock=off_peak_clock)
+    with fake as url:
+        r, _ = runner(tmp_path, url, prices, off_peak_clock)
+        s = r.run_batch(Echo(2))
+    assert len([b for b in fake.requests if not is_probe(b)]) == 3
+    runs = lines(tmp_path / "records" / "runs" / "echo.jsonl")
+    assert [x["outcome"]["status"] for x in runs] == ["pass", "pass"]
+    assert runs[0]["calls"] == 2 and runs[0]["unmetered_calls"] == 1
+    assert runs[1]["calls"] == 1 and runs[1]["unmetered_calls"] == 0
+    assert runs[0]["stop_reason"] is None and s["stopped_for"] is None
+    assert s["unmetered_attempts"] == 1 and s["reconciliation"] == "ok"
+    # The transcript keeps the failed attempt beside the one that answered.
+    calls = json.loads((tmp_path / "transcripts" / s["batch"] / f"{s['batch']}.i0.r0.json")
+                       .read_text(encoding="utf-8"))["calls"]
+    assert "Server disconnected without sending a response" in calls[0]["error"]["message"]
+    assert "turn" in calls[1]
+
+
+def test_a_batch_stops_at_its_third_attempt_closed_with_no_reply(tmp_path, prices,
+                                                                  off_peak_clock):
+    # One drop per item: the first two are retried, and the third stops the
+    # batch, though each item's own call has a retry left.
+    n = {"run_calls": 0}
+
+    def respond(body):
+        if is_probe(body):
+            return reply("ready")
+        n["run_calls"] += 1
+        r = reply("x")
+        return FakeReply(body=r.body, drop=True, bill=False) if n["run_calls"] % 2 else r
+    fake = FakeServer(respond, prices=prices, clock=off_peak_clock)
+    with fake as url:
+        r, _ = runner(tmp_path, url, prices, off_peak_clock)
+        s = r.run_batch(Echo(4))
+    assert s["unmetered_attempts"] == 3 and s["runs"] == 3
+    assert "did not arrive whole" in s["stopped_for"]
+    runs = lines(tmp_path / "records" / "runs" / "echo.jsonl")
+    assert [x["outcome"]["status"] for x in runs] == ["pass", "pass", "error"]
+    assert [x["unmetered_calls"] for x in runs] == [1, 1, 1]
+    assert len([b for b in fake.requests if not is_probe(b)]) == 5
+
+
+def test_one_call_is_retried_only_as_often_as_it_has_delays(tmp_path, prices, off_peak_clock):
+    # With a larger allowance, a call that keeps closing with no reply is still
+    # sent three times, its own and its two delays', and then stops the batch.
+    def respond(body):
+        if is_probe(body):
+            return reply("ready")
+        return FakeReply(body=reply("x").body, drop=True, bill=False)
+    fake = FakeServer(respond, prices=prices, clock=off_peak_clock)
+    with fake as url:
+        r, _ = runner(tmp_path, url, prices, off_peak_clock, max_unmetered=10)
+        s = r.run_batch(Echo(2))
+    assert len([b for b in fake.requests if not is_probe(b)]) == 3
+    assert s["runs"] == 1 and "did not arrive whole" in s["stopped_for"]
+    assert s["unmetered_attempts"] == 3
+
+
+def test_a_retry_waits_its_delay_and_passes_the_peak_gate_again(tmp_path, prices,
+                                                                monkeypatch):
+    # The drop at 00:49 is retried after its delay, at 00:51: inside the
+    # 10-minute margin before 01:00, so the gate stops the retry unsent.
+    clock = Clock(datetime(2026, 10, 5, 0, 40, tzinfo=timezone.utc))   # Monday, off-peak
+    slept = []
+    monkeypatch.setattr("qs.suite._time", SimpleNamespace(
+        sleep=lambda s: (slept.append(s), clock.advance(2))))
+
+    def respond(body):
+        if is_probe(body):
+            clock.advance(9)
+            return reply("ready")
+        return FakeReply(body=reply("x").body, drop=True, bill=False)
+    fake = FakeServer(respond, prices=prices, clock=clock)
+    with fake as url:
+        r, _ = runner(tmp_path, url, prices, clock, retry_delays=(7.0, 9.0))
+        s = r.run_batch(Echo(1))
+    assert slept == [7.0]
+    assert len([b for b in fake.requests if not is_probe(b)]) == 1
+    run = lines(tmp_path / "records" / "runs" / "echo.jsonl")[0]
+    assert run["outcome"]["status"] == "stopped" and "peak" in s["stopped_for"]
+    assert run["unmetered_calls"] == 1
