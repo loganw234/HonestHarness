@@ -156,8 +156,12 @@ Limits, each stated by the behaviour it concedes:
     mapping; run_item's status_basis; normalise_file's ledger-prefix case;
     judgement_problems' finding form; which plant owns a diff block that only inserts;
     the ledger copy's link refusal and manifest checks, since this account cannot make
-    a link; and rebuild_brief's line boundaries. The lines that face Docker were outside
-    the sweep, with tests/test_qs4h_docker.py, the file that pins them.
+    a link; rebuild_brief's line boundaries; tip_lines_of's early return and its refusal
+    of a cited line the file lacks; run_args' guard; and QS4H's default local directory.
+    Of the fourteen survivors on the lines that face Docker, tests/test_qs4h_docker.py
+    pins five. Still unpinned there: inspect_image's return condition, current_image_id's
+    presence test, the host's constant complete flag, the scratch directory's parents and
+    exist_ok arguments, and the sandbox runs' complete flag (verifier-P5.md 23:11:21).
 """
 from __future__ import annotations
 

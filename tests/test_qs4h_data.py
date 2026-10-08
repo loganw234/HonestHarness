@@ -66,6 +66,8 @@ def test_the_recorded_findings():
 
 # Each recorded finding's class, in-view mark and copy-only mark, generated from the table
 # in P5.md's entry of 14:30:06 (its "when" column: view or after; "copy only" in its last).
+# The class is that table's: P3-v2 to P3-v4 are "other" there, where verifier-P3 called
+# them nits to restate. No match or count reads the class.
 # --- RECORDED (generated) ---
 RECORDED = {
     'P1-v1': ('known limit', True, False),
@@ -112,7 +114,7 @@ RECORDED = {
 # --- end RECORDED ---
 
 
-def test_each_recorded_finding_has_the_ledgers_class_and_marks():
+def test_each_recorded_finding_has_its_tables_class_and_marks():
     """Each parcel's count of in-view findings held while two of P4's marks were swapped
     (verifier-P5's F2, a plant), so each mark is pinned on its own."""
     marks = {r["id"]: (r["class"], r["in_view"], r["copy_only"])
