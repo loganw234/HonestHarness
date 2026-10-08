@@ -3,10 +3,11 @@
     python tools/qs4h_image.py [--local <dir>] [--check-only]
 
 1. `docker ps` is read first; P2's pinned base must be present (it is never pulled).
-2. `docker build --network default -f sandbox/qs4h.Dockerfile` from an empty context
-   under <local>, tagged hh-qs4h-sandbox:<12 hex of the Dockerfile's SHA-256>. The
-   build's container reaches PyPI for the 18 pinned wheels, each checked by
-   --require-hashes. With --check-only the tagged image must exist already.
+2. `docker build --pull=false --network default -f sandbox/qs4h.Dockerfile` from an
+   empty context under <local>, tagged hh-qs4h-sandbox:<12 hex of the Dockerfile's
+   SHA-256>: the base is the one on this desktop, never pulled. The build's container
+   reaches PyPI for the 18 pinned wheels, each checked by --require-hashes. With
+   --check-only the tagged image must exist already.
 3. One container of the image, started as P2's sandbox starts a run's (no network, a
    read-only root, nobody), named hh-qs4h-<id>, checks: Python's version; `pip list`
    holds the 18 pins at their versions; `pip check` passes; there is no docker command;
@@ -118,9 +119,9 @@ def main(argv: list[str]) -> int:
             ctx.mkdir(parents=True, exist_ok=True)
             if any(ctx.iterdir()):
                 raise qs4.InputError("the build's context directory is not empty")
-            r = subprocess.run(["docker", "build", "--network", "default", "--progress", "plain", "-f",
-                                str(qs4h.DOCKERFILE_PATH), "-t", tag, str(ctx)], capture_output=True, text=True,
-                               timeout=1800)
+            r = subprocess.run(["docker", "build", "--pull=false", "--network", "default", "--progress", "plain",
+                                "-f", str(qs4h.DOCKERFILE_PATH), "-t", tag, str(ctx)], capture_output=True,
+                               text=True, timeout=1800)
             (local / "image-build.log").write_text(r.stdout + r.stderr, encoding="utf-8")
             if r.returncode != 0:
                 raise qs4.InputError(f"docker build failed (exit {r.returncode}); see local/qs4h/image-build.log")

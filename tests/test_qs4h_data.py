@@ -10,6 +10,7 @@ import subprocess
 import pytest
 
 from qs.agent import Budgets
+from qs.agent.sandbox import BACKSTOP_S, KILL_AFTER_S
 from qs.suites import qs4, qs4h
 
 ITEMS, EXPECTED = qs4h.ITEMS, qs4h.EXPECTED
@@ -63,11 +64,79 @@ def test_the_recorded_findings():
                 assert all(1 <= a <= b for a, b in pl["lines"])
 
 
-def test_qs4hs_caps_budgets_and_sources_are_qs4s():
+# Each recorded finding's class, in-view mark and copy-only mark, generated from the table
+# in P5.md's entry of 14:30:06 (its "when" column: view or after; "copy only" in its last).
+# --- RECORDED (generated) ---
+RECORDED = {
+    'P1-v1': ('known limit', True, False),
+    'P1-v2': ('known limit', True, False),
+    'P1-v3': ('known limit', True, False),
+    'P1-v4': ('known limit', True, False),
+    'P1-v5': ('known limit', True, False),
+    'P1-v6': ('restate', True, False),
+    'P2-v1': ('wrong answer', True, False),
+    'P2-v2': ('wrong answer', True, False),
+    'P2-v3': ('wrong answer', False, False),
+    'P2-v4': ('known limit', False, False),
+    'P2-v5': ('known limit', False, False),
+    'P2-v6': ('known limit', False, False),
+    'P2-v7': ('known limit', False, False),
+    'P2-v8': ('known limit', True, False),
+    'P2-v9': ('known limit', True, False),
+    'P2-v10': ('restate', False, True),
+    'P2-v11': ('restate', False, False),
+    'P2-v12': ('restate', False, False),
+    'P2-v13': ('other', False, False),
+    'P2-v14': ('other', False, False),
+    'P2-v15': ('other', False, True),
+    'P3-v1': ('restate', True, False),
+    'P3-v2': ('other', True, False),
+    'P3-v3': ('other', True, False),
+    'P3-v4': ('other', True, False),
+    'P3-v5': ('restate', False, False),
+    'P3-v6': ('restate', False, False),
+    'P3-v7': ('known limit', False, False),
+    'P3-v8': ('known limit', False, False),
+    'P3-v9': ('known limit', False, False),
+    'P3-v10': ('known limit', False, False),
+    'P3-v11': ('known limit', False, False),
+    'P4-v1': ('restate', True, False),
+    'P4-v2': ('known limit', True, False),
+    'P4-v3': ('other', True, False),
+    'P4-v4': ('other', True, False),
+    'P4-v5': ('known limit', True, False),
+    'P4-v6': ('known limit', False, False),
+    'P4-v7': ('other', False, False),
+    'P4-v8': ('other', False, False),
+}
+# --- end RECORDED ---
+
+
+def test_each_recorded_finding_has_the_ledgers_class_and_marks():
+    """Each parcel's count of in-view findings held while two of P4's marks were swapped
+    (verifier-P5's F2, a plant), so each mark is pinned on its own."""
+    marks = {r["id"]: (r["class"], r["in_view"], r["copy_only"])
+             for p in ITEMS["parcels"].values() for r in p["recorded"]}
+    assert marks == RECORDED
+
+
+def test_qs4hs_caps_and_sources_are_qs4s():
     assert ITEMS["caps"] == qs4.ITEMS["caps"] and ITEMS["sources"] == qs4.ITEMS["sources"]
     assert ITEMS["parcelround"]["commit"] == qs4.ITEMS["archive"]["parcelround"]
-    Budgets(**ITEMS["budgets"])
-    assert ITEMS["budgets"]["max_run_seconds"] + ITEMS["budgets"]["call_timeout_seconds"] + 900 <= 7200
+
+
+def test_qs4hs_budgets_are_qs4s_but_the_call_timeout_and_the_run_which_fits_two_hours():
+    """The lead's rule (lead.md 14:32:37, answer 3), applied at lead.md 19:54:31: a model's
+    --control at h4 took 208.1 s in the sandbox, so a tool call's timeout is 1.5 times
+    that, rounded up, 320 s; and a run, one call more with P2's kill grace, and 15
+    minutes fit 2 hours."""
+    b, theirs = ITEMS["budgets"], qs4.ITEMS["budgets"]
+    Budgets(**b)
+    moved = {"call_timeout_seconds", "max_run_seconds"}
+    assert {k: v for k, v in b.items() if k not in moved} == {k: v for k, v in theirs.items() if k not in moved}
+    assert b["call_timeout_seconds"] == 320 >= 1.5 * 208.1
+    assert b["max_run_seconds"] < theirs["max_run_seconds"]
+    assert b["max_run_seconds"] + b["call_timeout_seconds"] + KILL_AFTER_S + BACKSTOP_S + 900 <= 7200
 
 
 def test_the_briefs_rebuild_names_lines_and_hashes_only():
@@ -126,10 +195,16 @@ needs_inputs = pytest.mark.skipif(not built(), reason="QS4h's inputs are not bui
 
 @needs_inputs
 def test_every_item_prepares_on_the_built_inputs():
+    """Skips while an item has no gate record, as after tools/qs4h_rebuild.py --no-gate
+    (verifier-P5's L1); a record that does not hold still fails here."""
     try:
         qs4h.current_image_id()
     except qs4.InputError as e:
         pytest.skip(f"the sandbox image: {e}")
+    b = json.loads((qs4h.LOCAL / "built.json").read_text(encoding="utf-8"))
+    missing = [i["id"] for i in ITEMS["items"] if "gate" not in b["items"].get(i["id"], {})]
+    if missing:
+        pytest.skip(f"no gate record for {', '.join(missing)}: tools/qs4h_rebuild.py --gate-only writes them")
     inputs = qs4h.LocalInputs()
     for i in ITEMS["items"]:
         prep = inputs.prepare(i["id"])
@@ -160,3 +235,23 @@ def test_the_ledger_copy_holds_the_sealed_keys():
     members, _ = qs4h.load_snapshot(copies[-1].parent)
     for spec in ITEMS["parcels"].values():
         assert qs4.sha256(members[qs4h.LEDGER_ROOT + spec["key"]][0]) == spec["key_sha256"]
+
+
+def runs_of_six(text: str) -> set:
+    w = re.findall(r"[a-z0-9_.:'-]+", text.lower())
+    return {tuple(w[i:i + 6]) for i in range(len(w) - 5)}
+
+
+@needs_inputs
+def test_each_plants_description_is_qs4hs_own_words():
+    """verifier-P5's R1: the items say their descriptions are QS4h's own words. No plant's
+    `about` shares a run of six words with any plant's shape in its parcel's key, read
+    from the ledger copy, since QS4h's data holds no key text."""
+    copies = sorted((qs4h.LOCAL / "ledger").glob("*/manifest.json"))
+    assert copies
+    members, _ = qs4h.load_snapshot(copies[-1].parent)
+    for spec in ITEMS["parcels"].values():
+        key = json.loads(members[qs4h.LEDGER_ROOT + spec["key"]][0])
+        shapes = set().union(*(runs_of_six(p["shape"]) for p in key["plants"]))
+        for pl in spec["plants"]:
+            assert not runs_of_six(pl["about"]) & shapes, pl["id"]

@@ -34,7 +34,9 @@ gate run on the host and in the sandbox at each repository.
    only as the sandbox's one difference, checked by two pytest runs there), the host's
    with what the original verifier recorded, and each run is timed. `docker ps` is read
    before each container, and each container is removed. --gate-only runs this step
-   alone, on repositories already built.
+   alone, on repositories already built. --no-gate skips it, and the tool says that no
+   gate was compared: the items it built hold no gate record, so QS4h's inputs refuse
+   each, and the data test that prepares them skips, until --gate-only runs.
 8. It writes <local>/built.json after each item's gate. With --write-expected, made
    once, it records in qs4h_expected.json the builds, the repositories, the plants'
    edits, the recorded findings' lines at the real-tip builds, ParcelRound's repository,
@@ -350,7 +352,12 @@ def main(argv: list[str]) -> int:
                   f"{dur(h, 'gate')}+{dur(h, 'control')}, sandbox {dur(s, 'gate')}+{dur(s, 'control')}")
         qs4._remove(tmp)
     save(old, built)
-    print(f"items: {len([i for i in wanted if i['id'] in built['items']])} of {len(wanted)} built; {bad} not held")
+    n = len([i for i in wanted if i["id"] in built["items"]])
+    if a.no_gate:
+        print(f"items: {n} of {len(wanted)} built, {bad} refused; no gate compared (--no-gate), so no item "
+              "prepares until --gate-only records its gate")
+    else:
+        print(f"items: {n} of {len(wanted)} built; {bad} not held")
     return 0 if bad == 0 else 1
 
 

@@ -220,6 +220,38 @@ def test_a_located_finding_that_is_not_stated_goes_on_to_the_recorded_findings(t
     assert d["located"] == ["P3-A"] and d["stated"] == [] and d["matched"] == "P3-v10"
 
 
+@pytest.mark.parametrize("item, lines", [("h2-real", "1-2"), ("h2-real", "500-501"), ("h2-real", None),
+                                         ("h2-planted", "294")])
+def test_a_recorded_finding_with_lines_is_matched_only_at_its_lines(tmp_path, prices, off_peak_clock, item, lines):
+    """The lesson of verifier-P5's F1 (plant B): a recorded finding with spans is matched
+    by location only. A finding elsewhere in its file, or with no lines, is matched to
+    nothing, locates nothing, and counts as unmatched; at the planted join (294) it
+    locates plant P2-A without stating it, and still matches no recorded finding."""
+    cls = next(c for c in qs4h.SUITES if c.ITEM == item)
+    f = {"class": "other", "file": "qs/agent/loop.py", "statement": "a remark on the loop's structure"}
+    if lines:
+        f["lines"] = lines
+    _, records, _, _ = run(tmp_path, prices, off_peak_clock, ScriptedModel(turn(report_call("r", [f]))),
+                           make(cls, tmp_path))
+    d = data_of(records)
+    assert d["findings"][0]["matched"] is None and d["findings"][0]["matched_by"] is None
+    assert [r["id"] for r in d["recorded"] if r["located"]] == []
+    assert d["counts"]["unmatched"] == 1 and d["counts"]["recorded_in_view_located"] == 0
+    assert d["findings"][0]["located"] == (["P2-A"] if item == "h2-planted" else [])
+
+
+def test_a_recorded_finding_without_lines_is_matched_by_its_file(tmp_path, prices, off_peak_clock):
+    """QS4's rule, kept (qs4.py:929): a recorded finding that cites no lines, as P1-v6's
+    commit message, is matched by its file alone, and counts as located."""
+    f = {"class": "restate", "file": "commit message", "statement": "the message's counts are stale"}
+    _, records, _, _ = run(tmp_path, prices, off_peak_clock, ScriptedModel(turn(report_call("r", [f]))),
+                           make(qs4h.QS4hH1Real, tmp_path))
+    d = data_of(records)
+    assert d["findings"][0]["matched"] == "P1-v6" and d["findings"][0]["matched_by"] == "file"
+    assert [r["id"] for r in d["recorded"] if r["located"]] == ["P1-v6"]
+    assert d["counts"]["unmatched"] == 0 and d["counts"]["recorded_in_view_located"] == 1
+
+
 def test_a_deletion_is_located_within_its_widened_tolerance_and_no_further(tmp_path, prices, off_peak_clock):
     join = qs4h.EXPECTED["plant_spans"]["P2-A"][0]["lines"]
     tol = qs4h.ITEMS["settings"]["deletion_tolerance"]
@@ -273,7 +305,8 @@ def test_both_conditions_read_alike_and_hold_none_of_p4_as_sentence():
     assert "twelve files" in h4 and "809ed2f" in h4 and "<repos>/ds/" not in h4
 
 
-def test_the_suites_are_eight_at_qs4s_caps_and_budgets():
+def test_the_suites_are_eight_at_qs4s_caps():
+    """QS4's caps; the budgets are QS4's but two (tests/test_qs4h_data.py)."""
     assert [c.ITEM for c in qs4h.SUITES] == [i["id"] for i in qs4h.ITEMS["items"]]
     assert len(qs4h.SUITES) == 8 and all(c.name == f"qs4h-{c.ITEM}" for c in qs4h.SUITES)
     assert qs4h.ITEMS["caps"] == qs4.ITEMS["caps"]

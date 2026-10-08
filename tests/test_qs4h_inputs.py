@@ -101,6 +101,20 @@ def test_a_real_tip_build_or_an_edit_that_differs_from_its_pin_is_refused(world,
         li.prepare("h1-real")
 
 
+def test_without_the_gate_the_rebuild_says_no_gate_was_compared(world, tmp_path, capsys):
+    """verifier-P5's L1: under --no-gate the tool's last line says that no gate was
+    compared, not that every item held, and the items it built hold no gate record."""
+    swap = {str(world.local): str(tmp_path / "l")}
+    capsys.readouterr()
+    assert rebuild_tool.main([swap.get(x, x) for x in tool_args(world)["rebuild"]]) == 0
+    last = capsys.readouterr().out.strip().splitlines()[-1]
+    assert last.startswith("items: 4 of 4 built, 0 refused; no gate compared (--no-gate)")
+    assert "not held" not in last
+    built = json.loads((tmp_path / "l" / "built.json").read_text(encoding="utf-8"))
+    assert sorted(built["items"]) == ["h1-planted", "h1-real", "h2-planted", "h2-real"]
+    assert not any("gate" in b for b in built["items"].values())
+
+
 def test_a_key_whose_hash_is_not_the_sealed_one_is_refused(world, tmp_path):
     items = items_of(world)
     items["parcels"]["P1"]["key_sha256"] = "0" * 64
@@ -402,6 +416,38 @@ def test_a_pinned_platform_test_holds_only_as_the_sandboxs_one_difference():
     assert not qs4h.compare_gate(host, box(control=mode(None, {}, [9, 9], 0)), pinned)[0]
     failing_host = dict(host, gate=mode(["FAIL", 2, 3], dict(ok, tests="FAIL"), None, 1))
     assert not qs4h.compare_gate(failing_host, box(), pinned)[0]
+
+
+STAND_IN_GATE = '''import sys
+if "--control" in sys.argv:
+    print("controls: 1 of 1 caught")
+else:
+    print("tests     ok    1 passed")
+    print("PASS: 1 of 1 checks hold")
+'''
+
+
+def test_the_hosts_gate_must_leave_its_clone_clean_ignored_files_included(tmp_path, monkeypatch):
+    """verifier-P5's F3: a gate that writes even an ignored file leaves its clone
+    unclean, and the comparison then does not hold (tools/qs4h_rebuild.py). A gate that
+    imports a module of its own stays clean: run_gate_host itself sets
+    PYTHONDONTWRITEBYTECODE, as the sandbox does, so no bytecode cache is written."""
+    monkeypatch.delenv("PYTHONDONTWRITEBYTECODE", raising=False)
+    writes = ('import pathlib\npathlib.Path("out").mkdir(exist_ok=True)\npathlib.Path("out/x.txt").write_text("x")\n'
+              + STAND_IN_GATE)
+    for name, script, clean in (("quiet", STAND_IN_GATE, True), ("writes", writes, False),
+                                ("imports", "import helper\n" + STAND_IN_GATE, True)):
+        repo = tmp_path / name / "repo"
+        repo.mkdir(parents=True)
+        g(repo, "init", "-q", "-b", "main")
+        put(repo, ".gitignore", "out/\n")
+        put(repo, "tools/check.py", script)
+        put(repo, "tools/helper.py", "X = 1\n")
+        g(repo, "add", "-A")
+        g(repo, "commit", "-q", "-m", "a gate")
+        (tmp_path / name / "work").mkdir()
+        host = qs4h.run_gate_host(repo, tmp_path / name / "work", timeout=120)
+        assert host["gate"]["parsed"]["verdict"] == ["PASS", 1, 1] and host["clean_after"] is clean
 
 
 def test_the_pytest_count_line_is_read():

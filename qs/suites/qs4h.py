@@ -53,10 +53,11 @@ closure and forbidden blobs, with no refs, no remote and a clean tree; ParcelRou
 repository, the sources' and the ds files' hashes; the image in use, the one built from
 sandbox/qs4h.Dockerfile and recorded in local/qs4h/image.json; and the project's own
 gate, tools/check.py and its --control, run at the repository on the host (Docker made
-unreachable, so both sides skip the same tests) and in the sandbox with that image,
-whose verdicts matched, or differed only by a test the data pins as unable to pass on
-Linux (limit 16). A failure at construction raises, so tools/live.py spends nothing;
-in run_item it is recorded as error, with no call.
+unreachable, so both sides skip the same tests, and the clone left clean, ignored files
+included) and in the sandbox with that image, whose verdicts matched, or differed only
+by a test the data pins as unable to pass on Linux (limit 16). A failure at
+construction raises, so tools/live.py spends nothing; in run_item it is recorded as
+error, with no call.
 
 The image and the sandbox (A1.4): P2's pinned python:3.12-trixie with the project's
 dependency closure installed at build time, 18 wheels pinned by version and SHA-256.
@@ -92,7 +93,9 @@ Cost and time. Each run is one batch through P0's runner, at QS4's caps (40,000,
 prompt tokens, 500,000 output, 900,000 a call) on deepseek-flash: one batch reserves
 $9.0315264 off-peak at P0's default allowance of three unmetered attempts, and
 $27.5780064 at the lead's N = 28. tests/test_qs4h.py works both by hand. The budgets
-are in qs4h_items.json, with their derivation.
+are QS4's but two, in qs4h_items.json with their derivation: a tool call's timeout is
+320 s, 1.5 times a model's --control at h4 in the sandbox, and a run's budget 5,960 s,
+so that a run fits the lead's 2 hours (lead.md 19:54:31).
 
 Limits, each stated by the behaviour it concedes:
 1. QS4's own limits carry over, by their numbers in qs4.py (A1.10.1): 1 no network,
@@ -145,6 +148,16 @@ Limits, each stated by the behaviour it concedes:
     5 of 5 and 9 of 9. h4's comparison holds only with that one test pinned
     (parcels.P4.platform_failures; lead.md 15:13:14): the suite passes there without it,
     and it fails alone. A finding that it cannot pass on Linux is true of P4's work.
+17. Behaviours no test pins. verifier-P5's mutation sweep (verifier-P5.md 19:50:21, L2)
+    left 39 of 140 operator mutants of this module alive against the three test files
+    that need no Docker; none is a stated property or a fault today. The recorded
+    match's located flag and the unmatched and recorded_in_view_located counts are
+    pinned since, in tests/test_qs4h.py. Still unpinned: the results table's judged
+    mapping; run_item's status_basis; normalise_file's ledger-prefix case;
+    judgement_problems' finding form; which plant owns a diff block that only inserts;
+    the ledger copy's link refusal and manifest checks, since this account cannot make
+    a link; and rebuild_brief's line boundaries. The lines that face Docker were outside
+    the sweep, with tests/test_qs4h_docker.py, the file that pins them.
 """
 from __future__ import annotations
 
@@ -570,7 +583,10 @@ def run_gate_host(repo: Path, work: Path, *, timeout: float, script: str = "tool
     """The gate and its --control on the host, in a fresh clone of the replay repository
     under `work`, so the input is never touched. TMP, TEMP and TMPDIR point inside
     `work`, and DOCKER_HOST at a closed loopback port, so the tests that need Docker skip
-    as they must in the sandbox. The rest of the environment goes to the child unread."""
+    as they must in the sandbox; PYTHONDONTWRITEBYTECODE is set, as the sandbox sets it,
+    so Python's caches are not written. The rest of the environment goes to the child
+    unread. The clone must be clean afterwards, ignored files included, as QS4's check
+    reads it (verifier-P5's F3): a gate that wrote any file does not hold."""
     clone, tmp = Path(work) / f"host-{secrets.token_hex(4)}", Path(work) / f"tmp-{secrets.token_hex(4)}"
     head = git(repo, "rev-parse", "HEAD").decode().strip()
     git(Path(work), "clone", "-q", "--no-hardlinks", str(Path(repo).resolve()), str(clone.resolve()))
@@ -578,7 +594,8 @@ def run_gate_host(repo: Path, work: Path, *, timeout: float, script: str = "tool
     try:
         git(clone, "checkout", "-q", "--detach", head)
         tmp.mkdir()
-        env = dict(os.environ, TMP=str(tmp), TEMP=str(tmp), TMPDIR=str(tmp), DOCKER_HOST=UNREACHABLE_DOCKER)
+        env = dict(os.environ, TMP=str(tmp), TEMP=str(tmp), TMPDIR=str(tmp), DOCKER_HOST=UNREACHABLE_DOCKER,
+                   PYTHONDONTWRITEBYTECODE="1")
         for mode, extra in (("gate", []), ("control", ["--control"])):
             t0 = time.monotonic()
             r = subprocess.run([sys.executable, script, *extra], cwd=clone, capture_output=True, env=env,
@@ -586,7 +603,7 @@ def run_gate_host(repo: Path, work: Path, *, timeout: float, script: str = "tool
             text = r.stdout.decode("utf-8", "replace")
             out[mode] = {"exit": r.returncode, "parsed": qs4.parse_gate(text), "complete": True,
                          "sha256": sha256(text.encode("utf-8")), "duration_s": round(time.monotonic() - t0, 1)}
-        out["clean_after"] = not git(clone, "status", "--porcelain").strip()
+        out["clean_after"] = not git(clone, "status", "--porcelain", "--ignored").strip()
         return out
     finally:
         qs4._remove(clone)

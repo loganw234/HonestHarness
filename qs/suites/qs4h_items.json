@@ -49,8 +49,8 @@
  },
  "budgets": {
   "max_turns": 300,
-  "max_run_seconds": 6000,
-  "call_timeout_seconds": 300,
+  "max_run_seconds": 5960,
+  "call_timeout_seconds": 320,
   "max_output_chars": 32000,
   "malformed_retries": 3,
   "nudges": 2,
@@ -58,7 +58,7 @@
   "max_scratch_bytes": 536870912,
   "max_tokens_per_turn": 65536
  },
- "budgets_about": "QS4's budgets (qs4_items.json), the run's 6,000 s among them, until the gate's timings in the sandbox (P5.md) say otherwise: if a full gate run there takes more than 200 s, the per-call timeout becomes 1.5 times the slowest, and the run budget is set so a run fits the lead's 2 hours (lead.md 14:32:37, answer 3).",
+ "budgets_about": "QS4's budgets (qs4_items.json) but two, by the lead's rule (lead.md 14:32:37, answer 3) as applied at lead.md 19:54:31. A model's --control run at h4, in the sandbox without the one pinned test, took 208.1 s (verifier-P5.md 19:50:21), over the rule's 200 s, so a tool call's timeout is 320 s, 1.5 times that, rounded up. The run's budget is then 5,960 s, so that a run, one call more with P2's 20 s of kill grace (KILL_AFTER_S and BACKSTOP_S), and 15 minutes fit the lead's 2 hours: 5,960 + 320 + 20 + 900 = 7,200 s.",
  "settings": {
   "stream": true,
   "tolerance": 2,
@@ -965,7 +965,7 @@
      "id": "P4-A",
      "key_id": "A",
      "shape": "text",
-     "about": "the dispatch tells every run, real tips included, that the copy holds two planted faults",
+     "about": "QS4's prompt now tells each run, on either condition, that its copy has two faults, where the tip says only that it may have some",
      "markers": [
       [
        "may hold"
@@ -1000,7 +1000,7 @@
      "id": "P4-B",
      "key_id": "B",
      "shape": "rule",
-     "about": "a planted item passes when the screen catches one plant of its two",
+     "about": "QS4's status gives a planted item a pass when any one of its plants is caught, where the tip requires every plant",
      "markers": [
       [
        "both"
