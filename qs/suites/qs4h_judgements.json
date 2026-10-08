@@ -1,0 +1,5 @@
+{
+  "format": 1,
+  "about": "The lead's judgements of QS4h's live runs, each checked by a verifier, recorded as judgement (AMENDMENT-1.md, A1.5). One entry per plant of a planted run (verdict caught or missed: whether the run's located finding states the plant's fault), and one per finding of a run that the lead adjudicates against this round's recorded findings (verdict match, with the recorded finding's id in `recorded`; new true; or false alarm). Each names the run's record_id, who judged and who checked, and a note in the judge's own words: never the model's text. Empty until the runs.",
+  "judgements": []
+}

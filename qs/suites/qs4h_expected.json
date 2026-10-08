@@ -1,0 +1,1403 @@
+{
+  "briefs_rebuilt": {
+    "briefs/_common.md": "2f1b5894f6661f286919a894704c8f0c10d972c3316715ac34424271777fd8b8",
+    "briefs/_verifier.md": "340d7779e9ddad3a8a7da30a9d242d6d25d0ea6e6a4e748f68b6e368ed0c2c90"
+  },
+  "builds": {
+    "P1": "61c7e1eed2170ac1b702b5e88260d367ab2481ee",
+    "P2": "ceef2e2909ccf03545a901703187dace4a106bbe",
+    "P3": "beb61762dd04cdb2b37892e4e3d7d7d05626074a",
+    "P4": "9c38c2747572b94c428ab2afacfcd5d8cb93e120"
+  },
+  "cuts": {
+    "h1-planted": {
+      "bytes": 210938,
+      "digest": "d04bad450905f023f99107836d264e1ac5752159f2488e261bf0a3514875a344",
+      "files": [
+        "P2.md",
+        "README.md",
+        "briefs/P1.md",
+        "briefs/P2.md",
+        "briefs/P3.md",
+        "briefs/_common.md",
+        "briefs/_verifier.md",
+        "briefs/cs7-reader.md",
+        "briefs/verifier-P0.md",
+        "briefs/verifier-P1.md",
+        "briefs/verifier-P2.md",
+        "cs7-reader.md",
+        "lead.md",
+        "verifier-P0.md"
+      ]
+    },
+    "h1-real": {
+      "bytes": 210938,
+      "digest": "51260a37faa8ff6f963f1d8c4002075e600f0851d6244f21532397d216d5ae63",
+      "files": [
+        "P2.md",
+        "README.md",
+        "briefs/P1.md",
+        "briefs/P2.md",
+        "briefs/P3.md",
+        "briefs/_common.md",
+        "briefs/_verifier.md",
+        "briefs/cs7-reader.md",
+        "briefs/verifier-P0.md",
+        "briefs/verifier-P1.md",
+        "briefs/verifier-P2.md",
+        "cs7-reader.md",
+        "lead.md",
+        "verifier-P0.md"
+      ]
+    },
+    "h2-planted": {
+      "bytes": 207811,
+      "digest": "04083f91dac1d6d488e85b9bc2e88d2ef27a8bcef5a52bca8072388aad4bfd71",
+      "files": [
+        "P1.md",
+        "README.md",
+        "briefs/P1.md",
+        "briefs/P2.md",
+        "briefs/P3.md",
+        "briefs/P4.md",
+        "briefs/_common.md",
+        "briefs/_verifier.md",
+        "briefs/cs7-reader.md",
+        "briefs/verifier-P0.md",
+        "briefs/verifier-P1.md",
+        "briefs/verifier-P2.md",
+        "cs7-reader.md",
+        "lead.md",
+        "verifier-P0.md",
+        "verifier-P1.md"
+      ]
+    },
+    "h2-real": {
+      "bytes": 207811,
+      "digest": "aded72937527e3febef5ec0b233ae6e61a36d79496c858066b1c5c588d11356d",
+      "files": [
+        "P1.md",
+        "README.md",
+        "briefs/P1.md",
+        "briefs/P2.md",
+        "briefs/P3.md",
+        "briefs/P4.md",
+        "briefs/_common.md",
+        "briefs/_verifier.md",
+        "briefs/cs7-reader.md",
+        "briefs/verifier-P0.md",
+        "briefs/verifier-P1.md",
+        "briefs/verifier-P2.md",
+        "cs7-reader.md",
+        "lead.md",
+        "verifier-P0.md",
+        "verifier-P1.md"
+      ]
+    },
+    "h3-planted": {
+      "bytes": 426204,
+      "digest": "6f814627e7b5457cf4ca12ae22ed6a02573cc256536cd05017e6ba51d5a40544",
+      "files": [
+        "P1.md",
+        "P2.md",
+        "README.md",
+        "briefs/P1.md",
+        "briefs/P2.md",
+        "briefs/P3.md",
+        "briefs/P4.md",
+        "briefs/_common.md",
+        "briefs/_verifier.md",
+        "briefs/cs7-reader.md",
+        "briefs/verifier-P0.md",
+        "briefs/verifier-P1.md",
+        "briefs/verifier-P1b.md",
+        "briefs/verifier-P2.md",
+        "briefs/verifier-P3.md",
+        "cs7-reader.md",
+        "lead.md",
+        "verifier-P0.md",
+        "verifier-P1.md",
+        "verifier-P1b.md",
+        "verifier-P2.md"
+      ]
+    },
+    "h3-real": {
+      "bytes": 426204,
+      "digest": "d862f952d591a0e434d23586968d82eb977520d2a69265c8519406dd2b9e114e",
+      "files": [
+        "P1.md",
+        "P2.md",
+        "README.md",
+        "briefs/P1.md",
+        "briefs/P2.md",
+        "briefs/P3.md",
+        "briefs/P4.md",
+        "briefs/_common.md",
+        "briefs/_verifier.md",
+        "briefs/cs7-reader.md",
+        "briefs/verifier-P0.md",
+        "briefs/verifier-P1.md",
+        "briefs/verifier-P1b.md",
+        "briefs/verifier-P2.md",
+        "briefs/verifier-P3.md",
+        "cs7-reader.md",
+        "lead.md",
+        "verifier-P0.md",
+        "verifier-P1.md",
+        "verifier-P1b.md",
+        "verifier-P2.md"
+      ]
+    },
+    "h4-planted": {
+      "bytes": 556604,
+      "digest": "61370d9cd691cd1361bd52c800eef98d5f733c3145ea1eea95fe5e8d31dccee4",
+      "files": [
+        "P1.md",
+        "P2.md",
+        "P3.md",
+        "README.md",
+        "briefs/P1.md",
+        "briefs/P2.md",
+        "briefs/P3.md",
+        "briefs/P4.md",
+        "briefs/_common.md",
+        "briefs/_verifier.md",
+        "briefs/cs7-reader.md",
+        "briefs/verifier-P0.md",
+        "briefs/verifier-P0r.md",
+        "briefs/verifier-P1.md",
+        "briefs/verifier-P1b.md",
+        "briefs/verifier-P2.md",
+        "briefs/verifier-P3.md",
+        "briefs/verifier-P4.md",
+        "cs7-reader.md",
+        "lead.md",
+        "verifier-P0.md",
+        "verifier-P0r.md",
+        "verifier-P1.md",
+        "verifier-P1b.md",
+        "verifier-P2.md",
+        "verifier-P3.md"
+      ]
+    },
+    "h4-real": {
+      "bytes": 556604,
+      "digest": "758d86c56e5ec8e77e2add44e50fa25c50f91d09023c698e4ad66c5d40d4fd45",
+      "files": [
+        "P1.md",
+        "P2.md",
+        "P3.md",
+        "README.md",
+        "briefs/P1.md",
+        "briefs/P2.md",
+        "briefs/P3.md",
+        "briefs/P4.md",
+        "briefs/_common.md",
+        "briefs/_verifier.md",
+        "briefs/cs7-reader.md",
+        "briefs/verifier-P0.md",
+        "briefs/verifier-P0r.md",
+        "briefs/verifier-P1.md",
+        "briefs/verifier-P1b.md",
+        "briefs/verifier-P2.md",
+        "briefs/verifier-P3.md",
+        "briefs/verifier-P4.md",
+        "cs7-reader.md",
+        "lead.md",
+        "verifier-P0.md",
+        "verifier-P0r.md",
+        "verifier-P1.md",
+        "verifier-P1b.md",
+        "verifier-P2.md",
+        "verifier-P3.md"
+      ]
+    }
+  },
+  "ds": {
+    "digest": "eec91cb30f73f91a691828b1d0ea46ad537db4ee198beb355e206b2193dd0388",
+    "files": {
+      "balance.txt": "5471fef518a0718448224985bdd99db47821a70edebe0dfe56b1b423f255774a",
+      "chat_completion.html": "9639568ec758c93f42873bdf596cefba1627f9db9078ac4db2078c11963ac631",
+      "chat_completion.txt": "c67c8ee391eb8ecf3e07db46b66fea10f9a0fbe81018ffeae768d71a2c0993cc",
+      "chat_completion_full.txt": "30e479ea530b182be8b8bf9d71fa714c768245c82c3f05dbda1657b073d074ec",
+      "faq_api.txt": "6a915804a5114dcb4a2f00e3a230cf8d97910680b7b5bee299b37f21fad29d58",
+      "faq_main.js": "10996a5ecfcfded0fc0333f1fe587c0ac635e3e08060affb9281792a5480a8b0",
+      "function_calling.txt": "a715c4dc39446a0db4c20f9cdc538990c758e6181b1b4f4e22f82417276b8acf",
+      "guides_anthropic_api.txt": "352432706447c382edf0c0818dd8c8e6ffe19b659071634bb0a00de4a2379663",
+      "guides_json_mode.txt": "7a05620968feedaf676e3c1f9b2e416cf6d6e5086a7db8516b3d9a328d7777a1",
+      "guides_responses_api.txt": "76f95d47312e6db65ed72c9893691f0e3dfe874862fdd8f6a0f9015e2ff390b8",
+      "harness_quickstart.txt": "a04b4463097efb0430ce368b1c68348e415a427b26659b75d19114ddca1c9543",
+      "hf_v41flash_readme.md": "347c9db4e5506acb531cbc3b724407ab88e9af8781679152f0823d7bac16d251",
+      "hf_v4pro0813_readme.md": "61755d88e95789fcd7a36f50892f97bba977a30fc99d0f2907ab787ed10b0e66",
+      "home.txt": "21b123240346fc2840a3ff5935c2677e138ed06724ca40b77646d62dccc9d477",
+      "kv_cache.txt": "50064b640b4b9276754dc7cad223eb234d32d6626b5e1c88ad6de180f7a0471d",
+      "list_models.txt": "27783ade5d1cb8b48fb603daa32b40af1656caadbe171229d51e6dea5e3f1cb2",
+      "news_news260424.txt": "386d1d6e96dd5dc109ec7c3b6eed3ec41792f7a8f9c1a0261c0f26d54f0d2919",
+      "news_news260731.txt": "7dd229731f53143675708033181346b321bee7361b24fbc66b2a957596db92d8",
+      "news_news260813.txt": "4f550f2349a54191e4a1fab4ff399cf279b00ec89a411f9309e3c4b10198b051",
+      "news_news260821.txt": "1851a9b97298bbdc08e53eaca5ba25bfe6fce42d29a7b2846764e3f07e521798",
+      "news_news260910.txt": "515fe4abe51a9d6164a3db9e0f56893429e7b203d0e2f2634861b27f0f4178c3",
+      "pricing.txt": "c33c9b88e0c409918db075bf9c4b400869db66c9b4e342984b06e60de1aaf858",
+      "quick_start_error_codes.txt": "fc1b3454ebedbe20852e0f4052e511ca447128be5ba53e9bacf3dc003723e37f",
+      "quick_start_token_usage.txt": "5a2e667141686a6ca0a640424adec22735815011a7358fc947f0e3bacc32c075",
+      "rate_limit.txt": "81a06c35bff29321372c1594559c9cf7cfa51e4f091a5b22bf0a181416f3dcb0",
+      "reasoning.txt": "9e66b5a31b32d8c61f44d9096cad2333b22d71f425904e7b040cf6c40966f4c9",
+      "thinking.txt": "57bac5e10b1869300c15c0c2d1c3ade375a1b1a0d55e344c7852080fa0ee82c1",
+      "tool_calls.txt": "c0b757f03a3ed7befeca2151983ffc626dc83cdb4f1fe04b5ba3e041dbd56dbd",
+      "updates.txt": "a9b90b4b3ed236e5d097da406058c4b9bee8c23f28ca4637f924a84911d30b08",
+      "zh-cn_quick_start_pricing.txt": "a8aec09b993c7acb8aa58b74bfb402a11e8abf7ead1120e2bd721d868501057a",
+      "zh_news260910.txt": "7c5943b28184732ccb4bb20e4402f570d2623b2a35813e1c84b4754b9274c35e",
+      "zh_updates.txt": "fdae17b02990a1c50dab098cbd2455f2358e9ba78f08d820a51ea28db5ad175b"
+    }
+  },
+  "format": 1,
+  "parcelround": {
+    "commit": "f42242ecc1707a3d36c52e4b2a3b580ee2783e5b",
+    "files": [
+      ".gitattributes",
+      ".gitignore",
+      "ADOPTION.md",
+      "CASE-STUDY-2.md",
+      "CASE-STUDY-3.md",
+      "CASE-STUDY-4.md",
+      "CASE-STUDY-5.md",
+      "CASE-STUDY-6.md",
+      "CASE-STUDY.md",
+      "LICENSE",
+      "METHOD.md",
+      "README.md",
+      "archive/round2-ledger.zip",
+      "archive/round3-ledger.zip",
+      "archive/round4-ledger.zip",
+      "archive/round4-second-ledger.zip",
+      "archive/round5-ledger.zip",
+      "archive/round6-ledger.zip",
+      "archive/round6-practice-survey.md",
+      "templates/brief.md",
+      "templates/checklists.md",
+      "templates/ledger.md",
+      "templates/verifier.md",
+      "tools/check_method.py"
+    ],
+    "objects": 446,
+    "tree": "bbc8b20d204f19c9e35a3fe219338cf0cdf4cee2"
+  },
+  "plant_spans": {
+    "P1-A": [
+      {
+        "file": "qs/suites/qs1_cases.json",
+        "kind": "replacement",
+        "lines": [
+          582,
+          582
+        ],
+        "tip_lines": [
+          582,
+          582
+        ]
+      },
+      {
+        "file": "qs/suites/qs1_cases.json",
+        "kind": "replacement",
+        "lines": [
+          600,
+          600
+        ],
+        "tip_lines": [
+          600,
+          600
+        ]
+      }
+    ],
+    "P1-B": [
+      {
+        "file": "qs/suites/qs1.py",
+        "kind": "replacement",
+        "lines": [
+          377,
+          377
+        ],
+        "tip_lines": [
+          377,
+          377
+        ]
+      }
+    ],
+    "P2-A": [
+      {
+        "file": "qs/agent/loop.py",
+        "kind": "deletion",
+        "lines": [
+          294,
+          295
+        ],
+        "tip_lines": [
+          301,
+          301
+        ]
+      }
+    ],
+    "P2-B": [
+      {
+        "file": "qs/agent/loop.py",
+        "kind": "deletion",
+        "lines": [
+          269,
+          270
+        ],
+        "tip_lines": [
+          270,
+          275
+        ]
+      }
+    ],
+    "P3-A": [
+      {
+        "file": "qs/suites/qs6_items.json",
+        "kind": "replacement",
+        "lines": [
+          76,
+          76
+        ],
+        "tip_lines": [
+          76,
+          76
+        ]
+      }
+    ],
+    "P3-B": [
+      {
+        "file": "qs/suites/qs6_items.json",
+        "kind": "replacement",
+        "lines": [
+          28,
+          28
+        ],
+        "tip_lines": [
+          28,
+          28
+        ]
+      }
+    ],
+    "P4-A": [
+      {
+        "file": "qs/suites/qs4_prompt.md",
+        "kind": "replacement",
+        "lines": [
+          26,
+          26
+        ],
+        "tip_lines": [
+          26,
+          26
+        ]
+      }
+    ],
+    "P4-B": [
+      {
+        "file": "qs/suites/qs4.py",
+        "kind": "replacement",
+        "lines": [
+          1006,
+          1006
+        ],
+        "tip_lines": [
+          1006,
+          1006
+        ]
+      }
+    ]
+  },
+  "recorded_tip_lines": {
+    "P1-v1": [
+      []
+    ],
+    "P1-v2": [
+      []
+    ],
+    "P1-v3": [
+      []
+    ],
+    "P1-v4": [
+      []
+    ],
+    "P1-v5": [
+      []
+    ],
+    "P1-v6": [
+      []
+    ],
+    "P2-v1": [
+      [
+        [
+          293,
+          293
+        ],
+        [
+          97,
+          99
+        ],
+        [
+          111,
+          111
+        ]
+      ],
+      [
+        [
+          123,
+          123
+        ]
+      ]
+    ],
+    "P2-v10": [
+      [],
+      [
+        [
+          48,
+          50
+        ]
+      ]
+    ],
+    "P2-v11": [
+      [
+        [
+          33,
+          35
+        ]
+      ]
+    ],
+    "P2-v12": [
+      [
+        [
+          5,
+          5
+        ]
+      ]
+    ],
+    "P2-v13": [
+      [
+        [
+          114,
+          114
+        ]
+      ]
+    ],
+    "P2-v14": [
+      [
+        [
+          140,
+          141
+        ]
+      ]
+    ],
+    "P2-v15": [
+      []
+    ],
+    "P2-v2": [
+      [
+        [
+          152,
+          152
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          155,
+          158
+        ]
+      ]
+    ],
+    "P2-v3": [
+      [
+        [
+          111,
+          114
+        ]
+      ]
+    ],
+    "P2-v4": [
+      [
+        [
+          462,
+          465
+        ]
+      ]
+    ],
+    "P2-v5": [
+      [
+        [
+          462,
+          462
+        ]
+      ],
+      [
+        [
+          204,
+          204
+        ]
+      ]
+    ],
+    "P2-v6": [
+      [
+        [
+          184,
+          190
+        ],
+        [
+          338,
+          338
+        ],
+        [
+          33,
+          35
+        ]
+      ]
+    ],
+    "P2-v7": [
+      [
+        [
+          279,
+          279
+        ]
+      ]
+    ],
+    "P2-v8": [
+      [
+        [
+          91,
+          110
+        ]
+      ]
+    ],
+    "P2-v9": [
+      [
+        [
+          136,
+          138
+        ]
+      ]
+    ],
+    "P3-v1": [
+      [
+        [
+          53,
+          57
+        ],
+        [
+          745,
+          753
+        ]
+      ],
+      [
+        [
+          79,
+          83
+        ]
+      ]
+    ],
+    "P3-v10": [
+      [
+        [
+          75,
+          80
+        ]
+      ]
+    ],
+    "P3-v11": [
+      []
+    ],
+    "P3-v2": [
+      [
+        [
+          26,
+          27
+        ]
+      ]
+    ],
+    "P3-v3": [
+      [
+        [
+          27,
+          28
+        ]
+      ]
+    ],
+    "P3-v4": [
+      [
+        [
+          27,
+          27
+        ]
+      ]
+    ],
+    "P3-v5": [
+      [
+        [
+          132,
+          134
+        ]
+      ]
+    ],
+    "P3-v6": [
+      []
+    ],
+    "P3-v7": [
+      [
+        [
+          488,
+          489
+        ]
+      ]
+    ],
+    "P3-v8": [
+      [
+        [
+          507,
+          523
+        ]
+      ]
+    ],
+    "P3-v9": [
+      [
+        [
+          421,
+          421
+        ]
+      ]
+    ],
+    "P4-v1": [
+      []
+    ],
+    "P4-v2": [
+      [
+        [
+          565,
+          565
+        ]
+      ]
+    ],
+    "P4-v3": [
+      [
+        [
+          59,
+          61
+        ]
+      ]
+    ],
+    "P4-v4": [
+      []
+    ],
+    "P4-v5": [
+      [
+        [
+          590,
+          590
+        ],
+        [
+          601,
+          602
+        ],
+        [
+          696,
+          696
+        ],
+        [
+          744,
+          744
+        ],
+        [
+          807,
+          807
+        ],
+        [
+          813,
+          815
+        ],
+        [
+          854,
+          854
+        ],
+        [
+          860,
+          860
+        ],
+        [
+          869,
+          869
+        ],
+        [
+          880,
+          880
+        ],
+        [
+          908,
+          908
+        ],
+        [
+          917,
+          917
+        ],
+        [
+          934,
+          934
+        ],
+        [
+          941,
+          941
+        ],
+        [
+          1066,
+          1066
+        ]
+      ]
+    ],
+    "P4-v6": [
+      []
+    ],
+    "P4-v7": [
+      [
+        [
+          194,
+          194
+        ]
+      ]
+    ],
+    "P4-v8": [
+      [
+        [
+          1008,
+          1008
+        ]
+      ]
+    ]
+  },
+  "repos": {
+    "h1-planted": {
+      "commit": "17f9d9fa446ee56dca39c941aa653121ea9f4450",
+      "files": [
+        ".gitattributes",
+        ".gitignore",
+        "LICENSE",
+        "README.md",
+        "Research/curiosity-explorer-direction.md",
+        "Research/open-weight-harness-requirements.md",
+        "Research/open-weight-harness-research.md",
+        "Research/open-weight-pilot-notes.md",
+        "Rounds/HonestHarness-R1/PLAN.md",
+        "Rounds/ParcelRound-R6/PLAN.md",
+        "Rounds/ParcelRound-R6/harness-notes.md",
+        "Rounds/ParcelRound-R6/practice-survey.md",
+        "prices/deepseek-2026-10-06.json",
+        "pyproject.toml",
+        "qs/__init__.py",
+        "qs/client.py",
+        "qs/fake.py",
+        "qs/guard.py",
+        "qs/identity.py",
+        "qs/keys.py",
+        "qs/prices.py",
+        "qs/providers/__init__.py",
+        "qs/providers/deepseek.py",
+        "qs/record.py",
+        "qs/registry.py",
+        "qs/schema/run_record.schema.json",
+        "qs/suite.py",
+        "qs/suites/__init__.py",
+        "qs/suites/qs1.py",
+        "qs/suites/qs1_cases.json",
+        "records/batches.jsonl",
+        "records/identity.jsonl",
+        "records/spend.jsonl",
+        "registry.json",
+        "tests/conftest.py",
+        "tests/fixtures/guard_fixtures.json",
+        "tests/test_check.py",
+        "tests/test_client_and_keys.py",
+        "tests/test_deepseek.py",
+        "tests/test_guard.py",
+        "tests/test_prices.py",
+        "tests/test_qs1.py",
+        "tests/test_qs1_cases.py",
+        "tests/test_record.py",
+        "tests/test_runner.py",
+        "tools/check.py",
+        "tools/live.py"
+      ],
+      "forbidden_blobs": [
+        "0ff06f968031241701b1c7ea83d23abb73515824",
+        "304465bfa5fc5f096213217a12abfdb21d1acd08",
+        "38c293ce3d26f1a455135a5014eb81c5617e666e",
+        "44d41ddd47ca8dd3b3bd9bbebe236f47b118bfe8",
+        "592b2a2a7bcaed19ff34d41684fca7e0fbf617f2",
+        "f3214222a3d740b6da4eb5f178317ca20cda11e3"
+      ],
+      "objects": 141,
+      "tree": "ff3f87e37cab05ad2a0b2db24f8c212830428893"
+    },
+    "h1-real": {
+      "commit": "61c7e1eed2170ac1b702b5e88260d367ab2481ee",
+      "files": [
+        ".gitattributes",
+        ".gitignore",
+        "LICENSE",
+        "README.md",
+        "Research/curiosity-explorer-direction.md",
+        "Research/open-weight-harness-requirements.md",
+        "Research/open-weight-harness-research.md",
+        "Research/open-weight-pilot-notes.md",
+        "Rounds/HonestHarness-R1/PLAN.md",
+        "Rounds/ParcelRound-R6/PLAN.md",
+        "Rounds/ParcelRound-R6/harness-notes.md",
+        "Rounds/ParcelRound-R6/practice-survey.md",
+        "prices/deepseek-2026-10-06.json",
+        "pyproject.toml",
+        "qs/__init__.py",
+        "qs/client.py",
+        "qs/fake.py",
+        "qs/guard.py",
+        "qs/identity.py",
+        "qs/keys.py",
+        "qs/prices.py",
+        "qs/providers/__init__.py",
+        "qs/providers/deepseek.py",
+        "qs/record.py",
+        "qs/registry.py",
+        "qs/schema/run_record.schema.json",
+        "qs/suite.py",
+        "qs/suites/__init__.py",
+        "qs/suites/qs1.py",
+        "qs/suites/qs1_cases.json",
+        "records/batches.jsonl",
+        "records/identity.jsonl",
+        "records/spend.jsonl",
+        "registry.json",
+        "tests/conftest.py",
+        "tests/fixtures/guard_fixtures.json",
+        "tests/test_check.py",
+        "tests/test_client_and_keys.py",
+        "tests/test_deepseek.py",
+        "tests/test_guard.py",
+        "tests/test_prices.py",
+        "tests/test_qs1.py",
+        "tests/test_qs1_cases.py",
+        "tests/test_record.py",
+        "tests/test_runner.py",
+        "tools/check.py",
+        "tools/live.py"
+      ],
+      "forbidden_blobs": [
+        "0ff06f968031241701b1c7ea83d23abb73515824",
+        "22e08231f49fabac166a161ef29d3553127a752f",
+        "38c293ce3d26f1a455135a5014eb81c5617e666e",
+        "44d41ddd47ca8dd3b3bd9bbebe236f47b118bfe8",
+        "af1f26cd971cd808d9c29493155e692aa0fcd141",
+        "f3214222a3d740b6da4eb5f178317ca20cda11e3"
+      ],
+      "objects": 141,
+      "tree": "1186949d3e0cf7c42786f7a002163c66ae48afa5"
+    },
+    "h2-planted": {
+      "commit": "821469434966a67e406f09ae488250f0d7307025",
+      "files": [
+        ".gitattributes",
+        ".gitignore",
+        "LICENSE",
+        "README.md",
+        "Research/curiosity-explorer-direction.md",
+        "Research/open-weight-harness-requirements.md",
+        "Research/open-weight-harness-research.md",
+        "Research/open-weight-pilot-notes.md",
+        "Rounds/HonestHarness-R1/PLAN.md",
+        "Rounds/ParcelRound-R6/PLAN.md",
+        "Rounds/ParcelRound-R6/harness-notes.md",
+        "Rounds/ParcelRound-R6/practice-survey.md",
+        "prices/deepseek-2026-10-06.json",
+        "pyproject.toml",
+        "qs/__init__.py",
+        "qs/agent/__init__.py",
+        "qs/agent/budgets.py",
+        "qs/agent/loop.py",
+        "qs/agent/sandbox.py",
+        "qs/agent/scripted.py",
+        "qs/agent/tools.py",
+        "qs/client.py",
+        "qs/fake.py",
+        "qs/guard.py",
+        "qs/identity.py",
+        "qs/keys.py",
+        "qs/prices.py",
+        "qs/providers/__init__.py",
+        "qs/providers/deepseek.py",
+        "qs/record.py",
+        "qs/registry.py",
+        "qs/schema/run_record.schema.json",
+        "qs/suite.py",
+        "records/batches.jsonl",
+        "records/identity.jsonl",
+        "records/spend.jsonl",
+        "registry.json",
+        "sandbox/controls.py",
+        "tests/conftest.py",
+        "tests/fixtures/guard_fixtures.json",
+        "tests/test_agent_loop.py",
+        "tests/test_agent_runner.py",
+        "tests/test_agent_tools.py",
+        "tests/test_check.py",
+        "tests/test_client_and_keys.py",
+        "tests/test_deepseek.py",
+        "tests/test_guard.py",
+        "tests/test_prices.py",
+        "tests/test_record.py",
+        "tests/test_runner.py",
+        "tests/test_sandbox.py",
+        "tests/test_sandbox_docker.py",
+        "tools/check.py",
+        "tools/live.py"
+      ],
+      "forbidden_blobs": [
+        "0ff06f968031241701b1c7ea83d23abb73515824",
+        "38c293ce3d26f1a455135a5014eb81c5617e666e",
+        "44d41ddd47ca8dd3b3bd9bbebe236f47b118bfe8",
+        "f3214222a3d740b6da4eb5f178317ca20cda11e3",
+        "f9276f6ba58e905d9314e6be36ca76b57373f93d"
+      ],
+      "objects": 155,
+      "tree": "0d562d75a06d5448a9afa56ea751e20d44a71dd1"
+    },
+    "h2-real": {
+      "commit": "ceef2e2909ccf03545a901703187dace4a106bbe",
+      "files": [
+        ".gitattributes",
+        ".gitignore",
+        "LICENSE",
+        "README.md",
+        "Research/curiosity-explorer-direction.md",
+        "Research/open-weight-harness-requirements.md",
+        "Research/open-weight-harness-research.md",
+        "Research/open-weight-pilot-notes.md",
+        "Rounds/HonestHarness-R1/PLAN.md",
+        "Rounds/ParcelRound-R6/PLAN.md",
+        "Rounds/ParcelRound-R6/harness-notes.md",
+        "Rounds/ParcelRound-R6/practice-survey.md",
+        "prices/deepseek-2026-10-06.json",
+        "pyproject.toml",
+        "qs/__init__.py",
+        "qs/agent/__init__.py",
+        "qs/agent/budgets.py",
+        "qs/agent/loop.py",
+        "qs/agent/sandbox.py",
+        "qs/agent/scripted.py",
+        "qs/agent/tools.py",
+        "qs/client.py",
+        "qs/fake.py",
+        "qs/guard.py",
+        "qs/identity.py",
+        "qs/keys.py",
+        "qs/prices.py",
+        "qs/providers/__init__.py",
+        "qs/providers/deepseek.py",
+        "qs/record.py",
+        "qs/registry.py",
+        "qs/schema/run_record.schema.json",
+        "qs/suite.py",
+        "records/batches.jsonl",
+        "records/identity.jsonl",
+        "records/spend.jsonl",
+        "registry.json",
+        "sandbox/controls.py",
+        "tests/conftest.py",
+        "tests/fixtures/guard_fixtures.json",
+        "tests/test_agent_loop.py",
+        "tests/test_agent_runner.py",
+        "tests/test_agent_tools.py",
+        "tests/test_check.py",
+        "tests/test_client_and_keys.py",
+        "tests/test_deepseek.py",
+        "tests/test_guard.py",
+        "tests/test_prices.py",
+        "tests/test_record.py",
+        "tests/test_runner.py",
+        "tests/test_sandbox.py",
+        "tests/test_sandbox_docker.py",
+        "tools/check.py",
+        "tools/live.py"
+      ],
+      "forbidden_blobs": [
+        "0ff06f968031241701b1c7ea83d23abb73515824",
+        "38c293ce3d26f1a455135a5014eb81c5617e666e",
+        "44d41ddd47ca8dd3b3bd9bbebe236f47b118bfe8",
+        "732771522d1803584a014fb32008e32dc435c780",
+        "f3214222a3d740b6da4eb5f178317ca20cda11e3"
+      ],
+      "objects": 155,
+      "tree": "03615a0fff522a981be4cce1871ef5e60182cbab"
+    },
+    "h3-planted": {
+      "commit": "83ee19641ce09eb52abdfc609cfe4ba7e684cfb4",
+      "files": [
+        ".gitattributes",
+        ".gitignore",
+        "LICENSE",
+        "README.md",
+        "Research/curiosity-explorer-direction.md",
+        "Research/open-weight-harness-requirements.md",
+        "Research/open-weight-harness-research.md",
+        "Research/open-weight-pilot-notes.md",
+        "Rounds/HonestHarness-R1/PLAN.md",
+        "Rounds/ParcelRound-R6/PLAN.md",
+        "Rounds/ParcelRound-R6/harness-notes.md",
+        "Rounds/ParcelRound-R6/practice-survey.md",
+        "prices/deepseek-2026-10-06.json",
+        "pyproject.toml",
+        "qs/__init__.py",
+        "qs/client.py",
+        "qs/fake.py",
+        "qs/guard.py",
+        "qs/identity.py",
+        "qs/keys.py",
+        "qs/prices.py",
+        "qs/providers/__init__.py",
+        "qs/providers/deepseek.py",
+        "qs/record.py",
+        "qs/registry.py",
+        "qs/schema/run_record.schema.json",
+        "qs/suite.py",
+        "qs/suites/__init__.py",
+        "qs/suites/qs1.py",
+        "qs/suites/qs1_cases.json",
+        "qs/suites/qs6.py",
+        "qs/suites/qs6_cuts.json",
+        "qs/suites/qs6_items.json",
+        "qs/suites/qs6_source.json",
+        "records/batches.jsonl",
+        "records/identity.jsonl",
+        "records/runs/qs1.jsonl",
+        "records/spend.jsonl",
+        "registry.json",
+        "tests/conftest.py",
+        "tests/fixtures/guard_fixtures.json",
+        "tests/test_check.py",
+        "tests/test_client_and_keys.py",
+        "tests/test_deepseek.py",
+        "tests/test_guard.py",
+        "tests/test_prices.py",
+        "tests/test_qs1.py",
+        "tests/test_qs1_cases.py",
+        "tests/test_qs6.py",
+        "tests/test_qs6_cut.py",
+        "tests/test_qs6_data.py",
+        "tests/test_qs6_score.py",
+        "tests/test_qs6_support.py",
+        "tests/test_qs6_tools.py",
+        "tests/test_record.py",
+        "tests/test_runner.py",
+        "tools/check.py",
+        "tools/live.py",
+        "tools/qs6_extract.py",
+        "tools/qs6_key.py"
+      ],
+      "forbidden_blobs": [
+        "0ff06f968031241701b1c7ea83d23abb73515824",
+        "13f895f5cf8e781618587176e098b087dcc6b863",
+        "38c293ce3d26f1a455135a5014eb81c5617e666e",
+        "44d41ddd47ca8dd3b3bd9bbebe236f47b118bfe8",
+        "f3214222a3d740b6da4eb5f178317ca20cda11e3"
+      ],
+      "objects": 196,
+      "tree": "b279fab23b92315efefa2af897f86a6895c826ad"
+    },
+    "h3-real": {
+      "commit": "beb61762dd04cdb2b37892e4e3d7d7d05626074a",
+      "files": [
+        ".gitattributes",
+        ".gitignore",
+        "LICENSE",
+        "README.md",
+        "Research/curiosity-explorer-direction.md",
+        "Research/open-weight-harness-requirements.md",
+        "Research/open-weight-harness-research.md",
+        "Research/open-weight-pilot-notes.md",
+        "Rounds/HonestHarness-R1/PLAN.md",
+        "Rounds/ParcelRound-R6/PLAN.md",
+        "Rounds/ParcelRound-R6/harness-notes.md",
+        "Rounds/ParcelRound-R6/practice-survey.md",
+        "prices/deepseek-2026-10-06.json",
+        "pyproject.toml",
+        "qs/__init__.py",
+        "qs/client.py",
+        "qs/fake.py",
+        "qs/guard.py",
+        "qs/identity.py",
+        "qs/keys.py",
+        "qs/prices.py",
+        "qs/providers/__init__.py",
+        "qs/providers/deepseek.py",
+        "qs/record.py",
+        "qs/registry.py",
+        "qs/schema/run_record.schema.json",
+        "qs/suite.py",
+        "qs/suites/__init__.py",
+        "qs/suites/qs1.py",
+        "qs/suites/qs1_cases.json",
+        "qs/suites/qs6.py",
+        "qs/suites/qs6_cuts.json",
+        "qs/suites/qs6_items.json",
+        "qs/suites/qs6_source.json",
+        "records/batches.jsonl",
+        "records/identity.jsonl",
+        "records/runs/qs1.jsonl",
+        "records/spend.jsonl",
+        "registry.json",
+        "tests/conftest.py",
+        "tests/fixtures/guard_fixtures.json",
+        "tests/test_check.py",
+        "tests/test_client_and_keys.py",
+        "tests/test_deepseek.py",
+        "tests/test_guard.py",
+        "tests/test_prices.py",
+        "tests/test_qs1.py",
+        "tests/test_qs1_cases.py",
+        "tests/test_qs6.py",
+        "tests/test_qs6_cut.py",
+        "tests/test_qs6_data.py",
+        "tests/test_qs6_score.py",
+        "tests/test_qs6_support.py",
+        "tests/test_qs6_tools.py",
+        "tests/test_record.py",
+        "tests/test_runner.py",
+        "tools/check.py",
+        "tools/live.py",
+        "tools/qs6_extract.py",
+        "tools/qs6_key.py"
+      ],
+      "forbidden_blobs": [
+        "0ff06f968031241701b1c7ea83d23abb73515824",
+        "38c293ce3d26f1a455135a5014eb81c5617e666e",
+        "44d41ddd47ca8dd3b3bd9bbebe236f47b118bfe8",
+        "948a69db995bbad7ccc1e8a716e7a344787baa41",
+        "f3214222a3d740b6da4eb5f178317ca20cda11e3"
+      ],
+      "objects": 196,
+      "tree": "20c07d15cc72039840934da5fb0228d0c1d68e79"
+    },
+    "h4-planted": {
+      "commit": "3b1b3cd3d053d6ea54a9efb1fb6e62e10a157951",
+      "files": [
+        ".gitattributes",
+        ".gitignore",
+        "LICENSE",
+        "README.md",
+        "Research/curiosity-explorer-direction.md",
+        "Research/open-weight-harness-requirements.md",
+        "Research/open-weight-harness-research.md",
+        "Research/open-weight-pilot-notes.md",
+        "Rounds/HonestHarness-R1/PLAN.md",
+        "Rounds/ParcelRound-R6/PLAN.md",
+        "Rounds/ParcelRound-R6/harness-notes.md",
+        "Rounds/ParcelRound-R6/practice-survey.md",
+        "prices/deepseek-2026-10-06.json",
+        "pyproject.toml",
+        "qs/__init__.py",
+        "qs/agent/__init__.py",
+        "qs/agent/budgets.py",
+        "qs/agent/loop.py",
+        "qs/agent/sandbox.py",
+        "qs/agent/scripted.py",
+        "qs/agent/tools.py",
+        "qs/client.py",
+        "qs/fake.py",
+        "qs/guard.py",
+        "qs/identity.py",
+        "qs/keys.py",
+        "qs/prices.py",
+        "qs/providers/__init__.py",
+        "qs/providers/deepseek.py",
+        "qs/record.py",
+        "qs/registry.py",
+        "qs/schema/run_record.schema.json",
+        "qs/suite.py",
+        "qs/suites/__init__.py",
+        "qs/suites/qs1.py",
+        "qs/suites/qs1_cases.json",
+        "qs/suites/qs4.py",
+        "qs/suites/qs4_expected.json",
+        "qs/suites/qs4_items.json",
+        "qs/suites/qs4_judgements.json",
+        "qs/suites/qs4_prompt.md",
+        "qs/suites/qs6.py",
+        "qs/suites/qs6_cuts.json",
+        "qs/suites/qs6_items.json",
+        "qs/suites/qs6_source.json",
+        "records/batches.jsonl",
+        "records/identity.jsonl",
+        "records/runs/qs1.jsonl",
+        "records/spend.jsonl",
+        "registry.json",
+        "sandbox/controls.py",
+        "tests/conftest.py",
+        "tests/fixtures/guard_fixtures.json",
+        "tests/test_agent_loop.py",
+        "tests/test_agent_runner.py",
+        "tests/test_agent_tools.py",
+        "tests/test_check.py",
+        "tests/test_client_and_keys.py",
+        "tests/test_deepseek.py",
+        "tests/test_guard.py",
+        "tests/test_prices.py",
+        "tests/test_qs1.py",
+        "tests/test_qs1_cases.py",
+        "tests/test_qs4.py",
+        "tests/test_qs4_data.py",
+        "tests/test_qs4_docker.py",
+        "tests/test_qs4_inputs.py",
+        "tests/test_qs4_score.py",
+        "tests/test_qs4_support.py",
+        "tests/test_qs6.py",
+        "tests/test_qs6_cut.py",
+        "tests/test_qs6_data.py",
+        "tests/test_qs6_score.py",
+        "tests/test_qs6_support.py",
+        "tests/test_qs6_tools.py",
+        "tests/test_record.py",
+        "tests/test_runner.py",
+        "tests/test_sandbox.py",
+        "tests/test_sandbox_docker.py",
+        "tools/check.py",
+        "tools/live.py",
+        "tools/qs4_cut.py",
+        "tools/qs4_rebuild.py",
+        "tools/qs6_extract.py",
+        "tools/qs6_key.py"
+      ],
+      "forbidden_blobs": [
+        "0ff06f968031241701b1c7ea83d23abb73515824",
+        "38c293ce3d26f1a455135a5014eb81c5617e666e",
+        "44d41ddd47ca8dd3b3bd9bbebe236f47b118bfe8",
+        "b16311158a062c19d302d26fc0c4142a018b14c3",
+        "ef59123fb840f0b3aa179420bae6bf1b6fd8e98f",
+        "f3214222a3d740b6da4eb5f178317ca20cda11e3"
+      ],
+      "objects": 301,
+      "tree": "6e42f814aedc788ed91c66dd7174445555babf96"
+    },
+    "h4-real": {
+      "commit": "9c38c2747572b94c428ab2afacfcd5d8cb93e120",
+      "files": [
+        ".gitattributes",
+        ".gitignore",
+        "LICENSE",
+        "README.md",
+        "Research/curiosity-explorer-direction.md",
+        "Research/open-weight-harness-requirements.md",
+        "Research/open-weight-harness-research.md",
+        "Research/open-weight-pilot-notes.md",
+        "Rounds/HonestHarness-R1/PLAN.md",
+        "Rounds/ParcelRound-R6/PLAN.md",
+        "Rounds/ParcelRound-R6/harness-notes.md",
+        "Rounds/ParcelRound-R6/practice-survey.md",
+        "prices/deepseek-2026-10-06.json",
+        "pyproject.toml",
+        "qs/__init__.py",
+        "qs/agent/__init__.py",
+        "qs/agent/budgets.py",
+        "qs/agent/loop.py",
+        "qs/agent/sandbox.py",
+        "qs/agent/scripted.py",
+        "qs/agent/tools.py",
+        "qs/client.py",
+        "qs/fake.py",
+        "qs/guard.py",
+        "qs/identity.py",
+        "qs/keys.py",
+        "qs/prices.py",
+        "qs/providers/__init__.py",
+        "qs/providers/deepseek.py",
+        "qs/record.py",
+        "qs/registry.py",
+        "qs/schema/run_record.schema.json",
+        "qs/suite.py",
+        "qs/suites/__init__.py",
+        "qs/suites/qs1.py",
+        "qs/suites/qs1_cases.json",
+        "qs/suites/qs4.py",
+        "qs/suites/qs4_expected.json",
+        "qs/suites/qs4_items.json",
+        "qs/suites/qs4_judgements.json",
+        "qs/suites/qs4_prompt.md",
+        "qs/suites/qs6.py",
+        "qs/suites/qs6_cuts.json",
+        "qs/suites/qs6_items.json",
+        "qs/suites/qs6_source.json",
+        "records/batches.jsonl",
+        "records/identity.jsonl",
+        "records/runs/qs1.jsonl",
+        "records/spend.jsonl",
+        "registry.json",
+        "sandbox/controls.py",
+        "tests/conftest.py",
+        "tests/fixtures/guard_fixtures.json",
+        "tests/test_agent_loop.py",
+        "tests/test_agent_runner.py",
+        "tests/test_agent_tools.py",
+        "tests/test_check.py",
+        "tests/test_client_and_keys.py",
+        "tests/test_deepseek.py",
+        "tests/test_guard.py",
+        "tests/test_prices.py",
+        "tests/test_qs1.py",
+        "tests/test_qs1_cases.py",
+        "tests/test_qs4.py",
+        "tests/test_qs4_data.py",
+        "tests/test_qs4_docker.py",
+        "tests/test_qs4_inputs.py",
+        "tests/test_qs4_score.py",
+        "tests/test_qs4_support.py",
+        "tests/test_qs6.py",
+        "tests/test_qs6_cut.py",
+        "tests/test_qs6_data.py",
+        "tests/test_qs6_score.py",
+        "tests/test_qs6_support.py",
+        "tests/test_qs6_tools.py",
+        "tests/test_record.py",
+        "tests/test_runner.py",
+        "tests/test_sandbox.py",
+        "tests/test_sandbox_docker.py",
+        "tools/check.py",
+        "tools/live.py",
+        "tools/qs4_cut.py",
+        "tools/qs4_rebuild.py",
+        "tools/qs6_extract.py",
+        "tools/qs6_key.py"
+      ],
+      "forbidden_blobs": [
+        "03a44457ffb4cdbd7fec6178f758f14d28cab75c",
+        "0ff06f968031241701b1c7ea83d23abb73515824",
+        "38c293ce3d26f1a455135a5014eb81c5617e666e",
+        "42131a0cd4f66ab2072babc50b3e6160d17ef690",
+        "44d41ddd47ca8dd3b3bd9bbebe236f47b118bfe8",
+        "f3214222a3d740b6da4eb5f178317ca20cda11e3"
+      ],
+      "objects": 301,
+      "tree": "3b61e00d12215a1b8d06c4a7678d5a1651ccaf67"
+    }
+  },
+  "sources": {
+    "digest": "832d9baeabd7d273a5129b05e18c03cb4e8bad10978d6731c84b101634884394",
+    "files": {
+      "HonestFramework/METHOD.md": "461274bd6055383e6d4597e89c161ca639d64f2acca3c1dd5d63a2da19308035",
+      "HonestFramework/WITH-PARCELROUND.md": "665861554e911ea3806277b519307335808ae7185bf7fd53c8cf77bfe74e81ad",
+      "cft-fp256/docs/ROADMAP.md": "16d7eaff142d9fcb0c49fc0db768730932aee852dab048d43d0fcd5380f5d168",
+      "cft-fp256/docs/VALIDATION.md": "dd9b575b7b9c7b91be9485ff156b2a6722a99ff43fbb87dcb2cf814ed56bfd71",
+      "loganw.dev/site/data/relations.json": "939048ff2312105b5b6769c2b75e9af99734263d9739e3d94c3c3c30bd8d2560",
+      "loganw.dev/site/facts.py": "75a3fb39bfefd36802568548caf186189830cbc88ea35d082e8449e226ce5414",
+      "loganw.dev/site/mapgen.py": "7c4fb84cbf2993ba75fb3021250a0591bbdea80705b541e254bf1f5da31b2446",
+      "loganw.dev/site/pages/home.py": "a8080ef22da9d56f800eebeb0363e85f2cf7ff32e2b82d5e8713ec6f824f0a16",
+      "loganw.dev/site/pages/method.py": "6d9b415b746a9b50b8093b499a8e0e7f743bbcc8dfd58bf1c30e2c13ddb0fabf",
+      "loganw.dev/site/pages/propose.py": "7cb8df90e29aa2d37f8336c2630cabc1778914f4f79b7c9c285799672a8d0534",
+      "loganw.dev/site/pages/thread_determinism.py": "9fe439c61ab145ec9a5df049724e53f331ec97ab6e18423dbbddefe5130f6d7c",
+      "loganw.dev/site/pages/work_parcelround.py": "a2a2c55e5d868cb906b6f1665c1a924a57cfb8340dbc1484e209a5d9abc11dc6"
+    }
+  }
+}
