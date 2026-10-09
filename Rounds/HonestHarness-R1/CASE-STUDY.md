@@ -190,11 +190,12 @@ as lead:
    found.**
    - DeepSeek's usage export matched the spend file to the last decimal
      (17:08:40).
-   - On 2026-10-07, nine of QS6's fourteen batches billed 41 to 56% of
-     what the price table computed for peak hours, at their last reads. The
-     other five reconciled within the $0.02 tolerance, which at their sizes
-     cannot show a half. A Chinese public holiday, billed off-peak all day,
-     is the believed cause: no calendar was read. The guard held the batch on
+   - On 2026-10-07, all fourteen of QS6's batches billed, at their last
+     reads, within a cent of half what the price table computed for peak
+     hours. Half of each of nine exceeds the $0.02 tolerance, so those nine
+     mismatched. Half of each of the other five does not, so those
+     reconciled. A Chinese public holiday, billed off-peak all day, is the
+     believed cause: no calendar was read. The guard held the batch on
      the mismatch until it was diagnosed (18:35:19).
    - A test showed that billed drops can match another model's rates and
      read as routing. The summary now names the unmetered attempts.
@@ -464,9 +465,9 @@ The meter's figures, from the committed spend file (`records/spend.jsonl`,
     minutes (07:54:20, 08:25:11), with 700 closed attempts showing no charge.
     The usage export has not yet confirmed it.
 - **Where the bill was lower, the price table was the likely cause, not the
-  meter:** on 2026-10-07, nine of QS6's fourteen batches billed 41 to 56% of
-  the peak computation. A Chinese public holiday is believed to explain it
-  (18:35:19).
+  meter:** on 2026-10-07, all fourteen of QS6's batches billed within a cent
+  of half the peak computation. A Chinese public holiday is believed to
+  explain it (18:35:19).
 - **Of the $250 ceiling, $19.30 is spent.** The ceiling covers the measured
   models' API bills. The Claude sessions are outside it, and Logan settled
   that with his answer on decision 7, "API bills, Qwen inside" (PLAN.md,
