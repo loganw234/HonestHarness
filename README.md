@@ -5,10 +5,10 @@ and [HonestFramework](https://github.com/loganw234/HonestFramework) on
 open-weight models. Its core is a non-LLM orchestrator that turns the rules
 agents now have to remember into mechanisms they cannot route around.
 
-**Status: research, with its first code in progress.** This repository holds
-the requirements, the research behind them, and the record of rounds run by
-hand that test them. Since round 1 it also holds `qs/`, the qualification
-suites' runner, described below.
+**Status: research, with its first code.** This repository holds the
+requirements, the research behind them, and the record of rounds run by hand
+that test them. Since round 1 it also holds `qs/`, the qualification suites'
+runner, described below.
 
 ## What is here
 
@@ -37,13 +37,28 @@ suites' runner, described below.
   - the practice survey the plan rested on;
   - the harness notes, which list every rule the lead applied by hand, with
     the requirement that would make it a mechanism.
+- [Rounds/HonestHarness-R1/](Rounds/HonestHarness-R1/): HonestHarness's
+  round 1, closed 2026-10-08. It measured DeepSeek's flash model over its API
+  on four suites. It holds:
+  - the plan of record and its amendment;
+  - the case study, and the table drawn by script from the committed
+    records;
+  - the harness notes;
+  - the round's ledger, archived with a manifest.
+- [Rounds/HonestHarness-R2/PLAN.md](Rounds/HonestHarness-R2/PLAN.md): round
+  2's plan of record, approved 2026-10-08 and not yet begun. It finishes
+  Phase 0 on DeepSeek, with three measurements and the first role-placement
+  table:
+  - verifying recorded defects;
+  - honesty when a task becomes infeasible;
+  - the lead on paper.
 
-## The code (round 1, in progress)
+## The code
 
 `qs/` is the first code: the qualification suites' runner, which measures a
 model through any OpenAI-compatible endpoint and records every number against
-the stack that produced it. Round 1's plan of record is
-[Rounds/HonestHarness-R1/PLAN.md](Rounds/HonestHarness-R1/PLAN.md).
+the stack that produced it. Round 1 built it, and its plan and case study are
+in [Rounds/HonestHarness-R1/](Rounds/HonestHarness-R1/).
 
 - **The front door.** `python tools/check.py` runs the gate: the tests, the
   records' schema, the spending guard's arithmetic, privacy and the live
