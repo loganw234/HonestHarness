@@ -520,6 +520,10 @@ names the notes it rests on.
 13. **A replay's rewriting of its record is checked against the record**
     (51). A cut in which one sentence names a commit as both the copy and
     the tip is refused.
+14. **A file a verifier checks is frozen under its hash** (52). A settled
+    version is a new file, and its entry names both hashes. In this round the
+    lead overwrote its judgement drafts after their checks, so the checked
+    versions can be traced only through the verifiers' own lists.
 
 ## The round's end
 

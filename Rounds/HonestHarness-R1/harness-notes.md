@@ -433,3 +433,16 @@ notes they rest on.
     the tip, each bound to the item's commit only where the original
     named the copy, and the cut's check refuses a cut in which one
     sentence names a commit as both.
+52. **A file a verifier checked was overwritten by its settled version.**
+    The lead recorded the SHA-256 of each judgements draft when its
+    verifier was dispatched (2026-10-07 14:10:01; 2026-10-08 07:54:20,
+    12:11:23 and 13:18:10). After each check it rebuilt the draft in
+    place, with the settled verdicts and `checked_by` set. So no recorded
+    hash matches a file now, and the drafts as checked cannot be shown.
+    The committed verdicts can still be traced through each verifier's
+    own list and the settlement entries, but only by reading both.
+    Mechanism: a file sent to a verifier is frozen under its hash, and
+    the harness refuses to overwrite it. A settled version is a new file,
+    whose entry names both hashes and the changes between them. This is
+    METHOD.md's "freeze what is audited" (CS3#11), applied to the lead's
+    own scratch.
