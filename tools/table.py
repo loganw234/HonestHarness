@@ -5,9 +5,9 @@
 The batches that enter are named in a selection file, each batch left out with
 its reason, and the script refuses a live batch the file does not name: no
 batch is pooled, or dropped, unseen. Each suite pools its own records with its
-own function: QS1's metrics(), QS6's table() and QS4's table(). This script
-selects the records, calls those, and adds each batch's runs, statuses,
-dropped attempts, tokens and cost.
+own function: QS1's metrics(), QS6's table(), QS4's table() and QS4h's
+table(). This script selects the records, calls those, and adds each batch's
+runs, statuses, dropped attempts, tokens and cost.
 
 Cost is given twice. "Computed" is the meter's, at the price table's rate for
 the period each reply arrived in. "Billed" is the balance's change, read at
@@ -151,13 +151,21 @@ def qs4_rows(selected: list[dict]) -> dict | None:
     return qs4.table(recs, qs4.load_judgements())
 
 
+def qs4h_rows(selected: list[dict]) -> dict | None:
+    recs = [r for r in selected if str(r.get("suite", "")).startswith("qs4h-")]
+    if not recs:
+        return None
+    from qs.suites import qs4h
+    return qs4h.table(recs, qs4h.load_judgements())
+
+
 def compute(records_dir: Path, selection: dict) -> dict:
     runs, lines = load(records_dir)
     selected, summaries = select(runs, lines, selection)
     batches = batch_rows(runs, lines, summaries, selection)
     total = sum((Decimal(b["computed_usd"] or "0") for b in batches), Decimal("0"))
     return {"qs1": qs1_rows(selected), "qs6": qs6_rows(selected), "qs4": qs4_rows(selected),
-            "batches": batches, "computed_usd_all_live_batches": str(total)}
+            "qs4h": qs4h_rows(selected), "batches": batches, "computed_usd_all_live_batches": str(total)}
 
 
 # -- Markdown ---------------------------------------------------------------------------------
@@ -206,6 +214,16 @@ def markdown(t: dict) -> str:
             out.append(f"| {rid} | {r['item']} | {r['status']} | {r['plants_caught_screen']} | "
                        f"{r['plants_caught_judged']} | {r['findings']} | "
                        f"{r['r6_in_view_located']}/{r['r6_in_view']} | {r['read']} | {r['output']} | "
+                       f"{r['cost_usd']} |")
+    if t.get("qs4h"):
+        out += ["", "## QS4h", "",
+                "| run | item | status | verdict | plants caught, screen | plants caught, judged | findings | "
+                "recorded in-view findings located | read | output | cost |",
+                "|---|---|---|---|---|---|---|---|---|---|---|"]
+        for rid, r in t["qs4h"]["rows"].items():
+            out.append(f"| {rid} | {r['item']} | {r['status']} | {r['verdict']} | {r['plants_caught_screen']} | "
+                       f"{r['plants_caught_judged']} | {r['findings']} | "
+                       f"{r['recorded_in_view_located']}/{r['recorded_in_view']} | {r['read']} | {r['output']} | "
                        f"{r['cost_usd']} |")
     out += ["", "## Batches", "",
             "| batch | thinking | entered | runs | statuses | dropped attempts | read (hit/miss) | "

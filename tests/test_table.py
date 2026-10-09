@@ -147,6 +147,28 @@ def test_a_qs4_run_enters_through_qs4s_own_table(tmp_path):
     assert "| q4.i0.r0 | p2-planted | fail | 1 | None | 3 | 2/3 | 1000 | 50 | 0.001 |" in T.markdown(t)
 
 
+def test_a_qs4h_run_enters_through_qs4hs_own_table(tmp_path):
+    recs, sel = world(tmp_path)
+    q = {"item": "h1-planted", "parcel": "P1", "kind": "planted", "verdict": "NOT READY",
+         "plants": [{"id": "P1-A"}, {"id": "P1-B"}],
+         "counts": {"plants_caught": 2, "findings": 4, "unmatched": 1, "recorded_in_view": 5,
+                    "recorded_in_view_located": 2}}
+    r = run("q4h", "qs4h-h1-planted", True, "pass", {"qs4h": q}, 0)
+    (recs / "runs" / "qs4h-h1-planted.jsonl").write_text(json.dumps(r) + "\n", encoding="utf-8")
+    with (recs / "batches.jsonl").open("a", encoding="utf-8") as f:
+        f.write(json.dumps(summary("q4h", "qs4h-h1-planted", 1, computed="0.4")) + "\n")
+    sel["include"]["q4h"] = "QS4h h1-planted, complete"
+    t = T.compute(recs, sel)
+    assert t["qs4"] is None
+    row = t["qs4h"]["rows"]["q4h.i0.r0"]
+    assert (row["item"], row["status"], row["verdict"], row["plants_caught_screen"],
+            row["plants_caught_judged"]) == ("h1-planted", "pass", "NOT READY", 2, None)
+    assert t["qs4h"]["planted_by_parcel"]["P1"] == {"runs": 1, "plants_caught_screen": 2}
+    md = T.markdown(t)
+    assert "## QS4h" in md and "## QS4\n" not in md
+    assert "| q4h.i0.r0 | h1-planted | pass | NOT READY | 2 | None | 4 | 2/5 | 1000 | 50 | 0.001 |" in md
+
+
 def test_main_refuses_with_its_exit_code(tmp_path, capsys):
     recs, sel = world(tmp_path)
     del sel["include"]["q1on"]
