@@ -44,7 +44,7 @@ notes they rest on.
    dispatch record, not from the briefs directory.
 10. **The lead's sealed view.** The lead hashed its own suspicions about P0
     after dispatch and revealed them after the report: the verifier found all
-    five, and about fifteen more. Mechanism: the harness seals the author's
+    five, among the twenty findings of its first pass (11:21:04). Mechanism: the harness seals the author's
     view at dispatch and scores the verifier against it, as it does plants.
 11. **Model placement by the owner's standing rule.** At 11:45 Logan set
     verifiers on Sonnet "going forward". One verifier was then mid-pass on
@@ -162,15 +162,17 @@ notes they rest on.
     survivors, and reports where the survivors cluster. That is where the
     tests stop, here at the meaning of the data. Questions need a check that
     their wording entails what their evidence answers.
-24. **A method that worked was in the lead's scratch, but not in its
-    brief.** Draft 4's verifier reproduced all five planted copies by
-    copying each real tip's commit header and replacing only its tree. The
-    plan said they reproduced, but P4's brief described the original
-    builder's amend, which P4 could not make reproduce four of them. The
-    script had sat in a plan verifier's scratch since 09:41. Mechanism: when
-    a claim of reproduction goes into a plan, the harness keeps the method
-    that reproduced it beside the claim. A later parcel gets the method, not
-    only the claim.
+24. **A method that worked was in a verifier's scratch, not in the brief.**
+    Draft 4's verifier reproduced all five planted copies by copying each
+    real tip's commit header and replacing only its tree. P4's brief
+    described the original builder's method. P4 reported that four of five
+    copies did not rebuild by it (P4.md 17:45:13). The lead answered with
+    the plan verifier's method, 5 of 5 (17:47:24). Ninety seconds later P4
+    found the fault in its own probe, and the brief's method held too
+    (17:48:54). Mechanism: when a claim of reproduction goes into a plan,
+    the harness keeps the method that reproduced it beside the claim, and a
+    parcel's failure to reproduce is checked against that method before
+    anything changes.
 25. **The provider's calendar is part of the price table.** DeepSeek bills
     every hour of a Chinese public holiday off-peak. The table priced
     2026-10-07 01:20 UTC as peak, so the meter over-counted two QS6 batches
@@ -248,8 +250,8 @@ notes they rest on.
     composes the copy's message from every commit it squashes, in order, or
     states which one it took, and the verifier is told.
 36. **Sonnet verifiers caught 8 of 8 plants, each in its first pass.**
-    Every plant had survived its parcel's own tests: candidates were run
-    against the suite, and only survivors were kept. The two that
+    Every plant had survived its parcel's own tests: they were chosen so
+    that only reading finds them (22:00:27). The two that
     verifier-P4's own mutation pass could not find were found by reading
     the code against its docstring, its design and round 6's ledger.
     Mechanism: the harness selects plants by survival, and measures a
@@ -332,11 +334,11 @@ notes they rest on.
     applies. A sentence flagged by several runs is settled from its
     primary source before any verdict on it stands.
 45. **The allowance that bounds unmetered cost chose which runs survived.**
-    QS4's lanes allowed 23 attempts closed with no reply a batch. Three
-    long runs on real tips met it, two of them P5's, at 16 to 18% of their
-    attempts against about 9% overall. Their late requests were the
-    largest, and larger requests drop more (failed medians of 161 and 180
-    messages, against 131 and 123 answered). So the runs that the
+    QS4's lanes allowed 23 attempts closed with no reply a batch. Four runs
+    met it, three of them P5's real tip and one P3's (14:08:26), at 16 to
+    18% of their attempts against about 9% overall. Their late requests were
+    the largest, and larger requests drop more: in one, the failed requests'
+    median was 161 messages, against 131 answered (13:26:42). So the runs that the
     allowance ended were the ones that wandered. A dataset trimmed by it
     leans to shorter runs. The allowance was set by the balance, not the
     rate. Each dropped attempt reserves the dearest call QS4's caps allow,
@@ -360,7 +362,9 @@ notes they rest on.
     the harness keeps a running reconciliation over every batch since the
     last top-up. It closes a period only with a balance read well after
     the last call, and confirms the read with the next one. Each open
-    billing question is held as a hypothesis with its expected effect.
+    billing question is held as a hypothesis with its expected effect. The
+    question stays open here: QS4h's reads point to no charge (07:54:20,
+    08:25:11), and the usage export has not confirmed it.
 47. **Thorough tests still left two doors, and a re-implementation drifted.**
     P5's 70 tests pinned nearly every guard of its code slice. The lead's
     two plants went where they did not reach:
@@ -426,7 +430,7 @@ notes they rest on.
     alike. Where the lead's entry names both commits, the mapped entry
     says the copy is the parcel's own tip, beside "P3's own commit was
     checked absent". A real-tip run read the contradiction and asked the
-    lead which commit it held (2026-10-08 06:01). It cannot tell the
+    lead which commit it held (its transcript, 2026-10-08 06:01). It cannot tell the
     conditions apart, since both read the same, but a verifier is asked
     to trust a record that disagrees with itself. Mechanism: the mapping
     rewrites to two distinct placeholders, one for the copy and one for

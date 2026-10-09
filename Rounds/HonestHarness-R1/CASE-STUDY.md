@@ -54,7 +54,7 @@ as lead:
 | 17:01 | P1's fix verified and merged; QS1 thinking on runs clean |
 | 17:10 | P2 merged; P4 dispatched |
 | 18:17 | P3 merged; QS6's live runs start |
-| 18:35 | QS6 holds: a Chinese public holiday billed off-peak |
+| 18:35 | QS6 holds: billed at about half the meter's peak figure; a Chinese public holiday is believed the cause |
 | 19:11 | QS6 at 64K meets requests closed with no reply; P0 gains a bounded retry |
 | 19:37 | Logan: continue the runs, with a $20 top-up |
 | 19:49 | the retry committed; verifier-P0r goes out |
@@ -122,8 +122,8 @@ as lead:
    - All 8 were found, each in the verifier's first pass, each with an input
      that shows it. P5's planted copy later went the same way: 2 of 2 in
      verifier-P5's first pass (19:54).
-   - Every plant had survived its parcel's own tests: the lead ran
-     candidates against each suite and kept only survivors.
+   - Every plant had survived its parcel's own tests: they were chosen so
+     that only reading finds them (22:00:27).
    - **Where they clustered:**
      - in a golden, and in a leak scan's places;
      - in a loop's counters;
@@ -135,10 +135,12 @@ as lead:
      not find either of its two. Reading the code against its docstring, its
      design and round 6's ledger found both.
 2. **The verifiers also found real faults, and the lead's.**
-   - verifier-P0, on Opus, found all five of the lead's sealed suspicions
-     and about fifteen more, over three passes.
-   - verifier-P2 found two real faults besides its plants (V3, V4), fixed
-     before the merge.
+   - verifier-P0, on Opus, found all five of the lead's sealed suspicions.
+     Its first pass recorded twenty findings: five sent back, eight
+     restated and seven limits (11:21:04). Two more were sent back in its
+     second pass.
+   - verifier-P2 found three real faults besides its plants (F3 to F5),
+     fixed before the merge (14:50:58).
    - verifier-P0r found four sentences of the lead's that claimed more than
      was true.
    - verifier-P4 found that the owner's address rides in the replay
@@ -152,11 +154,13 @@ as lead:
      phase 1;
    - P2's brief said `--mount` refuses a missing source. P2 found it does
      not, on Docker Desktop;
-   - P4's brief gave a builder's method that reproduces only one of five
-     planted copies. The method that reproduces all five sat in a plan
-     verifier's scratch.
 
-   Each was found before it cost a wrong result in the record, except QS1's.
+   P4 also reported that four of five planted copies did not rebuild by its
+   brief's method. The lead answered with a plan verifier's method, which
+   rebuilt all five (17:47:24). Ninety seconds later P4 found the fault in its
+   own probe, and the brief's method held too (P4.md 17:48:54).
+
+   Each brief error was found before it cost a wrong result in the record, except QS1's.
    That one was found by a live batch, corrected, and run again.
 4. **DeepSeek flash met QS1 and QS6 at their ceilings.**
    - **QS1:** every call/no-call decision was right in both settings (F1
@@ -170,22 +174,24 @@ as lead:
 5. **The provider dropped requests, and the harness learned to retry them
    boundedly.**
    - At 64K tokens and above, DeepSeek closed about 5 to 7% of requests with
-     no reply at all, at holiday peak. Below 64K, none of over 500 runs met
-     one.
+     no reply at all, at peak hours on 2026-10-07. Below 64K, none of the
+     264 calls at 16K and 32K met one (19:11:24).
    - P0 stopped each batch at the first such drop, as built, since the cost
      was unmetered. The lead added a bounded retry, with its cost reserved
      and counted. Its batch allowance of three proved too small, so a flag
      raised it, and the rest ran at 15.
    - Every retry inside the allowance was answered.
-   - Whether DeepSeek bills a dropped request was open here. QS4h settled it
-     for its own runs (item 9).
+   - Whether DeepSeek bills a dropped request was open here, and is still
+     open: item 9's reads point to no charge, and the usage export has not
+     confirmed it.
 6. **The meter matched the bill, and where it did not, the reason was
    found.**
    - DeepSeek's usage export matched the spend file to the last decimal
      (17:08:40).
-   - A Chinese public holiday is billed off-peak all day. The price table
-     priced it as peak, and the guard held the batch on the mismatch until
-     it was diagnosed (18:35:19).
+   - QS6's batches on 2026-10-07 were billed at about half what the price
+     table computed for peak hours. A Chinese public holiday, billed off-peak
+     all day, is the believed cause: no calendar was read. The guard held the
+     batch on the mismatch until it was diagnosed (18:35:19).
    - A test showed that billed drops can match another model's rates and
      read as routing. The summary now names the unmetered attempts.
 7. **The owner's priority overtook the lead's own gate,** and the record
@@ -201,8 +207,9 @@ as lead:
        beside them as the false-alarm set.
      - The inputs: what round 6's verifier had, through P2's loop and
        Docker sandbox, ending in a structured report.
-     - Four passes, at Logan's word (07:23:08). The first two ran one at a
-       time, the rest in three lanes at once (09:32:39).
+     - Four passes, at Logan's word (07:23:08). The first ran one at a
+       time, and the second mostly so. The rest ran in three lanes at once
+       (09:32:39).
      - 40 runs count, ten a pass. 18 more ran and are left out, each with
        its reason (below).
    - **The plants: 31 of 40, by pass 8, 8, 8 and 7.** Round 6's Opus
@@ -245,8 +252,8 @@ as lead:
        ran 169 turns and wrote 45 check scripts before the 40M prompt cap
        stopped it. In pass 4 one request outgrew the 900,000-token per-call
        cap.
-     - Run again under the same conditions, it reported twice, in 103 and
-       122 turns.
+     - Run again under the same conditions, it reported twice, in 122 and
+       103 turns (the run records of 151656Z and 202615Z).
    - **Cost.** The 40 runs cost $5.74, $0.14 a run. 98.8% of the 469M tokens
      they read were cache hits, and they wrote 5.9M. The 18 left out cost
      $2.47.
@@ -255,17 +262,16 @@ as lead:
        `cat -n`'s line form every time, and answered it in `grep -n`'s. The
        lead changed `read_file`'s form (db94d41).
      - **Closed requests.** It closed about 11% of requests with no reply, and
-       more as requests grew: in two lost runs the failed requests' median
-       was 161 and 180 messages, against 131 and 123 for the answered.
+       more as requests grew: in one lost run the failed requests' median
+       was 161 messages, against 131 for the answered (13:26:42).
        - Bounded retries answered all but two calls, each closed three
          times running.
        - The batch's allowance ended four more runs.
        - The lanes' combined reconciliation agreed with a balance read two
-         minutes after the last call, to the cent (14:08:26). A later read
-         was $0.08 short (18:47:34): about $0.00023 for each of the 346
-         closed attempts in the lanes, or charges posted late. QS4h's
-         evidence (item 9) favours charges posted late. The usage export
-         settles it.
+         minutes after the last call, within the balance's rounding
+         (14:08:26). A later read was $0.08 short (18:47:34): about $0.00023
+         for each of the 346 closed attempts in the lanes, or charges posted
+         late. The usage export settles it.
      - **The runs left out:**
        - 2 refused by the filter;
        - 7 ended by closed requests;
@@ -355,10 +361,10 @@ as lead:
        its own reruns, so one queued a second rerun of h1-real against the
        rule. The lead caught it and restarted the lanes on one shared list
        (05:00:45).
-     - **The closed requests were not billed:** the combined reconciliation
+     - **The closed requests show no charge:** the combined reconciliation
        agreed with the meter to under a cent, with 700 closed attempts in
-       the lanes. It held at reads 10.5 and 42 minutes after the last call
-       (07:54:20, 08:25:11).
+       the lanes, at reads 10.5 and 42 minutes after the last call
+       (07:54:20, 08:25:11). The usage export has not yet confirmed it.
 10. **The runtime's limits shaped the round.**
     - A background job stops at 2 hours. So batches ran one per job, QS4's
       run budget is 6,000 s, and a proof run given too short a limit had to
@@ -442,19 +448,25 @@ The meter's figures, from the committed spend file (`records/spend.jsonl`,
 | the content filter's diagnostics, and probes | $0.003 |
 | **all** | **$19.304** |
 
-- **Each check the meter faced agreed with the bill, within its tolerance.**
-  - The batches reconciled alone.
-  - QS4's lanes, read together, agreed to the cent two minutes after the last
-    call (14:08:26). A later read, after Logan's $20, was $0.08 short
+- **The meter against the bill.** Of the 122 live batches, 35 reconciled
+  alone at their first read, and 71 ran in lanes and were reconciled only
+  together. 16 disagreed at their first read. Seven agreed at a later read,
+  once their bills had posted. Nine of QS6's stayed at about half (below).
+  - QS4's lanes, read together, agreed within the balance's rounding two
+    minutes after the last call (14:08:26). A later read, after Logan's $20, was $0.08 short
     (18:47:34), inside the combined tolerance of $0.28. The usage export says
     where the $0.08 went, and it is still to come.
   - QS4h's lanes, read together, agreed to under a cent at 10.5 and 42
-    minutes (07:54:20, 08:25:11), with 700 closed attempts unbilled.
-- **Where the bill was lower, the price table was wrong, not the meter:** a
-  Chinese public holiday is billed off-peak, at about half (18:35:19).
+    minutes (07:54:20, 08:25:11), with 700 closed attempts showing no charge.
+    The usage export has not yet confirmed it.
+- **Where the bill was lower, the price table was the likely cause, not the
+  meter:** QS6's batches on 2026-10-07 billed at about half the peak
+  computation, and a Chinese public holiday is believed to explain it
+  (18:35:19).
 - **Of the $250 ceiling, $19.30 is spent.** The ceiling covers the measured
   models' API bills; the Claude sessions, the Haiku agents among them, are
-  outside it (PLAN.md §5, decision 7).
+  outside it. Logan settled that with his answer on decision 7, "API bills,
+  Qwen inside" (PLAN.md, Approved).
 
 ## What the requirements and plan should say differently (proposed; Logan's to settle)
 
