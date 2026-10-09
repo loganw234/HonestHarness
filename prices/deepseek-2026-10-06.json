@@ -1,0 +1,23 @@
+{
+  "id": "deepseek-2026-10-06",
+  "provider": "deepseek",
+  "currency": "USD",
+  "unit_tokens": 1000000,
+  "source_url": "https://api-docs.deepseek.com/quick_start/pricing",
+  "read_date": "2026-10-06",
+  "models": {
+    "deepseek-flash": {
+      "off_peak": {"cache_hit": "0.003", "cache_miss": "0.15", "output": "0.6"},
+      "peak": {"cache_hit": "0.006", "cache_miss": "0.3", "output": "1.2"}
+    },
+    "deepseek-v4-pro": {
+      "off_peak": {"cache_hit": "0.022", "cache_miss": "0.66", "output": "1.98"},
+      "peak": {"cache_hit": "0.044", "cache_miss": "1.32", "output": "3.96"}
+    }
+  },
+  "schedule": {
+    "peak_windows_utc": [["01:00", "04:00"], ["06:00", "10:00"]],
+    "peak_weekdays_utc": ["Mon", "Tue", "Wed", "Thu", "Fri"],
+    "note": "Off-peak rates are half the peak rates. The source excludes Chinese public holidays from peak hours; this table does not model holidays, so the runner refuses to start a batch inside a peak window instead of guessing."
+  }
+}

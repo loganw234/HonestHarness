@@ -1,0 +1,12 @@
+{
+  "endpoints": [
+    {
+      "name": "deepseek-flash",
+      "provider": "deepseek",
+      "base_url": "https://api.deepseek.com",
+      "model": "deepseek-flash",
+      "price_table": "prices/deepseek-2026-10-06.json",
+      "key_env": "DEEPSEEK_API_KEY"
+    }
+  ]
+}

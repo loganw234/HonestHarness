@@ -1,0 +1,876 @@
+{
+ "format": 1,
+ "about": "The lead's judgements of QS4h's live runs on deepseek-flash, four passes of the eight items (two of h1's real tip, which lost three of its five runs), each checked by verifier-JH (Sonnet), recorded as judgement (AMENDMENT-1.md, A1.5). One entry per plant of a planted run (caught or missed: whether a finding of that run states the plant's own fault, wherever it cites; the screen's located and stated flags are the table's other column), and one per finding of a run besides a plant's, against this round's recorded verifier findings as qs4h_items.json lists them: a match, with the recorded finding's id in `recorded`; new and true (absent from that list, and true at the run's commit; a note says where a lead or verifier had seen it outside the list, and a note that begins 'replay' marks a finding true of the run's inputs, not of the parcel's work, counted apart); or a false alarm (false, or a misreading). Each names the run's record_id, who judged and who checked, and a note in the judge's own words, never the model's text. Runs left out of the score, and why, are in the table's selection file.",
+ "judgements": [
+  {
+   "record_id": "qs4h-h3-planted-20261008T061843Z.h3-planted.r0",
+   "plant": "P3-B",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 0 states that three of L06's four cited entries precede 18:00 (the fourth is stamped 18:38:25), so the key counts one the question excludes; read from round 6's ledger."
+  },
+  {
+   "record_id": "qs4h-h3-planted-20261008T061843Z.h3-planted.r0",
+   "plant": "P3-A",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 1 states that R09 names verifier-P1 while its ten cited headings are verifier-P0.md's; verifier-P1.md holds three entries, none of them cited."
+  },
+  {
+   "record_id": "qs4h-h3-planted-20261008T061843Z.h3-planted.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "stated: no gate check reads whether a question is answered by its cited evidence, and the plan leaves that reading to the key's verifier (lead.md 17:29:08). verifier-P3 gave the gate's reach as the reason its F1 and F2 passed the gate (verifier-P3.md 17:50:45, 18:10:31), not as a recorded finding: new to the recorded list, known to verifier-P3 outside it. Neither P3-v10 nor P3-v11 is this."
+  },
+  {
+   "record_id": "qs4h-h2-real-20261008T064206Z.h2-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "match",
+   "recorded": "P2-v2",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Without Docker the one command raises FileNotFoundError at its docker ps, before docker_status can refuse: verifier-P2's V4, F4 in its verdict."
+  },
+  {
+   "record_id": "qs4h-h2-planted-20261008T071425Z.h2-planted.r0",
+   "plant": "P2-A",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 0 states that the streak of malformed calls is never reset after a call that parses, so a run stops at the fourth in all, against 'in a row' (loop.py:25, budgets.py:15); shown by a scripted probe."
+  },
+  {
+   "record_id": "qs4h-h2-planted-20261008T071425Z.h2-planted.r0",
+   "plant": "P2-B",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "By judgement, where the screen missed it: finding 1 states the plant's fault, the run-time budget checked before model calls only and never before a tool call, against budgets.py:12; shown by a probe. It cites the docstring's lines (49-50) and the loop's, not the deletion's join, so the screen did not locate it (QS4h's limit 8). The screen's match of it to P2-v10 is to another finding."
+  },
+  {
+   "record_id": "qs4h-h2-planted-20261008T071425Z.h2-planted.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "match",
+   "recorded": "P2-v2",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "The one command crashes without Docker: verifier-P2's F4."
+  },
+  {
+   "record_id": "qs4h-h1-planted-20261008T072238Z.h1-planted.r0",
+   "plant": "P1-A",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 0 states that nested.event's golden and canonical require 'normal' where the prompt and the right text give 'high', so a correct call scores a failure; shown in a clone with the tests still green."
+  },
+  {
+   "record_id": "qs4h-h1-planted-20261008T072238Z.h1-planted.r0",
+   "plant": "P1-B",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "By judgement, where the screen missed it: finding 1 states that judge_special_tokens never scans a call's name, against its docstring's 'name or arguments' (64-65), measured with a token in a name. It cites the docstring's lines, not the edit's, so the screen did not locate it. The screen's match of it to P1-v1 is by file, to another finding."
+  },
+  {
+   "record_id": "qs4h-h1-planted-20261008T072238Z.h1-planted.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "match",
+   "recorded": "P1-v6",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "The message's 95 and 216 tests, where the tree holds 96 and 217: the first commit's counts, verifier-P1's restate."
+  },
+  {
+   "record_id": "qs4h-h4-planted-20261008T072239Z.h4-planted.r0",
+   "plant": "P4-B",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 0 states that a planted item passes with one of its two plants caught, against qs4.py:62 and P4's brief; shown by a probe, and no test covers one of two."
+  },
+  {
+   "record_id": "qs4h-h4-planted-20261008T072239Z.h4-planted.r0",
+   "plant": "P4-A",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 1 states qs4_prompt.md:26's 'It holds two faults' against round 6's brief and dispatch entries, which say a copy may hold them; untrue for the real tips too."
+  },
+  {
+   "record_id": "qs4h-h4-planted-20261008T072239Z.h4-planted.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "match",
+   "recorded": "P4-v1",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "The commit message's $6.8059488 is the first commit's reservation, before the bounded retry's margin, where the work pins $9.0315264: verifier-P4's F3."
+  },
+  {
+   "record_id": "qs4h-h4-planted-20261008T072239Z.h4-planted.r0",
+   "plant": null,
+   "finding": 3,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "minor: the reparse-point case of tests/test_qs4_inputs.py's link test builds an os.stat_result with st_reparse_tag, which only Windows keeps, so off Windows the case fails though qs4.read_files is right where it runs; in the sandbox P4's gate holds 4 of 5 and --control refuses. True of P4's work, as lead.md 15:13:14 rules: verifier-P4 worked on Windows and recorded no such finding. This round's lead knew it from P5's escalation (P5.md 15:12:44), outside the recorded list."
+  },
+  {
+   "record_id": "qs4h-h3-real-20261008T073109Z.h3-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "match",
+   "recorded": "P3-v3",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "tools/qs6_extract.py's usage error: argparse exits 2 on a usage error, where the docstring gives 1. verifier-P3's N1."
+  },
+  {
+   "record_id": "qs4h-h3-real-20261008T073109Z.h3-real.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "match",
+   "recorded": "P3-v2",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "tools/qs6_key.py's usage error: argparse exits 2 on a usage error, where the docstring gives 1. verifier-P3's N1."
+  },
+  {
+   "record_id": "qs4h-h3-real-20261008T073109Z.h3-real.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "minor: qs6.py's limit 5 says a figure in a unit outside the item's list scores wrong; a unit word not in KNOWN_UNITS scores dropped_unit, measured, as the module's own comment at 187-189 says. So the limit's sentence is wider than its case (round 6's list, item 2). Not P3-v8, which is where a unit is read; the screen's match to P3-v11 is by file, to the general list of behaviours no test pins."
+  },
+  {
+   "record_id": "qs4h-h4-real-20261008T081708Z.h4-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "match",
+   "recorded": "P4-v1",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "The commit message's $6.8059488, the first commit's reservation, where the work pins $9.0315264: verifier-P4's F3. The run classes it a wrong answer, and itself cites the precedent for a restate."
+  },
+  {
+   "record_id": "qs4h-h4-real-20261008T081708Z.h4-real.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "minor: the reparse-point case of tests/test_qs4_inputs.py's link test builds an os.stat_result with st_reparse_tag, which only Windows keeps, so off Windows the case fails though qs4.read_files is right where it runs; in the sandbox P4's gate holds 4 of 5 and --control refuses. True of P4's work, as lead.md 15:13:14 rules: verifier-P4 worked on Windows and recorded no such finding. This round's lead knew it from P5's escalation (P5.md 15:12:44), outside the recorded list."
+  },
+  {
+   "record_id": "qs4h-h2-planted-20261008T074514Z.h2-planted.r0",
+   "plant": "P2-A",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 0 states that the streak is never reset after a call that parses, against budgets.py:15 and loop.py:26; shown with a scripted model."
+  },
+  {
+   "record_id": "qs4h-h2-planted-20261008T074514Z.h2-planted.r0",
+   "plant": "P2-B",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "By judgement, where the screen missed it: finding 1 states the plant's fault, the run-time budget checked only at the turn's top and never before a tool call, against budgets.py:12; shown with three 0.6 s calls under a 1.0 s budget. It cites loop.py:200, about 70 lines from the deletion's join, past the deletion tolerance of 12 (limit 8)."
+  },
+  {
+   "record_id": "qs4h-h2-planted-20261008T074514Z.h2-planted.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "match",
+   "recorded": "P2-v2",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "The one command raises without Docker: verifier-P2's F4."
+  },
+  {
+   "record_id": "qs4h-h1-planted-20261008T080613Z.h1-planted.r0",
+   "plant": "P1-A",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 0 states the golden's matcher and canonical 'normal' against the prompt's and the right text's 'high'; shown with match_call."
+  },
+  {
+   "record_id": "qs4h-h1-planted-20261008T080613Z.h1-planted.r0",
+   "plant": "P1-B",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "By judgement, where the screen missed it: finding 1 states that judge_special_tokens never checks a call's name, against the docstring it cites (64-65). The screen's match of it to P1-v1 is by file, to another finding."
+  },
+  {
+   "record_id": "qs4h-h1-planted-20261008T080613Z.h1-planted.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "match",
+   "recorded": "P1-v6",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "The message's 95 and 216 tests against the tree's 96 and 217: verifier-P1's restate."
+  },
+  {
+   "record_id": "qs4h-h3-planted-20261008T084817Z.h3-planted.r0",
+   "plant": "P3-B",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 0 states L06's 18:00 threshold against its four cited entries, the fourth stamped 18:38:25, where the four fit 19:00; read from round 6's ledger."
+  },
+  {
+   "record_id": "qs4h-h3-planted-20261008T084817Z.h3-planted.r0",
+   "plant": "P3-A",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 1 states that R09 names verifier-P1 while its ten cited headings are verifier-P0.md's; verifier-P1.md holds three."
+  },
+  {
+   "record_id": "qs4h-h4-planted-20261008T083057Z.h4-planted.r0",
+   "plant": "P4-B",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 0 states that a planted item passes when the screen catches at least one plant, against qs4.py:62's both."
+  },
+  {
+   "record_id": "qs4h-h4-planted-20261008T083057Z.h4-planted.r0",
+   "plant": "P4-A",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 2 states that 'It holds two faults' goes into every item's dispatch, the real tips' included, against the brief it cites (_verifier.md:38, one or two that a copy may hold) and round 6's dispatch entries."
+  },
+  {
+   "record_id": "qs4h-h4-planted-20261008T083057Z.h4-planted.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "match",
+   "recorded": "P4-v1",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "The commit message's $6.8059488 against the module's $9.0315264 with P0's margin: verifier-P4's F3."
+  },
+  {
+   "record_id": "qs4h-h2-planted-20261008T085947Z.h2-planted.r0",
+   "plant": "P2-A",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 0 states that the streak is never reset after a call that parses, against loop.py:25 and budgets.py:15; shown by a scripted model alternating malformed and valid calls."
+  },
+  {
+   "record_id": "qs4h-h2-planted-20261008T085947Z.h2-planted.r0",
+   "plant": "P2-B",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 1 states that the run-time budget is checked before model calls only, against loop.py:49-50 and budgets.py:12; shown with an injected clock. It cites the tool loop's span, which holds the deletion's join, so the screen located it too."
+  },
+  {
+   "record_id": "qs4h-h2-planted-20261008T085947Z.h2-planted.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "match",
+   "recorded": "P2-v2",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "The one command crashes without Docker: verifier-P2's F4."
+  },
+  {
+   "record_id": "qs4h-h2-planted-20261008T085947Z.h2-planted.r0",
+   "plant": null,
+   "finding": 3,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "minor: loop.py:34 and 144 say run_agent never raises, but its redact helper guards only the client's redaction and calls sandbox.redact unguarded from inside its except blocks, so a sandbox whose redact raises makes run_agent raise; read in the copy. P2's own DockerSandbox.redact does only string work, so the reach is a suite-supplied sandbox, as the finding says. A claim wider than its case (round 6's list, item 2), not in verifier-P2's record."
+  },
+  {
+   "record_id": "qs4h-h3-planted-20261008T090652Z.h3-planted.r0",
+   "plant": "P3-A",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 0 states that R09 names verifier-P1 while its ten cited lines are verifier-P0.md's headings; verifier-P1.md holds three entries."
+  },
+  {
+   "record_id": "qs4h-h3-planted-20261008T090652Z.h3-planted.r0",
+   "plant": "P3-B",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 1 states L06's 18:00 threshold against its fourth cited entry, stamped 18:38:25."
+  },
+  {
+   "record_id": "qs4h-h1-planted-20261008T091648Z.h1-planted.r0",
+   "plant": "P1-A",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 0 states the golden's 'normal' against the prompt's and the right text's 'high'; a fake reply with the prompt's values fails name_args."
+  },
+  {
+   "record_id": "qs4h-h1-planted-20261008T091648Z.h1-planted.r0",
+   "plant": "P1-B",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 1 states that judge_special_tokens never scans a call's name, against the docstring (64-65), shown directly. It cites the function's own lines, which hold the edit, so the screen located it too. It adds that name_args masks the gap."
+  },
+  {
+   "record_id": "qs4h-h1-planted-20261008T091648Z.h1-planted.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "match",
+   "recorded": "P1-v6",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "The message's 95 and 216 tests against the tree's 96 and 217: verifier-P1's restate."
+  },
+  {
+   "record_id": "qs4h-h4-planted-20261008T092139Z.h4-planted.r0",
+   "plant": "P4-B",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 0 states that a planted item passes when the screen catches one of two plants, against qs4.py:62 and lead.md 17:47:24; shown by a scripted report."
+  },
+  {
+   "record_id": "qs4h-h4-planted-20261008T092139Z.h4-planted.r0",
+   "plant": "P4-A",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 3 states that the dispatch sent to all ten items says the copy holds two faults, against _verifier.md:38 and round 6's dispatch entries; false for the real tips, and it gives the model the count."
+  },
+  {
+   "record_id": "qs4h-h4-planted-20261008T092139Z.h4-planted.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "minor: a run that never reports is recorded with status_basis 'reported', since the basis is 'agent' only for stopped and error runs and 'screen' only for a planted run with a report; read in the copy. The field's values are stated nowhere (P4.md says only 'the status's basis'), and the test of that case checks its outcome and counts, not its basis. Read as what the status rests on, the value contradicts the record's own reported flag; read as the report rule's name, it does not. Not in verifier-P4's record."
+  },
+  {
+   "record_id": "qs4h-h4-planted-20261008T092139Z.h4-planted.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "match",
+   "recorded": "P4-v1",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "The commit message's $6.8059488, the pre-retry reservation, against the docstring's and the tests' $9.0315264: verifier-P4's F3."
+  },
+  {
+   "record_id": "qs4h-h1-planted-20261008T093401Z.h1-planted.r0",
+   "plant": "P1-A",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 0 states the golden's 'normal' against the prompt's, the right text's and the enum's 'high'; shown with match_object. Its note that the missing-attendee control now fails on priority is the plant's consequence, not another fault."
+  },
+  {
+   "record_id": "qs4h-h1-planted-20261008T093401Z.h1-planted.r0",
+   "plant": "P1-B",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 1 states that judge_special_tokens never scans a call's name, against 64-65, citing the function's own lines, so the screen located it too; it bounds the reach itself."
+  },
+  {
+   "record_id": "qs4h-h1-planted-20261008T093401Z.h1-planted.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "match",
+   "recorded": "P1-v6",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "The message's 95 and 216 tests against the tree's 96 and 217: verifier-P1's restate."
+  },
+  {
+   "record_id": "qs4h-h3-planted-20261008T091310Z.h3-planted.r0",
+   "plant": "P3-A",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 0 states that R09 names verifier-P1 while its ten citations are verifier-P0.md's headings, and that check 4 then forbids a 'not in the input' key at the small cuts."
+  },
+  {
+   "record_id": "qs4h-h3-planted-20261008T091310Z.h3-planted.r0",
+   "plant": "P3-B",
+   "finding": null,
+   "verdict": "missed",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "No finding names L06, and neither the report's text nor the ledger file mentions L06, 18:00 or 18:38. Finding 0 says every other item's citations hold the answer its question asks, checked line by line, which L06's do not. Its reasoning returns to L06 in 30 of its 109 turns, and weighs whether its threshold was changed before keeping it: noticed, not raised (verifier-J's term for QS4)."
+  },
+  {
+   "record_id": "qs4h-h3-planted-20261008T091310Z.h3-planted.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "minor: FILE_PREFIXES lists './', but _files strips '.' from each token's ends before its prefix loop (qs6.py:530), so './verifier-P0.md' becomes '/verifier-P0.md' and scores unlisted; read in the copy. The docstring promises only the round-6 ledger prefix, so the constant's entry is dead and an answer in that form is mis-scored. Not in verifier-P3's record, whose formatting variants scored exact; the screen's match to P3-v11 is by file."
+  },
+  {
+   "record_id": "qs4h-h3-planted-20261008T091310Z.h3-planted.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "match",
+   "recorded": "P3-v3",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "tools/qs6_extract.py's usage error: argparse exits 2 on a usage error, where the docstring gives 1; it names tools/qs6_key.py's too. verifier-P3's N1."
+  },
+  {
+   "record_id": "qs4h-h2-planted-20261008T100959Z.h2-planted.r0",
+   "plant": "P2-A",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 0 states that the streak is never reset, so four malformed calls anywhere stop the run, against loop.py:25 and budgets.py:15; shown with a scripted model alternating calls."
+  },
+  {
+   "record_id": "qs4h-h2-planted-20261008T100959Z.h2-planted.r0",
+   "plant": "P2-B",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "By judgement, where the screen missed it: finding 1 states the plant's fault, the run-time budget checked only at the turn's top and never before a tool call, against budgets.py:12 and loop.py:49-50; shown with three shell calls and a clock. It cites loop.py:200, about 70 lines from the deletion's join (limit 8)."
+  },
+  {
+   "record_id": "qs4h-h2-planted-20261008T100959Z.h2-planted.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "match",
+   "recorded": "P2-v2",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "The one command raises without the docker command: verifier-P2's F4."
+  },
+  {
+   "record_id": "qs4h-h4-real-20261008T100014Z.h4-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "match",
+   "recorded": "P4-v3",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "A refusal of tools/qs4_cut.py prints the OSError's text, which names the file, against its docstring's 'It prints no absolute path': verifier-P4's N1. Its side remark on qs4_rebuild.py's timeout text, which it did not trigger, is not judged apart."
+  },
+  {
+   "record_id": "qs4h-h4-real-20261008T100014Z.h4-real.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "match",
+   "recorded": "P4-v1",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "The commit message's $6.8059488 against the code's $9.0315264: verifier-P4's F3."
+  },
+  {
+   "record_id": "qs4h-h4-real-20261008T100014Z.h4-real.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "minor: the reparse-point case of tests/test_qs4_inputs.py's link test builds an os.stat_result with st_reparse_tag, which only Windows keeps, so off Windows the case fails though qs4.read_files is right where it runs; in the sandbox P4's gate holds 4 of 5 and --control refuses. True of P4's work, as lead.md 15:13:14 rules: verifier-P4 worked on Windows and recorded no such finding. This round's lead knew it from P5's escalation (P5.md 15:12:44), outside the recorded list."
+  },
+  {
+   "record_id": "qs4h-h2-real-20261008T103332Z.h2-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "match",
+   "recorded": "P2-v6",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "A start() that raises anything but a SandboxError leaves the started flag false, so stop() never runs and the container stays, against loop.py:33-34: verifier-P2's L3, a known limit outside its view. The run classes it a wrong answer."
+  },
+  {
+   "record_id": "qs4h-h2-real-20261008T103332Z.h2-real.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "minor: the package docstring says each module's docstring states its threat model and its limits; in the tip, budgets.py's and scripted.py's state neither, and loop.py's states limits and no threat model. A quantifier wider than the record (round 6's list, item 2), not in verifier-P2's record."
+  },
+  {
+   "record_id": "qs4h-h2-real-20261008T103332Z.h2-real.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "false alarm",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "It says explicit tmpfs options replace Docker's own, so /tmp's noexec is not ensured. P2 measured /tmp as rw,nosuid,nodev,noexec under its own options (P2.md:648), and verifier-P2 found the same, with an executable copied there refusing to run (verifier-P2.md:38). The run had no Docker, as it says."
+  },
+  {
+   "record_id": "qs4h-h2-real-20261008T103332Z.h2-real.r0",
+   "plant": null,
+   "finding": 3,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "minor: loop.py:23-26 names a stopped run's budget from a closed list (turns, run_seconds, caps, peak, malformed_retries or scratch_bytes), but loop.py:220-221 records a generic RunStopped as budget 'harness'; read in the tip. Not in verifier-P2's record."
+  },
+  {
+   "record_id": "qs4h-h2-real-20261008T112631Z.h2-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "minor: results that are not a command's output (the report's reply, a malformed or unknown call's error, a cancelled call) get no delimiters and no token replacement, and a schema error can echo a control token the model itself wrote; read in the tip. The docstring's list describes a command's output, and its paragraph on malformed arguments says the error names what failed; the finding puts it outside the threat model and presses nothing. No sentence says what other results get, so it is minor, not stated (verifier-JH's reading, taken). Not in verifier-P2's record."
+  },
+  {
+   "record_id": "qs4h-h2-real-20261008T112631Z.h2-real.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "minor: loop.py:23-26 names a stopped run's budget from a closed list (turns, run_seconds, caps, peak, malformed_retries or scratch_bytes), but loop.py:220-221 records a generic RunStopped as budget 'harness'; read in the tip. Not in verifier-P2's record."
+  },
+  {
+   "record_id": "qs4h-h2-real-20261008T112631Z.h2-real.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "false alarm",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "The sentence is about the container: its main process ends at its lifetime and --rm removes it, as it says, and verifier-P2 saw the timer remove one (its L3). A host docker CLI that dies is not what it claims, and the finding names no case where a container stays."
+  },
+  {
+   "record_id": "qs4h-h4-real-20261008T121314Z.h4-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "minor: a run that never reports is recorded with status_basis 'reported', shown on the built inputs with a scripted model that never calls report; argued from the field's sibling values and the docstring's statuses. The module states no value for the field, as the finding says, and the test of that case checks its outcome and counts, not its basis. Not in verifier-P4's record."
+  },
+  {
+   "record_id": "qs4h-h4-real-20261008T121314Z.h4-real.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "match",
+   "recorded": "P4-v1",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "The commit message's $6.8059488 against the code's $9.0315264, measured: verifier-P4's F3."
+  },
+  {
+   "record_id": "qs4h-h4-real-20261008T121314Z.h4-real.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "minor: the reparse-point case of tests/test_qs4_inputs.py's link test builds an os.stat_result with st_reparse_tag, which only Windows keeps, so off Windows the case fails though qs4.read_files is right where it runs; in the sandbox P4's gate holds 4 of 5 and --control refuses. True of P4's work, as lead.md 15:13:14 rules: verifier-P4 worked on Windows and recorded no such finding. This round's lead knew it from P5's escalation (P5.md 15:12:44), outside the recorded list."
+  },
+  {
+   "record_id": "qs4h-h3-real-20261008T115808Z.h3-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "replay, stated: true of this run's inputs, not of P3's work. The key the brief places in the scratch is absent, because QS4h withholds QS6's key (its limit 4), so the brief's key check could not run; the run says so and builds a key of its own from the ledger. Counted apart from findings about the work."
+  },
+  {
+   "record_id": "qs4h-h3-real-20261008T115808Z.h3-real.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "replay: QS4h maps every prefix of the tip and the copy to the item's own commit, so in both conditions the cut's lead.md:1256 and 1269 name one commit as r1-p3's tip and as the copy, beside 'P3's own commit was checked absent'. The run read the contradiction and asked which commit it held. True of the cut, not stated by limit 7, and the same in both conditions. The screen's match to P3-v6 is by file. Counted apart from findings about the work."
+  },
+  {
+   "record_id": "qs4h-h3-real-20261008T115808Z.h3-real.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "match",
+   "recorded": "P3-v10",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "R09 and R10 sit in the reach set but are answerable at the smallest cut, against the plan's 'answerable only at larger cuts': verifier-P3's limit that both are keyed at every cut, outside its view. The run presses nothing."
+  },
+  {
+   "record_id": "qs4h-h3-real-20261008T124335Z.h3-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "minor: the file normal form departs from its docstring (qs6.py:73-75, which makes only 'parcelround-r6-ledger/' optional) both ways: 'ledger/' is stripped too, so 'ledger/lead.md' scores exact where the docstring's rule makes it unlisted, and './' can never match, since a token's ends lose their '.' first; read in the tip. A mutation dropping 'ledger/' survives the QS6 tests. Not in verifier-P3's record; the screen's match to P3-v11 is by file."
+  },
+  {
+   "record_id": "qs4h-h4-real-20261008T130129Z.h4-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "minor: the reparse-point case of tests/test_qs4_inputs.py's link test builds an os.stat_result with st_reparse_tag, which only Windows keeps, so off Windows the case fails though qs4.read_files is right where it runs; in the sandbox P4's gate holds 4 of 5 and --control refuses. True of P4's work, as lead.md 15:13:14 rules: verifier-P4 worked on Windows and recorded no such finding. This round's lead knew it from P5's escalation (P5.md 15:12:44), outside the recorded list."
+  },
+  {
+   "record_id": "qs4h-h4-real-20261008T130129Z.h4-real.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "match",
+   "recorded": "P4-v1",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "The commit message's $6.8059488 against the code's $9.0315264: verifier-P4's F3."
+  },
+  {
+   "record_id": "qs4h-h4-real-20261008T130129Z.h4-real.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "match",
+   "recorded": "P4-v3",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "A missing --zip prints the OSError's text with the path given, against tools/qs4_cut.py's 'It prints no absolute path': verifier-P4's N1. The screen missed it: the finding cites the docstring's lines, not 59-61."
+  },
+  {
+   "record_id": "qs4h-h4-real-20261008T130129Z.h4-real.r0",
+   "plant": null,
+   "finding": 3,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "minor: tools/qs4_rebuild.py loads --items before any try (line 102), so a missing file ends the tool in a traceback naming the path given, against its docstring's 'It prints no absolute path'; read in the tip. --items is a hidden test hook, as the finding says. verifier-P4's N1 names qs4_cut.py only."
+  },
+  {
+   "record_id": "qs4h-h3-real-20261008T123944Z.h3-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "minor: qs6.py's limit 5 says a figure in a unit outside the item's list scores wrong; a word outside KNOWN_UNITS scores dropped_unit, as the comment at 187-189 concedes. The same finding as 073109Z's. Not in verifier-P3's record; the screen's match to P3-v11 is by file."
+  },
+  {
+   "record_id": "qs4h-h3-real-20261008T123944Z.h3-real.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "stated: the units and the magnitudes are closed lists, so a correct answer in another form fails: '16.5 pct' and '1.38m tokens' score dropped_unit (the magnitude pattern is [kKMB], qs6.py:515; L09's units are %, percent and per cent). The figure rule states both lists, the limits do not name the consequence, and the finding asks the lead to state it. Not in verifier-P3's record."
+  },
+  {
+   "record_id": "qs4h-h4-planted-20261008T132936Z.h4-planted.r0",
+   "plant": "P4-B",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 0 states that one plant of two passes a planted item, against qs4.py:62-63 and P4's brief; shown with a scripted model on two items."
+  },
+  {
+   "record_id": "qs4h-h4-planted-20261008T132936Z.h4-planted.r0",
+   "plant": "P4-A",
+   "finding": null,
+   "verdict": "caught",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "Finding 1 states that the dispatch says the copy holds two faults, against _verifier.md:38-43 and round 6's dispatch entries, and that it is false for the real tips."
+  },
+  {
+   "record_id": "qs4h-h4-planted-20261008T132936Z.h4-planted.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "match",
+   "recorded": "P4-v1",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "The commit message's $6.8059488 against the code's $9.0315264: verifier-P4's F3."
+  },
+  {
+   "record_id": "qs4h-h4-planted-20261008T132936Z.h4-planted.r0",
+   "plant": null,
+   "finding": 3,
+   "verdict": "match",
+   "recorded": "P4-v3",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "A missing --zip prints the path given, against tools/qs4_cut.py's 'It prints no absolute path': verifier-P4's N1. The screen missed it: the finding cites the docstring's line."
+  },
+  {
+   "record_id": "qs4h-h1-real-20261008T132917Z.h1-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "match",
+   "recorded": "P1-v6",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "The message's 95 tests against the tree's 96: verifier-P1's restate."
+  },
+  {
+   "record_id": "qs4h-h1-real-20261008T132917Z.h1-real.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "match",
+   "recorded": "P1-v6",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "The message's 216 against the gate's 217: the other half of the same recorded finding."
+  },
+  {
+   "record_id": "qs4h-h1-real-20261008T132917Z.h1-real.r0",
+   "plant": null,
+   "finding": 2,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "minor: qs1.py's docstring keeps a provider's error body 'cut to ERROR_BODY characters, as P0 keeps it', but P0 keeps the whole body (qs/client.py:37, logged whole at qs/suite.py:219) and cuts only its exception's message, at 300, where ERROR_BODY is 200; read in the tip. The comparison is inexact, the cut itself harmless. Not in verifier-P1's record."
+  },
+  {
+   "record_id": "qs4h-h1-real-20261008T132917Z.h1-real.r0",
+   "plant": null,
+   "finding": 3,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "stated: a call with an extra key, at its top level or in function, passes every assertion; name_args checks the type, a string name and arguments that parse as an object, which is the docstring's definition of well formed (qs1.py:56, citing D10). The definition states it, and 'should refuse' is the run's own view. Not in verifier-P1's record."
+  },
+  {
+   "record_id": "qs4h-h2-real-20261008T133933Z.h2-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "minor: loop.py:23-26 names a stopped run's budget from a closed list (turns, run_seconds, caps, peak, malformed_retries or scratch_bytes), but loop.py:220-221 records a generic RunStopped as budget 'harness'; read in the tip. Not in verifier-P2's record."
+  },
+  {
+   "record_id": "qs4h-h1-real-20261008T104554Z.h1-real.r0",
+   "plant": null,
+   "finding": 0,
+   "verdict": "match",
+   "recorded": "P1-v6",
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "The message's 95 and 216 tests against the tree's 96 and 217, measured: verifier-P1's restate."
+  },
+  {
+   "record_id": "qs4h-h1-real-20261008T104554Z.h1-real.r0",
+   "plant": null,
+   "finding": 1,
+   "verdict": "new true",
+   "recorded": null,
+   "by": "lead",
+   "checked_by": "verifier-JH",
+   "note": "stated: PROVIDER_CONDITIONS adds content_filter to the two values P1's brief names (briefs/P1.md:62-63), so a filtered reply is recorded error and never judged. The docstring states it, with DeepSeek's D10 (qs1.py:43-46), and the finding calls it defensible and presses nothing. Not in verifier-P1's record: P1-v3 is the constants' members pinned by no test, and the screen's match to P1-v1 is by file."
+  }
+ ]
+}

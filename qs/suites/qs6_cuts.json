@@ -1,0 +1,92 @@
+{
+ "qs6_cuts": 1,
+ "note": "The five cuts of round 6's ledger. A cut's time is the latest at which its rendered text is at or under its target by UTF-8 bytes / 4, the plan's measure; 'whole' is the ledger's last unit. deepseek_ratio is DeepSeek's rough 0.3 tokens a character (ds/quick_start_token_usage.txt:11). p0_largest_request is P0's estimate_tokens of the cut's longest request, as Context.chat makes it; max_call_prompt_tokens is that plus 2%, rounded up to a thousand. The API's prompt tokens measure each cut at run time. Written by tools/qs6_extract.py --build-cuts.",
+ "units_in_ledger": 122,
+ "cuts": [
+  {
+   "name": "c016k",
+   "target_bytes_over_4": 16000,
+   "time": "2026-10-02T21:11:40-07:00",
+   "units": 25,
+   "chars": 62822,
+   "bytes": 62885,
+   "bytes_over_4": 15721,
+   "deepseek_ratio": 18847,
+   "sha256": "d49151cceefd53ddb4e293f232a23e11a95575e353b110aba72860387c54bc2b",
+   "p0_largest_request": 32599,
+   "caps": {
+    "max_prompt_tokens": 1,
+    "max_output_tokens": 32000,
+    "max_call_prompt_tokens": 34000
+   }
+  },
+  {
+   "name": "c032k",
+   "target_bytes_over_4": 32000,
+   "time": "2026-10-02T21:54:16-07:00",
+   "units": 48,
+   "chars": 118711,
+   "bytes": 118826,
+   "bytes_over_4": 29706,
+   "deepseek_ratio": 35613,
+   "sha256": "3b4d7c9a23370820bac0b2bed2f6b0917cd6719afa34c0a27022e9a2bd7154bd",
+   "p0_largest_request": 61013,
+   "caps": {
+    "max_prompt_tokens": 1,
+    "max_output_tokens": 32000,
+    "max_call_prompt_tokens": 63000
+   }
+  },
+  {
+   "name": "c064k",
+   "target_bytes_over_4": 64000,
+   "time": "2026-10-02T22:09:39-07:00",
+   "units": 59,
+   "chars": 234193,
+   "bytes": 234451,
+   "bytes_over_4": 58612,
+   "deepseek_ratio": 70258,
+   "sha256": "af1d920ff25f4bff739694805142d7db322a9b30bc8713bf382e8cc1600c125e",
+   "p0_largest_request": 119713,
+   "caps": {
+    "max_prompt_tokens": 1,
+    "max_output_tokens": 32000,
+    "max_call_prompt_tokens": 123000
+   }
+  },
+  {
+   "name": "c128k",
+   "target_bytes_over_4": 128000,
+   "time": "2026-10-03T00:19:49-07:00",
+   "units": 110,
+   "chars": 500859,
+   "bytes": 502082,
+   "bytes_over_4": 125520,
+   "deepseek_ratio": 150258,
+   "sha256": "515d34d06c17ee2a7813d91db5abc24148aae118caa63b5e73a506743e4469db",
+   "p0_largest_request": 255316,
+   "caps": {
+    "max_prompt_tokens": 1,
+    "max_output_tokens": 32000,
+    "max_call_prompt_tokens": 261000
+   }
+  },
+  {
+   "name": "whole",
+   "target_bytes_over_4": null,
+   "time": "2026-10-03T01:18:19-07:00",
+   "units": 122,
+   "chars": 551324,
+   "bytes": 552573,
+   "bytes_over_4": 138143,
+   "deepseek_ratio": 165397,
+   "sha256": "c390ea66c0678c6ef8d84b22f429d917919c9809a31845371f0b0a9a24655711",
+   "p0_largest_request": 280944,
+   "caps": {
+    "max_prompt_tokens": 1,
+    "max_output_tokens": 32000,
+    "max_call_prompt_tokens": 287000
+   }
+  }
+ ]
+}

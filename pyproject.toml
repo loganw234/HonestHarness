@@ -1,0 +1,17 @@
+[project]
+name = "honestharness-qs"
+version = "0.1.0"
+description = "Qualification suites for placing models in ParcelRound and HonestFramework roles, by measurement."
+requires-python = ">=3.12"
+license = { text = "MIT" }
+dependencies = [
+    "httpx>=0.28",
+    "jsonschema>=4.23",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=9"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

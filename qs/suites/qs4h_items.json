@@ -1,0 +1,1273 @@
+{
+ "format": 1,
+ "about": "QS4h's items: this round's four planted copies, each as its planted copy and its real tip (AMENDMENT-1.md, A1.2). SHAs and the keys' hashes come from the ledger's keys/; stamps from its lead.md and the verifiers' files; the shared briefs' rebuild by its lines' hashes. The plants' markers were pre-registered at P5.md 14:25:48, before the verifiers' files were read; the recorded findings are listed at 14:30:06, each by the entry that records it, with its places at the copy. Descriptions are QS4h's own words, never a ledger's text.",
+ "ledger": {
+  "name": "honestharness-r1-ledger",
+  "zone": "-07:00"
+ },
+ "parcelround": {
+  "commit": "f42242ecc1707a3d36c52e4b2a3b580ee2783e5b",
+  "mount": "parcelround-worktrees",
+  "dir": "P0"
+ },
+ "sources": [
+  {
+   "name": "cft-fp256",
+   "commit": "4190a47f5d99859a1af9a356cc7ed9e535ae74db",
+   "paths": [
+    "docs/VALIDATION.md",
+    "docs/ROADMAP.md"
+   ]
+  },
+  {
+   "name": "HonestFramework",
+   "commit": "65447fd4d8253034fd6d206479c5a5371c623c60",
+   "paths": [
+    "WITH-PARCELROUND.md",
+    "METHOD.md"
+   ]
+  },
+  {
+   "name": "loganw.dev",
+   "commit": "43c36a21f8d7bc8674b7813f9e4b35e93d53d07c",
+   "paths": [
+    "site/data/relations.json",
+    "site/facts.py",
+    "site/mapgen.py",
+    "site/pages/home.py",
+    "site/pages/method.py",
+    "site/pages/propose.py",
+    "site/pages/thread_determinism.py",
+    "site/pages/work_parcelround.py"
+   ]
+  }
+ ],
+ "caps": {
+  "max_prompt_tokens": 40000000,
+  "max_output_tokens": 500000,
+  "max_call_prompt_tokens": 900000
+ },
+ "budgets": {
+  "max_turns": 300,
+  "max_run_seconds": 5960,
+  "call_timeout_seconds": 320,
+  "max_output_chars": 32000,
+  "malformed_retries": 3,
+  "nudges": 2,
+  "max_calls_per_turn": 16,
+  "max_scratch_bytes": 536870912,
+  "max_tokens_per_turn": 65536
+ },
+ "budgets_about": "QS4's budgets (qs4_items.json) but two, by the lead's rule (lead.md 14:32:37, answer 3) as applied at lead.md 19:54:31. A model's --control run at h4, in the sandbox without the one pinned test, took 208.1 s (verifier-P5.md 19:50:21), over the rule's 200 s, so a tool call's timeout is 320 s, 1.5 times that, rounded up. The run's budget is then 5,960 s, so that a run, one call more with P2's 20 s of kill grace (KILL_AFTER_S and BACKSTOP_S), and 15 minutes fit the lead's 2 hours: 5,960 + 320 + 20 + 900 = 7,200 s.",
+ "settings": {
+  "stream": true,
+  "tolerance": 2,
+  "deletion_tolerance": 12,
+  "ledger_file_cap": 4194304,
+  "first_run": "h3-planted"
+ },
+ "settings_about": "deletion_tolerance is the distance from P2-A's join (after planted line 294) up to the head of the malformed-call block it ends (planted 282); it also reaches the tool loop's head above P2-B's join (planted 262, 7 lines up). tests/test_qs4h_data.py measures both.",
+ "required_briefs": [
+  "README.md",
+  "lead.md",
+  "briefs/_verifier.md",
+  "briefs/_common.md"
+ ],
+ "briefs_rebuild": {
+  "about": "The shared briefs as P1's and P2's verifiers read them: each file as the ledger holds it, less the desktop-priority item added at 15:35:17 and amended at 16:39:34 (A1.3). Only the lines' numbers and hashes are committed, never their text.",
+  "parcels": [
+   "P1",
+   "P2"
+  ],
+  "edits": [
+   {
+    "file": "briefs/_common.md",
+    "lines": [
+     213,
+     217
+    ],
+    "source_sha256": "759b94d7191f8956c2edd6cedd3b33e26518ff5b747b64be24d737eff2fd9957",
+    "removed_sha256": "bb6ebf73a20f9117011e26eefb6f3c3e0a7b83b356b27416841bc1e1e8502a4b",
+    "absent": [
+     "15:35:17",
+     "16:39:34",
+     "lowprio"
+    ]
+   },
+   {
+    "file": "briefs/_verifier.md",
+    "lines": [
+     57,
+     63
+    ],
+    "source_sha256": "01c5b6d440e55549bc9dde14e48d2ccf4d726f9cbd8d4122463eeebdeb27fe1d",
+    "removed_sha256": "dff0231873a537c1159782f870759fc19b699df9270d91d485a4b18997074567",
+    "absent": [
+     "15:35:17",
+     "16:39:34",
+     "lowprio"
+    ]
+   }
+  ]
+ },
+ "parcels": {
+  "P1": {
+   "copy": "17f9d9fa446ee56dca39c941aa653121ea9f4450",
+   "tip": "8d6ba7287d9da15b5d636f70dea252621b0f1edd",
+   "base": "929d6e5781e2ef713027ab5a619b4f69e1c4a60d",
+   "key": "keys/key-17f9d9f.json",
+   "key_sha256": "fc91152595812a702bedf7a5b2095a08d280267010f2436235dd320bc693f5e2",
+   "stamp": "2026-10-06 13:42:27",
+   "view": "14:17:11",
+   "report": "14:24:26",
+   "original_gate": {
+    "recorded": "verifier-P1.md 14:17:11",
+    "gate": [
+     5,
+     5
+    ],
+    "control": [
+     9,
+     9
+    ]
+   },
+   "inputs": [
+    "ds"
+   ],
+   "adaptation": [
+    "ds"
+   ],
+   "plants": [
+    {
+     "id": "P1-A",
+     "key_id": "A",
+     "shape": "figure",
+     "about": "nested.event's golden expects the priority normal, where its prompt gives high (two edits)",
+     "markers": [
+      [
+       "high",
+       "normal"
+      ],
+      [
+       "priority",
+       "high"
+      ]
+     ]
+    },
+    {
+     "id": "P1-B",
+     "key_id": "B",
+     "shape": "rule",
+     "about": "special_tokens scans no call's name, against the module docstring",
+     "markers": [
+      [
+       "name"
+      ],
+      [
+       "names"
+      ]
+     ]
+    }
+   ],
+   "recorded": [
+    {
+     "id": "P1-v1",
+     "class": "known limit",
+     "places": [
+      {
+       "file": "qs/suites/qs1.py",
+       "lines": []
+      }
+     ],
+     "in_view": true,
+     "recorded": "verifier-P1.md 14:17:11: the tool results sent back, pinned by no test",
+     "copy_only": false
+    },
+    {
+     "id": "P1-v2",
+     "class": "known limit",
+     "places": [
+      {
+       "file": "qs/suites/qs1.py",
+       "lines": []
+      }
+     ],
+     "in_view": true,
+     "recorded": "verifier-P1.md 14:17:11: tools on every request, pinned by no test",
+     "copy_only": false
+    },
+    {
+     "id": "P1-v3",
+     "class": "known limit",
+     "places": [
+      {
+       "file": "qs/suites/qs1.py",
+       "lines": []
+      }
+     ],
+     "in_view": true,
+     "recorded": "verifier-P1.md 14:17:11: the constant lists' members, pinned by no test",
+     "copy_only": false
+    },
+    {
+     "id": "P1-v4",
+     "class": "known limit",
+     "places": [
+      {
+       "file": "qs/suites/qs1.py",
+       "lines": []
+      }
+     ],
+     "in_view": true,
+     "recorded": "verifier-P1.md 14:17:11: judge branches only a missing reply reaches",
+     "copy_only": false
+    },
+    {
+     "id": "P1-v5",
+     "class": "known limit",
+     "places": [
+      {
+       "file": "qs/suites/qs1.py",
+       "lines": []
+      }
+     ],
+     "in_view": true,
+     "recorded": "verifier-P1.md 14:17:11: a finish_reason that is a JSON array is recorded error",
+     "copy_only": false
+    },
+    {
+     "id": "P1-v6",
+     "class": "restate",
+     "places": [
+      {
+       "file": "<commit message>",
+       "lines": []
+      }
+     ],
+     "in_view": true,
+     "recorded": "verifier-P1.md 14:17:11: the message's test counts are the first commit's",
+     "copy_only": false
+    }
+   ]
+  },
+  "P2": {
+   "copy": "821469434966a67e406f09ae488250f0d7307025",
+   "tip": "ceef2e2909ccf03545a901703187dace4a106bbe",
+   "base": "0692de377f29d363abdefc8082aae2eb7b5cc881",
+   "key": "keys/key-8214694.json",
+   "key_sha256": "c3a37d70e2bdd4e3e669558fae30c059e0adb403d2e44074f91e330d3acc0d0e",
+   "stamp": "2026-10-06 13:53:53",
+   "view": "14:38:11",
+   "report": "14:47:32",
+   "original_gate": {
+    "recorded": "verifier-P2.md 14:06:57",
+    "gate": [
+     5,
+     5
+    ],
+    "control": [
+     9,
+     9
+    ]
+   },
+   "inputs": [
+    "parcelround"
+   ],
+   "adaptation": [
+    "parcelround",
+    "docker"
+   ],
+   "plants": [
+    {
+     "id": "P2-A",
+     "key_id": "A",
+     "shape": "rule",
+     "about": "a well-formed call no longer resets the malformed-call streak (a deletion)",
+     "markers": [
+      [
+       "reset*"
+      ],
+      [
+       "in total"
+      ],
+      [
+       "cumulativ*"
+      ],
+      [
+       "consecutive"
+      ],
+      [
+       "accumulat*"
+      ]
+     ]
+    },
+    {
+     "id": "P2-B",
+     "key_id": "B",
+     "shape": "rule",
+     "about": "the run-time budget is no longer checked before each tool call (a deletion)",
+     "markers": [
+      [
+       "max_run_seconds"
+      ],
+      [
+       "run_seconds"
+      ],
+      [
+       "time budget"
+      ],
+      [
+       "run-time budget"
+      ],
+      [
+       "run time"
+      ],
+      [
+       "wall clock"
+      ],
+      [
+       "wall-clock"
+      ],
+      [
+       "elapsed"
+      ],
+      [
+       "time limit"
+      ],
+      [
+       "deadline"
+      ],
+      [
+       "time",
+       "tool call*"
+      ]
+     ]
+    }
+   ],
+   "recorded": [
+    {
+     "id": "P2-v1",
+     "class": "wrong answer",
+     "places": [
+      {
+       "file": "qs/agent/loop.py",
+       "lines": [
+        [
+         287,
+         287
+        ],
+        [
+         97,
+         99
+        ],
+        [
+         111,
+         111
+        ]
+       ]
+      },
+      {
+       "file": "qs/agent/tools.py",
+       "lines": [
+        [
+         123,
+         123
+        ]
+       ]
+      }
+     ],
+     "in_view": true,
+     "recorded": "verifier-P2.md 14:16:59 V3; verdict 14:47:32 F3: model text reaches the published record",
+     "copy_only": false
+    },
+    {
+     "id": "P2-v2",
+     "class": "wrong answer",
+     "places": [
+      {
+       "file": "sandbox/controls.py",
+       "lines": [
+        [
+         152,
+         152
+        ],
+        [
+         5,
+         5
+        ],
+        [
+         155,
+         158
+        ]
+       ]
+      }
+     ],
+     "in_view": true,
+     "recorded": "verifier-P2.md 14:16:59 V4; verdict 14:47:32 F4: the one command crashes without docker",
+     "copy_only": false
+    },
+    {
+     "id": "P2-v3",
+     "class": "wrong answer",
+     "places": [
+      {
+       "file": "qs/agent/tools.py",
+       "lines": [
+        [
+         111,
+         114
+        ]
+       ]
+      }
+     ],
+     "in_view": false,
+     "recorded": "verifier-P2.md 14:47:32 F5: two parse failures escape",
+     "copy_only": false
+    },
+    {
+     "id": "P2-v4",
+     "class": "known limit",
+     "places": [
+      {
+       "file": "qs/agent/sandbox.py",
+       "lines": [
+        [
+         462,
+         465
+        ]
+       ]
+      }
+     ],
+     "in_view": false,
+     "recorded": "verifier-P2.md 14:47:32 L1: a long shell command",
+     "copy_only": false
+    },
+    {
+     "id": "P2-v5",
+     "class": "known limit",
+     "places": [
+      {
+       "file": "qs/agent/sandbox.py",
+       "lines": [
+        [
+         462,
+         462
+        ]
+       ]
+      },
+      {
+       "file": "qs/agent/tools.py",
+       "lines": [
+        [
+         204,
+         204
+        ]
+       ]
+      }
+     ],
+     "in_view": false,
+     "recorded": "verifier-P2.md 14:47:32 L2: a NUL or a lone surrogate",
+     "copy_only": false
+    },
+    {
+     "id": "P2-v6",
+     "class": "known limit",
+     "places": [
+      {
+       "file": "qs/agent/loop.py",
+       "lines": [
+        [
+         184,
+         190
+        ],
+        [
+         331,
+         331
+        ],
+        [
+         33,
+         35
+        ]
+       ]
+      }
+     ],
+     "in_view": false,
+     "recorded": "verifier-P2.md 14:47:32 L3: a start() that raises another error skips stop()",
+     "copy_only": false
+    },
+    {
+     "id": "P2-v7",
+     "class": "known limit",
+     "places": [
+      {
+       "file": "qs/agent/sandbox.py",
+       "lines": [
+        [
+         279,
+         279
+        ]
+       ]
+      }
+     ],
+     "in_view": false,
+     "recorded": "verifier-P2.md 14:47:32 L4: a fixed container lifetime",
+     "copy_only": false
+    },
+    {
+     "id": "P2-v8",
+     "class": "known limit",
+     "places": [
+      {
+       "file": "sandbox/controls.py",
+       "lines": [
+        [
+         91,
+         110
+        ]
+       ]
+      }
+     ],
+     "in_view": true,
+     "recorded": "verifier-P2.md 14:16:59, believed; verdict 14:47:32 L5: the tree asserted before the host run only",
+     "copy_only": false
+    },
+    {
+     "id": "P2-v9",
+     "class": "known limit",
+     "places": [
+      {
+       "file": "sandbox/controls.py",
+       "lines": [
+        [
+         136,
+         138
+        ]
+       ]
+      }
+     ],
+     "in_view": true,
+     "recorded": "verifier-P2.md 14:16:59; verdict 14:47:32 L6: a gate failing alike on both sides reads held",
+     "copy_only": false
+    },
+    {
+     "id": "P2-v10",
+     "class": "restate",
+     "places": [
+      {
+       "file": "<commit message>",
+       "lines": []
+      },
+      {
+       "file": "qs/agent/loop.py",
+       "lines": [
+        [
+         48,
+         50
+        ]
+       ]
+      }
+     ],
+     "in_view": false,
+     "recorded": "verifier-P2.md 14:47:32: no call past the budgets, until F2 is fixed",
+     "copy_only": true
+    },
+    {
+     "id": "P2-v11",
+     "class": "restate",
+     "places": [
+      {
+       "file": "qs/agent/loop.py",
+       "lines": [
+        [
+         33,
+         35
+        ]
+       ]
+      }
+     ],
+     "in_view": false,
+     "recorded": "verifier-P2.md 14:47:32: removed on every path",
+     "copy_only": false
+    },
+    {
+     "id": "P2-v12",
+     "class": "restate",
+     "places": [
+      {
+       "file": "sandbox/controls.py",
+       "lines": [
+        [
+         5,
+         5
+        ]
+       ]
+      }
+     ],
+     "in_view": false,
+     "recorded": "verifier-P2.md 14:47:32: the one command refuses",
+     "copy_only": false
+    },
+    {
+     "id": "P2-v13",
+     "class": "other",
+     "places": [
+      {
+       "file": "qs/agent/tools.py",
+       "lines": [
+        [
+         114,
+         114
+        ]
+       ]
+      }
+     ],
+     "in_view": false,
+     "recorded": "verifier-P2.md 14:47:32 nit: a doubled word",
+     "copy_only": false
+    },
+    {
+     "id": "P2-v14",
+     "class": "other",
+     "places": [
+      {
+       "file": "sandbox/controls.py",
+       "lines": [
+        [
+         140,
+         141
+        ]
+       ]
+      }
+     ],
+     "in_view": false,
+     "recorded": "verifier-P2.md 14:47:32 nit: a cut capture's message",
+     "copy_only": false
+    },
+    {
+     "id": "P2-v15",
+     "class": "other",
+     "places": [
+      {
+       "file": "ledger/lead.md",
+       "lines": []
+      }
+     ],
+     "in_view": false,
+     "recorded": "verifier-P2.md 14:47:32: the diff's insertions against the count lead.md records",
+     "copy_only": true
+    }
+   ]
+  },
+  "P3": {
+   "copy": "83ee19641ce09eb52abdfc609cfe4ba7e684cfb4",
+   "tip": "beb61762dd04cdb2b37892e4e3d7d7d05626074a",
+   "base": "6f0d928a3025431385adc91015014e1766cd8f4a",
+   "key": "keys/key-83ee196.json",
+   "key_sha256": "0f28fab53b3c6f7215f6080b4ae9d3d0174aa031bb77a2db3542f261fc90debd",
+   "stamp": "2026-10-06 17:29:08",
+   "view": "17:50:45",
+   "report": "18:10:31",
+   "original_gate": {
+    "recorded": "verifier-P3.md 17:50:45",
+    "gate": [
+     5,
+     5
+    ],
+    "control": [
+     9,
+     9
+    ]
+   },
+   "inputs": [
+    "parcelround",
+    "ds"
+   ],
+   "adaptation": [
+    "key",
+    "parcelround",
+    "ds"
+   ],
+   "plants": [
+    {
+     "id": "P3-A",
+     "key_id": "A",
+     "shape": "reference",
+     "about": "R09's question names verifier-P1 while its evidence is verifier-P0's",
+     "markers": [
+      [
+       "P1",
+       "P0"
+      ]
+     ]
+    },
+    {
+     "id": "P3-B",
+     "key_id": "B",
+     "shape": "figure",
+     "about": "L06's bound is 18:00 while its cited lines fit 19:00",
+     "markers": [
+      [
+       "18:00",
+       "18:38*"
+      ],
+      [
+       "18:00",
+       "19:00"
+      ],
+      [
+       "18:00",
+       "46",
+       "after"
+      ],
+      [
+       "18:00",
+       "46",
+       "later"
+      ]
+     ]
+    }
+   ],
+   "recorded": [
+    {
+     "id": "P3-v1",
+     "class": "restate",
+     "places": [
+      {
+       "file": "qs/suites/qs6.py",
+       "lines": [
+        [
+         53,
+         57
+        ],
+        [
+         745,
+         753
+        ]
+       ]
+      },
+      {
+       "file": "tools/qs6_key.py",
+       "lines": [
+        [
+         79,
+         83
+        ]
+       ]
+      }
+     ],
+     "in_view": true,
+     "recorded": "verifier-P3.md 17:50:45 F3: the key's own fields are not compared",
+     "copy_only": false
+    },
+    {
+     "id": "P3-v2",
+     "class": "other",
+     "places": [
+      {
+       "file": "tools/qs6_key.py",
+       "lines": [
+        [
+         26,
+         27
+        ]
+       ]
+      }
+     ],
+     "in_view": true,
+     "recorded": "verifier-P3.md 17:50:45 N1: the exit status",
+     "copy_only": false
+    },
+    {
+     "id": "P3-v3",
+     "class": "other",
+     "places": [
+      {
+       "file": "tools/qs6_extract.py",
+       "lines": [
+        [
+         27,
+         28
+        ]
+       ]
+      }
+     ],
+     "in_view": true,
+     "recorded": "verifier-P3.md 17:50:45 N1: the exit status",
+     "copy_only": false
+    },
+    {
+     "id": "P3-v4",
+     "class": "other",
+     "places": [
+      {
+       "file": "tools/qs6_extract.py",
+       "lines": [
+        [
+         27,
+         27
+        ]
+       ]
+      }
+     ],
+     "in_view": true,
+     "recorded": "verifier-P3.md 17:50:45 N1: a traceback that prints a path",
+     "copy_only": false
+    },
+    {
+     "id": "P3-v5",
+     "class": "restate",
+     "places": [
+      {
+       "file": "qs/suites/qs6.py",
+       "lines": [
+        [
+         132,
+         134
+        ]
+       ]
+      }
+     ],
+     "in_view": false,
+     "recorded": "verifier-P3.md 18:10:31 F4: the reservation's ratio",
+     "copy_only": false
+    },
+    {
+     "id": "P3-v6",
+     "class": "restate",
+     "places": [
+      {
+       "file": "<commit message>",
+       "lines": []
+      }
+     ],
+     "in_view": false,
+     "recorded": "verifier-P3.md 18:10:31 N2: the message's test count",
+     "copy_only": false
+    },
+    {
+     "id": "P3-v7",
+     "class": "known limit",
+     "places": [
+      {
+       "file": "qs/suites/qs6.py",
+       "lines": [
+        [
+         488,
+         489
+        ]
+       ]
+      }
+     ],
+     "in_view": false,
+     "recorded": "verifier-P3.md 18:09:12: a count past 4,300 digits",
+     "copy_only": false
+    },
+    {
+     "id": "P3-v8",
+     "class": "known limit",
+     "places": [
+      {
+       "file": "qs/suites/qs6.py",
+       "lines": [
+        [
+         507,
+         523
+        ]
+       ]
+      }
+     ],
+     "in_view": false,
+     "recorded": "verifier-P3.md 18:10:31: a unit read only after its number",
+     "copy_only": false
+    },
+    {
+     "id": "P3-v9",
+     "class": "known limit",
+     "places": [
+      {
+       "file": "qs/suites/qs6.py",
+       "lines": [
+        [
+         421,
+         421
+        ]
+       ]
+      }
+     ],
+     "in_view": false,
+     "recorded": "verifier-P3.md 18:10:31: the answer line's form",
+     "copy_only": false
+    },
+    {
+     "id": "P3-v10",
+     "class": "known limit",
+     "places": [
+      {
+       "file": "qs/suites/qs6_items.json",
+       "lines": [
+        [
+         75,
+         80
+        ]
+       ]
+      }
+     ],
+     "in_view": false,
+     "recorded": "verifier-P3.md 18:10:31: R09 and R10 keyed at every cut",
+     "copy_only": false
+    },
+    {
+     "id": "P3-v11",
+     "class": "known limit",
+     "places": [
+      {
+       "file": "qs/suites/qs6.py",
+       "lines": []
+      }
+     ],
+     "in_view": false,
+     "recorded": "verifier-P3.md 18:10:31: behaviours no test pins",
+     "copy_only": false
+    }
+   ]
+  },
+  "P4": {
+   "copy": "3b1b3cd3d053d6ea54a9efb1fb6e62e10a157951",
+   "tip": "5ecd02b97dace1164246837667dd5e0de8ae6791",
+   "base": "7b0dc64436644fc3f19f1410b233dc4c06483cac",
+   "key": "keys/key-3b1b3cd.json",
+   "key_sha256": "7f53bd01642663c0eeb29c1d468127001a379d51cf8d74ae52388ae9f1d76b24",
+   "stamp": "2026-10-06 20:21:45",
+   "view": "21:47:05",
+   "report": "21:57:02",
+   "original_gate": {
+    "recorded": "verifier-P4.md 20:43:08",
+    "gate": [
+     5,
+     5
+    ],
+    "control": [
+     9,
+     9
+    ]
+   },
+   "inputs": [
+    "parcelround",
+    "sources"
+   ],
+   "adaptation": [
+    "parcelround",
+    "sources",
+    "docker"
+   ],
+   "plants": [
+    {
+     "id": "P4-A",
+     "key_id": "A",
+     "shape": "text",
+     "about": "QS4's prompt now tells each run, on either condition, that its copy has two faults, where the tip says only that it may have some",
+     "markers": [
+      [
+       "may hold"
+      ],
+      [
+       "how many"
+      ],
+      [
+       "number of plants"
+      ],
+      [
+       "number of faults"
+      ],
+      [
+       "plant count"
+      ],
+      [
+       "count of"
+      ],
+      [
+       "real tip*"
+      ],
+      [
+       "blind*"
+      ],
+      [
+       "leak*"
+      ]
+     ]
+    },
+    {
+     "id": "P4-B",
+     "key_id": "B",
+     "shape": "rule",
+     "about": "QS4's status gives a planted item a pass when any one of its plants is caught, where the tip requires every plant",
+     "markers": [
+      [
+       "both"
+      ],
+      [
+       "one of two"
+      ],
+      [
+       "one of its two"
+      ],
+      [
+       "1 of 2"
+      ],
+      [
+       "one plant"
+      ],
+      [
+       "partial*"
+      ],
+      [
+       "any plant"
+      ],
+      [
+       "at least one"
+      ],
+      [
+       "either"
+      ]
+     ]
+    }
+   ],
+   "recorded": [
+    {
+     "id": "P4-v1",
+     "class": "restate",
+     "places": [
+      {
+       "file": "<commit message>",
+       "lines": []
+      }
+     ],
+     "in_view": true,
+     "recorded": "verifier-P4.md 21:29:26 F3: the message's reservation is the first commit's",
+     "copy_only": false
+    },
+    {
+     "id": "P4-v2",
+     "class": "known limit",
+     "places": [
+      {
+       "file": "qs/suites/qs4.py",
+       "lines": [
+        [
+         565,
+         565
+        ]
+       ]
+      }
+     ],
+     "in_view": true,
+     "recorded": "verifier-P4.md 21:29:26 L1: control lines with other endings",
+     "copy_only": false
+    },
+    {
+     "id": "P4-v3",
+     "class": "other",
+     "places": [
+      {
+       "file": "tools/qs4_cut.py",
+       "lines": [
+        [
+         59,
+         61
+        ]
+       ]
+      }
+     ],
+     "in_view": true,
+     "recorded": "verifier-P4.md 21:29:26 N1: an OSError's path",
+     "copy_only": false
+    },
+    {
+     "id": "P4-v4",
+     "class": "other",
+     "places": [
+      {
+       "file": "qs/suites/qs4_items.json",
+       "lines": []
+      }
+     ],
+     "in_view": true,
+     "recorded": "verifier-P4.md 21:29:26; verdict 21:57:02 N3: recorded findings' classes",
+     "copy_only": false
+    },
+    {
+     "id": "P4-v5",
+     "class": "known limit",
+     "places": [
+      {
+       "file": "qs/suites/qs4.py",
+       "lines": [
+        [
+         590,
+         590
+        ],
+        [
+         601,
+         602
+        ],
+        [
+         696,
+         696
+        ],
+        [
+         744,
+         744
+        ],
+        [
+         807,
+         807
+        ],
+        [
+         813,
+         815
+        ],
+        [
+         854,
+         854
+        ],
+        [
+         860,
+         860
+        ],
+        [
+         869,
+         869
+        ],
+        [
+         880,
+         880
+        ],
+        [
+         908,
+         908
+        ],
+        [
+         917,
+         917
+        ],
+        [
+         934,
+         934
+        ],
+        [
+         941,
+         941
+        ],
+        [
+         1066,
+         1066
+        ]
+       ]
+      }
+     ],
+     "in_view": true,
+     "recorded": "verifier-P4.md 21:47:05; verdict 21:57:02 L3: mutation survivors",
+     "copy_only": false
+    },
+    {
+     "id": "P4-v6",
+     "class": "known limit",
+     "places": [
+      {
+       "file": "<history>",
+       "lines": []
+      }
+     ],
+     "in_view": false,
+     "recorded": "verifier-P4.md 21:54:13; verdict 21:57:02 L2: the owner's address",
+     "copy_only": false
+    },
+    {
+     "id": "P4-v7",
+     "class": "other",
+     "places": [
+      {
+       "file": "qs/suites/qs4_items.json",
+       "lines": [
+        [
+         194,
+         194
+        ]
+       ]
+      }
+     ],
+     "in_view": false,
+     "recorded": "verifier-P4.md 21:54:13; verdict 21:57:02 N2: words of a verifier's file",
+     "copy_only": false
+    },
+    {
+     "id": "P4-v8",
+     "class": "other",
+     "places": [
+      {
+       "file": "qs/suites/qs4.py",
+       "lines": [
+        [
+         1008,
+         1008
+        ]
+       ]
+      }
+     ],
+     "in_view": false,
+     "recorded": "verifier-P4.md 21:57:02 N4: a plural",
+     "copy_only": false
+    }
+   ],
+   "platform_failures": {
+    "tests": [
+     "tests/test_qs4_inputs.py::test_a_link_or_reparse_point_in_an_input_directory_is_refused[reparse point]"
+    ],
+    "why": "it builds an os.stat_result with st_reparse_tag, which Linux drops, so it cannot pass in the sandbox; it passes on the Windows host verifier-P4 used",
+    "decided": "lead.md 15:13:14, at P5.md 15:12:44"
+   }
+  }
+ },
+ "items": [
+  {
+   "id": "h1-planted",
+   "parcel": "P1",
+   "kind": "planted"
+  },
+  {
+   "id": "h1-real",
+   "parcel": "P1",
+   "kind": "real"
+  },
+  {
+   "id": "h2-planted",
+   "parcel": "P2",
+   "kind": "planted"
+  },
+  {
+   "id": "h2-real",
+   "parcel": "P2",
+   "kind": "real"
+  },
+  {
+   "id": "h3-planted",
+   "parcel": "P3",
+   "kind": "planted"
+  },
+  {
+   "id": "h3-real",
+   "parcel": "P3",
+   "kind": "real"
+  },
+  {
+   "id": "h4-planted",
+   "parcel": "P4",
+   "kind": "planted"
+  },
+  {
+   "id": "h4-real",
+   "parcel": "P4",
+   "kind": "real"
+  }
+ ]
+}

@@ -1,2 +1,6 @@
 __pycache__/
 *.stackdump
+.pytest_cache/
+transcripts/
+*.egg-info/
+local/
