@@ -139,8 +139,9 @@ as lead:
      Its first pass recorded twenty findings: five sent back, eight
      restated and seven limits (11:21:04). Two more were sent back in its
      second pass.
-   - verifier-P2 found three real faults besides its plants (F3 to F5),
-     fixed before the merge (14:50:58).
+   - verifier-P2 found three real faults besides its plants (F3 to F5). They
+     were sent back (14:50:58), marked fixed in its second pass (17:04:41),
+     and merged at 17:10:43.
    - verifier-P0r found four sentences of the lead's that claimed more than
      was true.
    - verifier-P4 found that the owner's address rides in the replay
@@ -157,8 +158,9 @@ as lead:
 
    P4 also reported that four of five planted copies did not rebuild by its
    brief's method. The lead answered with a plan verifier's method, which
-   rebuilt all five (17:47:24). Ninety seconds later P4 found the fault in its
-   own probe, and the brief's method held too (P4.md 17:48:54).
+   rebuilt all five (17:47:24). P4's correction, entered ninety seconds
+   later, names its own probe's fault, so the brief's method held too
+   (P4.md 17:48:54).
 
    Each brief error was found before it cost a wrong result in the record, except QS1's.
    That one was found by a live batch, corrected, and run again.
@@ -188,10 +190,12 @@ as lead:
    found.**
    - DeepSeek's usage export matched the spend file to the last decimal
      (17:08:40).
-   - QS6's batches on 2026-10-07 were billed at about half what the price
-     table computed for peak hours. A Chinese public holiday, billed off-peak
-     all day, is the believed cause: no calendar was read. The guard held the
-     batch on the mismatch until it was diagnosed (18:35:19).
+   - On 2026-10-07, nine of QS6's fourteen batches billed 41 to 56% of
+     what the price table computed for peak hours, at their last reads. The
+     other five reconciled within the $0.02 tolerance, which at their sizes
+     cannot show a half. A Chinese public holiday, billed off-peak all day,
+     is the believed cause: no calendar was read. The guard held the batch on
+     the mismatch until it was diagnosed (18:35:19).
    - A test showed that billed drops can match another model's rates and
      read as routing. The summary now names the unmetered attempts.
 7. **The owner's priority overtook the lead's own gate,** and the record
@@ -271,7 +275,7 @@ as lead:
          minutes after the last call, within the balance's rounding
          (14:08:26). A later read was $0.08 short (18:47:34): about $0.00023
          for each of the 346 closed attempts in the lanes, or charges posted
-         late. The usage export settles it.
+         late. The usage export will settle it.
      - **The runs left out:**
        - 2 refused by the filter;
        - 7 ended by closed requests;
@@ -450,8 +454,8 @@ The meter's figures, from the committed spend file (`records/spend.jsonl`,
 
 - **The meter against the bill.** Of the 122 live batches, 35 reconciled
   alone at their first read, and 71 ran in lanes and were reconciled only
-  together. 16 disagreed at their first read. Seven agreed at a later read,
-  once their bills had posted. Nine of QS6's stayed at about half (below).
+  together. 16 disagreed at their first read. Seven read ok at a later
+  recheck. Nine of QS6's stayed at about half (below).
   - QS4's lanes, read together, agreed within the balance's rounding two
     minutes after the last call (14:08:26). A later read, after Logan's $20, was $0.08 short
     (18:47:34), inside the combined tolerance of $0.28. The usage export says
@@ -460,13 +464,14 @@ The meter's figures, from the committed spend file (`records/spend.jsonl`,
     minutes (07:54:20, 08:25:11), with 700 closed attempts showing no charge.
     The usage export has not yet confirmed it.
 - **Where the bill was lower, the price table was the likely cause, not the
-  meter:** QS6's batches on 2026-10-07 billed at about half the peak
-  computation, and a Chinese public holiday is believed to explain it
+  meter:** on 2026-10-07, nine of QS6's fourteen batches billed 41 to 56% of
+  the peak computation. A Chinese public holiday is believed to explain it
   (18:35:19).
 - **Of the $250 ceiling, $19.30 is spent.** The ceiling covers the measured
-  models' API bills; the Claude sessions, the Haiku agents among them, are
-  outside it. Logan settled that with his answer on decision 7, "API bills,
-  Qwen inside" (PLAN.md, Approved).
+  models' API bills. The Claude sessions are outside it, and Logan settled
+  that with his answer on decision 7, "API bills, Qwen inside" (PLAN.md,
+  Approved). The Haiku agents fall outside by the same first clause: the
+  harness metered none of their runs.
 
 ## What the requirements and plan should say differently (proposed; Logan's to settle)
 

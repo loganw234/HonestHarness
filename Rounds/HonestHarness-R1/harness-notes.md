@@ -167,17 +167,19 @@ notes they rest on.
     real tip's commit header and replacing only its tree. P4's brief
     described the original builder's method. P4 reported that four of five
     copies did not rebuild by it (P4.md 17:45:13). The lead answered with
-    the plan verifier's method, 5 of 5 (17:47:24). Ninety seconds later P4
-    found the fault in its own probe, and the brief's method held too
-    (17:48:54). Mechanism: when a claim of reproduction goes into a plan,
+    the plan verifier's method, 5 of 5 (17:47:24). P4's correction, entered
+    ninety seconds later, names its own probe's fault, so the brief's method
+    held too (17:48:54). Mechanism: when a claim of reproduction goes into a plan,
     the harness keeps the method that reproduced it beside the claim, and a
     parcel's failure to reproduce is checked against that method before
     anything changes.
 25. **The provider's calendar is part of the price table.** DeepSeek bills
-    every hour of a Chinese public holiday off-peak. The table priced
-    2026-10-07 01:20 UTC as peak, so the meter over-counted two QS6 batches
-    by double. The guard held the next batch on the mismatch, and the
-    diagnosis took one line of D2 and the balance's arithmetic.
+    every hour of a Chinese public holiday off-peak (D2). The table priced
+    2026-10-07 01:20 UTC as peak, and two QS6 batches billed about half the
+    meter's figure. A holiday that day is the believed cause, since no
+    calendar was read (18:35:19). The guard held the next batch on the
+    mismatch, and the diagnosis took one line of D2 and the balance's
+    arithmetic.
     verifier-P0 had stated this exact case as K7 at 11:18. Mechanism: the
     price table carries the provider's holiday calendar, from a cited
     source. Until it does, the harness refuses peak runs on dates it cannot
@@ -230,7 +232,7 @@ notes they rest on.
 33. **A guard's constant met the provider's real failure rate.** P0's batch
     allowance of three dropped attempts was the lead's guess. Live,
     DeepSeek dropped about 5 to 7% of requests at 64K tokens and above, and
-    none of over 500 below 64K. So 66-run batches stopped at their third
+    none of the 264 calls at 16K and 32K (19:11:24). So 66-run batches stopped at their third
     drop. The lead added a per-batch flag (fcbc67d), and ran the rest at 15.
     Every retry before the batches' limits was answered. Mechanism: each
     guard constant carries its basis. The harness measures each provider's
