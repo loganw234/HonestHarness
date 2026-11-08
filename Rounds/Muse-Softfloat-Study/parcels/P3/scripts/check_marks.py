@@ -111,7 +111,7 @@ def main():
               ["proposal", "group", "case_report_label", "case_report_label_text", "mark",
                "clauses_present", "clauses_case_only", "clauses_newer_only", "clauses_absent", "label_check"], pm_rows)
     from collections import Counter
-    print("marks rows:", len(marks), "| cited lines checked:", sum(1 for m in marks if m["source_id"]), "| failures:", bad)
+    print("marks rows:", len(marks), "| rows with a citation:", sum(1 for m in marks if m["source_id"]), "| distinct source-line pairs:", len({(m["source_id"], m["line"]) for m in marks if m["source_id"]}), "| failures:", bad)
     print("proposal marks:", dict(Counter(r[4] for r in pm_rows)))
     for r in pm_rows:
         print(r[0], "|", r[2], "|", r[4], "| present:", r[5], "| case:", r[6], "| newer:", r[7], "| absent:", r[8], "|", r[9])

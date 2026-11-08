@@ -27,6 +27,7 @@ any search hit was read). Each clause is marked by the strongest place that carr
 | RULE-K | a rule in the kit only |
 | ADVICE | in a method file as advice, an example or a default, with no must or never; "paraphrase = yes" where the words differ |
 | PART | the clause is partly there; the row says what is missing |
+| ADJACENT | a neighbouring practice that is not the clause; shown in `data/marks.csv` and counted as ABSENT when the clause mark is derived |
 | CASE | only an observation or proposal in a case study, or a pending row of `ADOPTION.md` |
 | NEWER | only above the pin (`CASE-STUDY-7.md` at `894d125`) |
 | ABSENT | none of the above, after two searches |
@@ -38,7 +39,7 @@ clauses (the base a label names, or the setting) are shown but not counted
 (`clauses.json`, `_context`; amended before any mark was read).
 
 The marks are my readings. What the scripts guarantee: every cited line holds its
-quote (41 cited lines in `data/marks.csv`, 0 failures), and the derivation is
+quote (41 rows of `data/marks.csv` cite 39 distinct source-line pairs, 0 failures), and the derivation is
 mechanical (`scripts/recount.py` re-derives it by another method: 18 proposals,
 no disagreement).
 
@@ -60,7 +61,7 @@ the quotes and lines are `data/marks.csv`.
 | 6 | new | CASE-ONLY | | c3 (CS3 l717: read the journal, the notice is truncated) | c1, c2 | agrees |
 | 7 | new | ABSENT | | | all three | agrees |
 | 8 | extension | PARTIAL | c4: "Stop your own background work before you report" (l438); c3 (pause record, l532) | | c1 ceilings | has a base |
-| 9 | extension | PARTIAL | c1 (HF FAILURE-MODES C3, METHOD l514, l584); c2 (a sentence that "claims more than is true" is restated, l1126) | | c3 | has a base |
+| 9 | extension | PARTIAL | c2 (a sentence that "claims more than is true" is restated, l1126) | | c1 (neighbours only: `HF:FAILURE-MODES.md` C3, `HF:METHOD.md` l514 and l584, which show a practice beside a recorded mode, not a mode per authority), c3 | has a base |
 | 10 | extension | PARTIAL | c3: generated copies get a `--check` (`HF:METHOD.md` l350) | | c1 registry | has a base |
 | 11 | new | PARTIAL | c1: kit tables name a digest of each input (`KIT:METRICS.md` l39) | | c2 (adjacent), c3 | overstated |
 | 12 | reinforcement | PARTIAL | c2: "A figure the documents quote has a script in the tree" (`PR:METHOD.md` l228; CS4#4) | | c3 | has a base, but see 4 |
@@ -116,7 +117,8 @@ Whether the round "paid for" skipping P13 is P2's step 4, not mine.
 - HonestFramework: 0 commits reachable from a local ref and not from `65447fd`.
 - ParcelRound: 2, both on `case-study-7` (`8b6d6d4`, `894d125`, 2026-10-05); they add
   only `CASE-STUDY-7.md` and `archive/round7-cost-scripts.zip`. `METHOD.md` and
-  `ADOPTION.md` are unchanged at `894d125` (the diff names only those two files).
+  `ADOPTION.md` are unchanged at `894d125` (the diff from `f42242e` names only
+  `CASE-STUDY-7.md` and `archive/round7-cost-scripts.zip`).
 - `CASE-STUDY-7.md` lists nine proposals (l522-583). Reading them: item 4 repeats P4's
   scoped re-check (scope, model, budget); item 3 is near P5's recount (the lead's
   restatements read their constants from the code at the time of writing). The other
@@ -125,19 +127,19 @@ Whether the round "paid for" skipping P13 is P2's step 4, not mine.
 
 ## 3. Task 2: the toy round (`data/toy_practice.csv`, `data/toy_provenance.csv`)
 
-Counts: PRACTISED 4 (P1, P6, P8, P16), PARTLY 9 (P2, P3, P4, P5, P7, P9, P10, P12, P15),
+Counts: PRACTISED 2 (P6, P16), PARTLY 11 (P1, P2, P3, P4, P5, P7, P8, P9, P10, P12, P15),
 SILENT 5 (P11, P13, P14, P17, P18), by `toy_round` in `data/proposals.csv`. The strongest evidence:
 
-- **P1 practised.** The toy's metrics README: "provenance gate: it must quote the
+- **P1 in part: the copy's HEAD is quoted; the copy-only line is not shown.** The toy's metrics README: "provenance gate: it must quote the
   copy's HEAD" (`TOY:docs/metrics/README.md` l14). `scripts/toy_provenance.py` read all 44
   verifier reports named in the toy's `plants.jsonl`: **44 of 44** quote their own
   `copy_head`, the first quote at line 3 to 21 (median 7), 41 within the first 15 lines.
   Second route: `grep -c -F` of each 40-character head in its report: 44 of 44.
-  `verify-carousel.md` l2 reads "Provenance (checked first, re-checked last)". The
+  `verify-carousel.md` l3 reads "Provenance (checked first, re-checked last)". The
   copy-only line was not measured.
 - **P6 practised.** The Wave T1 briefs were "report-file-first to scratch/toy1/"
   (`<muse>/ledger/lead.md` l901); all 44 verdict rows name a report file and all 44 exist.
-- **P8 practised in the two ways shown.** The same dispatch had "<3 GB child-command ceilings" (l901);
+- **P8 in part: a memory ceiling and a wall window are shown, not process ownership or checkpointing.** The same dispatch had "<3 GB child-command ceilings" (l901);
   the board capture window was raised as the registry grew (`TOY:docs/RECORD.md` l115-119).
   Process ownership and checkpointing are not shown.
 - **P16 practised for the plant ledger.** Key hash committed before the verifier is
@@ -166,7 +168,7 @@ its line in the file:
   (`verifier-P5.md` l101). One verifier ran a git command in the real checkout and disclosed it (`verifier-P3.md` l166).
 - **P5 met in round 1:** the lead's "hand-typed golden count of 44, which was 38"
   (`lead.md` l696), recounted by script.
-- **P6:** round 1's reports arrived as final messages (`lead.md` l184); round 2 filed them
+- **P6:** round 1's verifier-P0 report arrived as its final message (`lead.md` l184, one report); round 2 filed them
   "verbatim, each from the agent's final message" (round 2 `lead.md` l1060). No spilled or
   truncated report was found by the stems.
 - **P8:** "I started no background process" (round 1 `P1.md` l407); round 2 met a leftover
@@ -200,13 +202,13 @@ judge map (P18), so those three proposals mark NOT APPLICABLE or NEITHER there.
 |---|---|---|
 | 18 proposals | `proposals.py`: 18 rows, ids P1 to P18 in order | `grep -c -E '^- \*\*P[0-9]+\.'` of the case report: 18 |
 | Marks by proposal | `check_marks.py`: ABSENT 3, PARTIAL 14, CASE-ONLY 1 | `recount.py`: the same, no disagreement |
-| 41 cited lines in `marks.csv` | `check_marks.py`: 0 failures | `sed -n` of 10 lines (`PR:METHOD.md` l438, l940, l1092, l1301; `PR:ADOPTION.md` l152, l155; `HF:METHOD.md` l630, l838; `KIT:WORKFLOW.md` l24, l178): each reads as quoted |
+| 41 cited rows (39 distinct lines) in `marks.csv` | `check_marks.py`: 0 failures | `sed -n` of 10 lines (`PR:METHOD.md` l438, l940, l1092, l1301; `PR:ADOPTION.md` l152, l155; `HF:METHOD.md` l630, l838; `KIT:WORKFLOW.md` l24, l178): each reads as quoted |
 | Toy HEAD quotes | `toy_provenance.py`: 44 of 44 | `grep -c -F` per report: 44 of 44; `grep -c '"copy_head"'` of the plants file: 44 rows |
 | 34 other citations | `cite_check.py`: 0 failures | control: with one quote and one line altered in a copy, `cite_check.py` reports 2 failures and exits 1 |
-| Blind re-mark (seed 1: P2, P3, P5, P8, P9) | first-pass marks | `data/remark.csv`: a `git grep` route agrees on the proposal mark in 4 of 5 (P5 disagrees); on clauses it was narrower than reading, missing one clause each in P3, P5 and P9 |
+| Re-mark by a second route, made after the first pass (seed 1: P2, P3, P5, P8, P9) | first-pass marks | `data/remark.csv`: a `git grep` route agrees on the proposal mark in 4 of 5 (P5 disagrees); on clauses it was narrower than reading, missing one clause each in P3, P5 and P9 |
 
 The re-mark tests consistency of my reading, not correctness, and I made it after the
-first pass, so it is not blind in the strict sense.
+first pass, so it is not blind.
 
 ## 7. Limits
 
@@ -229,6 +231,10 @@ first pass, so it is not blind in the strict sense.
   `git show` of named files (`docs/KICKOFF.md`, `docs/RECORD.md`).
 
 ## 8. Reproduce
+
+Run these from the parcel directory, `Rounds/Muse-Softfloat-Study/parcels/P3/` in the
+worktree, where `scripts/` and `data/` sit side by side. The scripts find `data/` from
+their own location, so another working folder also works if the path to `scripts/` is given.
 
     python -I scripts/proposals.py --repos <repos> --scratch <scratch>
     python -I scripts/corpus.py --repos <repos> --scratch <scratch>

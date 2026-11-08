@@ -4,7 +4,8 @@ Sources, read-only:
   TOY:docs/RECORD.md, WAVE-T1.md, WAVE-T2.md, TOY-0.md, metrics/README.md   at the toy's 084f98b (git show)
   MUSE:ledger/lead.md from line 889 to the end                               (file)
   TOYMSG:<scratch/toy1|toy2>/msg-plant-*.txt                                 (files the toy's plants.jsonl names:
-      the lead's plant-dispatch messages, which are the toy verifiers' briefs)
+      the lead's plant-ledger commit-message drafts. They are not the toy verifiers' briefs: the toy's
+      briefs are not a readable file)
 Never opens <muse>/scratch/lead/ or any 'plants' key folder.
 
 Writes data/toy_candidates.csv and data/toy_sources.csv (the file list with line counts).

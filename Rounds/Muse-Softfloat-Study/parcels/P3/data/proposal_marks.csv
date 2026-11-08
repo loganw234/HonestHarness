@@ -7,7 +7,7 @@ P5,ParcelRound — the lead's own work.,extension,extension,PARTIAL,c1,c2,,"c3,c
 P6,"ParcelRound — attempts, processes, channels.",new,"new, harness-facing",CASE-ONLY,,c3,,"c1,c2",agrees
 P7,"ParcelRound — attempts, processes, channels.",new,new,ABSENT,,,,"c1,c2,c3",agrees
 P8,"ParcelRound — attempts, processes, channels.",extension,extension of time-boxes,PARTIAL,"c3,c4",,,c1,"has a base (clauses present: c3,c4)"
-P9,HonestFramework — authorities and claims.,extension,extension of §1/§9's spirit,PARTIAL,"c1,c2",,,c3,"has a base (clauses present: c1,c2)"
+P9,HonestFramework — authorities and claims.,extension,extension of §1/§9's spirit,PARTIAL,c2,,,"c1,c3",has a base (clauses present: c2)
 P10,HonestFramework — authorities and claims.,extension,extension of single-sourcing to prose,PARTIAL,c3,,,c1,has a base (clauses present: c3)
 P11,HonestFramework — authorities and claims.,new,new,PARTIAL,c1,,,"c2,c3",overstated: c1 already present
 P12,HonestFramework — authorities and claims.,reinforcement,"reinforcement of the front-door rule, extended to evidence paths",PARTIAL,c2,,,c3,has a base (clauses present: c2)
