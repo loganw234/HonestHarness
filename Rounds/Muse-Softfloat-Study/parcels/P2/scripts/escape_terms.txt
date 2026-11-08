@@ -1,0 +1,44 @@
+# id@@regex (mine, from each finding's own words)
+M1@@berkeley_ingest|gated against Berkeley|zero berkeley|never executes TestFloat|no berkeley|berkeley.{0,40}(historical|not (run|executed|a gate))
+M2@@ce81d66e|7\.92 ?s|index\.html.{0,60}(stale|interval|stream)
+M3@@RTTZ|value 5|out-of-enum|P5 (is|pin)|(msf_rounding_t\))5
+M4@@read_until|run_bench|bench.{0,40}(60 s|window|budget)
+S5@@TRIG_COUNT_FINAL|final-stage.{0,40}(fallback|disagree)|silent fallback|TEST_COUNTERS
+S6@@remainder_core|decode lemma|early return
+N1@@HEADER_PRELUDE|wave-4 gate has closed
+N2@@trap banner|None of these is implemented
+N3@@render_special|"snan"|\bsnan\b.{0,30}(spell|render|output)
+N4@@formats\.tsv.{0,60}type|`type` column
+N5@@documented setter|per-core rounding.{0,40}setter|setter.{0,40}rounding
+N6@@symbol_scan|SKIP-BY-NAME
+N7@@berkeley-int|nan-class
+N8@@take_lock|TOCTOU|exists-check
+N9@@stale lock|liveness|SIGKILL
+N10@@record.{0,20}git HEAD|board scripts.{0,40}HEAD|bench labels
+N11@@MSF_BOARD_SERIAL|untargeted
+N12@@kissfft_host.{0,60}(race|attach)|mid-boot
+N13@@host_replay.{0,60}(ValueError|malformed)|reply-width
+N14@@29-row|superseded.{0,30}median
+N15@@1\.58 steps|7\.9 s
+N16@@upload-artifact|gate logs as artifacts
+N17@@610ee45|base stamp
+N18@@frozen-snapshot|freeze stamp|25 merges / 150
+N19@@union-merge|mid-file|briefs\.jsonl.{0,60}(conflict|union)
+N20@@no usage/passes rows|unrowed
+N21@@bare date|ISO-8601
+N22@@gitvisual7|50 MB|\bLFS\b
+T1@@2560-bit|80 limbs|WIDTHS\.md
+T2@@implemented\.tsv.{0,40}(CRLF|mixed)|mixed CRLF
+T3@@status-per-family
+T4@@non-static|test-counter globals
+T5@@hand-typed|duplicate constants
+T6@@smoke minutes|duration words
+T7@@2\.7%|3\.3%
+T8@@27 merge commits|25 merges into main
+T9@@0x9E3779B9|seed stride
+T10@@interval skip
+T11@@wave-label|wave label
+T12@@brief.{0,10}paths|resolve only via
+T13@@copyright header|per-file
+T14@@moving major tags|unversioned apt|pinned to
+T15@@worktrees/ directory|empty untracked

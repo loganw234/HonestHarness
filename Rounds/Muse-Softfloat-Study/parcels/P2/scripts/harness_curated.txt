@@ -1,0 +1,15 @@
+# row@@verdict@@evidence (row = order in the kit's HARNESS.md table). Keys as in clauses_curated.txt.
+1@@held (the kit's fallback)@@H row 1; A2:71 (copies at worktrees/verify*/); AS:207 (worktrees named in parcel ledgers). Native worktree isolation was not used, because it would cut from the wrong repository (L:2)
+2@@held, with a limit@@H row 2; a child cannot message the lead mid-run, so urgency rides the file channel (H); escalations.jsonl 23 rows, which the lead's first look counts as all by the file channel (lead.md 08:11:55)
+3@@unknown@@H row 3 says a Monitor is armed inline per dispatch; L:19 calls the wake path "untested"; no later record that a Monitor woke an agent was read
+4@@failed natively, fallback held@@H row 4 (measured 4 of 4 reader follow-ups lost their write grant); L:22, L:29, L:54 (re-checks went to fresh agents with findings quoted)
+5@@unknown@@H row 5 sets the brief rule; no instance of a parcel spawning an agent was read
+6@@held@@H row 6; usage and passes rows are extracted from transcripts by the extractor (L:58)
+7@@held, with a limit@@H row 7; only model_completed records carry usage (H); passes/usage rows froze at 39 for Waves 4-5 until repaired (A2:142, AF:69); 7 verifiers have no usage row (lead's count, see P1)
+8@@fallback held; no contact found@@H row 8; K:111-115 (clones with cft in their names sat beside the workspace; no mechanical fence); A2:222, AF:129, AS:241 (tree scans found nothing)
+9@@held@@H row 9; A2:271; AS:153; L has 12 mentions of board.lock
+10@@partly held@@H row 10; AS:207 (three parcel branches, not main, on origin, one directed by brief); A2:32 (lead commits pushed with no verifier, ~30 of 44)
+11@@held@@H row 11; K:111-115; A2:222
+12@@stated limit, partly exposed@@H row 12; A2:71 (graded plant shapes sat in plants.jsonl inside later verifiers' copies and no sampled brief forbade reading it); AS:93 (10 of 10 seal verifier briefs fence plants.jsonl by name)
+13@@partly held@@H row 13 (and its own correction that ledger.sh is not the only writer); A2:142 (twelve ledgers with no ledger.sh stamp; a 7.1-hour gap); L:181
+14@@unknown@@H row 14; no pause announcement or resume note read (L:639 shows the owner leaving for about 8 hours)

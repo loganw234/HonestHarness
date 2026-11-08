@@ -1,0 +1,47 @@
+# id@@own@@evidence@@earlier_audit@@family@@mechanism@@why
+# own: raised | partly | examined-passed | not-raised.  Escape = not-raised or examined-passed. "partly" is not counted as an escape.
+# family: FAILURE-MODES.md at HonestFramework 65447fd (A-I, meta-failure) or "none fits".
+# Full audit (REPORT.md of 2026-11-01) -----------------------------------------------------------
+M1@@examined-passed@@scratch/verifier-readme/report.md:18 checked the README sentence "gated against Berkeley TestFloat 3e, MPFR, or an exact reference" against COVERAGE authority column and VECTORS.md tags and marked it Agree; Berkeley batches ran at generation time (parcel-f32.md:57,61; scratch/verifier-w1f32)@@no@@C3 declared configuration instead of executed work@@PR/ROLES "check every claim in a comment, a document" (ROLES.md:91) and HF section 3 (a gate watched to fail)@@The verifier read the declared authority column, not what the merge gate runs; verifier-readme is the one that missed plant 4 (lead's first look)
+M2@@not-raised@@no hit naming site/index.html in lead.md, RECORD or any verifier report; the new interval hash ae04caf0 is in lead.md:756,766,811 and verifier-w6judgemap@@no@@F1 the list kept in several places / F2 one number, many places@@HF section 4 (one fact, one place) and PR "A figure the documents quote has a script in the tree" (METHOD.md:228)@@The Wave 6 restamp updated README, BOARD and demo by hand; the site page quoted the old figure; no claim-surface diff gate (AF:211 D4 proposed one)
+M3@@partly@@scratch/verifier-w5attr/report.md:41 ("public value 5 hits every default: arm = silent toward-zero, the study's named trap"); scratch/verifier-w5aug/report.md:120 cleared it ("no caller-passable collision")@@no@@E3 the plausible fallback@@HF section 2 (refusal is the only alternative to correctness)@@Raised in another context; the cast bypass of the P5 pin was cleared by the augmented-parcel verifier
+M4@@not-raised@@verifier-psbench.md:31 and parcel-psbench.md:37 record "board/run_bench.sh unchanged"; no entry says the committed path was run through its 60 s reader@@no@@C3 declared configuration instead of executed work@@HF section 3 and PR gates: re-run the committed command@@BENCH numbers came from a labelled parcel run with a scratch 600 s reader (REPORT.md:48-57), so the committed re-run path was never exercised
+S5@@partly@@ledger/parcel-w4trig.md:168 and parcel-w5exp2.md:375 record that the counters exist only in test builds@@no@@E3 the plausible fallback@@HF section 2 (refuse rather than approximate) and section 8 (uncertainty travels in the value)@@Disclosed as a design fact; its consequence (no runtime tripwire in the shipped build) is not stated as a limit
+S6@@not-raised@@0 hits for remainder_core, decode lemma, early return@@no@@none fits (an unstated lemma guards a branch)@@PR verifier list (ROLES.md:90 diff against ownership; check every claim)@@A fragile-by-omission branch; the auditor proved the lemma holds, so no wrong answer
+N1@@not-raised@@0 hits@@no@@F1 the list kept in several places@@HF section 4 (generate the rest)@@Generator text not updated when Wave 5 added tier 2 rows
+N2@@not-raised@@0 hits@@no@@F1@@PR "Write when it clears the bar"; claim check (ROLES.md:91)@@A comment's reason went stale when core rows were added
+N3@@partly@@lead.md:267 and docs/RECORD.md@a49991f:531 record rulings on snan spelling in the string parcel@@no@@F1@@HF section 4@@The ruling was made; SF-0's spelling text was not reconciled
+N4@@not-raised@@0 hits@@no@@E1 the ignored reserved field@@HF section 2 / section 3@@Column never read by the generator, and nothing tested that editing it propagates
+N5@@not-raised@@0 hits@@no@@C3 declared configuration instead of executed work@@HF section 8@@SF-0 describes a setter the compat layer does not have
+N6@@raised@@scratch/verifier-w1f64/report.md:82,108 (symbol scan SKIP-BY-NAME, named); ledger/parcel-w6sanitize.md:52 ("a loud non-pass")@@no@@D2 the silently skipped stage@@HF section 3 skips loud@@Known and named as a skip by design; the audit's point is that the exit status is 0
+N7@@raised@@scratch/verifier-w1prep/report.md:191 (note N4: the berkeley-int result-skip half cannot fire on any implemented op); :182-186 probes the nan-class branches@@no@@D2@@verifier list@@Raised as a note in Wave 1 prep
+N8@@not-raised@@0 hits for race or TOCTOU; take_lock appears only as usage@@no@@none fits (race)@@BOARD.md:11 (lock is a file)@@Lock protocol written, its atomicity not examined
+N9@@not-raised@@0 hits@@no@@none fits (stale lock)@@BOARD.md:12@@Same
+N10@@not-raised@@0 hits@@no@@C3@@BOARD.md:14 (every board result names its artifact)@@Scripts do not record the commit; wrappers outside the tree did
+N11@@partly@@lead.md:565-575 (multi-board untargeted flash; "should have landed with the multi-board test")@@A2:271@@G1 the dangerous default@@BOARD.md:14, HF section 6@@Serial targeting was added to the interval script; ias15_run.sh was not
+N12@@not-raised@@0 hits@@no@@none fits (fail-closed race)@@@@Retry passes; the audit calls it fail-closed
+N13@@not-raised@@0 hits@@no@@E1@@verifier list@@Latent mismatch in a replay script
+N14@@not-raised@@docs/RECORD.md@a49991f:1340 carries the 29-row run; no supersession pointer found@@no@@F1@@HF section 7 (record dated; later entries supersede)@@A later entry exists; the earlier paragraph points nowhere
+N15@@not-raised@@0 relevant hits@@no@@F1@@HF section 4@@Wall-times quoted from an earlier measurement
+N16@@not-raised@@0 hits for upload-artifact@@no@@C3@@ROLES.md:91@@README claims logs kept as artifacts for a job that does not upload them
+N17@@not-raised@@only an unrelated hit@@no@@F1@@HF section 6 provenance@@Stamp names the merge commit by construction
+N18@@not-raised@@docs/RECORD.md@a49991f:1289 is a later appendix line on film-number freeze stamps@@AS:253 and SD-1 (seal audit)@@F2@@HF section 6@@Known to the seal audit, not to a verifier; the video README lacks the note
+N19@@raised@@disclosed in the merge bodies (AS:124 D9) and REPORT.md:125 itself says "disclosed"@@AS:124@@none fits@@HF section 7@@Conflict resolved as a union and disclosed
+N20@@raised@@docs/RECORD.md@a49991f:1288; ledger/parcel-w5metrics.md:36,62,106@@AF:69@@none fits (metrics coverage)@@METRICS.md:3@@Disclosed as unrowed by design
+N21@@not-raised@@0 hits@@no@@F1@@HF section 4@@One row's date format breaks the metrics README schema
+N22@@not-raised@@0 relevant hits@@no@@none fits (repository hygiene)@@@@The audit calls it deliberate
+T1@@not-raised@@no hit on the accumulator limbs (the WIDTHS hits concern another row)@@no@@F2@@HF section 4@@Restatement rule of WIDTHS.md not followed
+T2@@not-raised@@0 relevant hits@@no@@F1@@@@Mixed line endings in a generated table
+T3@@not-raised@@0 hits@@no@@F1@@@@Docstring contradicts implementation
+T4@@not-raised@@0 hits@@no@@none fits@@@@Test-build globals
+T5@@not-raised@@only a claim in verifier-p0/report.md:202 that no hand-typed duplicates exist@@no@@F1@@HF section 4@@The P0 verifier checked and found none; the audit finds hand-typed max-finite and qNaN literals
+T6@@not-raised@@0 hits@@no@@F1@@@@Duration words stale
+T7@@not-raised@@RECORD:1193 states the 2.7% figure@@no@@F1@@@@Two figures for one cut
+T8@@raised@@ledger/verifier-w6popups.md:35 verified "25 merges into main"@@no@@none fits@@@@The claim is accurate as scoped; the audit asks for a clarifying phrase
+T9@@not-raised@@scratch/verifier-psbench/report.md:84 reads the seed formula in code; no entry says BENCH.md omits it@@no@@F1@@@@A documentation gap
+T10@@not-raised@@0 hits@@no@@none fits@@@@Skip disclosed in stdout only
+T11@@raised@@ledger/parcel-w5metrics.md:140 ("topic wave labels (observation)"); docs/RECORD.md@a49991f:1242@@no@@F1@@@@Noted as an observation
+T12@@not-raised@@0 hits@@no@@F1@@@@Brief paths resolve only via the out-of-repo ledger
+T13@@not-raised@@no relevant hit@@no@@none fits@@@@No per-file headers
+T14@@not-raised@@no relevant hit@@no@@none fits (supply chain)@@@@Moving tags in CI
+T15@@not-raised@@0 hits@@no@@none fits@@@@Leftover directory
