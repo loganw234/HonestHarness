@@ -1,0 +1,21 @@
+{
+  "_note": "Written before the toy sources were searched. For each proposal: the question put to the toy's record, and the stems used to find lines that might answer it. Marks: PRACTISED (a row, field or line shows the act), STATED (a rule or plan is written, no row or line shows it done), PARTLY, NOT PRACTISED (the record shows it was not done, or the failure happened), SILENT.",
+  "P1": {"q": "Does a toy verifier quote the copy's HEAD, with a copy-only line, as its first recorded act?", "stems": ["provenance", "copy.s HEAD", "quote the copy", "copy_head", "\\bHEAD\\b"]},
+  "P2": {"q": "Was the copy handed over by allowlist, or built with no route to the real tip?", "stems": ["allowlist", "detached", "no route", "plant\\.py", "export", "clone", "unreachable"]},
+  "P3": {"q": "Do the plants include metadata shapes (labels, counts of counts, provenance fields), with per-field checks?", "stems": ["metadata", "label", "provenance", "per-field", "citation", "arithmetic", "count"]},
+  "P4": {"q": "Does a change after the copy was built go past a delta check scoped to the diff?", "stems": ["delta", "re-?check", "scoped", "after the verdict", "lead merge fix", "lead fix"]},
+  "P5": {"q": "Are landing edits made by script with asserts and a recount; does an adherence audit run at each wave close?", "stems": ["adherence", "by script", "assert", "recount", "wave close", "audit"]},
+  "P6": {"q": "Is the report a file in scratch with a compact result and a path; is a spilled or empty result recovered from the file?", "stems": ["report", "spill", "truncat", "empty", "verify-.*\\.md", "recover"]},
+  "P7": {"q": "Is a dead or voided attempt named in the record, and the retry run from a clean checkout?", "stems": ["void", "dead", "abandon", "attempt", "clean checkout", "fresh"]},
+  "P8": {"q": "Do briefs carry memory, wall-clock or process ceilings; do long parcels checkpoint; does an agent own its processes?", "stems": ["ceiling", "memory", "wall", "window", "timeout", "checkpoint", "background", "orphan", "process"]},
+  "P9": {"q": "Is each authority recorded with its execution mode, and is a claim-versus-mechanism pass a step at the seal?", "stems": ["executed", "historical", "mechanism", "claim", "never existed", "seal"]},
+  "P10": {"q": "Is there a claim registry of load-bearing literals and the surfaces that carry them?", "stems": ["registry", "pinned", "literal", "single-?source", "claims"]},
+  "P11": {"q": "Does a generated file's stamp name the newest commit counted, with regeneration after the append?", "stems": ["stamp", "regenerat", "counted from", "generated", "provenance"]},
+  "P12": {"q": "Is evidence produced by the committed path, or is a scratch variant promoted in the same parcel?", "stems": ["committed path", "scratch", "promot", "variant", "probe"]},
+  "P13": {"q": "Does each dispatch define its roots, and do scripts resolve the workspace from any worktree?", "stems": ["<repos>", "<scratch>", "roots", "absolute path", "worktree", "resolve"]},
+  "P14": {"q": "Does a freeze end with the consumer's exact verification command, LF manifests and an allowlist build?", "stems": ["freeze", "frozen", "sha256sum", "\\bLF\\b", "CRLF", "allowlist", "bundle", "manifest"]},
+  "P15": {"q": "Is there a hardware annex: inventory before first flash, target by serial, an atomic lock with stale recovery?", "stems": ["inventory", "serial", "board\\.lock", "mkdir", "lock", "stale", "genuine", "flash"]},
+  "P16": {"q": "Are metrics rows appended at merge time, in the same step as the ledger entry?", "stems": ["plants\\.jsonl", "append", "at merge", "metrics", "lead-merge", "restated pre-push"]},
+  "P17": {"q": "Is there an asset-provenance file naming source, licence and permitted surfaces for each non-code asset?", "stems": ["asset", "licen[cs]e", "provenance", "datasheet", "font", "image", "music"]},
+  "P18": {"q": "Does the seal end with a cold dry run on a fresh clone, by an agent that did not write the map?", "stems": ["cold", "dry run", "fresh clone", "clean clone", "judge map", "walk"]}
+}

@@ -1,0 +1,549 @@
+proposal,clause,tier,source_id,line,text
+P1,c1,M,PR:METHOD.md,225,"the seam as a refusal, and the first thing the refusal stopped was the"
+P1,c1,M,PR:METHOD.md,740,"live from the first thing it dispatches, not from the first time it"
+P1,c1,M,PR:METHOD.md,1143,- it gives no wrong answer today. The first entry to apply the rule in
+P1,c1,M,PR:templates/ledger.md,201,First line is the headline. Include a `For:` line — the watcher prints
+P1,c1,M,HF:METHOD.md,127,"`atlas-optical` and `atlas-film` carry a `PROVENANCE.md`, on the stated"
+P1,c1,M,HF:METHOD.md,438,## 6. The artifact carries its own provenance
+P1,c1,M,HF:METHOD.md,593,### The stronger form: write the disagreement into the value's own provenance
+P1,c1,M,HF:METHOD.md,599,"value's provenance**, on 178 entries. A further 116 carry a marker saying the"
+P1,c1,M,HF:ADOPTING.md,150,"## Step 6 — Provenance, when you start shipping artifacts (a day)"
+P1,c1,M,HF:FAILURE-MODES.md,282,### H1 — The first entry instead of the relevant one
+P1,c1,M,HF:WITH-PARCELROUND.md,94,**Provenance on what parcels hand back.** [§6](METHOD.md). A parcel's claimed
+P1,c1,M,HF:templates/manifest.md,134,"version of that one extracted the first entry in the report, which belongs to"
+P1,c1,K,KIT:START-HERE.md,107,"| [tools/](tools/check_kit.py) | `check_kit.py`, the gate; `ledger.sh`, the ledger's two writes; `plant.py`, the planted copies and their keys; `round_metrics.py`, the record's tables. Each tool's fir"
+P1,c2,M,PR:METHOD.md,213,"**Name a base commit ""at or after""**, and put the exact tip in the"
+P1,c2,M,PR:METHOD.md,325,parcel whatever that checkout's HEAD is. In round 3 it was the commit
+P1,c2,M,PR:METHOD.md,712,"head -1 ""$U/$f""; grep -m1 '^For:' ""$U/$f"" 2>/dev/null || true"
+P1,c2,M,PR:METHOD.md,984,"lead's run, and the full suite at the tip of the branch main will move"
+P1,c2,M,PR:METHOD.md,1225,"tip at the round's end or at a milestone, not at each merge. Three"
+P1,c2,M,PR:METHOD.md,1228,(below); and main moves only to a tip on which the full suite has run
+P1,c2,M,PR:METHOD.md,1305,"failed at HEAD, which was the lead's uncommitted edit, and ten noted the"
+P1,c2,M,PR:ADOPTION.md,111,"| CS3#17 | A worktree the harness creates branches from the session checkout's HEAD | reinforcement | adopted in part at `03561a7`: fast-forward to the base and check its SHA, never switch another ses"
+P1,c2,M,PR:ADOPTION.md,143,"| CS5#8 | A planted control's parcel tip stays out of the ledger until its verifier reports | extension | pending: not practised | archive/round6-practice-survey.md, CS5#8 | — | — | — |"
+P1,c2,M,PR:ADOPTION.md,178,| S4 | Allowed: one round branch; P0 lands on it before any parcel; a gate after each merge; each merge re-made; main moves only to a verified tip | allowed shape | adopted at `03561a7` and `d38fea1` 
+P1,c2,M,PR:ADOPTION.md,180,"| S6 | Allowed: reuse of a run made by someone other than the author of the work verified, with identical inputs and binary hashes; the verifier re-runs from clean what it doubts; the full suite at th"
+P1,c2,M,PR:templates/checklists.md,75,"- [ ] Names the base commit ""at or after"", puts the exact tip in the"
+P1,c2,M,PR:templates/checklists.md,194,main moving only to a tip on which the full suite has run and which
+P1,c2,M,PR:templates/ledger.md,163,"head -1 ""$U/$f""; grep -m1 '^For:' ""$U/$f"" 2>/dev/null || true"
+P1,c2,M,PR:templates/verifier.md,82,and the full suite at the tip of the branch main will move to is always
+P1,c2,M,HF:METHOD.md,412,"| ""pushed to main"" | `git push -q`, then an echo of the **local** `HEAD`, which is true whether or not anything moved |"
+P1,c2,M,HF:METHOD.md,450,`git rev-parse` while its working tree had never updated. Both build hosts
+P1,c2,M,HF:ADOPTING.md,42,grep -rn 'rev-parse HEAD' .          # local ref quoted as remote evidence
+P1,c2,M,HF:ADOPTING.md,44,"grep -rn '| *head\|| *tail' .        # $? belongs to head, not the test"
+P1,c2,M,HF:FAILURE-MODES.md,30,"| 3 | ""pushed to main"" | `git push -q` then an echo of **local** `HEAD` | ask the remote: `git ls-remote` (§5) |"
+P1,c2,M,HF:FAILURE-MODES.md,76,A remote host reported the expected commit from `git rev-parse` while its
+P1,c2,M,HF:FAILURE-MODES.md,84,they catch a class that `rev-parse` cannot see.
+P1,c2,M,HF:FAILURE-MODES.md,129,"`cmd | head -n 2; echo ""rc=$?""` reports `head`'s status. Benign here, but the"
+P1,c2,M,HF:FAILURE-MODES.md,143,`git push -q` followed by `git rev-parse --short HEAD`. The echo prints the
+P1,c2,M,HF:FAILURE-MODES.md,144,"local head, which is true whether or not anything moved. Reported twice in one"
+P1,c2,M,HF:FAILURE-MODES.md,157,**Defence.** Confirm the subject: `git -C <dir> rev-parse --show-toplevel` and
+P1,c2,M,HF:templates/agent-notes.md,98,"SHA whose working tree never updated is the failure `rev-parse` cannot see,"
+P1,c2,M,HF:templates/gate-runner.sh,122,"COMMIT=$(git -C ""$ROOT"" rev-parse --short HEAD 2>/dev/null || echo nogit)"
+P1,c2,K,KIT:AGENTS.md,31,"3. ""**Never pipe a long make or test through `| grep | head -N` on this desktop.** It deadlocks at zero CPU with no"
+P1,c2,K,KIT:ROLES.md,33,"- **every merge:** serially, with the gate after each one, and the full suite on the tip before the main branch"
+P1,c2,K,KIT:WORKFLOW.md,131,"with no remote, no refs and no route back to P5's own tip"" (round 6's `lead.md`). Its one new commit sits on the"
+P1,c2,K,KIT:WORKFLOW.md,141,4. **The parcel's own tip stays out of the ledger until its verifier reports.** The parcel gives it to the lead in
+P1,c2,K,KIT:WORKFLOW.md,153,"`plant.py check`: the key hashes to what the ledger recorded, the copy's commit is the parcel's tip with the"
+P1,c3,M,PR:METHOD.md,799,"modification time to the copy's own, and only the working copy, still there,"
+P1,c3,M,HF:templates/gate-runner.sh,83,# §4: the only copy of the stage list is the `stage` calls themselves.
+P1,c3,K,KIT:WORKFLOW.md,147,6. **Rulings wait.** A ruling on a finding that touches only the copy describes a plant. It goes in the lead's
+P2,c1,M,PR:METHOD.md,493,"brief. Either is allowed, and the second only if every brief carries them,"
+P2,c1,M,PR:METHOD.md,601,"Two means carry it, and either is allowed: the file channel, a file in"
+P2,c1,M,PR:METHOD.md,922,"a spelling it did not list, and so did the three allowlists that"
+P2,c1,M,PR:METHOD.md,985,to is always run afresh before main moves. The allowance rests on a
+P2,c1,M,PR:METHOD.md,1179,that the import allowlist among them did not hold.
+P2,c1,M,PR:METHOD.md,1223,A round branch is an allowed shape beside this one: every worktree is
+P2,c1,M,PR:METHOD.md,1344,"allowlist while two parcel branches were open, ran it against both"
+P2,c1,M,PR:ADOPTION.md,40,- `S` rows are adaptations allowed with their conditions.
+P2,c1,M,PR:ADOPTION.md,175,"| S1 | Allowed: the runtime's messages in place of urgent/, the ledger entry first; the brief says how to escalate without finishing; verifiers get only the lead's messages | allowed shape | adopted a"
+P2,c1,M,PR:ADOPTION.md,176,"| S2 | Allowed: the ledger's rules carried in every brief, the three read moments (R5) included, in place of a README | allowed shape | adopted at `3676786` (beyond the four answers; approved by Logan"
+P2,c1,M,PR:ADOPTION.md,177,"| S3 | Allowed: the lead told of escalations by the runtime, in place of a watch; the channel watched to work (a test escalation at dispatch reaches the lead) | allowed shape | adopted at `3676786` (b"
+P2,c1,M,PR:ADOPTION.md,178,| S4 | Allowed: one round branch; P0 lands on it before any parcel; a gate after each merge; each merge re-made; main moves only to a verified tip | allowed shape | adopted at `03561a7` and `d38fea1` 
+P2,c1,M,PR:ADOPTION.md,179,| S5 | Allowed: parcels own the documents that describe their code; the claims documents stay the lead's; every claim in a parcel-written document is on its verifier's list | allowed shape | adopted a
+P2,c1,M,PR:ADOPTION.md,180,"| S6 | Allowed: reuse of a run made by someone other than the author of the work verified, with identical inputs and binary hashes; the verifier re-runs from clean what it doubts; the full suite at th"
+P2,c1,M,PR:templates/brief.md,67,"(Two means carry it, and either is allowed: keep the one this round uses,"
+P2,c1,M,PR:templates/checklists.md,130,"- [ ] The escalation channel is chosen, and either means is allowed: the"
+P2,c1,M,PR:templates/ledger.md,9,"or as the same rules in every brief. Either is allowed, and the second"
+P2,c1,M,PR:templates/ledger.md,110,"Two means carry it, and either is allowed: the file channel, a file in"
+P2,c1,M,HF:METHOD.md,727,"mode produced by your own harness rather than by the world. Require a ""silent"""
+P2,c1,K,KIT:METRICS.md,50,"Count the same way where the harness allows it. Where it does not, say how you counted, beside the figures."
+P3,c3,M,PR:METHOD.md,306,"**The small edits outside your files that ARE expected**, enumerated."
+P3,c3,M,PR:METHOD.md,929,"**A limit is stated by the behaviour it concedes, not by the plants"
+P3,c3,M,PR:METHOD.md,935,hook as its plant. A limit stated that way holds against a new
+P3,c3,M,PR:ADOPTION.md,126,"| CS4#14 | A limit is stated by the behaviour it concedes, not by the plants that found it | new | adopted at `4ff28ca` | archive/round6-practice-survey.md, CS4#14 | What a gate cannot see, and who fi"
+P3,c3,M,PR:ADOPTION.md,151,"| CS6#3 | Planted-fault keys, and any description of their plants, stay out of the ledger until every verifier on a planted copy in the round has reported | new | pending: proposed by round 6 | CASE-S"
+P3,c3,M,PR:templates/brief.md,134,"Expected small edits outside your files, and **only** these: `<registry"
+P3,c3,M,PR:templates/brief.md,197,say so and say why — that is expected and fine; doing it silently is not.
+P3,c3,M,PR:templates/checklists.md,73,- [ ] Enumerates the small edits outside its files that are expected. (§3)
+P3,c3,M,PR:templates/checklists.md,98,expected. (§3)
+P3,c3,M,PR:templates/checklists.md,184,"expected to stage. (§7, own)"
+P3,c3,M,PR:templates/verifier.md,150,"stated by the behaviour it concedes, not by the plants that found it."
+P3,c3,M,HF:METHOD.md,59,"- **Publish its output as data.** Freeze vector sets — inputs, expected"
+P3,c3,M,HF:METHOD.md,60,"outputs, and expected side effects — as files with hashes. Then a gate is a"
+P3,c3,M,HF:METHOD.md,648,The answer is to **plant faults and score the detector.**
+P3,c3,M,HF:METHOD.md,774,controlled the same way: plant a defect in a code sample given to a review
+P3,c3,M,HF:ADOPTING.md,184,"2. Plant specific, subtle faults in some: a transplanted constant, a real"
+P3,c3,M,HF:FAILURE-MODES.md,76,A remote host reported the expected commit from `git rev-parse` while its
+P3,c3,M,HF:WITH-PARCELROUND.md,83,[§9](METHOD.md) makes that measurable: plant faults of the shapes a verifier is
+P3,c3,M,HF:templates/controls.md,165,| the pass | plant |
+P3,c3,M,HF:templates/gate-runner.sh,154,# MUST_FAIL=1 before a stage inverts its verdict: the command is expected to
+P3,c3,M,HF:templates/manifest.md,79,PASS: platform — <expected target>
+P3,c3,K,KIT:GLOSSARY.md,94,"- **A negative control, or a plant.** A fault put in on purpose, to show that a gate catches it."
+P3,c3,K,KIT:METRICS.md,17,"| plants caught | the lead's grading of each report against its key | yes | the key's sha256, recorded before dispatch; the integration verifier |"
+P3,c3,K,KIT:METRICS.md,34,"- **plants:** caught and missed, per verifier. Plants are graded at the reveal (WORKFLOW.md), so this table is"
+P3,c3,K,KIT:OWNER.md,30,"the planted-fault protocol copies a parcel's commit (`tools/plant.py`). Read as written, rule 7 forbids both. So"
+P3,c3,K,KIT:ROLES.md,69,"- disclose any boundary it crossed, and why. A crossing is expected; a silent one is not (section 3);"
+P3,c3,K,KIT:START-HERE.md,107,"| [tools/](tools/check_kit.py) | `check_kit.py`, the gate; `ledger.sh`, the ledger's two writes; `plant.py`, the planted copies and their keys; `round_metrics.py`, the record's tables. Each tool's fir"
+P3,c3,K,KIT:WORKFLOW.md,124,"[ADOPTION.md](method/parcelround/ADOPTION.md) still holds as pending: CS5#8, CS6#4 and CS6#3. `tools/plant.py` does"
+P3,c3,K,KIT:WORKFLOW.md,128,"`copy_commit`: the parcel's `real_tip`, and `plants[]`, each with `file`, `old`, `new` and `shape`. It keeps the"
+P3,c3,K,KIT:WORKFLOW.md,130,"2. **`plant.py make`** builds the copy in round 6's shape: ""a fresh repository detached at 9c306e9 (parent a30aca5),"
+P3,c3,K,KIT:WORKFLOW.md,133,plants applied. The tool then writes the key with its `copy_commit` and prints the key's sha256. Just before
+P3,c3,K,KIT:WORKFLOW.md,134,"dispatch, `plant.py check --dispatch` reads the copy as the reveal's check does (step 8), and also what"
+P3,c3,K,KIT:WORKFLOW.md,147,6. **Rulings wait.** A ruling on a finding that touches only the copy describes a plant. It goes in the lead's
+P3,c3,K,KIT:WORKFLOW.md,151,"the keys go into the ledger and the record, and `plant.py list` sets each plant beside its report. The lead"
+P3,c3,K,KIT:WORKFLOW.md,152,"grades each plant caught or missed by reading, and the integration verifier checks the grading, with"
+P3,c3,K,KIT:WORKFLOW.md,153,"`plant.py check`: the key hashes to what the ledger recorded, the copy's commit is the parcel's tip with the"
+P3,c3,K,KIT:WORKFLOW.md,154,"plants applied, on the base the ledger names, and the copy's git state meets each condition `plant.py --help`"
+P3,c3,K,KIT:WORKFLOW.md,161,"- **What a detection rate measures.** The lead's choice of plants and the verifiers' detection, together. The"
+P3,c3,K,KIT:WORKFLOW.md,162,verifiers of the lead's own work get no plants.
+P3,c3,K,KIT:WORKFLOW.md,164,"controls/. A verifier that read them knows those shapes, so plant shapes the kit does not show."
+P4,c2,M,PR:METHOD.md,313,in one round each discovered independently that a directory their brief
+P4,c2,M,PR:METHOD.md,314,"told them to read did not exist in a fresh worktree, and each solved it"
+P4,c2,M,PR:METHOD.md,350,"at zero CPU, the generated files a fresh worktree lacks. Round 2 learned"
+P4,c2,M,PR:METHOD.md,480,- three parcels independently hit the same setup problem and each solved
+P4,c2,M,PR:METHOD.md,782,escalated the wrong-worktree dispatch measured it four independent ways
+P4,c2,M,PR:METHOD.md,1048,"an independent agent, and an account saying every number in the paper"
+P4,c2,M,PR:METHOD.md,1060,"independent modes"" became ""two modes"" in the lead's correction, a word"
+P4,c2,M,PR:templates/verifier.md,126,independently — pick the ones you think are most load-bearing — and
+P4,c2,M,HF:METHOD.md,56,- **Make it independent.** It must not share code with the thing it judges.
+P4,c2,M,HF:METHOD.md,76,is easy to get wrong: **commit the source's own independently documented
+P4,c2,M,HF:METHOD.md,467,case study this is eight independent checks; a copy that does not re-hash
+P4,c2,M,HF:METHOD.md,519,"second, independent counter beside the headline number — in the case study,"
+P4,c2,M,HF:METHOD.md,675,"Then the measurement: two independent auditors grade, and the result is"
+P4,c2,M,HF:METHOD.md,679,"classified correctly from three independent *secondary* fetches, because the"
+P4,c2,M,HF:METHOD.md,715,"**Assign a few items twice, to independent auditors, and compare.** Two agents"
+P4,c2,M,HF:FAILURE-MODES.md,300,**Defence.** Print an independent counter beside the headline — a domain
+P4,c2,M,HF:WITH-PARCELROUND.md,20,"Use ParcelRound when you have three or more session-sized, mostly independent"
+P4,c2,M,HF:templates/agent-notes.md,37,--resume reruns only what has not passed. A fresh invocation runs
+P4,c2,M,HF:templates/controls.md,13,named source's own bytes** across two independent auditors — and whose one
+P4,c2,M,HF:templates/controls.md,142,3. Prefer two independent auditors. Agreement between two passes that each
+P4,c2,M,HF:templates/gate-runner.sh,32,#   ./gate-runner.sh --fresh             force a new run id
+P4,c2,M,HF:templates/gate-runner.sh,45,"ONLY=""""; SKIP=""""; REQUIRE_ALL=0; LIST=0; RESUME=""""; FRESH=0; BUDGET="""""
+P4,c2,M,HF:templates/gate-runner.sh,69,--fresh)       FRESH=1; shift;;
+P4,c2,M,HF:templates/gate-runner.sh,123,"if [ -n ""$RESUME"" ] && [ ""$FRESH"" = 1 ]; then"
+P4,c2,M,HF:templates/gate-runner.sh,124,"die ""--resume and --fresh are contradictory"""
+P4,c2,M,HF:templates/gate-runner.sh,136,"tree glued to half a run of another is a report about neither. Use --fresh."";;"
+P4,c2,K,KIT:WORKFLOW.md,130,"2. **`plant.py make`** builds the copy in round 6's shape: ""a fresh repository detached at 9c306e9 (parent a30aca5),"
+P5,c3,M,PR:METHOD.md,208,**A wave boundary is the one moment a brief can be updated.** Fold the
+P5,c3,M,PR:METHOD.md,759,every author's file before each merge and at each wave boundary** - where
+P5,c3,M,PR:ADOPTION.md,63,| CS2#4 | A wave boundary is the one moment a brief can be updated | untyped | adopted at `9b18e35` | CS2:371; METHOD.md:144; both at `49a9266` | Four more things a seam settles | checklists | P5 |
+P5,c3,M,PR:ADOPTION.md,173,"| R4 | Restore: the lead reads every author's file before each merge and at each wave boundary, so the cross-parcel view survives | restoration | adopted at `3676786` | archive/round6-practice-survey."
+P5,c3,M,PR:templates/checklists.md,155,before each merge and at each wave boundary. (§4)
+P5,c3,M,PR:templates/checklists.md,213,"- [ ] At a wave boundary, the ledger was folded into the next wave's"
+P5,c3,M,PR:templates/ledger.md,141,before each merge and at each wave boundary. (§4)
+P5,c3,K,KIT:CLEAN-ROOM.md,70,"Logan checks the project repository against fingerprints of cft-fp256's sources, at each wave's close and at the"
+P5,c3,K,KIT:METRICS.md,35,"made then, in the round's last entry, not in each wave's;"
+P5,c3,K,KIT:WORKFLOW.md,80,For each wave:
+P5,c3,K,KIT:WORKFLOW.md,103,"**At each wave boundary,** read the ledger whole and fold it into the next wave's briefs (PR section 2)."
+P5,c4,M,PR:METHOD.md,120,"manage — it is the first parcel, and it is the lead's.**"
+P5,c4,M,PR:METHOD.md,247,"**Design first: a parcel proposes, and the lead approves before it"
+P5,c4,M,PR:METHOD.md,512,"reads the lead's file first, and a parcel's only once it has formed its own"
+P5,c4,M,PR:METHOD.md,523,"parcel's work, or the lead's?* Three things do: environment and setup"
+P5,c4,M,PR:METHOD.md,552,"in the ledger first, then in the message.** Round 4's lead resumed a parcel by"
+P5,c4,M,PR:METHOD.md,561,"lead three times, four parcels, a verifier - typed a guessed time at"
+P5,c4,M,PR:METHOD.md,594,lead's next read: in round 3 all eight parcels asked the lead questions in
+P5,c4,M,PR:METHOD.md,1000,paid for. It reports; the parcel or the lead acts.
+P5,c4,M,PR:METHOD.md,1074,"the list had run, and the lead had the parcel staged within minutes of"
+P5,c4,M,PR:ADOPTION.md,21,"them, or of both parcels where two did. The lead's restates and"
+P5,c4,M,PR:ADOPTION.md,97,"| CS3#3 | A parcel's question for the lead goes in urgent/ | reinforcement | adopted at `3676786` | archive/round6-practice-survey.md, CS3#3 | Escalation: one rule, whatever carries it | ledger, brief"
+P5,c4,M,PR:ADOPTION.md,165,"| B13 | Design first: a parcel proposes, and the lead approves before it builds | practice | adopted at `03561a7` | archive/round6-practice-survey.md, Table B | 3. The brief | brief | P1 |"
+P5,c4,M,PR:ADOPTION.md,179,| S5 | Allowed: parcels own the documents that describe their code; the claims documents stay the lead's; every claim in a parcel-written document is on its verifier's list | allowed shape | adopted a
+P5,c4,M,PR:templates/checklists.md,144,- [ ] Seeded with whatever the lead already knows that a parcel would
+P5,c4,M,PR:templates/ledger.md,45,"verifier reads the lead's file first, and a parcel's only once it has"
+P5,c4,M,PR:templates/ledger.md,70,"parcel's work, or the lead's?* Three things do."
+P5,c4,M,PR:templates/ledger.md,139,lead can see a pattern across parcels. Its watcher skips the lead's own
+P5,c4,M,PR:templates/verifier.md,55,"write only to it. Read the lead's file first, and the parcel's only once"
+P5,c4,M,PR:templates/verifier.md,80,"parcel's verifier may reuse a long run the lead made for that parcel,"
+P5,c4,M,PR:templates/verifier.md,162,"14. `<The instruments the parcel lacks, and the lead's own artefacts — the"
+P5,c4,M,HF:WITH-PARCELROUND.md,71,"test — written by the lead, because it belonged to no parcel — found it in"
+P5,c4,K,KIT:BOARD.md,9,- **The lead holds the board.** A parcel that needs board time asks the lead by the escalation channel. The lead
+P5,c4,K,KIT:GLOSSARY.md,66,"- **A long run.** A run that takes long enough to be the lead's to monitor, not a parcel's (OWNER.md, rule 2)."
+P5,c4,K,KIT:HARNESS.md,23,"| whether an agent can read another agent's scratch directory, the lead's included | ParcelRound METHOD.md, section 3; WORKFLOW.md, the planted-fault protocol | the instruction, and disclosure: the re"
+P5,c4,K,KIT:OWNER.md,13,"| the models | ""Not yet decided, their most capable for the lead, likely one step down for parcels. Unsure what the TUI they offer has in terms of capabilities, but I will determine that live once the"
+P5,c4,K,KIT:OWNER.md,19,"| the planted faults' keys | ""The lead holds them for parcels"" |"
+P5,c4,K,KIT:OWNER.md,31,"the lead asks whether it covers a parcel's commits in its own worktree, or the main branch and pushes only."
+P5,c4,K,KIT:START-HERE.md,9,"- **ParcelRound** ([method/parcelround/](method/parcelround/README.md)): one lead splits the work into parcels,"
+P5,c4,K,KIT:START-HERE.md,93,"| [ROLES.md](ROLES.md) | the owner, the lead, a parcel, a verifier: what each decides, asks and never does |"
+P5,c4,K,KIT:WORKFLOW.md,107,"By docs/BOARD.md. The lead holds it, and a parcel asks for board time."
+P5,c4,K,KIT:WORKFLOW.md,121,"""The lead holds them for parcels"" (Logan, 2026-10-23). It is round 6's practice, which is in"
+P5,c4,K,KIT:WORKFLOW.md,132,"parcel's base, which the lead gives and the tool prints for the ledger, and holds the parcel's tree with the"
+P5,c4,K,KIT:WORKFLOW.md,141,4. **The parcel's own tip stays out of the ledger until its verifier reports.** The parcel gives it to the lead in
+P6,c1,M,PR:METHOD.md,1437,"report, its ledger file and its worktree: round 3's fixers had the"
+P6,c1,M,PR:templates/checklists.md,217,"the parcel's final report, its ledger file and its worktree. (§8)"
+P6,c1,M,HF:METHOD.md,49,"With an authority, the agent is never asked. It reports ""the C path differs"
+P6,c1,M,HF:METHOD.md,298,"- **Gate the gate's own plumbing.** If a suite reports results in a file,"
+P6,c1,M,HF:FAILURE-MODES.md,39,"| 12 | ""worst path is +7.28 ns, ample margin"" | that was the *first* path in the report — a shell clock; the design's own was +0.21 | name the thing you are reading; check against a known value (§1) |"
+P6,c1,M,HF:FAILURE-MODES.md,284,A timing report lists paths grouped by clock. The first group was a shell
+P6,c1,M,HF:templates/README.md,56,checker **injected** carriage returns into a clean file and then reported that
+P6,c1,K,KIT:GLOSSARY.md,15,"- **READ.** Read, not run: a file and a line, a commit, a report, a page or a search. Examples: ""(READ, by VCI)"""
+P6,c1,K,KIT:HARNESS.md,15,"| resuming an agent with its context | section 8, ""A send-back needs no re-brief"" | a newly briefed agent, given the verifier's findings, the parcel's report, its ledger file and its worktree | | |"
+P6,c2,M,PR:METHOD.md,1265,"- **The summary to the owner, with the cost** - per agent, measured as"
+P6,c2,M,PR:ADOPTION.md,90,| CS2#31 | The lead's summary to the owner carries the cost | untyped | adopted at `9b18e35` | CS2:493; METHOD.md:704; both at `49a9266` | 7. What the lead keeps | checklists | P5 |
+P6,c2,M,PR:ADOPTION.md,107,"| CS3#13 | The cost summary gives processed tokens beside the harness's figure, and says which is which | new + reinforcement | adopted in part at `d38fea1`: the round's cost reported as processed tok"
+P6,c2,M,PR:ADOPTION.md,172,"| R3 | Restore: the summary to the owner carries the cost, read from transcripts | restoration | adopted at `d38fea1` | archive/round6-practice-survey.md, the departures table | 7. What the lead keeps"
+P6,c2,M,PR:templates/checklists.md,241,"- [ ] The summary to the owner carries the cost — per agent, measured as"
+P6,c2,M,HF:FAILURE-MODES.md,180,crashed the summary on an unbound variable — after exiting 0.
+P6,c2,M,HF:templates/gate-runner.sh,245,"echo ""== summary"""
+P6,c2,K,KIT:ROLES.md,13,"it, and its details by the kit page or template that holds them. A line that cites nothing is the kit's summary of"
+P6,c2,K,KIT:ROLES.md,42,"- **the summary to Logan,** with the cost."
+P6,c2,K,KIT:WORKFLOW.md,115,"- the summary to Logan, with the cost (PR section 7)."
+P6,c2,K,KIT:WORKFLOW.md,142,its final message.
+P6,c2,K,KIT:WORKFLOW.md,193,"| 10 | Wed 11-04 | the keys, the record, the metrics, and the summary |"
+P7,c1,M,PR:templates/brief.md,77,read** — a dead watcher and a quiet directory look identical. Where every
+P7,c1,M,PR:templates/ledger.md,184,"you cannot tell how long it was dead. Where every watch expires, the"
+P7,c1,M,PR:templates/verifier.md,138,"dead"", ""this cannot happen"" — check it with the bytes. When parcels"
+P7,c2,M,HF:METHOD.md,832,"had been repaired, and claimed a checker failed on a clean checkout when it"
+P7,c2,M,HF:METHOD.md,838,Run the front door from a clean clone and time it. If the figure in the
+P7,c2,M,HF:templates/agent-notes.md,128,"both had been repaired, and claimed a checker failed on a clean checkout when"
+P7,c3,M,PR:METHOD.md,349,"gates, the heredoc and line-ending traps, the pipeline that deadlocks"
+P7,c3,M,HF:METHOD.md,359,"heredoc, a validation list, and the calls themselves. Two copies drifted:"
+P7,c3,M,HF:FAILURE-MODES.md,233,"A runner's stage names lived in a `--list` heredoc, a validation list, and the"
+P7,c3,K,KIT:AGENTS.md,26,"1. ""**A Python heredoc in Git Bash can lose a backslash** (`\\n` arrives as a newline, `\\` as `\`), and a long one"
+P8,c1,M,PR:METHOD.md,52,it validated the *file* rather than what reached memory.
+P8,c1,M,PR:METHOD.md,90,"ask's ceiling was two percent of the requester's wall, measured from"
+P8,c1,M,PR:METHOD.md,536,"do a full read, check your tree before you trust your memory of what you"
+P8,c1,M,PR:METHOD.md,568,"heading's time from `date`, never from memory. Round 3 shows why, and"
+P8,c1,M,PR:METHOD.md,682,agent's process survived only because the shell had already read the
+P8,c1,M,PR:METHOD.md,685,"edited out from under a running process. If you must use a file, put"
+P8,c1,M,PR:METHOD.md,744,"armed it with the dispatch only because its memory carried the lesson, and"
+P8,c1,M,PR:METHOD.md,889,- **A device gate needs a device with its own memory.** The simulator's
+P8,c1,M,PR:METHOD.md,890,memory model started every test empty and the software executor wrote
+P8,c1,M,PR:METHOD.md,924,"sees a process, a socket or a file write however it is spelled, and"
+P8,c1,M,PR:METHOD.md,990,"[CASE-STUDY-3, Where the wall clock went]. The conditions keep what the"
+P8,c1,M,PR:METHOD.md,1086,"refusal on the format ceiling and so refused a working build, and a"
+P8,c1,M,PR:METHOD.md,1104,"it was not supposed to, diff the **preprocessed translation unit** at"
+P8,c1,M,PR:METHOD.md,1106,ways and only one was in scope; the preprocessed output was 3610 lines
+P8,c1,M,PR:METHOD.md,1266,"below, with the verifiers' share stated, and the wall clock split"
+P8,c1,M,PR:METHOD.md,1269,"Measure the cost as the tokens processed, read from each agent's"
+P8,c1,M,PR:METHOD.md,1274,each agent's final context size and not what it processed
+P8,c1,M,PR:METHOD.md,1438,"ledger file and the commits, their only memory of the parcel, and not"
+P8,c1,M,PR:METHOD.md,1447,"in wall clock: round 2 was 24 hours, of which the last ten were tile"
+P8,c1,M,PR:ADOPTION.md,107,"| CS3#13 | The cost summary gives processed tokens beside the harness's figure, and says which is which | new + reinforcement | adopted in part at `d38fea1`: the round's cost reported as processed tok"
+P8,c1,M,PR:ADOPTION.md,146,"| CS5#11 | The case study is written from the ledger, not from the lead's memory, and read against it by someone other than the lead before it is pushed | extension | pending: practised only in the ro"
+P8,c1,M,PR:templates/brief.md,54,"Write each heading's time from `date`, never from memory. (§4)"
+P8,c1,M,PR:templates/brief.md,58,"do a full read, check your tree before you trust your memory of what you"
+P8,c1,M,PR:templates/checklists.md,124,memory. (§4)
+P8,c1,M,PR:templates/checklists.md,242,"the tokens processed, read from each agent's transcript and the"
+P8,c1,M,PR:templates/checklists.md,243,"lead's, with the verifiers' share stated, and the wall clock split"
+P8,c1,M,PR:templates/ledger.md,55,"**Write each heading's time from `date`, never from memory.** Write the"
+P8,c1,M,PR:templates/ledger.md,89,"resuming, do a full read, check your tree before you trust your memory of"
+P8,c1,M,PR:templates/ledger.md,219,"Write `<date time>` from `date`, never from memory. (§4)"
+P8,c1,M,PR:templates/verifier.md,58,"from `date`, never from memory. (§4)"
+P8,c1,M,PR:templates/verifier.md,122,"(Diffing the *preprocessed translation unit* at both commits, or"
+P8,c1,M,HF:METHOD.md,129,"a compilation with better manners"", and that ""a process table whose"
+P8,c1,M,HF:METHOD.md,296,"proves the work happened, and for the count. An exit code says the process"
+P8,c1,M,HF:METHOD.md,477,"cleaned — 13,415 MB of trees distilled to **9 MB** worth keeping, after the"
+P8,c1,M,HF:METHOD.md,758,"change did not affect a build it was not supposed to, **diff the preprocessed"
+P8,c1,M,HF:METHOD.md,760,"file compiled two ways, only one in scope; the preprocessed output was 3,610"
+P8,c1,M,HF:ADOPTING.md,162,"because the tree had been cleaned; 13,415 MB of intermediates reduce to 9 MB"
+P8,c1,M,HF:FAILURE-MODES.md,43,"| 16 | ""timing reports are a few hundred KB"" | 31 MB each — the estimate was ~1000× low | measure before you quote; never estimate into a decision (§7) |"
+P8,c1,M,HF:FAILURE-MODES.md,127,### B3 — The exit code of the wrong process
+P8,c1,M,HF:FAILURE-MODES.md,155,"""safe to delete 206 MB"" rested on a check about a different directory."
+P8,c1,M,HF:FAILURE-MODES.md,316,"were 31 MB each, three orders out. And ""those ten documents are demo essays"""
+P8,c1,M,HF:WITH-PARCELROUND.md,97,"build it was not supposed to, **diff the preprocessed translation unit** at both"
+P8,c1,M,HF:templates/controls.md,35,being tested is answering from memory.
+P8,c1,M,HF:templates/controls.md,154,process and re-run.
+P8,c1,M,HF:templates/manifest.md,44,"memory_map:    a->HBM[0] b->HBM[1] c->HBM[2] d->HBM[3], no channel shared"
+P8,c1,M,HF:templates/manifest.md,85,"PASS: memory intent — <n> masters, all on the declared memory, no sharing"
+P8,c1,M,HF:templates/manifest.md,127,"In the case study: 13,415 MB of trees reduced to **9 MB** kept per set — the"
+P8,c1,K,KIT:GLOSSARY.md,67,"- **A time box and a scope ceiling.** How long a brief expects a first pass to take, and how large it expects the"
+P8,c1,K,KIT:METRICS.md,14,| commits; the size of a change against its scope ceiling; files outside the ownership list | git | no | |
+P8,c1,K,KIT:METRICS.md,33,"- **time boxes and scope ceilings,** each against its actual;"
+P8,c1,K,KIT:OWNER.md,94,"- **A time box and a scope ceiling in every brief** (line 21733). His words on them, 2026-10-20: ""If needed it can"
+P8,c1,K,KIT:OWNER.md,99,"- **""delete only what the run created, and stop only processes the run started, by PID""** (line 18990)."
+P8,c1,K,KIT:PROJECT.md,36,"standard below are from memory, so they are BELIEVED until the lead reads the PDF."
+P8,c1,K,KIT:START-HERE.md,33,never from memory ([WORKFLOW.md](WORKFLOW.md); [the ledger's README](method/parcelround/templates/ledger.md)).
+P8,c1,K,KIT:WORKFLOW.md,59,"- **the parcels and the waves,** each parcel with its owned files, its time box and its scope ceiling;"
+P8,c1,K,KIT:WORKFLOW.md,84,- its time box and its scope ceiling;
+P8,c1,K,KIT:WORKFLOW.md,178,- **Every brief:** a time box and a scope ceiling.
+P9,c3,M,PR:METHOD.md,89,the requester; two asks were one mechanism wearing two names; a third
+P9,c3,M,PR:METHOD.md,397,"that was wrong as a mechanism; each cost a parcel its first half hour,"
+P9,c3,M,PR:METHOD.md,402,aimed at a different repository cannot use that mechanism at all — it
+P9,c3,M,PR:METHOD.md,518,"These are the floor, not the mechanism — see the push channel below."
+P9,c3,M,PR:METHOD.md,875,"- **When a mechanism is enforced in two places, a gate that reads the"
+P9,c3,M,PR:ADOPTION.md,78,"| CS2#19 | When a mechanism is enforced in two places, a gate that reads the cheapest observable cannot see a defect in the other | untyped | adopted at `9b18e35` | CS2:438; METHOD.md:555; both at `49"
+P9,c3,M,PR:templates/checklists.md,120,"the brief says they are the floor, not the mechanism, whatever"
+P9,c3,M,PR:templates/ledger.md,58,"**Read at three moments** — the floor, not the mechanism; the escalation"
+P9,c3,M,PR:templates/ledger.md,172,"that happened on this mechanism's first use. If you must use a file, put"
+P9,c3,M,PR:templates/ledger.md,180,"**The watch is not the mechanism, it is latency reduction.** A watcher"
+P9,c3,M,PR:templates/verifier.md,152,10. **A mechanism enforced in two places**: a gate that reads the
+P9,c3,M,HF:METHOD.md,3,Ten mechanisms. Each one exists because a specific kind of true-but-worthless
+P9,c3,M,HF:METHOD.md,39,That sentence is the whole mechanism.
+P9,c3,M,HF:METHOD.md,339,"This is the mechanism that verifies itself, which is why it comes third and"
+P9,c3,M,HF:METHOD.md,501,record destroys the only evidence that a mechanism ever caught anything — and
+P9,c3,M,HF:METHOD.md,502,the catches are the entire argument for the mechanisms.
+P9,c3,M,HF:METHOD.md,766,Every other mechanism in this document protects against an agent's *code*
+P9,c3,M,HF:METHOD.md,867,"essentially all of it, including every mechanism on this page, and found most"
+P9,c3,M,HF:FAILURE-MODES.md,26,| # | Reported | Actually true | Mechanism that catches it |
+P9,c3,M,HF:FAILURE-MODES.md,59,"A second instance, same day, different mechanism: `api-test` is in `$(TESTS)`"
+P9,c3,M,HF:WITH-PARCELROUND.md,16,exactly what the mechanisms here are for. Run parcels without them and you get
+P9,c3,M,HF:WITH-PARCELROUND.md,110,mechanism backwards in a way that changed what the feature cost.
+P9,c3,M,HF:WITH-PARCELROUND.md,112,That is this framework's thesis from the other direction. The mechanisms here
+P9,c3,M,HF:templates/README.md,3,Drop-in files. Each one implements a specific mechanism from
+P9,c3,M,HF:templates/README.md,8,| file | mechanism | what it is |
+P9,c3,M,HF:templates/README.md,48,"README's mechanism count altered     rc=1, ""claims 12; METHOD.md has 10"""
+P9,c3,M,HF:templates/controls.md,7,This is the template for METHOD §9: the mechanism that makes an agent's
+P9,c3,M,HF:templates/ledger.md,6,This is METHOD §7. It is the cheapest mechanism in the framework and the one
+P9,c3,M,HF:templates/ledger.md,45,"<The change, with file references. Mechanism, not narrative.>"
+P9,c3,K,KIT:HARNESS.md,6,"The methods were written in another harness. Each row names a mechanism they assume, the fallback the method already"
+P9,c3,K,KIT:HARNESS.md,10,"| mechanism the methods assume | where the method says so | its fallback | this harness: how, or ""none"" | used? |"
+P9,c3,K,KIT:START-HERE.md,99,"| [HARNESS.md](HARNESS.md) | a template: each mechanism the methods assume, mapped to your harness on day 1 |"
+P9,c3,K,KIT:START-HERE.md,137,"Monitor, worktrees by `isolation`). Read them as that harness's. [HARNESS.md](HARNESS.md) maps each mechanism"
+P10,c1,M,PR:METHOD.md,70,"- **Declared once and checked**: the count is still a literal, but it"
+P10,c1,M,PR:METHOD.md,72,"list, so a disagreement surfaces on the next run."
+P10,c1,M,PR:METHOD.md,166,### Make the registry self-enforcing
+P10,c1,M,PR:METHOD.md,186,"stage runs is.** Round 4's registry failed any test file no stage ran,"
+P10,c1,M,PR:templates/brief.md,37,3. `<the header or registry P0 produced>` — `<how a capability is
+P10,c1,M,PR:templates/brief.md,134,"Expected small edits outside your files, and **only** these: `<registry"
+P10,c1,M,HF:METHOD.md,85,`atlas-optical` extracts a lens registry from an open compilation of historic
+P10,c1,M,HF:METHOD.md,86,prescriptions and re-traces every one through its own surfaces. Its committed
+P10,c1,M,HF:METHOD.md,128,"grounds that ""a registry whose numbers cannot be traced to their sources is"
+P10,c1,M,HF:METHOD.md,166,"proceeds, and the divergence surfaces far away from its cause — if it ever"
+P10,c1,M,HF:METHOD.md,199,"the source** — requiring the literal `LEGACY_NOT_GLASS = frozenset({""IR""})` to"
+P10,c1,M,HF:METHOD.md,329,author *measured its false-alarm rate against the registry* — **166 flags on
+P10,c1,M,HF:METHOD.md,573,"And it is enforced in both directions, in `tools/dioptrique_registry.py`:"
+P10,c1,M,HF:METHOD.md,610,"same registry keeps the compilation's ""names are given with reservations"""
+P10,c1,M,HF:FAILURE-MODES.md,222,"the caller proceeds, and the divergence surfaces far from its cause."
+P11,c3,M,PR:METHOD.md,1208,lived in a combination that two parcels' gates each excluded by
+P11,c3,M,HF:FAILURE-MODES.md,334,parcels' gates each excluded by construction: one parcel's file pinned the
+P11,c3,M,HF:WITH-PARCELROUND.md,69,excluded *by construction*. One parcel's file pinned the setting; the other's
+P12,c3,M,PR:METHOD.md,229,spike's figures came from scratch work that nothing in the tree
+P12,c3,M,PR:METHOD.md,315,from scratch. One line in the brief.
+P12,c3,M,PR:METHOD.md,337,"**Each agent's own scratch directory, named in its brief**, and no"
+P12,c3,M,PR:METHOD.md,338,"secret in any directory an agent is given. Say: ""Your scratch directory"
+P12,c3,M,PR:METHOD.md,341,"session scratchpad, which held the platform key the round used, and a"
+P12,c3,M,PR:METHOD.md,481,it from scratch;
+P12,c3,M,PR:METHOD.md,678,"agents in a round share a scratch directory (§3 gives each its own), the"
+P12,c3,M,PR:ADOPTION.md,118,"| CS4#6 | Name each agent's scratch directory, and keep secrets outside every directory an agent is given | new | adopted at `03561a7` | archive/round6-practice-survey.md, CS4#6 | 3. The brief | brief"
+P12,c3,M,PR:templates/brief.md,156,Your scratch directory is `<dir>/<your-name>/`; put everything you make
+P12,c3,M,PR:templates/checklists.md,85,"- [ ] Gives each agent its own scratch directory, named in its brief, and"
+P12,c3,M,PR:templates/ledger.md,170,"share a scratch directory (§3 gives each its own), the watcher is the one"
+P12,c3,M,PR:templates/verifier.md,84,- **Your scratch directory is `<dir>/<your-name>/`;** put everything you
+P12,c3,M,PR:templates/verifier.md,87,"*copies* under your scratch directory, never by patching the tree, and"
+P12,c3,M,HF:templates/manifest.md,103,When a set of artifacts is promoted together:
+P12,c3,M,HF:templates/manifest.md,105,"- **Checker passes on every member, or nothing is promoted.** A half-staged"
+P12,c3,K,KIT:HARNESS.md,23,"| whether an agent can read another agent's scratch directory, the lead's included | ParcelRound METHOD.md, section 3; WORKFLOW.md, the planted-fault protocol | the instruction, and disclosure: the re"
+P12,c3,K,KIT:HARNESS.md,31,**Each agent's scratch directory:**
+P12,c3,K,KIT:OWNER.md,100,"- **Scratch in a shared directory ""is deleted by the exact path recorded when it was made, never by prefix""**"
+P12,c3,K,KIT:ROLES.md,79,- read another agent's scratch directory.
+P12,c3,K,KIT:ROLES.md,98,- read another agent's scratch directory. The lead's is the one that holds the keys.
+P12,c3,K,KIT:WORKFLOW.md,21,[templates/ledger.md](method/parcelround/templates/ledger.md) (PR section 4). Give each agent a scratch directory
+P12,c3,K,KIT:WORKFLOW.md,24,"places by roots each dispatch defines, such as `<repos>/` and `<scratch>/`, never by an absolute path: round"
+P12,c3,K,KIT:WORKFLOW.md,129,"draft in its own scratch directory, outside every agent's reach."
+P12,c3,K,KIT:WORKFLOW.md,145,"clone of the copy under its own scratch directory (`git clone COPY <scratch>/work`), so that the reveal's check"
+P12,c3,K,KIT:WORKFLOW.md,148,"scratch directory, not in the ledger, until the reveal."
+P12,c3,K,KIT:WORKFLOW.md,149,7. **The copy goes out of reach** once its verifier has reported: the lead moves it into its own scratch directory.
+P13,c2,M,PR:METHOD.md,145,worktree branches from it. A P0 landing mid-round is worse than none.
+P13,c2,M,PR:METHOD.md,147,"before any parcel starts, and every worktree is cut from the branch"
+P13,c2,M,PR:METHOD.md,149,be pushed: the language and step-6 rounds cut their parcels' worktrees
+P13,c2,M,PR:METHOD.md,314,"told them to read did not exist in a fresh worktree, and each solved it"
+P13,c2,M,PR:METHOD.md,317,"**The base commit, and an instruction to verify it.** A worktree does"
+P13,c2,M,PR:METHOD.md,324,harness that cuts the worktree from the session's checkout hands the
+P13,c2,M,PR:METHOD.md,339,is `<dir>/<your-name>/`; put everything you make outside your worktree
+P13,c2,M,PR:METHOD.md,350,"at zero CPU, the generated files a fresh worktree lacks. Round 2 learned"
+P13,c2,M,PR:METHOD.md,400,**Check the worktree is of the right repository.** If your tooling
+P13,c2,M,PR:METHOD.md,401,"creates an agent's worktree from *the session's* repository, a parcel"
+P13,c2,M,PR:METHOD.md,405,telling the agent to stay out of a repository its worktree was inside
+P13,c2,M,PR:METHOD.md,441,"worktree folders open, so the cleanup could not delete them, and one"
+P13,c2,M,PR:METHOD.md,501,**Where it lives matters.** Agents in worktrees cannot see each other's
+P13,c2,M,PR:METHOD.md,502,files — that is what a worktree is. The ledger sits outside every
+P13,c2,M,PR:METHOD.md,503,"worktree, at a fixed absolute path each brief states, and is **ignored"
+P13,c2,M,PR:METHOD.md,728,parcel escalating that it had been dispatched into a worktree of the
+P13,c2,M,PR:METHOD.md,782,escalated the wrong-worktree dispatch measured it four independent ways
+P13,c2,M,PR:METHOD.md,1223,A round branch is an allowed shape beside this one: every worktree is
+P13,c2,M,PR:METHOD.md,1256,"worktrees are removed, the lead looks for what finished agents left"
+P13,c2,M,PR:METHOD.md,1259,"interface, and they held the worktree folders open, so the cleanup"
+P13,c2,M,PR:METHOD.md,1285,"**Resolve conflicts from what the VCS says is conflicted**, never from"
+P13,c2,M,PR:METHOD.md,1287,survives before you stage. One lead resolved the two files the merge
+P13,c2,M,PR:METHOD.md,1289,holding its conflict — along with eight agent worktrees as embedded
+P13,c2,M,PR:METHOD.md,1302,"or a worktree the lead never edits, not the tree the lead is working"
+P13,c2,M,PR:METHOD.md,1309,ending out of the conflict block; a resolver that has not read the lines
+P13,c2,M,PR:METHOD.md,1316,"side's, and nothing may be lost. A merge resolved by hand is the lead's"
+P13,c2,M,PR:METHOD.md,1320,"unresolved, on a `;` where `&&` belonged [CASE-STUDY-2, 14:12]. No"
+P13,c2,M,PR:METHOD.md,1350,still gates main.** Round 4's lead made the merge in a worktree of its
+P13,c2,M,PR:METHOD.md,1437,"report, its ledger file and its worktree: round 3's fixers had the"
+P13,c2,M,PR:ADOPTION.md,111,"| CS3#17 | A worktree the harness creates branches from the session checkout's HEAD | reinforcement | adopted in part at `03561a7`: fast-forward to the base and check its SHA, never switch another ses"
+P13,c2,M,PR:templates/brief.md,17,You are parcel **`<P2>`** in `<repo>` (a git worktree of
+P13,c2,M,PR:templates/brief.md,44,`<absolute path outside every worktree>`. Read **every** file there
+P13,c2,M,PR:templates/brief.md,131,- Anything outside this worktree — in particular `<other live repos>`.
+P13,c2,M,PR:templates/brief.md,148,"than polling"". Then: ""Build only inside your own worktree."">` (own)"
+P13,c2,M,PR:templates/brief.md,157,"outside your worktree there, and nowhere else. (§3)"
+P13,c2,M,PR:templates/brief.md,184,worktree only; the integrator merges. (own)
+P13,c2,M,PR:templates/checklists.md,28,"every worktree is cut from — is behaviour-preserving, and the full"
+P13,c2,M,PR:templates/checklists.md,108,- [ ] The worktree is a checkout of the **right repository** — if your
+P13,c2,M,PR:templates/checklists.md,114,"- [ ] Exists, outside every worktree, at a path every brief states. (§4)"
+P13,c2,M,PR:templates/checklists.md,199,"- [ ] Auditors and verifiers read a committed SHA, or a worktree the lead"
+P13,c2,M,PR:templates/checklists.md,217,"the parcel's final report, its ledger file and its worktree. (§8)"
+P13,c2,M,PR:templates/checklists.md,237,"- [ ] Before the agents' worktrees were removed, the lead looked for what"
+P13,c2,M,PR:templates/ledger.md,37,This directory is **outside every worktree**. Agents work in separate
+P13,c2,M,PR:templates/verifier.md,54,`<absolute path outside every worktree>`. Your file is `<your-name>.md`;
+P13,c2,M,PR:templates/verifier.md,85,"make outside your worktree there, and nowhere else. (§3)"
+P13,c2,M,PR:templates/verifier.md,174,"""Build only inside your own worktree."" Plus any environment trap.>` (own)"
+P13,c2,M,HF:METHOD.md,514,"- **Separate the live claim from the historical one in the layout**, so the"
+P13,c2,M,HF:METHOD.md,596,and it is better precisely because it does not resolve anything. Where two
+P13,c2,M,HF:FAILURE-MODES.md,154,resolved to the parent repository and reported *that* as clean. The conclusion
+P13,c2,M,HF:WITH-PARCELROUND.md,35,"| A ledger, append-only, one file per author, outside every worktree (§4) | [§7](METHOD.md) | the record is the only way to correct a brief after dispatch |"
+P13,c2,M,HF:templates/controls.md,52,"| **Attribution slide** | a real, correctly-cited paper credited with introducing something it did not, with a quotation invented around it | the citation resolves; the claim is not in it |"
+P13,c2,K,KIT:AGENTS.md,38,5. **WSL cannot read the git of a Windows worktree:** its `.git` file names a Windows path. So a check that reads git
+P13,c2,K,KIT:GLOSSARY.md,74,"- **The ledger.** The round's working channel: one file per author, append only, outside every worktree, archived"
+P13,c2,K,KIT:HARNESS.md,12,"| a separate checkout (worktree) for each agent | ParcelRound METHOD.md, sections 2 and 3 | `git worktree add`, by the lead, one for each agent, outside each other | | |"
+P13,c2,K,KIT:HARNESS.md,15,"| resuming an agent with its context | section 8, ""A send-back needs no re-brief"" | a newly briefed agent, given the verifier's findings, the parcel's report, its ledger file and its worktree | | |"
+P13,c2,K,KIT:OWNER.md,29,"- **what rule 7 covers.** The method's briefs have each parcel commit in its own worktree (templates/brief.md), and"
+P13,c2,K,KIT:OWNER.md,31,"the lead asks whether it covers a parcel's commits in its own worktree, or the main branch and pushes only."
+P13,c2,K,KIT:ROLES.md,54,"- resolve a conflict from what the merge output printed, rather than from what git says is conflicted;"
+P13,c2,K,KIT:START-HERE.md,32,"2. **The ledger.** One file per author, append only, outside every worktree, each heading stamped from `date`,"
+P13,c2,K,KIT:START-HERE.md,132,dangle by design. Do not try to resolve them.
+P13,c2,K,KIT:START-HERE.md,137,"Monitor, worktrees by `isolation`). Read them as that harness's. [HARNESS.md](HARNESS.md) maps each mechanism"
+P13,c2,K,KIT:WORKFLOW.md,20,"3. **Make the ledger** outside every worktree, with the README from"
+P13,c2,K,KIT:WORKFLOW.md,96,"6. **Merge,** serially, with the gate after each merge, and never while a suite runs (PR section 7). Resolve"
+P13,c2,K,KIT:WORKFLOW.md,156,"wrote to the copy's git state anyway (an add, a stash, a checkout, a worktree), `check` refuses the copy for it,"
+P16,c1,M,PR:METHOD.md,860,"only P0, before main moves (§7 has its merges and records). Twice the"
+P16,c1,M,PR:METHOD.md,937,"way, and a known limit recorded at a merge is one. [CASE-STUDY-4,"
+P16,c1,M,PR:METHOD.md,1126,"merges as a recorded known limit, and a sentence that claims more than"
+P16,c1,M,PR:METHOD.md,1163,"**The lead's seam commits and fixes (§5), its merges and its records go"
+P16,c1,M,PR:METHOD.md,1366,"the lead merged, verified, diagnosed and recorded within the project's"
+P16,c1,M,PR:ADOPTION.md,106,"| CS3#12 | Check a gate budget against the merged diff before trusting it | relaxation + extension | adopted in part at `d38fea1`: the budget checked against the merged diff, and the record of why mai"
+P16,c1,M,PR:ADOPTION.md,154,"| CS6#6 | A restate at the merge only narrows a sentence to its source; it adds nothing the record does not hold | extension | pending: proposed by round 6 | CASE-STUDY-6.md, obs 12 | — | — | — |"
+P16,c1,M,PR:ADOPTION.md,158,"| B3 | The send-back rule: only a regression or a wrong answer sends work back; anything else merges as a recorded known limit, and a sentence that claims too much is restated at the merge | practice;"
+P16,c1,M,PR:templates/checklists.md,169,"- [ ] The lead's seam commits and fixes, its merges and its records go"
+P16,c1,K,KIT:GLOSSARY.md,69,"- **The integration verifier.** A verifier on the lead's own work: its merges, its seam and its record. It makes"
+P16,c1,K,KIT:OWNER.md,42,"On 2026-10-13: ""Lead fixes sentence at merge"" (cft-fp256's record, line 19166)."
+P16,c1,K,KIT:OWNER.md,125,"**Everything else, the lead decides by the standards.** Unattended, it merges, verifies, diagnoses and records within"
+P16,c1,K,KIT:ROLES.md,44,"**Its own work goes past a verifier like a parcel's:** seam commits, fixes, merges and record entries, from the first"
+P16,c1,K,KIT:WORKFLOW.md,98,"7. **The integration verifier** checks the lead's merges, seam and record, and makes each merge again from its"
+P16,c3,M,PR:METHOD.md,793,"At the end of the round, fold anything durable into the repository's own"
+P16,c3,M,PR:METHOD.md,1263,"every file no parcel touches, so the end of the round is one section"
+P16,c3,M,PR:templates/brief.md,49,"the end of the round, and kept. (§4)"
+P16,c3,M,PR:templates/checklists.md,222,## At the end of the round
+P16,c3,M,PR:templates/checklists.md,233,"every file no parcel touches, so the end of the round is one section"
+P16,c3,K,KIT:WORKFLOW.md,117,"The template is checklists.md, ""At the end of the round""."
+P17,c3,M,PR:METHOD.md,80,in. A transcribed copy would have gone on silently testing a stale
+P17,c3,M,PR:METHOD.md,413,**a parcel that finishes without waiting silently drops their work**.
+P17,c3,M,PR:METHOD.md,458,not on whether it happened.** A parcel that silently stays inside a
+P17,c3,M,PR:METHOD.md,820,- **Passing against itself.** A mode the implementation silently ignored
+P17,c3,M,PR:METHOD.md,845,"pass the entire suite, while silently breaking signed zero."
+P17,c3,M,PR:METHOD.md,881,"read happened"": a regression cannot pass it silently. [13:59]"
+P17,c3,M,PR:templates/brief.md,111,**The trap that would be a silent wrong answer.** `<the thing that
+P17,c3,M,PR:templates/brief.md,197,say so and say why — that is expected and fine; doing it silently is not.
+P17,c3,M,HF:METHOD.md,135,"2 contradicted, 9 corroborated, 10 corroborated-with-caveats, 3 silent (no"
+P17,c3,M,HF:METHOD.md,137,"""silent"" category matters as much as the others: absence of a published"
+P17,c3,M,HF:METHOD.md,252,- **Passing against itself.** The mode under test was silently ignored by the
+P17,c3,M,HF:METHOD.md,267,silently breaking signed zero.
+P17,c3,M,HF:METHOD.md,355,"Parallel lists drift, silently, and the drift is a wrong answer rather than a"
+P17,c3,M,HF:METHOD.md,392,"third copy silently keeps the old value, you have found the next thing to"
+P17,c3,M,HF:METHOD.md,422,A silently skipped stage is a gate that cannot fail.
+P17,c3,M,HF:METHOD.md,525,"A bound recorded as a count decays silently as the data grows, and the decay"
+P17,c3,M,HF:METHOD.md,612,silently in either direction.
+P17,c3,M,HF:METHOD.md,725,and an ordinary user agent. Each false unreachability had silently downgraded a
+P17,c3,M,HF:METHOD.md,727,"mode produced by your own harness rather than by the world. Require a ""silent"""
+P17,c3,M,HF:ADOPTING.md,71,"- **It does** if wrong answers are expensive and silent — numerics, protocol"
+P17,c3,M,HF:ADOPTING.md,108,- **refuse** an unknown stage name rather than silently selecting nothing;
+P17,c3,M,HF:FAILURE-MODES.md,90,have failed*: a silent wrong answer.
+P17,c3,M,HF:FAILURE-MODES.md,173,## D. Silent selection
+P17,c3,M,HF:FAILURE-MODES.md,185,### D2 — The silently skipped stage
+P17,c3,M,HF:FAILURE-MODES.md,298,the workload had silently been reduced to nothing.
+P17,c3,M,HF:WITH-PARCELROUND.md,49,silently ignored; a gate **proving nothing** because the state it re-read was
+P17,c3,M,HF:WITH-PARCELROUND.md,55,"pass the whole suite, while silently breaking signed zero."
+P17,c3,M,HF:templates/agent-notes.md,41,"silently passed — so read the skip list, and use <--require-all> on a host"
+P17,c3,M,HF:templates/controls.md,79,**Stance:** corroborates | contradicts | silent
+P17,c3,M,HF:templates/controls.md,83,"`Stance` deserves three values, not two. **`silent` — the source has no figure"
+P17,c3,M,HF:templates/controls.md,85,"agreement. In the worked example, 3 of 24 real entries were silent and were"
+P17,c3,M,HF:templates/gate-runner.sh,17,#       silently selecting nothing.
+P17,c3,K,KIT:CLEAN-ROOM.md,3,"**One repository is off limits: Logan's cft-fp256.** In his words (2026-10-23): ""Web access to read third-party"
+P17,c3,K,KIT:CLEAN-ROOM.md,33,"Every third-party source is open to read: the literature, Berkeley SoftFloat and TestFloat, pico-sdk, MPFR and"
+P17,c3,K,KIT:OWNER.md,14,"| the web | ""Web access to read third-party code and solutions, the only restriction is staying away from cft"" |"
+P17,c3,K,KIT:OWNER.md,120,"- anything that would put his name, his address or his data in front of a third party."
+P17,c3,K,KIT:PROJECT.md,16,"- **The web:** ""Web access to read third-party code and solutions"", with cft-fp256 off limits (CLEAN-ROOM.md)."
+P17,c3,K,KIT:PROJECT.md,64,"- Which third-party code may be copied, and which only read. Record each source's licence."
+P17,c3,K,KIT:ROLES.md,69,"- disclose any boundary it crossed, and why. A crossing is expected; a silent one is not (section 3);"
+P17,c3,K,KIT:WORKFLOW.md,45,- the third-party implementations and test suites;
+P18,c2,M,PR:METHOD.md,126,"into one table that both callers walk, and **unlocking a capability"
+P18,c2,M,PR:METHOD.md,168,"When P0 turns scattered statements into a table, make the test **walk"
+P18,c2,M,PR:METHOD.md,302,and the verifiers judged READY by the standard they had offered
+P18,c2,M,PR:METHOD.md,356,the safe action is followed when the unsafe one is closer to hand.
+P18,c2,M,PR:METHOD.md,446,"### Expect boundary violations, and judge them on disclosure"
+P18,c2,M,PR:METHOD.md,457,"standard: **judge a crossing on whether it was disclosed and reasoned,"
+P18,c2,M,PR:METHOD.md,557,"the only channel: it is the channel of record, so that what a later reader"
+P18,c2,M,PR:METHOD.md,567,"included**, as an instruction an entry can follow word for word: write each"
+P18,c2,M,PR:METHOD.md,574,"rule, and 5 of the fixers' 6 stamps were typed; and the follow-ups' README,"
+P18,c2,M,PR:METHOD.md,590,"**What cannot wait for a read moment goes to its reader at once, and is"
+P18,c2,M,PR:METHOD.md,764,"it. In round 3, with the lead's watch down, 11 of the follow-ups' 49 entries"
+P18,c2,M,PR:METHOD.md,806,"the reader of the case study, not a channel."
+P18,c2,M,PR:METHOD.md,933,"every gate: a limit stated by its instances is walked past, as a rule"
+P18,c2,M,PR:METHOD.md,1099,"The follow-ups had no such step, and at least nine of their verifiers'"
+P18,c2,M,PR:METHOD.md,1113,**A stated limit is tested.** A verifier judges READY by the standard
+P18,c2,M,PR:METHOD.md,1155,and a limit such a fault walks past is a sentence that claims more
+P18,c2,M,PR:METHOD.md,1174,- **Round 3:** the follow-ups' seam commits and both record entries went
+P18,c2,M,PR:ADOPTION.md,153,"| CS6#5 | A wrong answer the lead's own ruling caused is the lead's to fix, past a verifier; the parcel that followed it is not sent back | extension | pending: proposed by round 6 | CASE-STUDY-6.md, "
+P18,c2,M,PR:templates/brief.md,13,reads like a colleague handing over gets followed. (own)
+P18,c2,M,PR:templates/brief.md,61,"**What cannot wait for a read moment goes to its reader at once, and is"
+P18,c2,M,PR:templates/brief.md,108,"that holds, `<what follows>`. Check it against the source; if I am wrong,"
+P18,c2,M,PR:templates/checklists.md,40,"- [ ] Registries walk themselves and fail **by name, in both"
+P18,c2,M,PR:templates/ledger.md,103,"**What cannot wait for a read moment goes to its reader at once, and is"
+P18,c2,M,HF:METHOD.md,16,- **9** covers the case with no compiler: when the deliverable is a judgement
+P18,c2,M,HF:METHOD.md,32,that requires no judgement.
+P18,c2,M,HF:METHOD.md,56,- **Make it independent.** It must not share code with the thing it judges.
+P18,c2,M,HF:METHOD.md,299,"something must read the file, and something must prove the reader can say"
+P18,c2,M,HF:METHOD.md,515,"question ""may I edit this?"" has a structural answer rather than a judgement"
+P18,c2,M,HF:METHOD.md,641,"## 9. When the deliverable is a judgement, control the judge"
+P18,c2,M,HF:METHOD.md,694,reader to establish it.
+P18,c2,M,HF:METHOD.md,711,### Two ways to measure a judge with no key at all
+P18,c2,M,HF:METHOD.md,731,### The judge's own failure mode
+P18,c2,M,HF:METHOD.md,733,A judge has a pathology of its own and it is not dishonesty: it is
+P18,c2,M,HF:METHOD.md,757,"And a technique, because it replaces a judgement with a measurement: to prove a"
+P18,c2,M,HF:METHOD.md,773,It generalises past citations. Any judgement an agent delivers can be
+P18,c2,M,HF:METHOD.md,792,"in three weeks, which is nearly the same reader."
+P18,c2,M,HF:METHOD.md,796,"Not twelve tiers the reader must assemble. **One command, in two or three"
+P18,c2,M,HF:METHOD.md,800,uncomfortable way. That project *had* a runner with three well-judged budgets
+P18,c2,M,HF:METHOD.md,816,the next reader will assume warmth that is not there.
+P18,c2,M,HF:METHOD.md,825,"reader searches for. ""The default compiler here is the 32-bit one"" is useless;"
+P18,c2,M,HF:METHOD.md,833,"passed. A stale warning teaches the reader to distrust a check that works,"
+P18,c2,M,HF:ADOPTING.md,49,### 0c. Walk [FAILURE-MODES.md](FAILURE-MODES.md) once
+P18,c2,M,HF:ADOPTING.md,52,caught**. Habits are not defences — they are the same judgement the framework
+P18,c2,M,HF:ADOPTING.md,80,"from the things it judges.** One grep, in the gate."
+P18,c2,M,HF:ADOPTING.md,127,"*did* exist, with three well-judged budgets, reachable from the runner's own"
+P18,c2,M,HF:ADOPTING.md,177,"## Step 8 — Control the judges, if any output is a judgement (a day)"
+P18,c2,M,HF:FAILURE-MODES.md,32,"| 5 | ""suite green, 21 benches"" | the framework cannot set an exit code; three real defects passed | read the results file; negative-control the reader (§3) |"
+P18,c2,M,HF:FAILURE-MODES.md,124,"**Defence.** Something must read the file, and something must prove the reader"
+P18,c2,M,HF:FAILURE-MODES.md,125,"can say no. Both halves: the reader, and the negative control on the reader."
+P18,c2,M,HF:FAILURE-MODES.md,143,`git push -q` followed by `git rev-parse --short HEAD`. The echo prints the
+P18,c2,M,HF:FAILURE-MODES.md,151,### C2 — The tool that walked up to the parent
+P18,c2,M,HF:FAILURE-MODES.md,288,"question, where the next reader would have had no reason to doubt it."
+P18,c2,M,HF:FAILURE-MODES.md,332,"A bit-identity defect that **five parcels, two verifiers, a follow-up parcel"
+P18,c2,M,HF:FAILURE-MODES.md,375,"defences — they are the same judgement the framework exists to remove, just"
+P18,c2,M,HF:WITH-PARCELROUND.md,38,"| The verifier must not fix anything; ""found nothing"" is an acceptable answer (§6) | [§9](METHOD.md) | the judge has its own failure mode |"
+P18,c2,M,HF:WITH-PARCELROUND.md,67,"that **five parcels, two verifiers, a follow-up parcel and 211 assertions all"
+P18,c2,M,HF:templates/README.md,4,"[METHOD.md](../METHOD.md) and carries its reasoning in comments, so a reader"
+P18,c2,M,HF:templates/README.md,12,"| [controls.md](controls.md) | §9 | Planted-fault controls for work whose output is a **judgement** — audits, reviews, citation checks. The one with no substitute for AI-heavy work. |"
+P18,c2,M,HF:templates/README.md,20,because a template that has never executed teaches its reader nothing. Both
+P18,c2,M,HF:templates/agent-notes.md,35,"that in these words, or the next reader will assume warmth that is not"
+P18,c2,M,HF:templates/agent-notes.md,69,reader searches for.>
+P18,c2,M,HF:templates/agent-notes.md,120,exact string the reader will paste into a search.
+P18,c2,M,HF:templates/check_generated.py,132,"# Show the drift. A check that says only ""differs"" sends the reader to"
+P18,c2,M,HF:templates/controls.md,8,*judgement* checkable. Use it whenever the deliverable is an assessment rather
+P18,c2,M,HF:templates/controls.md,118,"together, no later reader can establish that the auditor did not read the"
+P18,c2,M,HF:templates/controls.md,163,Anything an agent delivers as a judgement can be controlled this way:
+P18,c2,M,HF:templates/ledger.md,63,"<Scope deliberately left out, so a later reader does not mistake absence for"
+P18,c2,M,HF:templates/ledger.md,86,"**Who or what decided.** When a judgement was unavoidable — a tolerance, a"
+P18,c2,M,HF:templates/manifest.md,36,"# Results the build measured, so a later reader need not re-run it to know"
+P18,c2,M,HF:templates/manifest.md,60,invites the next reader to compare it with a number from a different clock
+P18,c2,M,HF:templates/manifest.md,94,reader needs to know *which* eight things were true.
+P18,c2,K,KIT:CLEAN-ROOM.md,30,"agent notes into a reader's context, because the repository was attached to that harness's session. The reader"
+P18,c2,K,KIT:CLEAN-ROOM.md,45,"This is judged on disclosure, as ParcelRound judges a crossing of a boundary"
+P18,c2,K,KIT:CLEAN-ROOM.md,46,"([method/parcelround/METHOD.md](method/parcelround/METHOD.md), section 3: ""judge a crossing on whether it was"
+P18,c2,K,KIT:GLOSSARY.md,78,"- **An escalation.** A question or finding that cannot wait for a read moment. It goes to its reader at once, and"
+P18,c2,K,KIT:PROJECT.md,31,"reader, outside every repository and every zip."
+P18,c2,K,KIT:START-HERE.md,7,"judgement. Every ""is this true?"" is answered by something that cannot hold an opinion: a reference, a gate"
+P18,c2,K,KIT:START-HERE.md,34,"3. **Escalation.** What cannot wait for a read moment goes to its reader at once, and is written in the ledger"
+P18,c2,K,KIT:START-HERE.md,85,bytes a token (MEASURED by the kit's cold reader).

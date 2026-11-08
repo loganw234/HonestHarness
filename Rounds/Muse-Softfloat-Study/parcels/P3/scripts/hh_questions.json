@@ -1,0 +1,21 @@
+{
+  "_note": "Written before HonestHarness round 1 and 2 were searched. Each proposal has failure stems (the same failure met) and practice stems (the same practice adopted). Marks: MET (the same failure happened), ADOPTED (the same practice is written or done), BOTH, NEITHER (searched, nothing found), NOT APPLICABLE (the round had no such work).",
+  "P1": {"failure": ["wrong (?:tree|copy|branch)", "checked the wrong", "stale (?:copy|clone|tree)"], "practice": ["copy.s HEAD", "quote.{0,30}HEAD", "rev-parse HEAD", "provenance"]},
+  "P2": {"failure": ["reach(?:ed|able).{0,40}(?:real|branch|tip)", "could (?:have )?read.{0,40}(?:real|parcel)", "fence.{0,40}(?:broke|touch|crossed|disclos)"], "practice": ["no route", "unreachable", "allowlist", "detached", "reference copy", "separate clone", "export of"]},
+  "P3": {"failure": ["miscount", "mislabel", "wrong label", "count of counts"], "practice": ["metadata", "per-field", "label plant", "provenance field"]},
+  "P4": {"failure": ["after (?:the )?(?:verifier|verification).{0,40}(?:edit|change|fix)", "unverified (?:fix|change|edit)", "not seen by"], "practice": ["delta", "scoped re-?check", "fresh verifier", "re-?check.{0,30}diff"]},
+  "P5": {"failure": ["typed (?:count|number|figure)", "transcri\\w+ (?:error|slip)", "hand-?typed", "off by one"], "practice": ["by script", "occurrence", "assert", "recount", "adherence"]},
+  "P6": {"failure": ["spill", "truncat", "empty (?:result|report|reply)", "report file.{0,30}refus", "refus\\w+.{0,40}report", "could not (?:write|save).{0,30}report"], "practice": ["report file", "report\\.md", "final message", "reports/"]},
+  "P7": {"failure": ["\\bvoid", "dead agent", "died", "dropped by", "API failure", "usage limit"], "practice": ["clean checkout", "fresh checkout", "redispatch", "re-dispatch", "resume note"]},
+  "P8": {"failure": ["out of memory", "OOM", "orphan", "stackdump", "left running", "background process", "hung", "timed out", "runaway"], "practice": ["2 GB", "ceiling", "time box", "timebox", "stop every", "checkpoint", "resume note"]},
+  "P9": {"failure": ["never ran", "not executed", "was not run", "claimed.{0,40}but", "declared.{0,40}not run", "claims more"], "practice": ["execution mode", "executed in the gate", "weakest", "claim.versus", "historical"]},
+  "P10": {"failure": ["stale (?:number|count|figure|total)", "drift", "disagree(?:d|s) with", "two places", "inconsistent"], "practice": ["registry", "single-?source", "restamp", "load-bearing"]},
+  "P11": {"failure": ["stale stamp", "regenerat", "generated.{0,30}(?:stale|before)", "counted from"], "practice": ["stamp", "newest commit", "as of commit", "generated from"]},
+  "P12": {"failure": ["scratch (?:variant|copy|version)", "not in the tree", "not committed", "different path"], "practice": ["committed path", "promot", "front door", "in the tree"]},
+  "P13": {"failure": ["absolute path", "main checkout", "wrong worktree", "hard-?coded path", "path.{0,30}(?:private|leak)"], "practice": ["<repos>", "<scratch>", "roots", "relative to"]},
+  "P14": {"failure": ["CRLF", "line ending", "sha256sum", "does not verify", "mismatch"], "practice": ["allowlist", "frozen", "freeze", "manifest", "\\bLF\\b"]},
+  "P15": {"failure": ["serial", "board", "flash"], "practice": ["lock", "mkdir", "inventory"]},
+  "P16": {"failure": ["backfill", "back-fill", "refresh", "catch-up", "end-of-round", "stale metrics"], "practice": ["at merge", "same step", "appended", "metrics"]},
+  "P17": {"failure": ["licen[cs]e", "copyright", "unattributed", "rights"], "practice": ["provenance", "attribution", "asset", "permitted"]},
+  "P18": {"failure": ["did not work from a clean", "fresh clone.{0,30}fail", "broken link", "only works on"], "practice": ["cold", "dry run", "fresh clone", "clean clone", "walk"]}
+}

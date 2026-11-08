@@ -1,0 +1,63 @@
+proposal,clause,role,mark,best_source,marks_seen,clause
+P1,c1,counted,ABSENT,,ABSENT,provenance is the verifier's first recorded act
+P1,c2,counted,ABSENT,,ABSENT,the copy's HEAD is quoted
+P1,c3,counted,ABSENT,,ABSENT,one line only the copy holds is quoted
+P1,c4,counted,ABSENT,PR:ADOPTION.md:152,ADJACENT,before any check counts
+P2,c1,counted,ABSENT,,ABSENT,handover by allowlist: the verifier's world is the copy plus named evidence paths
+P2,c2,counted,RULE-K,KIT:WORKFLOW.md:131,RULE-K,"the real branch is made unreachable (separate clone, detached export, no ref to the real tip)"
+P2,c3,counted,ABSENT,KIT:WORKFLOW.md:137,ADJACENT,a fence or prohibition alone is not enough
+P2,c4,counted,CASE,PR:CASE-STUDY-6.md:160,CASE,round 6's reference-copy note
+P3,c1,counted,CASE,PR:CASE-STUDY-6.md:166,CASE,"plant sets include metadata shapes (labels, counts of counts, provenance fields)"
+P3,c2,counted,ADVICE,HF:METHOD.md:630,ABSENT;ADVICE,briefs require per-field checks
+P3,c3,counted,ABSENT,,ABSENT,never counts against an expected list
+P4,c1,counted,RULE-M,PR:METHOD.md:1092,NEWER;RULE-M,a change after the copy is built goes past a delta check scoped to the diff
+P4,c2,counted,ABSENT,,ABSENT,the check is independent
+P4,c3,counted,RULE-M,PR:METHOD.md:940,RULE-M,a verifier-finding fix included; changes after verification
+P4,c4,counted,CASE,PR:ADOPTION.md:131,CASE,'the verifier already saw the parcel' never covers unseen bytes
+P5,c1,counted,ADVICE,PR:METHOD.md:64,ADVICE,lead landing edits made by script with occurrence-count asserts
+P5,c2,counted,CASE,PR:ADOPTION.md:156,CASE;NEWER,a recount before writing
+P5,c3,counted,ABSENT,,ABSENT,"the adherence audit runs at each wave close, not once at the end"
+P5,c4,counted,ABSENT,,ABSENT,the audit grades the lead/parcel distinction
+P6,c1,counted,ABSENT,,ABSENT,the report artifact is a file in the agent's scratch
+P6,c2,counted,ABSENT,,ABSENT,the result channel carries a compact summary and the path
+P6,c3,counted,CASE,PR:CASE-STUDY-3.md:717,CASE,"a spilled, truncated or empty result is recovered from the file, never re-run"
+P7,c1,counted,ABSENT,,ABSENT,a dead or voided attempt is named as such in the record
+P7,c2,counted,ABSENT,,ABSENT,its tree and outputs are untrusted; the retry starts clean
+P7,c3,counted,ABSENT,,ABSENT,grades come from the valid attempt only
+P8,c1,counted,ABSENT,,ABSENT,"briefs carry resource ceilings by default (memory, wall clock, process count)"
+P8,c2,context,RULE-K,KIT:WORKFLOW.md:178,RULE-K,time-boxes
+P8,c3,counted,ADVICE,PR:METHOD.md:532,ADVICE,long parcels checkpoint progress the lead can read without asking
+P8,c4,counted,RULE-M,PR:METHOD.md:438,RULE-M,an agent owns every process it starts until it kills or hands it over
+P9,c1,counted,ABSENT,HF:FAILURE-MODES.md:161,ADJACENT,an authority is recorded with its execution mode
+P9,c2,counted,PART,PR:METHOD.md:1126,PART,prose may claim only the weakest mode still true
+P9,c3,counted,ABSENT,PR:METHOD.md:875,ABSENT;ADJACENT,a claim-vs-mechanism pass is a named step at each seal
+P9,c4,context,RULE-M,HF:METHOD.md:27,RULE-M,authority
+P10,c1,counted,ABSENT,,ABSENT,a claim registry names every surface carrying a load-bearing literal
+P10,c2,context,RULE-M,HF:METHOD.md:346,RULE-M,single-sourcing
+P10,c3,counted,ADVICE,HF:METHOD.md:350,ADVICE,"a restamp runs the registry; generated surfaces are entries, not exceptions"
+P11,c1,counted,RULE-K,KIT:METRICS.md:39,RULE-K,a generated file's stamp names the newest commit its contents were counted from
+P11,c2,counted,ABSENT,HF:METHOD.md:350,ADJACENT,regeneration happens after the landing appends counted rows
+P11,c3,counted,ABSENT,,ABSENT,or the stamp says which rows it excludes
+P12,c1,context,RULE-M,HF:METHOD.md:789,RULE-M,the front-door rule
+P12,c2,counted,RULE-M,PR:METHOD.md:228,RULE-M,evidence is produced by the committed path
+P12,c3,counted,ABSENT,,ABSENT,"a needed variant is promoted into the tree, or the claim is scoped to the scratch path, in the same parcel"
+P13,c1,counted,RULE-K,KIT:WORKFLOW.md:24,RULE-K,"every dispatch defines its roots (<repos>, <scratch>, <ledger>)"
+P13,c2,counted,ABSENT,,ABSENT,"kit scripts resolve the workspace from any worktree, not the main checkout's layout"
+P13,c3,counted,RULE-K,KIT:WORKFLOW.md:24,RULE-K,no absolute paths in written records
+P14,c1,counted,ADVICE,HF:METHOD.md:479,ADVICE,the freeze recipe ends with the consumer's exact verification command on the target shell
+P14,c2,counted,ABSENT,KIT:AGENTS.md:29,ADJACENT,manifests are written LF
+P14,c3,counted,ABSENT,PR:METHOD.md:1301,ADJACENT,the bundle is built from an allowlist
+P14,c4,counted,ABSENT,,ABSENT,a bundle that verifies only under a tolerant reader is not frozen
+P15,c1,counted,PART,KIT:BOARD.md:4,PART,"an environment inventory before first flash (serials, variants, cables proven by data)"
+P15,c2,counted,ABSENT,KIT:BOARD.md:16,ADJACENT,target by serial always
+P15,c3,counted,PART,KIT:BOARD.md:11,PART,an atomic lock (mkdir) with pid/host/time and a named stale recovery
+P15,c4,context,RULE-K,KIT:BOARD.md:1,RULE-K,hardware in the loop
+P16,c1,counted,ABSENT,,ABSENT,"metrics rows append at merge time, in the same step as the ledger entry"
+P16,c2,context,ABSENT,KIT:METRICS.md:40,ADJACENT,metrics rows
+P16,c3,counted,ABSENT,,ABSENT,so no end-of-round refresh parcel exists
+P17,c1,counted,PART,HF:METHOD.md:127,PART,an asset-provenance file beside the clean-room file
+P17,c2,counted,PART,KIT:CLEAN-ROOM.md:34,PART,"every non-code asset names its source, licence and permitted surfaces"
+P17,c3,counted,ABSENT,,ABSENT,"unresolved rights default to ship silent, host elsewhere, never commit the raw asset"
+P18,c1,counted,PART,HF:METHOD.md:838,PART,the seal sequence ends with a cold dry run on a fresh public clone
+P18,c2,counted,ABSENT,,ABSENT,walked through the judge map exactly as written
+P18,c3,counted,ABSENT,PR:ADOPTION.md:146,ADJACENT,by an agent that did not write the map

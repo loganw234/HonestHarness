@@ -1,0 +1,6 @@
+proposal,second_route,first_route_mark,agree,note
+"P2","PARTIAL (c2 kit rule; no allowlist)","PARTIAL","yes",""
+"P3","PARTIAL (c2 only)","PARTIAL","yes","the second route missed c1 (a CASE clause found only by reading)"
+"P5","ABSENT","PARTIAL","no","the second route missed PR:METHOD.md l64 (Derive counts), which the first route found with the word transcribe"
+"P8","PARTIAL (c2 kit, c4 method)","PARTIAL","yes",""
+"P9","PARTIAL (c2)","PARTIAL","yes","the second route missed c1 (ADVICE in HF FAILURE-MODES C3)"
