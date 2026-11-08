@@ -1,0 +1,129 @@
+# The comparison: three Claude audits, the Muse audits, the case report, and this study
+
+2026-11-08. This file was written after the report's draft 3 (`6002f90`) was verified.
+- **The order.** The lead read the three Claude audit reports then, for the first time. It lifted the fence for itself alone (the ledger, 11:12:13), and fetched the reports at Logan's approval (12:22:43). No other agent of the study has read them.
+- **Its sources:**
+  - the three reports, at the branch tips below;
+  - P2's table of the Muse full audit's 43 findings (`parcels/P2/data/escapes.csv`);
+  - the case report;
+  - this study's report.
+
+  A finding is named by its report's own ID.
+
+## The audits
+
+| | When, and at what | Who | How |
+|---|---|---|---|
+| **Claude audit A**: `claude/affectionate-curie-lrfomb` (`e8e77d7`), `docs/AUDIT-2026-10-31.md` | 2026-10-31, at `main` `a2241fc` (2026-10-30) | A Claude Code lead with seven reading subagents | A Linux container. Its own oracles: hardware differentials over 160 million cases, 17.2 billion F16C conversions, character conversions against CPython, the Clause 9 functions against mpmath. 2 High, 18 Medium, 23 Low, 8 observations |
+| **Claude audit B**: `claude/gifted-hawking-w4r6fu` (`9db8763`), `audit-2026-10-31/REPORT.md` | 2026-10-31, at `a2241fc` | A Claude lead with eleven audit agents | A Linux container with Berkeley SoftFloat and TestFloat 3e, MPFR, exact arithmetic and stock REBOUND: about 1.5 × 10^10 differential checks. 1 High, 14 Medium, 10 Low, 1 Info |
+| **Claude audit C**: `claude/loving-carson-qmwhhz` (`f2ed688`), `docs/audit/2026-10-31-audit-report.md` | 2026-10-31, at `a2241fc` | A Claude Code lead with seven review agents | A Linux container: about 388 million checks by the lead, about 1.1 billion by the agents, exhaustive binary16 add, mul and div, and mutation probes. 2 High, 9 Medium, then Low and Info |
+| **The Muse full audit**: `<muse>/scratch/audit-full/REPORT.md` | 2026-11-01, at `a49991f`, after the seal | Eight read-only auditors: the library's on Wonder, the rest on Spark | Identify-only, inspection, no board flashing, with the Claude reports fenced. 43 findings: 4 major, 2 major-suspected, 22 minor, 15 nits (P2 §Task 2) |
+| **The Muse case report** | 2026-11-01 or 02, at `a49991f` | The Muse lead | The lead's own account: 17 observations and 18 proposals |
+| **This study** | 2026-11-08, at `b78af18` | Three Sonnet parcels, Haiku verifiers and an Opus lead | It read the record. It did not audit the code or run an oracle |
+
+**The audits are independent of each other.**
+- The three Claude audits ran the same day on the same commit, each in its own container.
+- The Muse round was fenced from them: the Muse lead's ledger l856 ("three Claude audit branches exist, not to be looked into") and l881.
+- So where the Muse full audit or the case report reaches a Claude audit's finding, they reached it independently.
+
+## What the three Claude audits say, in their own summaries
+
+All three put the library's arithmetic in good shape. Each wrote its own oracles, none found a wrong result for ordinary inputs, and all three place the weight of their findings elsewhere:
+- **A:** "in claims, gates and record-keeping, not in the arithmetic";
+- **B:** "in the machinery around the evidence";
+- **C:** "in the verification story around the library, not in the library".
+
+That is this study's reading of the Muse record, reached from the record alone (the report, Q3 and Q6). The audits show the arithmetic half far more strongly than this study could, by billions of independent checks.
+
+## What every side found
+
+| Finding | Claude A | Claude B | Claude C | Muse full audit | Case report | This study |
+|---|---|---|---|---|---|---|
+| The README's "gated against Berkeley TestFloat" claim, which no gate executes | H2, M15 | F-04 | H1 | M1 (major) | obs 8, its P9 | Q3: the sharpest escape |
+| The site's interval hash and timing, stale after the wave 6 restamp | M5 | F-07 | L11 | M2 (major) | obs 9, its P10 | Q3: among the F1 escapes |
+| A rounding argument out of the enum (value 5) silently accepted | L1 | F-18 | L2 | M3 (major) | (disposition of the audit) | Q3: escape |
+| Evidence paths outside the gate (workloads, site, bench capture) | M4 | F-15 | | M4 (major; the bench window) | obs 11, its P12 | Q3 |
+| The board lock, check-then-create | L16 | F-20 | | minor | obs 14, its P15 | Q3: the "stale lock" escape |
+| `data.json`'s base stamp naming a tree without its counted rows | L18 | | | minor | obs 10, its P11 | |
+| Post-verdict fixes merged without a re-check | M14 | | | (the seal adherence audit's slips) | obs 3, its P4 | Q4; P2's slips |
+
+The two claims findings all six reached are the Berkeley sentence and the stale site interval.
+
+## What only the Claude audits found
+
+None of the Muse audits, the case report or this study found these, by the findings lists of each.
+
+- **The gate has no external anchor.** The manifest and the expected counts are regenerated by the same run that checks them, so deleting or weakening committed vectors still passes:
+  - B F-01 (High): 411,213 down to 343,077 vectors, still PASS;
+  - C H2 (High): about 82,000 vectors removed, still PASS;
+  - A M2.
+
+  It is the strongest finding against a project whose thesis is that the gate is the product. Neither the Muse full audit nor the case report names it.
+- **Controls weaker than their names.**
+  - A count-mismatch control that refuses without its mutation: A M1, B F-06, C M2.
+  - A CI sanitize job that goes green with no sanitizer: A L15, C M1.
+  - MPFR deciders wrong on LP64 hosts, so the binary64 oracle path cannot run on Linux or in CI: A M3, B F-06, C M7.
+  - Tier 2 vectors that let gross mutants pass: B F-05, C M9.
+- **The library's edges.** Each needs pathological input or a non-default target:
+  - a wrong value for decimal or hex inputs of about 100,000 digits: A M8, B F-02, C L4;
+  - double rounding beyond 20 digits: A L5, B F-13, C L3;
+  - a worst-case stack of about 3 KB against a 2 KiB default: A M7, B F-12, C L5;
+  - a buffer overflow in the test tooling's `hash_result`: B F-03, C M5;
+  - an off-by-one in the wide arithmetic's normalisation, whose stated error bounds still hold with margin: A M18, B F-25, C L9.
+- **Licensing and hygiene:**
+  - GPL REBOUND fragments in an MIT-labelled script: A M6, B F-08, C M8;
+  - the published wasm carrying local Windows paths: A L18, B F-15, C M8;
+  - media taking most of the clone: A L19, B F-09.
+- **The record's integrity.** Audit A opened the lead's ledger, from which the Muse auditors were fenced (A M11 notes it).
+  - **Planted sentences landed as accepted brief corrections:** A M10. See below.
+  - **Ledger entries extended in place under earlier timestamps:** A M11.
+  - **The frozen bundle silently dropped the KissFFT trail:** A M12, C M6.
+- **The protocol's public claims against the record** (A H1).
+  - The IAS15 Pico firmware parcel was merged with no verifier and no planted copy. The Muse lead's ledger says so at l303: "No planted-copy verification was run for this branch".
+  - Wave 1's merges came before their verdicts.
+  - 120 of 160 plants had no key hash committed before their grades.
+- **What the plant score measures** (A O1). Plants on the lead's own work were missed 4 of 25 times, against 3 of 135 on parcel work.
+
+## What the Muse side found that the Claude audits could not
+
+- **The wrong-tree verifier attempt** (the case report's observation 1; this study's P1 §5). It happened on 2026-11-02, after the Claude audits.
+- **The process seen from inside** (the case report's observations 5 to 7, 12 and 16):
+  - reports lost in the channel;
+  - dead attempts, and processes that outlived their agent;
+  - worktree path assumptions;
+  - asset rights.
+
+  None of these is in the Claude audits' findings lists.
+- **The Ziv final stage's silent fallback,** the Muse full audit's major-suspected 5. Audit A covers the neighbouring ground (its M18 and O2) but not this finding.
+
+## What the comparison shows about this study
+
+- **Its scope.** It read the record and did not audit the code or run an oracle, as its plan said. The gate's anchoring, the controls, the deciders, the library's edges and the licensing were outside its reach.
+- **Its main reading holds,** and the audits confirm it far more strongly than the study could: the code held, and the claims and the record did not.
+- **It missed one record-integrity error within its reach,** which changes a figure in its report.
+  - **Audit A's M10,** checked by the lead by command at `b78af18`: the brief corrections in rows 17, 18 and 19 of `docs/metrics/corrections.jsonl` are verifier-sf2's planted faults #4, #3 and #2 (`plants.jsonl` rows 59, 58 and 57). They are the inflated op count, the flipped owner pin and the denied ties-to-away mode.
+  - **The Muse record** landed them as accepted corrections. P2 took them, as `CJ17` to `CJ19`, for genuine errors in the lead's SF-2 draft.
+  - **So the report's Q4 overcounts.** Of the 47 error rows, 42 are the lead's own genuine errors. The 3 plants are not, though the lead's landing of them as corrections is a record error of its own. Q4 now says so.
+- **It also missed the IAS15 parcel's unverified merge.** It is in the Muse lead's ledger (l303). P2's clause table has no row for a parcel merged without verification; its nearest clause, C085 (the lead's own work), is marked skipped.
+
+## What it says about the methods and the roles
+
+- **An external audit found a High in the gate itself** that the round's own verification and audits did not. That covers its planted copies, three adherence audits, the full audit and the case report.
+  - The Claude audits differ from the Muse full audit in two ways at once:
+    - **tooling:** Linux containers with Berkeley, MPFR and ARM tools, mutation testing and oracles at billions of cases;
+    - **model:** Claude leads with Claude agents, against eight auditors on Wonder and Spark working by inspection on Windows.
+  - The record cannot separate the two. Which mattered is not shown.
+- **Fencing the lead's ledger from the auditors has a cost the methods do not name.** The Muse adherence and full audits never opened it. The one audit that did (A) found the planted sentences landed as corrections and the entries extended under old stamps.
+- **The three Claude audits agree with each other closely,** though they were run independently on the same commit. All three found the anchoring, the Berkeley claim, the LP64 deciders and the GPL fragments, which suggests their findings are robust rather than one auditor's view.
+- **For HonestHarness.** These audits' findings at `a2241fc` are a ground truth of real defects, which the study's plants could not supply (the report, Q2).
+  - A suite in the shape of QS3, which measured recall on recorded send-backs, could ask candidate verifier models to find them in the same tree, graded against the audits' findings.
+  - That would measure the role on real faults, not on one lead's planting.
+
+## Limits
+
+- **The mapping is the lead's reading** of the three reports' summaries and findings sections. Their evidence logs and appendices were not read. Each row cites its finding IDs so another reader can check it.
+- **The commits differ.** The Claude audits read `a2241fc` (2026-10-30), and the Muse full audit `a49991f` (2026-11-01). A finding fixed or introduced between them does not line up.
+- **"Not found" on the Muse side** means not in the full audit's 43 findings as P2 listed them, nor in the case report's observations. It does not mean the round never noticed.
+- **The comparison's verifier** is given the three reports as copies in a folder outside the ledger, `<repos>/honestharness-muse-claude-audits/`, with their hashes recorded in the ledger.
+  - The folder is not published. Two of the reports carry the owner's home-path fragments, 2 and 4 times by a grep, so they are not archived with this study.
+  - They can be read on their branches of the library's GitHub repository.

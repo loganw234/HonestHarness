@@ -2,11 +2,12 @@
 
 2026-11-08. The lead is Claude Opus 5.5, in Claude Code. The plan of record is `PLAN.md` beside this file (`5197b2a`).
 
-This is draft 3.
+This is draft 4.
 - **Draft 2** took verifier-R's pass 1 on draft 1 (`35873c2`): no wrong figure, 8 restates and 9 notes (`reports/verifier-R.md`).
 - **Draft 3** takes verifier-R's pass 2, which found five small new faults and no wrong figure.
   - The lead fixed them and checked each line by command, since verifier-R's passes were spent.
   - It also writes the case report's proposals as "proposal P2" and so on, so they cannot be read as this study's parcels P1 to P3.
+- **Draft 4** corrects Q4's count of the lead's errors, after the comparison (`COMPARISON.md`) found 3 planted faults counted among them.
 
 This report answers the plan's six questions from three parcels' analyses, which sit beside it. Each analysis was verified twice, once on a planted copy and once on its fix:
 
@@ -46,7 +47,7 @@ The study's ledger, archived beside this report, holds every step. The lead's mo
   - Next is declared configuration standing in for executed work (5).
   - The full audit found no defect in the shipped math surface.
   - A search for a finding that comes back empty shows only that its terms did not match.
-- **Q4, the lead.** Of 47 error rows, 45 are the lead's own, and its own prose was the least-verified text. That is the same pattern ParcelRound's round 6 recorded under an Opus lead.
+- **Q4, the lead.** Of 47 error rows, 42 are the lead's own genuine errors. 3 more are planted faults the Muse record landed as corrections (see the comparison). Its own prose was the least-verified text, which is the same pattern ParcelRound's round 6 recorded under an Opus lead.
 - **Q5, the case report.**
   - **Its claims:** of 79 checkable claims, 45 hold, 12 partly, 1 does not, and 21 cannot be checked from the files read.
   - **Its 18 proposals:** none is already a full rule in the methods at the kit's pins, 14 are there in part, 3 are absent, and 1 sits only in a case study.
@@ -232,6 +233,11 @@ P2 found 47 error rows, 45 of them the lead's own by their owner column (P2 §Ta
 - all 24 of the brief corrections, 22 of which are the lead's own: 11 faults in briefs, 4 in its own code or tools, and 7 in its own texts;
 - 23 more, from the ledger, the record and the audits.
 
+**A correction, from the comparison.** Three of the 7 "text" rows are not errors in the lead's work.
+- **What they are:** corrections rows 17 to 19, in the SF-2 draft, are verifier-sf2's planted faults #4, #3 and #2 (`plants.jsonl` rows 59, 58 and 57). The Muse record landed them as accepted brief corrections.
+- **Who found it:** Claude audit A's M10, and the lead checked it by command at `b78af18`.
+- **What it changes:** the lead's own genuine errors are 42 of the 47 rows. Landing the 3 plants as corrections is a record error of the lead's besides (`COMPARISON.md`).
+
 **Who caught them:** parcels, verifiers, the audits, and the lead itself (eight times).
 - **The lead's own code or tool faults in its first phase** (correction rows 4 to 7, among them a smoke control) were fixed before the seal.
 - **Faults in the record and the claims** reached `main`, and several stand at the seal as history with an erratum.
@@ -353,5 +359,7 @@ The study ran the same methods with Claude agents: three Sonnet parcels, Haiku v
 - **Field evidence, not a controlled comparison.** The earlier rounds' figures differ in planter, plants per copy, work and models.
 - **The toy round** could not be classed or re-graded: it has no per-plant shapes and no keys the study could read.
 - **The Muse records were read as they stood on 2026-11-08.** Their two repositories were read at commits. Their other files were read as found, and another session may still be working there.
-- **The Claude audit reports** in the library's `audit-bundle/` were fenced from this study until this draft was verified. The comparison with them is written after.
+- **The Claude audit reports** were fenced from this study until its draft 3 was verified.
+  - They sit on three branches of the library on GitHub, not in its `audit-bundle/` as the plan had thought.
+  - The comparison with them is `COMPARISON.md`, written after.
 - **The Muse session transcripts** were not read, by Logan's choice. The usage figures are the project's own extraction.
