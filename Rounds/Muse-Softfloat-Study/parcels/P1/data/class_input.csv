@@ -1,0 +1,196 @@
+row,cls,basis,tiebreak,reason
+1,C,shape,,exception flag dropped on a path in src/msf32.c
+2,C,shape,,sign handling on an infinity fast path in src/msf32.c
+3,C,shape,,exponent bookkeeping in src/msf32.c
+4,T,shape,,committed vector expectation in tests/vectors
+5,T,shape,TB2,generator pool in tests/gen_vectors_f32.py feeds vectors only
+6,C,shape,,exception flag dropped in src/msf64.c
+7,C,shape,,signed-zero rule in src/msf64.c
+8,C,key,TB1,shape reads like a test but the key puts the change in src/msf64.c
+9,T,shape,,committed vector flag expectation
+10,T,shape,TB2,reference generator constant in tests/gen_vectors_f64.py
+11,C,shape,,exception flag dropped in src/msf16.c
+12,C,shape,,sign handling in src/msf16.c
+13,C,shape,,exponent bookkeeping in src/msf16.c
+14,T,shape,,committed vector expectation
+15,T,shape,TB2,generator pool in tests/gen_vectors_f16.py
+16,C,shape,,wrapper format decode in src/msf32.c
+17,C,shape,,fused-op addend decode in src/msf32.c
+18,C,shape,,signaling predicate in src/msf64.c
+19,T,shape,,committed vector expectation
+20,T,shape,TB2,generator payload constant in tests/gen_vectors_xf.py
+21,C,shape,,decimal ties rounding in src/msf_string.c
+22,C,shape,,consumed-count logic in src/msf_string.c
+23,C,shape,,hex fraction scaling in src/msf_string.c
+24,T,shape,,committed vector expectation
+25,T,shape,TB2,generator literal in tests/gen_vectors_str.py
+26,C,key,TB2,claim-token gate in tools/gen_tables.py (generator whose output ships)
+27,C,key,TB2,flags pointer in tables/operations.tsv which feeds shipped tables
+28,C,key,TB5,freeze check in tools/run.sh (gate script is tool source)
+29,M,shape,TB4,authority label in generated docs/COVERAGE.tsv (berkeley vs mpfr-exact)
+30,D,key,TB1,provenance cap stated in tests/VECTORS.md (prose); the runner is the truth
+31,C,shape,,NaN-class invalid signalling in src/msf_performat.inc
+32,C,shape,,signed-zero ordering in src/msf_performat.inc
+33,C,shape,,payload setter encodings in src/msf_performat.inc
+34,T,shape,TB2,reference generator tests/gen_vectors_tier2.py
+35,T,shape,,committed getPayload expectation
+36,C,shape,,rounding direction in board/interval_workload.c
+37,C,shape,,proof guard in board/interval_workload.c
+38,C,shape,,banned Number form in board/interval_workload.c
+39,T,shape,TB2,exact oracle in tests/gen_interval_catalogue.py
+40,T,shape,,frozen catalogue row in tests/interval_catalogue.tsv
+41,C,shape,,sign of zero in src/msf_math.c
+42,C,shape,,result sign in src/msf_math.c
+43,C,shape,,error-interval constant in src/msf_trig_tables.h
+44,C,key,TB2,coefficient generator tools/gen_trig_tables.py whose output ships
+45,T,shape,,committed flag expectation in trig-f64.vec
+46,C,shape,,wrapper calls wrong core in compat/msf_aeabi.c
+47,C,shape,,firmware input generator constant in board/kissfft_main.c
+48,C,shape,,CMake guard in board/CMakeLists.txt
+49,D,shape,,claim in docs/BOARD.md
+50,C,shape,,board host script board/kissfft_host.py
+51,D,shape,,README count
+52,D,shape,TB3,score stated in README prose
+53,D,shape,,README claim about Fork B
+54,D,shape,,README list of refused functions
+55,D,shape,,README vector count
+56,D,shape,TB3,arithmetic inside docs/studies/SF-2.md (prose)
+57,D,shape,,study claim about an internal mode
+58,D,shape,TB6,owner pin recorded in study prose
+59,D,shape,,op-count evidence in study prose
+60,D,shape,,refusal wording in study prose
+61,C,shape,,decimal tie rounding in src/msf_string.c
+62,C,key,TB2,table generator tools/gen_tables.py whose output ships
+63,T,shape,TB2,string reference arm in tests/gen_vectors_str.py
+64,T,shape,,committed flag expectation
+65,C,key,TB5,run.sh control (gate script is tool source)
+66,D,shape,,README vector total
+67,D,shape,TB3,score stated in README prose
+68,D,shape,,README claims unlanded steps landed
+69,D,shape,,README attribute census
+70,D,shape,,README pow refusal wording
+71,C,shape,,rSqrt pole in src/msf_alg.c
+72,C,key,TB1,shape names a decider but the key puts the change in src/msf_alg.c
+73,T,shape,TB2,exact decider in tests/gen_vectors_alg.py
+74,C,key,TB2,claim token in tables/operations.tsv (feeds shipped tables)
+75,T,shape,,committed specials flag in a .vec
+76,C,shape,,hypot sign in src/msf_alg.c
+77,C,shape,,sticky bits in src/msf_alg.c
+78,T,shape,TB2,exact decider in tests/gen_vectors_alg.py
+79,C,key,TB2,tables/implemented.tsv row (feeds dispatch and coverage)
+80,T,shape,,committed specials expectation
+81,D,key,TB3,score in site/data.json (site claim surface)
+82,D,key,TB8,flag label literal in site/app.js
+83,D,shape,,site page claim
+84,D,key,,link path in README
+85,D,shape,,site page claim
+86,C,shape,,licence check in demo/fetch.py
+87,C,shape,,summary logic in demo/run_demo.sh
+88,T,shape,,expected hash file demo/expected-ias15.txt
+89,T,shape,,expected hash file demo/expected-kissfft.txt
+90,O,key,,.gitignore is repo config rather than source; closest class code
+91,D,shape,,TWIDDLES.md claim
+92,D,shape,TB3,census total in TWIDDLES.md prose
+93,D,shape,,TWIDDLES.md rule statement
+94,D,shape,,TWIDDLES.md precision statement
+95,D,shape,,link in docs/BOARD.md
+96,C,shape,,underflow cut in src/msf_math.c
+97,C,shape,,error-bound constants in src/msf_explog_tables.h
+98,T,shape,TB2,generator flag constant in tests/gen_vectors_explog.py
+99,C,key,TB2,tables/operations.tsv attribute (feeds shipped tables)
+100,T,shape,,committed vector flags
+101,C,shape,,compare in src/msf_math.c
+102,C,shape,,error bound in src/msf_explog_tables.h
+103,T,shape,TB2,generator flag constant in tests/gen_vectors_explog.py
+104,C,key,TB2,tables/implemented.tsv row
+105,T,shape,,committed vector flags
+106,C,shape,,RTTZ arm in src/msf_roundpack.c
+107,C,shape,,underflow flag in src/msf_aug.c
+108,C,shape,,zero-sum sign in src/msf_aug.c
+109,C,key,TB2,tables/operations.tsv attribute
+110,T,shape,,committed vector flags
+111,R,shape,TB4,token figure in docs/metrics/usage.jsonl and the totals built on it
+112,M,shape,TB4,model label in usage.jsonl
+113,M,shape,TB4,sent_back field in passes.jsonl
+114,M,shape,TB4,answered stamp in escalations.jsonl
+115,M,shape,TB4,base SHA in briefs.jsonl
+116,D,shape,,README headline count
+117,D,shape,,README claim
+118,D,key,TB3,count in site/data.json
+119,D,key,TB3,numbers table in site/data.json
+120,T,key,TB7,expected value in site/vectors-sample.json (a sample vector)
+121,D,shape,,README video spec
+122,D,key,TB3,count in site/data.json
+123,D,shape,,link in docs/BOARD.md
+124,D,key,TB9,prose comment stating an attribute count inside src/msf_math.c
+125,D,shape,,pin table in docs/BOARD.md
+126,C,shape,,guard mask in board/interval_workload.c
+127,C,shape,,aug_prod in board/interval_workload.c
+128,C,shape,,call site in board/interval_workload.c
+129,C,shape,,build list in board/interval_run.sh
+130,D,key,TB9,header comment in board/interval_workload.h
+131,C,shape,,CI step in ci.yml
+132,C,shape,,CI runs-on in ci.yml
+133,C,shape,,PATH guard in tools/run.sh
+134,C,shape,,nan control in tools/run.sh
+135,C,shape,,tag printing in tools/run.sh
+136,T,key,TB7,pinned expectation constant in examples/host/main.c
+137,T,shape,,expected.txt
+138,C,key,TB5,build.sh diff gate (tool source)
+139,C,shape,,CI step in ci.yml
+140,T,key,TB7,pinned expectation constant in examples/pico/main.c
+141,C,shape,,sanitize flavour in tools/run.sh
+142,T,key,TB5,canary program tests/sanitize_canary_ub.c is a fixture
+143,C,key,TB7,skip message logic in tools/run.sh
+144,C,shape,,flavour refusal in tools/run.sh
+145,C,shape,,CI job in ci.yml
+146,D,shape,,judge map claim in README
+147,D,shape,,judge map count in README
+148,D,shape,,judge reproduction step in README
+149,D,key,TB1,hash quoted in README prose
+150,T,shape,,expected file demo/expected-interval.txt
+151,C,key,TB1,duration table in video/assemble.py
+152,C,shape,,tempo scale in video/assemble.py
+153,C,key,TB1,BLOCKS audit data in video/segments/idea.py
+154,C,shape,,default in video/segments/intro_outro.py
+155,C,key,TB1,gate rank in video/segments/gitvisual.py
+156,C,key,TB1,card count literal in video/segments/gitvisual.py
+157,C,key,TB1,card count literal in video/segments/gitvisual.py
+158,C,key,TB1,card total literal in video/segments/gitvisual.py
+159,C,key,TB1,card total literal in video/segments/gitvisual.py
+160,C,key,TB1,word-budget text in video/segments/gitvisual.py
+161,C,shape,,scale in video/captions.py
+162,D,key,,caption text in assembly_v6.srt
+163,D,key,,INDEX.md row
+164,O,key,,generated caption file format (VTT timestamps); closest class claim in docs
+165,O,key,,generated caption timing overlap; closest class claim in docs
+166,R,shape,TB4,frozen token figure in usage.jsonl
+167,R,shape,TB4,token figure in usage.jsonl and the totals built on it
+168,M,shape,TB4,commit SHA in passes.jsonl
+169,M,shape,TB4,base SHA in briefs.jsonl
+170,M,shape,TB4,wave field in passes.jsonl
+171,D,key,,table median in docs/BENCH.md
+172,C,key,TB1,seed constant in board/bench_main.c
+173,D,shape,,disclaimer in docs/BENCH.md
+174,D,shape,,run label in docs/BENCH.md
+175,D,shape,,size figure in docs/BENCH.md
+176,C,shape,,CI job in ci.yml
+177,C,shape,,CI install list in ci.yml
+178,C,shape,,CI artifact name in ci.yml
+179,D,shape,,README names environment
+180,C,shape,,CI step in ci.yml
+181,D,shape,,README count
+182,D,shape,,README median
+183,D,shape,,README claim
+184,D,shape,TB1,hash quoted in README prose
+185,D,shape,,README image path
+186,D,shape,,BENCH.md table median
+187,D,shape,,README median
+188,D,shape,TB3,ratio table arithmetic in BENCH.md prose table
+189,C,key,TB1,seed constant in board/bench_main.c
+190,C,key,,legend labels in tools/bench_graphs.py
+191,D,shape,,caption hex in site/app.js
+192,D,key,TB7,deck entry operand in site/app.js against its caption
+193,D,shape,,caption claim in site/app.js
+194,C,key,TB8,site logic in site/app.js
+195,D,shape,,caption boolean in site/app.js

@@ -1,0 +1,211 @@
+{
+ "archive": "muse-study-ledger.zip",
+ "sha256": "bd515ef09b948634caea79023866abb7746287ff08e63780572fc6bdb790fd17",
+ "members": [
+  {
+   "path": "honestharness-muse-ledger/briefs/_common.md",
+   "bytes": 10638,
+   "sha256": "2533815702fce7ac1057f09ba7a60838109f75af2b2acc379b5f67c60bf65db3"
+  },
+  {
+   "path": "honestharness-muse-ledger/briefs/_verifier.md",
+   "bytes": 5528,
+   "sha256": "609db5e04560d41c3f92275f2e89324b260755d301180798cfe4a5da78a56817"
+  },
+  {
+   "path": "honestharness-muse-ledger/briefs/P1.md",
+   "bytes": 7230,
+   "sha256": "95669228cb23cf076b6ba5fe280b94c53149523aace98740cdb1c89c37e48d4e"
+  },
+  {
+   "path": "honestharness-muse-ledger/briefs/P2.md",
+   "bytes": 3898,
+   "sha256": "68573609464797ef44d183ea15887ce29ac0bd70a95e163809cd34facd9daadf"
+  },
+  {
+   "path": "honestharness-muse-ledger/briefs/P3.md",
+   "bytes": 3328,
+   "sha256": "34c31c1714b99f24739d12cb3797100a748d4e00bd634a330603f25ec8f3fdae"
+  },
+  {
+   "path": "honestharness-muse-ledger/briefs/verifier-C.md",
+   "bytes": 2885,
+   "sha256": "e1cb66c1073cf616cfa150ac0244dc47ee28be58bd67f1ed2a42eefd0b6a351b"
+  },
+  {
+   "path": "honestharness-muse-ledger/briefs/verifier-N.md",
+   "bytes": 2729,
+   "sha256": "5750c403cc9e6e63450d2cfa1270a1a712d67e3d75c9ebeb0daf5aa28965405d"
+  },
+  {
+   "path": "honestharness-muse-ledger/briefs/verifier-P1.md",
+   "bytes": 3082,
+   "sha256": "1012405a801468e5b208b8677992e582195ffb47edcb5b1f4141eb986ad88817"
+  },
+  {
+   "path": "honestharness-muse-ledger/briefs/verifier-P2.md",
+   "bytes": 3057,
+   "sha256": "7cc8e129a8754f5a0d71b4cef9d00cf7aca842b1ae9d4b5275f2c02e1e0baa0a"
+  },
+  {
+   "path": "honestharness-muse-ledger/briefs/verifier-P3.md",
+   "bytes": 2866,
+   "sha256": "14ca5a626290dd6047a128848de3ce16affd66204dfabb6d798d7a7bf6d2ae2f"
+  },
+  {
+   "path": "honestharness-muse-ledger/briefs/verifier-PL.md",
+   "bytes": 4253,
+   "sha256": "e146115f9273cf9a581711312256e3668b5a1238d78eff8aea685be83a9bfb33"
+  },
+  {
+   "path": "honestharness-muse-ledger/briefs/verifier-PL2.md",
+   "bytes": 3494,
+   "sha256": "4c705af74bd7edbb71083277a8f2b2ebcea0e05a7d2f4dd2b1988f2272837166"
+  },
+  {
+   "path": "honestharness-muse-ledger/briefs/verifier-R.md",
+   "bytes": 2734,
+   "sha256": "e92b420d827fae009a7077a1668537fc3d8ecf64b56873ce092e28f9d92318dd"
+  },
+  {
+   "path": "honestharness-muse-ledger/keys/key-P1.json",
+   "bytes": 2391,
+   "sha256": "432984d1199feaadd0ca9a24820a303f09354871d32c9df9092b2f379025b7fb"
+  },
+  {
+   "path": "honestharness-muse-ledger/keys/key-P2.json",
+   "bytes": 2563,
+   "sha256": "41375a312ab61885aece0e21f7912e19cafe2a0289166031056edd854c7b8343"
+  },
+  {
+   "path": "honestharness-muse-ledger/keys/key-P3.json",
+   "bytes": 2085,
+   "sha256": "f6229a1e19de376d59a6aa71dd98b3224fbd0fe502be2c63dc315074b5462ac9"
+  },
+  {
+   "path": "honestharness-muse-ledger/lead.md",
+   "bytes": 91748,
+   "sha256": "615063e3af09284636ce740fb0006c64c1a65349df5de60c20b0582d433d587e"
+  },
+  {
+   "path": "honestharness-muse-ledger/P1.md",
+   "bytes": 46883,
+   "sha256": "2f3e4b3f6409ddf53501d4adba8f55966a356ed48258aacc3407971ae5cb2807"
+  },
+  {
+   "path": "honestharness-muse-ledger/P2.md",
+   "bytes": 21856,
+   "sha256": "25cf7a2d6f9e0109ecc01f60d7d957895c6669260593b249cade4d6497fe29e2"
+  },
+  {
+   "path": "honestharness-muse-ledger/P3.md",
+   "bytes": 24340,
+   "sha256": "ed266c6120aaa5338ab315f534a5e51232d666158d2ffeb7bd1589dd9b6f2e98"
+  },
+  {
+   "path": "honestharness-muse-ledger/README.md",
+   "bytes": 5657,
+   "sha256": "262c952e7e1022ea77ca3c01d17d1cf99c653ac95b2f3b52c06f9f7627a7cd74"
+  },
+  {
+   "path": "honestharness-muse-ledger/reports/grading-wave1.md",
+   "bytes": 7519,
+   "sha256": "dece34b276380403f5d4ef23080c9309c0e1b7f4c491b8ff9628440c662e1d0d"
+  },
+  {
+   "path": "honestharness-muse-ledger/reports/P1.md",
+   "bytes": 1545,
+   "sha256": "3e4be932dbbe61050aac5ae6b2912502452f6dc599885a9fd7940651e8c441df"
+  },
+  {
+   "path": "honestharness-muse-ledger/reports/P2.md",
+   "bytes": 1447,
+   "sha256": "c698d2587e1a8efc4148f4860c2fe657636817825540f0e961ea990035d2c404"
+  },
+  {
+   "path": "honestharness-muse-ledger/reports/P3.md",
+   "bytes": 12096,
+   "sha256": "d42366e8015854d9e69f9f971c0bb8aca73adba7ef3c0ebf870f91cc57227ca7"
+  },
+  {
+   "path": "honestharness-muse-ledger/reports/verifier-C.md",
+   "bytes": 8977,
+   "sha256": "a8e7f7e0a4f4611709fe0635b749e7b23bef410478dd2665f6c1256c2c363c68"
+  },
+  {
+   "path": "honestharness-muse-ledger/reports/verifier-N.md",
+   "bytes": 7274,
+   "sha256": "b937b304e6448ab499bdb10b67bcfb606a443d5682d387b6218a14868e7620cd"
+  },
+  {
+   "path": "honestharness-muse-ledger/reports/verifier-P1.md",
+   "bytes": 7233,
+   "sha256": "a04305374ceda2ec85b2e768ac8457b5853505b7cd849d95c2309cfe97defc1f"
+  },
+  {
+   "path": "honestharness-muse-ledger/reports/verifier-P2.md",
+   "bytes": 8698,
+   "sha256": "e92464c1f88a08189be8cb549919ad0967fbd973871cdcc5cf9c4b2c22a1109a"
+  },
+  {
+   "path": "honestharness-muse-ledger/reports/verifier-P3.md",
+   "bytes": 9094,
+   "sha256": "981858474ab9a598d1fe734933b210c75c8a68a566fe076f71781b7ca8c9bbf5"
+  },
+  {
+   "path": "honestharness-muse-ledger/reports/verifier-PL.md",
+   "bytes": 8521,
+   "sha256": "e44ad57ec6d4973a07a4b0ebedbdac317c0d38059135d4f9494a59ff19ddcd7b"
+  },
+  {
+   "path": "honestharness-muse-ledger/reports/verifier-PL2.md",
+   "bytes": 4782,
+   "sha256": "adb0a358067d8a8afdcf971ae5343bf82b7203911e102850b510cb8fdc657e4c"
+  },
+  {
+   "path": "honestharness-muse-ledger/reports/verifier-R.md",
+   "bytes": 7868,
+   "sha256": "58fd4695dd6e82fc157a71c1e29eb4da0e619c01119ccdd7cef70c31439e4798"
+  },
+  {
+   "path": "honestharness-muse-ledger/verifier-C.md",
+   "bytes": 21310,
+   "sha256": "2bfb423c7f7fa5a2f52af24d191007b3b554773554f2ba7d79fb0f2694f36df3"
+  },
+  {
+   "path": "honestharness-muse-ledger/verifier-N.md",
+   "bytes": 16999,
+   "sha256": "107ffbf909d5601a8e28b09f836c0ebdd5aa8cd5178cea77efd8fe63812199b5"
+  },
+  {
+   "path": "honestharness-muse-ledger/verifier-P1.md",
+   "bytes": 21004,
+   "sha256": "a685c2ab57503f61017f304408312fbbe8834ed5e0e589423a2eab48e9655fc8"
+  },
+  {
+   "path": "honestharness-muse-ledger/verifier-P2.md",
+   "bytes": 17183,
+   "sha256": "30075d441fb733618d790a5b49f4aae042e1d88ca2e54de466e5ed01ca28afe2"
+  },
+  {
+   "path": "honestharness-muse-ledger/verifier-P3.md",
+   "bytes": 19641,
+   "sha256": "b538d6c82fbcc4083bc01560f8d5fc24d8811aaeb2105bec9451733f89baaff3"
+  },
+  {
+   "path": "honestharness-muse-ledger/verifier-PL.md",
+   "bytes": 11309,
+   "sha256": "9dc679344894c23e713a62e8040582f2d2096755d702f3d3c220d509aaafc9b2"
+  },
+  {
+   "path": "honestharness-muse-ledger/verifier-PL2.md",
+   "bytes": 10044,
+   "sha256": "5e4c614f08faaef647ff353f9267b48467eec763054c357f0c3b01e510bd6c7a"
+  },
+  {
+   "path": "honestharness-muse-ledger/verifier-R.md",
+   "bytes": 17726,
+   "sha256": "11d40e06c94a580af6b1c23b0633802e175d6441b7c631317099de5b5d07f321"
+  }
+ ]
+}

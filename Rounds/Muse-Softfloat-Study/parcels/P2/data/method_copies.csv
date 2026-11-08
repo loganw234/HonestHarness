@@ -1,0 +1,7 @@
+method,file,result,source_lines,kit_lines,diff
+parcelround,METHOD.md,differs,1448,1448,"+24/-24; first hunk @@ -107,2 +107,2 @@"
+parcelround,ADOPTION.md,identical,180,180,
+honest,METHOD.md,differs,873,873,+1/-1; first hunk @@ -248 +248 @@
+honest,ADOPTING.md,identical,200,200,
+honest,WITH-PARCELROUND.md,differs,116,116,+1/-1; first hunk @@ -3 +3 @@
+honest,FAILURE-MODES.md,differs,377,377,+1/-1; first hunk @@ -352 +352 @@

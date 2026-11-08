@@ -1,0 +1,196 @@
+row,wave,verifier,plant,key_prefix,shape,altered_file,class,basis,tiebreak,path_rule_agrees,path_rule_class,reason
+1,wave1,verifier-w1f32,1,71ef8ff1,a mandatory exception flag dropped on one path,src/msf32.c,code,shape,,yes,,exception flag dropped on a path in src/msf32.c
+2,wave1,verifier-w1f32,2,71ef8ff1,the effective (negated) sign ignored on an infinity fast path,src/msf32.c,code,shape,,yes,,sign handling on an infinity fast path in src/msf32.c
+3,wave1,verifier-w1f32,3,71ef8ff1,exponent bookkeeping off by one,src/msf32.c,code,shape,,yes,,exponent bookkeeping in src/msf32.c
+4,wave1,verifier-w1f32,4,71ef8ff1,a committed vector expectation corrupted,tests/vectors/arith-f32.vec,test data,shape,,yes,,committed vector expectation in tests/vectors
+5,wave1,verifier-w1f32,5,71ef8ff1,a boundary value quietly weakened in the generator pool,tests/gen_vectors_f32.py,test data,shape,TB2,yes,,generator pool in tests/gen_vectors_f32.py feeds vectors only
+6,wave1,verifier-w1f64,1,e6bbc65c,a mandatory exception flag dropped on one path,src/msf64.c,code,shape,,yes,,exception flag dropped in src/msf64.c
+7,wave1,verifier-w1f64,2,e6bbc65c,the signed-zero rule inverted,src/msf64.c,code,shape,,yes,,signed-zero rule in src/msf64.c
+8,wave1,verifier-w1f64,3,e6bbc65c,an opposite-infinities invalid test inverted,src/msf64.c,code,key,TB1,yes,,shape reads like a test but the key puts the change in src/msf64.c
+9,wave1,verifier-w1f64,4,e6bbc65c,a committed vector flag expectation corrupted,tests/vectors/arith-f64.vec,test data,shape,,yes,,committed vector flag expectation
+10,wave1,verifier-w1f64,5,e6bbc65c,a flag-bit constant wrong in the reference generator,tests/gen_vectors_f64.py,test data,shape,TB2,yes,,reference generator constant in tests/gen_vectors_f64.py
+11,wave2,verifier-w2f16,1,824cb884,a mandatory exception flag dropped on one path,src/msf16.c,code,shape,,yes,,exception flag dropped in src/msf16.c
+12,wave2,verifier-w2f16,2,824cb884,the effective (negated) sign ignored on an infinity fast path,src/msf16.c,code,shape,,yes,,sign handling in src/msf16.c
+13,wave2,verifier-w2f16,3,824cb884,exponent bookkeeping off by one,src/msf16.c,code,shape,,yes,,exponent bookkeeping in src/msf16.c
+14,wave2,verifier-w2f16,4,824cb884,a committed vector expectation corrupted,tests/vectors/arith-f16.vec,test data,shape,,yes,,committed vector expectation
+15,wave2,verifier-w2f16,5,824cb884,a boundary value quietly weakened in the generator pool,tests/gen_vectors_f16.py,test data,shape,TB2,yes,,generator pool in tests/gen_vectors_f16.py
+16,wave2,verifier-w2xf,1,c589a477,a wrapper decodes a source in the wrong format,src/msf32.c,code,shape,,yes,,wrapper format decode in src/msf32.c
+17,wave2,verifier-w2xf,2,c589a477,the addend of one fused operation decoded in the wrong format,src/msf32.c,code,shape,,yes,,fused-op addend decode in src/msf32.c
+18,wave2,verifier-w2xf,3,c589a477,a signaling predicate made quiet,src/msf64.c,code,shape,,yes,,signaling predicate in src/msf64.c
+19,wave2,verifier-w2xf,4,c589a477,a committed vector expectation corrupted,tests/vectors/arith-xf.vec,test data,shape,,yes,,committed vector expectation
+20,wave2,verifier-w2xf,5,c589a477,a directed-pool payload constant altered in the generator,tests/gen_vectors_xf.py,test data,shape,TB2,yes,,generator payload constant in tests/gen_vectors_xf.py
+21,wave3,verifier-w3str,1,63fe450a,decimal ties always round away from zero,src/msf_string.c,code,shape,,yes,,decimal ties rounding in src/msf_string.c
+22,wave3,verifier-w3str,2,63fe450a,consumed undercounts one accepted spelling,src/msf_string.c,code,shape,,yes,,consumed-count logic in src/msf_string.c
+23,wave3,verifier-w3str,3,63fe450a,hex fraction scaled by the wrong power of two,src/msf_string.c,code,shape,,yes,,hex fraction scaling in src/msf_string.c
+24,wave3,verifier-w3str,4,63fe450a,a committed vector expectation corrupted,tests/vectors/from-decimal-str.vec,test data,shape,,yes,,committed vector expectation
+25,wave3,verifier-w3str,5,63fe450a,a directed-pool literal altered in the generator,tests/gen_vectors_str.py,test data,shape,TB2,yes,,generator literal in tests/gen_vectors_str.py
+26,wave4,verifier-w4seam,1,80c99a9b,a reserved claim token admitted before its gate exists,tools/gen_tables.py,code,key,TB2,yes,,claim-token gate in tools/gen_tables.py (generator whose output ships)
+27,wave4,verifier-w4seam,2,80c99a9b,one minmax family loses its flags pointer in the table,tables/operations.tsv,code,key,TB2,yes,,flags pointer in tables/operations.tsv which feeds shipped tables
+28,wave4,verifier-w4seam,3,80c99a9b,registered Tier 2 freeze weakened from equality to a floor,tools/run.sh,code,key,TB5,yes,,freeze check in tools/run.sh (gate script is tool source)
+29,wave4,verifier-w4seam,4,80c99a9b,one generated coverage authority altered by hand,docs/COVERAGE.tsv,metadata or provenance,shape,TB4,no,D,authority label in generated docs/COVERAGE.tsv (berkeley vs mpfr-exact)
+30,wave4,verifier-w4seam,5,80c99a9b,documented provenance cap disagrees with the runner,tests/VECTORS.md,claim in docs,key,TB1,yes,,provenance cap stated in tests/VECTORS.md (prose); the runner is the truth
+31,wave4,verifier-w4minmax,1,0483c3c4,Number forms signal invalid for the wrong NaN class,src/msf_performat.inc,code,shape,,yes,,NaN-class invalid signalling in src/msf_performat.inc
+32,wave4,verifier-w4minmax,2,0483c3c4,signed-zero ordering reversed in value comparison,src/msf_performat.inc,code,shape,,yes,,signed-zero ordering in src/msf_performat.inc
+33,wave4,verifier-w4minmax,3,0483c3c4,payload setters swap the quiet and signaling encodings,src/msf_performat.inc,code,shape,,yes,,payload setter encodings in src/msf_performat.inc
+34,wave4,verifier-w4minmax,4,0483c3c4,reference generator rejects the maximum admissible payload,tests/gen_vectors_tier2.py,test data,shape,TB2,yes,,reference generator tests/gen_vectors_tier2.py
+35,wave4,verifier-w4minmax,5,0483c3c4,one committed getPayload expectation corrupted,tests/vectors/payload-f16.vec,test data,shape,,yes,,committed getPayload expectation
+36,wave4,verifier-w4interval,1,4fd3df3b,lower endpoints rounded to nearest instead of downward,board/interval_workload.c,code,shape,,yes,,rounding direction in board/interval_workload.c
+37,wave4,verifier-w4interval,2,4fd3df3b,stage-3 proof guard no longer trips on overflow,board/interval_workload.c,code,shape,,yes,,proof guard in board/interval_workload.c
+38,wave4,verifier-w4interval,3,4fd3df3b,a banned Number form enters the containment path,board/interval_workload.c,code,shape,,yes,,banned Number form in board/interval_workload.c
+39,wave4,verifier-w4interval,4,4fd3df3b,exact discriminant oracle adds instead of subtracts,tests/gen_interval_catalogue.py,test data,shape,TB2,yes,,exact oracle in tests/gen_interval_catalogue.py
+40,wave4,verifier-w4interval,5,4fd3df3b,one frozen catalogue exact decision corrupted,tests/interval_catalogue.tsv,test data,shape,,yes,,frozen catalogue row in tests/interval_catalogue.tsv
+41,wave4,verifier-w4trig,1,ec0d8227,cosPi half-integer zero takes the sign of x,src/msf_math.c,code,shape,,yes,,sign of zero in src/msf_math.c
+42,wave4,verifier-w4trig,2,ec0d8227,nearest-integer remainder sign dropped from sinPi result sign,src/msf_math.c,code,shape,,yes,,result sign in src/msf_math.c
+43,wave4,verifier-w4trig,3,ec0d8227,stage-1 error interval narrowed far inside its proven bound,src/msf_trig_tables.h,code,shape,,yes,,error-interval constant in src/msf_trig_tables.h
+44,wave4,verifier-w4trig,4,ec0d8227,sine coefficient generator uses the wrong factorial,tools/gen_trig_tables.py,code,key,TB2,yes,,coefficient generator tools/gen_trig_tables.py whose output ships
+45,wave4,verifier-w4trig,5,ec0d8227,one committed special-case flag expectation corrupted,tests/vectors/trig-f64.vec,test data,shape,,yes,,committed flag expectation in trig-f64.vec
+46,wave4,verifier-w4kissfft,1,0cdba979,sinpi wrapper calls the cosine core entry,compat/msf_aeabi.c,code,shape,,yes,,wrapper calls wrong core in compat/msf_aeabi.c
+47,wave4,verifier-w4kissfft,2,0cdba979,firmware input generator constant differs from the host by one,board/kissfft_main.c,code,shape,,yes,,firmware input generator constant in board/kissfft_main.c
+48,wave4,verifier-w4kissfft,3,0cdba979,guarded KissFFT target builds without its scratch tree,board/CMakeLists.txt,code,shape,,yes,,CMake guard in board/CMakeLists.txt
+49,wave4,verifier-w4kissfft,4,0cdba979,exact-angle twiddle claim widened past the gated sizes,docs/BOARD.md,claim in docs,shape,,yes,,claim in docs/BOARD.md
+50,wave4,verifier-w4kissfft,5,0cdba979,board host compares row counts but not hash contents,board/kissfft_host.py,code,shape,,yes,,board host script board/kissfft_host.py
+51,readme,verifier-readme,1,e356f249,instantiation total inflated beyond the inventory (833 of 822),README.md,claim in docs,shape,,yes,,README count
+52,readme,verifier-readme,2,e356f249,planted-verification score rounded up to perfect (50 of 50),README.md,claim in docs,shape,TB3,yes,,score stated in README prose
+53,readme,verifier-readme,3,e356f249,Fork B named change erased toward an unmodified-KissFFT claim,README.md,claim in docs,shape,,yes,,README claim about Fork B
+54,readme,verifier-readme,4,e356f249,37-function count and pow/powr refusal quietly dropped,README.md,claim in docs,shape,,yes,,README list of refused functions
+55,readme,verifier-readme,5,e356f249,"committed vector count inflated tenfold (1,463,946)",README.md,claim in docs,shape,,yes,,README vector count
+56,wave5,verifier-sf2,1,a90480af,closure inventory arithmetic inflated (855 for 849),docs/studies/SF-2.md,claim in docs,shape,TB3,yes,,arithmetic inside docs/studies/SF-2.md (prose)
+57,wave5,verifier-sf2,2,a90480af,existing internal ties-to-away mode denied,docs/studies/SF-2.md,claim in docs,shape,,yes,,study claim about an internal mode
+58,wave5,verifier-sf2,3,a90480af,owner pin P1 flipped R2 to R1,docs/studies/SF-2.md,claim in docs,shape,TB6,yes,,owner pin recorded in study prose
+59,wave5,verifier-sf2,4,a90480af,"augmented op-count evidence inflated (594,666 for 394,666)",docs/studies/SF-2.md,claim in docs,shape,,yes,,op-count evidence in study prose
+60,wave5,verifier-sf2,5,a90480af,refused pow/powr softened to a priced deferral,docs/studies/SF-2.md,claim in docs,shape,,yes,,refusal wording in study prose
+61,wave5,verifier-w5attr,1,c6ac1bec,decimal ties-to-away drops exact ties,src/msf_string.c,code,shape,,yes,,decimal tie rounding in src/msf_string.c
+62,wave5,verifier-w5attr,2,c6ac1bec,public attribute value no longer matches internal mode 4,tools/gen_tables.py,code,key,TB2,yes,,table generator tools/gen_tables.py whose output ships
+63,wave5,verifier-w5attr,3,c6ac1bec,string reference ties-to-away arm drops ties,tests/gen_vectors_str.py,test data,shape,TB2,yes,,string reference arm in tests/gen_vectors_str.py
+64,wave5,verifier-w5attr,4,c6ac1bec,one relabeled trig flag expectation corrupted,tests/vectors/trig-f64.vec,test data,shape,,yes,,committed flag expectation
+65,wave5,verifier-w5attr,5,c6ac1bec,te/ta wrong-mode control can no longer fail,tools/run.sh,code,key,TB5,yes,,run.sh control (gate script is tool source)
+66,readme,verifier-readme2,1,bc51f2ba,"committed vector total inflated (196,404)",README.md,claim in docs,shape,,yes,,README vector total
+67,readme,verifier-readme2,2,bc51f2ba,plant score rounded up to perfect (65 of 65),README.md,claim in docs,shape,TB3,yes,,score stated in README prose
+68,readme,verifier-readme2,3,bc51f2ba,unlanded steps claimed as landed,README.md,claim in docs,shape,,yes,,README claims unlanded steps landed
+69,readme,verifier-readme2,4,bc51f2ba,attribute row census inflated to whole inventory (822 for 255),README.md,claim in docs,shape,,yes,,README attribute census
+70,readme,verifier-readme2,5,bc51f2ba,pow refusal softened to a pricing,README.md,claim in docs,shape,,yes,,README pow refusal wording
+71,wave5,verifier-w5alg1,1,d85e64c8,rSqrt(-0) pole delivers +inf instead of -inf,src/msf_alg.c,code,shape,,yes,,rSqrt pole in src/msf_alg.c
+72,wave5,verifier-w5alg1,2,d85e64c8,exact square comparison result inverted,src/msf_alg.c,code,key,TB1,yes,,shape names a decider but the key puts the change in src/msf_alg.c
+73,wave5,verifier-w5alg1,3,d85e64c8,exact decider drops smallest-normal boundary results,tests/gen_vectors_alg.py,test data,shape,TB2,yes,,exact decider in tests/gen_vectors_alg.py
+74,wave5,verifier-w5alg1,4,d85e64c8,refused claim token C-ULP admitted for a Tier 2 row,tables/operations.tsv,code,key,TB2,yes,,claim token in tables/operations.tsv (feeds shipped tables)
+75,wave5,verifier-w5alg1,5,d85e64c8,divideByZero flag stripped from a specials vector,tests/vectors/alg-f64.vec,test data,shape,,yes,,committed specials flag in a .vec
+76,wave5,verifier-w5alg2,1,25041ecd,"hypot(-0,-0) delivers -0 instead of +0",src/msf_alg.c,code,shape,,yes,,hypot sign in src/msf_alg.c
+77,wave5,verifier-w5alg2,2,25041ecd,tail and parity sticky dropped from the pack input,src/msf_alg.c,code,shape,,yes,,sticky bits in src/msf_alg.c
+78,wave5,verifier-w5alg2,3,25041ecd,exact decider drops inexact below the midpoint,tests/gen_vectors_alg.py,test data,shape,TB2,yes,,exact decider in tests/gen_vectors_alg.py
+79,wave5,verifier-w5alg2,4,25041ecd,binary32 hypot silently unimplemented (parity break),tables/implemented.tsv,code,key,TB2,yes,,tables/implemented.tsv row (feeds dispatch and coverage)
+80,wave5,verifier-w5alg2,5,25041ecd,one specials expectation sign-flipped,tests/vectors/alg-f16.vec,test data,shape,,yes,,committed specials expectation
+81,site,verifier-w5site,1,5a4c8a2c,plant score inflated to perfect in data.json,site/data.json,claim in docs,key,TB3,yes,,score in site/data.json (site claim surface)
+82,site,verifier-w5site,2,5a4c8a2c,underflow and inexact flag labels swapped,site/app.js,claim in docs,key,TB8,no,C or D (TB8),flag label literal in site/app.js
+83,site,verifier-w5site,3,5a4c8a2c,Fork B patch erased toward unmodified-KissFFT claim,site/index.html,claim in docs,shape,,yes,,site page claim
+84,site,verifier-w5site,4,5a4c8a2c,Pages URL path wrong (underscore project name),README.md,claim in docs,key,,yes,,link path in README
+85,site,verifier-w5site,5,5a4c8a2c,in-progress steps claimed landed,site/index.html,claim in docs,shape,,yes,,site page claim
+86,site,verifier-w5demo,1,5caf7fdb,licence hash verification bypassed,demo/fetch.py,code,shape,,yes,,licence check in demo/fetch.py
+87,site,verifier-w5demo,2,5caf7fdb,summary PASS regardless of workload results,demo/run_demo.sh,code,shape,,yes,,summary logic in demo/run_demo.sh
+88,site,verifier-w5demo,3,5caf7fdb,final IAS15 state hash corrupted,demo/expected-ias15.txt,test data,shape,,yes,,expected hash file demo/expected-ias15.txt
+89,site,verifier-w5demo,4,5caf7fdb,one expected KissFFT hash corrupted,demo/expected-kissfft.txt,test data,shape,,yes,,expected hash file demo/expected-kissfft.txt
+90,site,verifier-w5demo,5,5caf7fdb,download cache no longer ignored (tracking guard),.gitignore,other,key,,no,?,.gitignore is repo config rather than source; closest class code
+91,wave5,verifier-w5twiddledoc,1,2cf0f2c7,ungated N=256 inverse coverage claimed,docs/TWIDDLES.md,claim in docs,shape,,yes,,TWIDDLES.md claim
+92,wave5,verifier-w5twiddledoc,2,2cf0f2c7,field census total inflated,docs/TWIDDLES.md,claim in docs,shape,TB3,yes,,census total in TWIDDLES.md prose
+93,wave5,verifier-w5twiddledoc,3,2cf0f2c7,never-unmodified rule inverted,docs/TWIDDLES.md,claim in docs,shape,,yes,,TWIDDLES.md rule statement
+94,wave5,verifier-w5twiddledoc,4,2cf0f2c7,decider precision halved in the record,docs/TWIDDLES.md,claim in docs,shape,,yes,,TWIDDLES.md precision statement
+95,wave5,verifier-w5twiddledoc,5,2cf0f2c7,retained-derivation link broken,docs/BOARD.md,claim in docs,shape,,yes,,link in docs/BOARD.md
+96,wave5,verifier-w5exp2,1,8e186bd5,underflow cut swallows the exact tie input,src/msf_math.c,code,shape,,yes,,underflow cut in src/msf_math.c
+97,wave5,verifier-w5exp2,2,8e186bd5,stage-3 error bound narrowed past its proof,src/msf_explog_tables.h,code,shape,,yes,,error-bound constants in src/msf_explog_tables.h
+98,wave5,verifier-w5exp2,3,8e186bd5,generator inexact flag bit wrong,tests/gen_vectors_explog.py,test data,shape,TB2,yes,,generator flag constant in tests/gen_vectors_explog.py
+99,wave5,verifier-w5exp2,4,8e186bd5,exp2m1 row claims no exception flags,tables/operations.tsv,code,key,TB2,yes,,tables/operations.tsv attribute (feeds shipped tables)
+100,wave5,verifier-w5exp2,5,8e186bd5,inexact fabricated on an exact specials vector,tests/vectors/explog-f64.vec,test data,shape,,yes,,committed vector flags
+101,wave5,verifier-w5log2,1,d5ff8180,recentring compare widened past the exact square boundary,src/msf_math.c,code,shape,,yes,,compare in src/msf_math.c
+102,wave5,verifier-w5log2,2,d5ff8180,binary64 log error bound narrowed past its proof,src/msf_explog_tables.h,code,shape,,yes,,error bound in src/msf_explog_tables.h
+103,wave5,verifier-w5log2,3,d5ff8180,generator underflow flag bit wrong,tests/gen_vectors_explog.py,test data,shape,TB2,yes,,generator flag constant in tests/gen_vectors_explog.py
+104,wave5,verifier-w5log2,4,d5ff8180,implemented row drops the fifth attribute,tables/implemented.tsv,code,key,TB2,yes,,tables/implemented.tsv row
+105,wave5,verifier-w5log2,5,d5ff8180,pole divide-by-zero stripped from committed vector,tests/vectors/explog-f64.vec,test data,shape,,yes,,committed vector flags
+106,wave5,verifier-w5aug,1,ef5f9bd6,RTTZ arm rounds ties to even,src/msf_roundpack.c,code,shape,,yes,,RTTZ arm in src/msf_roundpack.c
+107,wave5,verifier-w5aug,2,ef5f9bd6,underflow dropped in the one inexact mul cell,src/msf_aug.c,code,shape,,yes,,underflow flag in src/msf_aug.c
+108,wave5,verifier-w5aug,3,ef5f9bd6,exact-zero sum sign takes either operand,src/msf_aug.c,code,shape,,yes,,zero-sum sign in src/msf_aug.c
+109,wave5,verifier-w5aug,4,ef5f9bd6,caller rounding attribute claimed for a fixed-rounding op,tables/operations.tsv,code,key,TB2,yes,,tables/operations.tsv attribute
+110,wave5,verifier-w5aug,5,ef5f9bd6,R1 flags fabricated on an exact tiny residual,tests/vectors/aug-f64.vec,test data,shape,,yes,,committed vector flags
+111,wave5,verifier-w5metrics,1,8a5c7589,session output tokens inflated by 50000,docs/metrics/usage.jsonl,record arithmetic,shape,TB4,no,metrics file (M or R by what is altered),token figure in docs/metrics/usage.jsonl and the totals built on it
+112,wave5,verifier-w5metrics,2,8a5c7589,spark verifier relabeled to the lead model,docs/metrics/usage.jsonl,metadata or provenance,shape,TB4,no,metrics file (M or R by what is altered),model label in usage.jsonl
+113,wave5,verifier-w5metrics,3,8a5c7589,planted-copy verdict misrecorded as a send-back,docs/metrics/passes.jsonl,metadata or provenance,shape,TB4,no,metrics file (M or R by what is altered),sent_back field in passes.jsonl
+114,wave5,verifier-w5metrics,4,8a5c7589,answered stamp fabricated where none was sourced,docs/metrics/escalations.jsonl,metadata or provenance,shape,TB4,no,metrics file (M or R by what is altered),answered stamp in escalations.jsonl
+115,wave5,verifier-w5metrics,5,8a5c7589,restored briefs row cites a nonexistent base commit,docs/metrics/briefs.jsonl,metadata or provenance,shape,TB4,no,metrics file (M or R by what is altered),base SHA in briefs.jsonl
+116,wave5,verifier-w5readme3,1,17ae218e,headline instantiation count inflated by ten,README.md,claim in docs,shape,,yes,,README headline count
+117,wave5,verifier-w5readme3,2,17ae218e,augmented op-count benefit claimed as shipped,README.md,claim in docs,shape,,yes,,README claim
+118,wave5,verifier-w5readme3,3,17ae218e,site claims every plant ever caught,site/data.json,claim in docs,key,TB3,yes,,count in site/data.json
+119,wave5,verifier-w5readme3,4,17ae218e,augmented pair exclusion erased from the numbers table,site/data.json,claim in docs,key,TB3,yes,,numbers table in site/data.json
+120,wave5,verifier-w5readme3,5,17ae218e,site sample exp2(0) expectation off by one ulp,site/vectors-sample.json,test data,key,TB7,no,D,expected value in site/vectors-sample.json (a sample vector)
+121,polish,verifier-polish1,1,26c14c81,current video master specs reverted to the old cut,README.md,claim in docs,shape,,yes,,README video spec
+122,polish,verifier-polish1,2,26c14c81,site claims every plant ever caught,site/data.json,claim in docs,key,TB3,yes,,count in site/data.json
+123,polish,verifier-polish1,3,26c14c81,broken same-directory link reintroduced,docs/BOARD.md,claim in docs,shape,,yes,,link in docs/BOARD.md
+124,polish,verifier-polish1,4,26c14c81,rounding attribute count reverted to four,src/msf_math.c,claim in docs,key,TB9,no,C,prose comment stating an attribute count inside src/msf_math.c
+125,polish,verifier-polish1,5,26c14c81,clone and Pico LED pins swapped,docs/BOARD.md,claim in docs,shape,,yes,,pin table in docs/BOARD.md
+126,wave6,verifier-w6augint,1,fb244b52,guard no longer trips on inexact augmented pairs,board/interval_workload.c,code,shape,,yes,,guard mask in board/interval_workload.c
+127,wave6,verifier-w6augint,2,fb244b52,product head replaced by its tail in aug_prod,board/interval_workload.c,code,shape,,yes,,aug_prod in board/interval_workload.c
+128,wave6,verifier-w6augint,3,fb244b52,product head and tail swapped at the call site,board/interval_workload.c,code,shape,,yes,,call site in board/interval_workload.c
+129,wave6,verifier-w6augint,4,fb244b52,msf_aug.c dropped from the interval host build list,board/interval_run.sh,code,shape,,yes,,build list in board/interval_run.sh
+130,wave6,verifier-w6augint,5,fb244b52,header states the opposite of the P1=R2 guard semantics,board/interval_workload.h,claim in docs,key,TB9,no,C,header comment in board/interval_workload.h
+131,wave6,verifier-w6ci,1,c33726a7,standard CI job silently runs only the smoke budget,.github/workflows/ci.yml,code,shape,,yes,,CI step in ci.yml
+132,wave6,verifier-w6ci,2,c33726a7,"standard job moved off Linux, defeating the parcel purpose",.github/workflows/ci.yml,code,shape,,yes,,CI runs-on in ci.yml
+133,wave6,verifier-w6ci,3,c33726a7,MSYS2 PATH guard inverted,tools/run.sh,code,shape,,yes,,PATH guard in tools/run.sh
+134,wave6,verifier-w6ci,4,c33726a7,CRLF last-field bug reintroduced in the nan control,tools/run.sh,code,shape,,yes,,nan control in tools/run.sh
+135,wave6,verifier-w6ci,5,c33726a7,expect-count provenance tags printed CR-carrying again,tools/run.sh,code,shape,,yes,,tag printing in tools/run.sh
+136,wave6,verifier-w6examples,1,c9625a57,host example pinned 1/10 expectation off by one ulp,examples/host/main.c,test data,key,TB7,no,?,pinned expectation constant in examples/host/main.c
+137,wave6,verifier-w6examples,2,c9625a57,committed expected output wrong on an exact product,examples/host/expected.txt,test data,shape,,yes,,expected.txt
+138,wave6,verifier-w6examples,3,c9625a57,host build passes even when stdout differs,examples/host/build.sh,code,key,TB5,yes,,build.sh diff gate (tool source)
+139,wave6,verifier-w6examples,4,c9625a57,CI regenerates the expectation instead of enforcing it,.github/workflows/ci.yml,code,shape,,yes,,CI step in ci.yml
+140,wave6,verifier-w6examples,5,c9625a57,pico example expectation diverges from the host mirror,examples/pico/main.c,test data,key,TB7,no,?,pinned expectation constant in examples/pico/main.c
+141,wave6,verifier-w6sanitize,1,be4c5af0,trap flavour made recoverable: findings print and exit 0,tools/run.sh,code,shape,,yes,,sanitize flavour in tools/run.sh
+142,wave6,verifier-w6sanitize,2,be4c5af0,UB canary no longer overflows,tests/sanitize_canary_ub.c,test data,key,TB5,no,?,canary program tests/sanitize_canary_ub.c is a fixture
+143,wave6,verifier-w6sanitize,3,be4c5af0,runtime-absent skip claims a clean PASS,tools/run.sh,code,key,TB7,yes,,skip message logic in tools/run.sh
+144,wave6,verifier-w6sanitize,4,be4c5af0,flavour refusal inverted: sanitize budget itself refused when set,tools/run.sh,code,shape,,yes,,flavour refusal in tools/run.sh
+145,wave6,verifier-w6sanitize,5,be4c5af0,CI sanitize job never runs the address flavour,.github/workflows/ci.yml,code,shape,,yes,,CI job in ci.yml
+146,wave6,verifier-w6judgemap,1,4dcf5c2a,judge map gives the old cut's specs for the current film,README.md,claim in docs,shape,,yes,,judge map claim in README
+147,wave6,verifier-w6judgemap,2,4dcf5c2a,map claims every plant ever caught,README.md,claim in docs,shape,,yes,,judge map count in README
+148,wave6,verifier-w6judgemap,3,4dcf5c2a,judge reproduction step demands the physical board,README.md,claim in docs,shape,,yes,,judge reproduction step in README
+149,wave6,verifier-w6judgemap,4,4dcf5c2a,map quotes the pre-augint interval hash as current,README.md,claim in docs,key,TB1,yes,,hash quoted in README prose
+150,wave6,verifier-w6judgemap,5,4dcf5c2a,demo interval expectation off by one hex digit,demo/expected-interval.txt,test data,shape,,yes,,expected file demo/expected-interval.txt
+151,wave6,verifier-w6filmretime,1,e3314462,assembly duration table keeps the pre-retime why length,video/assemble.py,code,key,TB1,yes,,duration table in video/assemble.py
+152,wave6,verifier-w6filmretime,2,e3314462,assembly tempo scale is a no-op; cut would run 185 s over the cap,video/assemble.py,code,shape,,yes,,tempo scale in video/assemble.py
+153,wave6,verifier-w6filmretime,3,e3314462,idea BLOCKS audit ends the question beat at its own start,video/segments/idea.py,code,key,TB1,yes,,BLOCKS audit data in video/segments/idea.py
+154,wave6,verifier-w6filmretime,4,e3314462,phone-camera supersampling defaults off despite the SS=2 record,video/segments/intro_outro.py,code,shape,,yes,,default in video/segments/intro_outro.py
+155,wave6,verifier-w6filmretime,5,e3314462,kissfft gate holds one rank past its merge,video/segments/gitvisual.py,code,key,TB1,yes,,gate rank in video/segments/gitvisual.py
+156,wave6,verifier-w6popups,1,9e0d129d,parcels card counts the lead spine pass as a parcel,video/segments/gitvisual.py,code,key,TB1,yes,,card count literal in video/segments/gitvisual.py
+157,wave6,verifier-w6popups,2,9e0d129d,verifiers card carries the studies count,video/segments/gitvisual.py,code,key,TB1,yes,,card count literal in video/segments/gitvisual.py
+158,wave6,verifier-w6popups,3,9e0d129d,plants card uses the post-freeze HEAD total,video/segments/gitvisual.py,code,key,TB1,yes,,card total literal in video/segments/gitvisual.py
+159,wave6,verifier-w6popups,4,9e0d129d,gates card transposes digits in the standard extras total,video/segments/gitvisual.py,code,key,TB1,yes,,card total literal in video/segments/gitvisual.py
+160,wave6,verifier-w6popups,5,9e0d129d,studies card breaks its word budget; dwell and downstream timings move,video/segments/gitvisual.py,code,key,TB1,yes,,word-budget text in video/segments/gitvisual.py
+161,wave6,verifier-w6captions,1,339c61fc,tempo scale inverted; regenerated cues drift and overrun the film,video/captions.py,code,shape,,yes,,scale in video/captions.py
+162,wave6,verifier-w6captions,2,339c61fc,caption text differs from the on-screen message,video/out/assembly_v6.srt,claim in docs,key,,no,?,caption text in assembly_v6.srt
+163,wave6,verifier-w6captions,3,339c61fc,INDEX still time disagrees with filename and recomputation,video/out/stills_v6/INDEX.md,claim in docs,key,,yes,,INDEX.md row
+164,wave6,verifier-w6captions,4,339c61fc,VTT timestamps use SRT commas,video/out/assembly_v6.vtt,other,key,,no,?,generated caption file format (VTT timestamps); closest class claim in docs
+165,wave6,verifier-w6captions,5,339c61fc,one cue overruns into the following beats,video/out/assembly_v6.srt,other,key,,no,?,generated caption timing overlap; closest class claim in docs
+166,wave6,verifier-w6metrics,1,beff2b21,frozen wave0 usage row edited; append-only prefix broken,docs/metrics/usage.jsonl,record arithmetic,shape,TB4,no,metrics file (M or R by what is altered),frozen token figure in usage.jsonl
+167,wave6,verifier-w6metrics,2,beff2b21,appended usage row inflated; totals no longer reconcile,docs/metrics/usage.jsonl,record arithmetic,shape,TB4,no,metrics file (M or R by what is altered),token figure in usage.jsonl and the totals built on it
+168,wave6,verifier-w6metrics,3,beff2b21,passes row cites a commit that does not exist,docs/metrics/passes.jsonl,metadata or provenance,shape,TB4,no,metrics file (M or R by what is altered),commit SHA in passes.jsonl
+169,wave6,verifier-w6metrics,4,beff2b21,briefs row base disagrees with its brief,docs/metrics/briefs.jsonl,metadata or provenance,shape,TB4,no,metrics file (M or R by what is altered),base SHA in briefs.jsonl
+170,wave6,verifier-w6metrics,5,beff2b21,wave6 verifier pass mislabelled wave5; per-wave tables break,docs/metrics/passes.jsonl,metadata or provenance,shape,TB4,no,metrics file (M or R by what is altered),wave field in passes.jsonl
+171,postseal,verifier-psbench,1,c7e98cc5,headline f32 add median decimal-slipped in the table,docs/BENCH.md,claim in docs,key,,yes,,table median in docs/BENCH.md
+172,postseal,verifier-psbench,2,c7e98cc5,source LCG seed disagrees with the documented seed and sinks,board/bench_main.c,code,key,TB1,yes,,seed constant in board/bench_main.c
+173,postseal,verifier-psbench,3,c7e98cc5,records-only disclaimer flipped into a performance claim,docs/BENCH.md,claim in docs,shape,,yes,,disclaimer in docs/BENCH.md
+174,postseal,verifier-psbench,4,c7e98cc5,run-label clock for one flavour disagrees with its banner,docs/BENCH.md,claim in docs,shape,,yes,,run label in docs/BENCH.md
+175,postseal,verifier-psbench,5,c7e98cc5,bench-pico text size transposed vs the log header,docs/BENCH.md,claim in docs,shape,,yes,,size figure in docs/BENCH.md
+176,postseal,verifier-psciwindows,1,c8464f51,windows job retargeted to ubuntu under its windows name,.github/workflows/ci.yml,code,shape,,yes,,CI job in ci.yml
+177,postseal,verifier-psciwindows,2,c8464f51,arm-none-eabi package dropped; inventory and symbol scan cannot run,.github/workflows/ci.yml,code,shape,,yes,,CI install list in ci.yml
+178,postseal,verifier-psciwindows,3,c8464f51,a Linux job mapping altered (artifact renamed),.github/workflows/ci.yml,code,shape,,yes,,CI artifact name in ci.yml
+179,postseal,verifier-psciwindows,4,c8464f51,README names the deprecated MSYS2 environment the job does not use,README.md,claim in docs,shape,,yes,,README names environment
+180,postseal,verifier-psciwindows,5,c8464f51,windows standard step silently reruns smoke under its merge-gate name,.github/workflows/ci.yml,code,shape,,yes,,CI step in ci.yml
+181,postseal,verifier-psreadme,1,f5d7b66a,at-a-glance instantiation count mutated 849 to 859,README.md,claim in docs,shape,,yes,,README count
+182,postseal,verifier-psreadme,2,f5d7b66a,bench binary64 div median transposed 56412.50 to 54612.50,README.md,claim in docs,shape,,yes,,README median
+183,postseal,verifier-psreadme,3,f5d7b66a,KissFFT claimed used completely unmodified,README.md,claim in docs,shape,,yes,,README claim
+184,postseal,verifier-psreadme,4,f5d7b66a,details IAS15 hash last digits mutated f48abb to f48abc,README.md,claim in docs,shape,TB1,yes,,hash quoted in README prose
+185,postseal,verifier-psreadme,5,f5d7b66a,hero image path extension mutated .png to .jpg,README.md,claim in docs,shape,,yes,,README image path
+186,postseal,verifier-psbench2,1,0305f97a,bench-pico msf32_add table median decimal-slipped outside its min/max,docs/BENCH.md,claim in docs,shape,,yes,,BENCH.md table median
+187,postseal,verifier-psbench2,2,0305f97a,README quoted binary32 mul median transposed vs BENCH.md and raw log,README.md,claim in docs,shape,,yes,,README median
+188,postseal,verifier-psbench2,3,0305f97a,ratio-table arithmetic wrong for msf32_div pair,docs/BENCH.md,claim in docs,shape,TB3,yes,,ratio table arithmetic in BENCH.md prose table
+189,postseal,verifier-psbench2,4,0305f97a,source LCG seed disagrees with documented seed and recorded sinks,board/bench_main.c,code,key,TB1,yes,,seed constant in board/bench_main.c
+190,postseal,verifier-psbench2,5,0305f97a,compare-graph legend labels swapped between muse and stock series,tools/bench_graphs.py,code,key,,yes,,legend labels in tools/bench_graphs.py
+191,postseal,verifier-psedge,1,da767e45,FMA caption fused-result hex mutated vs live result,site/app.js,claim in docs,shape,,no,C or D (TB8),caption hex in site/app.js
+192,postseal,verifier-psedge,2,da767e45,sinPi operand changed 0.5 to 0.25 while caption claims exact 1,site/app.js,claim in docs,key,TB7,no,C or D (TB8),deck entry operand in site/app.js against its caption
+193,postseal,verifier-psedge,3,da767e45,division-by-zero caption claims inexact also raised,site/app.js,claim in docs,shape,,no,C or D (TB8),caption claim in site/app.js
+194,postseal,verifier-psedge,4,da767e45,edge button enabled in wasm-down branch contradicting live-only status text,site/app.js,code,key,TB8,no,C or D (TB8),site logic in site/app.js
+195,postseal,verifier-psedge,5,da767e45,totalOrder caption boolean flipped vs live result,site/app.js,claim in docs,shape,,no,C or D (TB8),caption boolean in site/app.js

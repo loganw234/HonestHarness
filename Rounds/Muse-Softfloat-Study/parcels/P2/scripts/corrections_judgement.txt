@@ -1,0 +1,26 @@
+# n@@owner@@introduced@@fixed@@reached_main@@reached_seal@@note   (n = line number in docs/metrics/corrections.jsonl at b78af18)
+# owner: who held the fault. The brief's premise "every row is a fault in a brief, so the lead's" is tested here.
+1@@lead (brief)@@@@@@no, caught by the parcel at design@@no@@Template artifact in a brief
+2@@lead (brief)@@@@@@no@@no@@
+3@@lead (brief)@@@@@@no@@no@@Brief shorthand
+4@@lead (code: kernel and reference)@@23a740f@@53acb1a@@yes, in P0 pushed to main@@no, fixed before the seal@@RECORD:403 "the tininess defect was the lead's, twice over"; the parcels' fence, not the lead's gates, caught it
+5@@lead (tool: berkeley_ingest)@@23a740f@@53acb1a@@yes, in P0@@no@@RECORD:403 "The ingest eq mis-mapping was the lead's"
+6@@lead (tool: berkeley_ingest)@@23a740f@@53acb1a@@yes, in P0@@no@@Independent second find of row 5
+7@@lead (P0 smoke control)@@23a740f@@b37fb12@@yes, in P0@@no@@Control 9 retired later (lead.md:313)
+8@@lead (brief)@@@@@@no@@no@@
+9@@lead (brief)@@@@@@no@@no@@Numbers in the brief's authority split
+10@@lead (brief)@@@@@@no@@no@@
+11@@lead (brief)@@@@@@no@@no@@
+12@@lead (brief)@@@@@@no@@no@@
+13@@lead (brief)@@@@@@no@@no@@
+14@@lead (SF-0 text)@@@@@@no, caught at the parcel's design@@no@@SF-0 2.6 rests on a grammar the standard does not define
+15@@lead (brief)@@@@@@no@@no@@
+16@@lead (brief)@@@@@@no@@no@@
+17@@lead (SF-2 draft)@@@@889ec2e@@no, folded before the merge (A2:309)@@no@@Found by verifier-sf2 at 05:22:48
+18@@lead (SF-2 draft)@@@@889ec2e@@no@@no@@Section 5 contradicted section 9
+19@@lead (SF-2 draft)@@@@889ec2e@@no@@no@@
+20@@lead (SF-2 draft)@@@@889ec2e@@no@@no@@
+21@@lead (SF-2 draft)@@@@889ec2e@@no@@no@@
+22@@study agent (a figure in a study), not a brief@@@@@@no@@no@@The row names a study brief; the fault is a double-counted total in the study agent's report
+23@@parcel (parcel-w5twiddledoc's document), not a brief@@@@97d1cbe@@no, fixed on the branch before the merge (AF:129)@@no@@Found by verifier-w5twiddledoc; the row says it was rowed late at the seal
+24@@lead (merge body and RECORD seal entry)@@47f5ea7@@@@yes, merge body immutable@@yes, restated by appendix (AS SD-2)@@Found by the seal auditor; accepted true in the row

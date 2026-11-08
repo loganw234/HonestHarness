@@ -1,0 +1,20 @@
+repo,proposal,clause,path,commit,first_matching_line,stem,text
+ParcelRound,P2,c3,CASE-STUDY-7.md,8b6d6d4065ea36870e8150a90f51a5f9ebd749ba,210,fence,(gates) and section 6 (verifiers) predict layered defences. Each layer here
+ParcelRound,P3,c2,CASE-STUDY-7.md,8b6d6d4065ea36870e8150a90f51a5f9ebd749ba,314,recount,"gate to recount (the verifier counted 3, 3, 2, 3, 3 and 2 in the"
+ParcelRound,P4,c1,CASE-STUDY-7.md,8b6d6d4065ea36870e8150a90f51a5f9ebd749ba,698,scoped to the diff,A re-check scoped to the diff found them.
+ParcelRound,P4,c2,CASE-STUDY-7.md,8b6d6d4065ea36870e8150a90f51a5f9ebd749ba,300,second verifier,second verifier's count.
+ParcelRound,P5,c1,CASE-STUDY-7.md,8b6d6d4065ea36870e8150a90f51a5f9ebd749ba,249,assert,"Guards stopped three of these before anything was built: an assertion, an"
+ParcelRound,P5,c2,CASE-STUDY-7.md,8b6d6d4065ea36870e8150a90f51a5f9ebd749ba,314,recount,"gate to recount (the verifier counted 3, 3, 2, 3, 3 and 2 in the"
+ParcelRound,P5,c4,CASE-STUDY-7.md,8b6d6d4065ea36870e8150a90f51a5f9ebd749ba,35,lead's own,"| 5 | CASE-STUDY-5.md, on branch `round5-case-study`, not yet merged | loganw.dev | 2026-09-29 to 30 | a verifier added mid-round on the lead's own commits, because the lead had broken the round's own"
+ParcelRound,P7,c3,CASE-STUDY-7.md,8b6d6d4065ea36870e8150a90f51a5f9ebd749ba,354,retry,"- The make flags and the heredoc each cost the lead a retry on 10-05, and"
+ParcelRound,P7,c3,CASE-STUDY-7.md,8b6d6d4065ea36870e8150a90f51a5f9ebd749ba,345,redo,- an unquoted heredoc that runs backticks;
+ParcelRound,P8,c1,CASE-STUDY-7.md,8b6d6d4065ea36870e8150a90f51a5f9ebd749ba,297,\bmemory\b,continuations it also read its ledger and a memory file holding the run's
+ParcelRound,P8,c3,CASE-STUDY-7.md,8b6d6d4065ea36870e8150a90f51a5f9ebd749ba,291,resume note,agent committed its work and wrote a resume note within nine minutes. The
+ParcelRound,P9,c4,CASE-STUDY-7.md,8b6d6d4065ea36870e8150a90f51a5f9ebd749ba,61,authorit,"- a Python golden model, which is the authority;"
+ParcelRound,P13,c2,CASE-STUDY-7.md,8b6d6d4065ea36870e8150a90f51a5f9ebd749ba,318,resolve,resolved such rows two ways: once by taking each row from the side that
+ParcelRound,P15,c1,CASE-STUDY-7.md,8b6d6d4065ea36870e8150a90f51a5f9ebd749ba,452,serials?,- The serial resources were:
+ParcelRound,P15,c3,CASE-STUDY-7.md,8b6d6d4065ea36870e8150a90f51a5f9ebd749ba,45,lock\b,"- the U50 clock sweep's session, case study 3's ""second live session"", which"
+ParcelRound,P15,c3,CASE-STUDY-7.md,8b6d6d4065ea36870e8150a90f51a5f9ebd749ba,215,stale,"| a parcel's own gate | C's directed cases caught a stale-context bug in R22 that its fuzz passed (10-05, item 6). CV2CW's own run met the integration regression in the tree it was dispatched on, and "
+ParcelRound,P15,c4,CASE-STUDY-7.md,8b6d6d4065ea36870e8150a90f51a5f9ebd749ba,63,hardware,"- bit identity everywhere, with anything the hardware cannot do refused by"
+ParcelRound,P16,c2,CASE-STUDY-7.md,8b6d6d4065ea36870e8150a90f51a5f9ebd749ba,318,\brows\b,resolved such rows two ways: once by taking each row from the side that
+ParcelRound,P18,c2,CASE-STUDY-7.md,8b6d6d4065ea36870e8150a90f51a5f9ebd749ba,186,as written,"- 09:15: the plan of record approved, ""Approve as written (Recommended)"", after a verifier's three checks of it."

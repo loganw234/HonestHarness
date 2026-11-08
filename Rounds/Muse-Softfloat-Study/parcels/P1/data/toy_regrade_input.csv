@@ -1,0 +1,11 @@
+sample_id,defects_named_by_report,report_lines,lead_plants_caught,lead_extra_findings,consistent,note
+T01,"D1-D5 plus D6 (minor, report-only)",24-95,5,1,yes,lead.md line 937 lists the five plants (fig8 IC digit; Lagrange 762; memset removal; 240-hardcode; proof 40000) and the report's D3; D2; D4; D5; D1 match them one by one; D6 is the extra
+T02,"D1-D9 plus M1 (minor)",51-62,5,3,yes,"9 defects named, 5 + 3 extras = 8; D4, D7 and D8 match the three extras the row lists; D9 is a minor item the row does not list; no key and no lead list of the five plants, so only the count is checked"
+T03,"D1-D8 plus a minor-findings section",79-195,5,3,yes,"8 defects = 5 + 3 extras; the row's extras (SI MB label, DST backwards, morning-report example) match D1/D2, D7, D8"
+T04,"D1-D5",77-135,5,0,yes,count only
+T05,"D1-D5",58-143,5,0,yes,count only
+T06,"D1-D5",68-124,5,0,yes,count only
+T07,"D1-D5",49-99,5,0,yes,count only
+T08,"5 numbered defects",71-85,5,0,yes,count only
+T09,"D-1 to D-5 (convicted)",148-168,5,0,yes,count only
+T10,"D1-D5",31-40,5,0,yes,count only
