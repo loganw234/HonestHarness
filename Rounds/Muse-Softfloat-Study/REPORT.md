@@ -2,12 +2,15 @@
 
 2026-11-08. The lead is Claude Opus 5.5, in Claude Code. The plan of record is `PLAN.md` beside this file (`5197b2a`).
 
-This is draft 4.
+This is draft 5.
 - **Draft 2** took verifier-R's pass 1 on draft 1 (`35873c2`): no wrong figure, 8 restates and 9 notes (`reports/verifier-R.md`).
 - **Draft 3** takes verifier-R's pass 2, which found five small new faults and no wrong figure.
   - The lead fixed them and checked each line by command, since verifier-R's passes were spent.
   - It also writes the case report's proposals as "proposal P2" and so on, so they cannot be read as this study's parcels P1 to P3.
 - **Draft 4** corrects Q4's count of the lead's errors, after the comparison (`COMPARISON.md`) found 3 planted faults counted among them.
+- **Draft 5** takes verifier-C's pass 1 on the comparison and draft 4 (`reports/verifier-C.md`).
+  - Q4's first lines now carry the corrected count, and its source.
+  - Q1 names the IAS15 parcel's unverified merge, which the comparison found missing from this report.
 
 This report answers the plan's six questions from three parcels' analyses, which sit beside it. Each analysis was verified twice, once on a planted copy and once on its fix:
 
@@ -32,6 +35,7 @@ The study's ledger, archived beside this report, holds every step. The lead's mo
     - 6 were skipped and 6 did not apply;
     - for 49 the record cannot show either way.
   - The skipped include the rule that the lead's own work goes past a verifier: about 30 of 44 lead commits did not.
+  - Outside the clause table, one parcel, the IAS15 workload's Pico firmware, was merged with no verifier.
   - The harness forced one real fallback, resuming an agent. All four follow-ups lost their write grant, so fresh agents took over.
   - The kit already held clauses of three of the case report's later proposals:
     - two it labels new: a copy with no route back to the real branch, and a board lock;
@@ -47,7 +51,7 @@ The study's ledger, archived beside this report, holds every step. The lead's mo
   - Next is declared configuration standing in for executed work (5).
   - The full audit found no defect in the shipped math surface.
   - A search for a finding that comes back empty shows only that its terms did not match.
-- **Q4, the lead.** Of 47 error rows, 42 are the lead's own genuine errors. 3 more are planted faults the Muse record landed as corrections (see the comparison). Its own prose was the least-verified text, which is the same pattern ParcelRound's round 6 recorded under an Opus lead.
+- **Q4, the lead.** Of 47 error rows, 42 are the lead's own genuine errors: P2's 45 lead-owned rows, less 3 planted faults the Muse record landed as corrections (see the comparison). Its own prose was the least-verified text, which is the same pattern ParcelRound's round 6 recorded under an Opus lead.
 - **Q5, the case report.**
   - **Its claims:** of 79 checkable claims, 45 hold, 12 partly, 1 does not, and 21 cannot be checked from the files read.
   - **Its 18 proposals:** none is already a full rule in the methods at the kit's pins, 14 are there in part, 3 are absent, and 1 sits only in a case study.
@@ -108,6 +112,9 @@ The differences fit the kit's own rewrite rules. The lines were not checked one 
   - the rule that the lead's own work goes past a verifier.
 
   The record gives no reason for the last four.
+- **One skip is outside the clause table.** The `ias15-pico` parcel, the IAS15 workload's Pico firmware, was merged at `d9718cf` with no verifier and no planted copy (the Muse lead's ledger l303).
+  - Its merge body disclosed it, and the adherence audit A2 listed it as a slip (P2's `A03`).
+  - P2's clause table has no clause for a parcel merged unverified.
 - **The 35 adapted** include:
   - escalation by a file channel, because a child agent cannot message the lead mid-run;
   - an integration verifier that never ran: the lead merged by `git merge-tree` and relabelled the rows;
@@ -229,14 +236,15 @@ The full audit found no defect in the shipped math surface (`<muse>/scratch/audi
 
 ## Q4: the lead's own errors
 
-P2 found 47 error rows, 45 of them the lead's own by their owner column (P2 §Task 3):
-- all 24 of the brief corrections, 22 of which are the lead's own: 11 faults in briefs, 4 in its own code or tools, and 7 in its own texts;
+P2 found 47 error rows, 45 of them the lead's by their owner column (P2 §Task 3). 42 of those are the lead's own genuine errors, as the correction below explains:
+- all 24 of the brief corrections, 22 of them owned by the lead and 19 its own genuine errors: 11 faults in briefs, 4 in its own code or tools, and 4 in its own texts (P2 counts 7 texts; 3 are plants);
 - 23 more, from the ledger, the record and the audits.
 
 **A correction, from the comparison.** Three of the 7 "text" rows are not errors in the lead's work.
 - **What they are:** corrections rows 17 to 19, in the SF-2 draft, are verifier-sf2's planted faults #4, #3 and #2 (`plants.jsonl` rows 59, 58 and 57). The Muse record landed them as accepted brief corrections.
 - **Who found it:** Claude audit A's M10, and the lead checked it by command at `b78af18`.
-- **What it changes:** the lead's own genuine errors are 42 of the 47 rows. Landing the 3 plants as corrections is a record error of the lead's besides (`COMPARISON.md`).
+- **What it changes:** the lead's own genuine errors are 42 of the 47 rows. That is P2's 45 lead-owned rows in `data/lead_errors.csv`, less `CJ17` to `CJ19`. No P2 file records 42, since P2 counted the three as errors.
+- **Landing the 3 plants as corrections** is a record error of the lead's besides (`COMPARISON.md`).
 
 **Who caught them:** parcels, verifiers, the audits, and the lead itself (eight times).
 - **The lead's own code or tool faults in its first phase** (correction rows 4 to 7, among them a smoke control) were fixed before the seal.
