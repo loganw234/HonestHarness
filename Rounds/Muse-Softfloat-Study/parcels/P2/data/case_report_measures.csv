@@ -1,0 +1,102 @@
+key,value
+a49991f.rows.usage,128
+a49991f.rows.passes,131
+a49991f.rows.plants,190
+a49991f.rows.briefs,49
+a49991f.rows.corrections,24
+a49991f.rows.escalations,23
+a49991f.rows.fetches,5
+a49991f.usage.input,1410803658
+a49991f.usage.output,7261540
+a49991f.usage.input_plus_output,1418065198
+a49991f.plants.caught,182
+a49991f.plants.wave.polish,4/5
+a49991f.plants.wave.postseal,20/20
+a49991f.plants.wave.readme,9/10
+a49991f.plants.wave.site,10/10
+a49991f.plants.wave.wave1,9/10
+a49991f.plants.wave.wave2,10/10
+a49991f.plants.wave.wave3,5/5
+a49991f.plants.wave.wave4,25/25
+a49991f.plants.wave.wave5,46/50
+a49991f.plants.wave.wave6,44/45
+a49991f.plants.key0305f97a,"5 rows, 5 caught"
+a49991f.plant_keys.hashes,14
+a49991f.plant_keys.rows_covered,70 of 190
+a49991f.record.lines,1400
+a49991f.coverage.rows,849
+a49991f.coverage.tiers,"{'1': 783, '2': 66}"
+a49991f.coverage.authority,"{'berkeley': 117, 'mpfr-exact': 414, 'project-exact': 207, 'project-exact+berkeley-check': 111}"
+a49991f.run_sh.testfloat_lines,0
+a49991f.run_sh.berkeley_lines,0
+b78af18.rows.usage,128
+b78af18.rows.passes,131
+b78af18.rows.plants,195
+b78af18.rows.briefs,50
+b78af18.rows.corrections,24
+b78af18.rows.escalations,23
+b78af18.rows.fetches,5
+b78af18.usage.input,1410803658
+b78af18.usage.output,7261540
+b78af18.usage.input_plus_output,1418065198
+b78af18.plants.caught,187
+b78af18.plants.wave.polish,4/5
+b78af18.plants.wave.postseal,25/25
+b78af18.plants.wave.readme,9/10
+b78af18.plants.wave.site,10/10
+b78af18.plants.wave.wave1,9/10
+b78af18.plants.wave.wave2,10/10
+b78af18.plants.wave.wave3,5/5
+b78af18.plants.wave.wave4,25/25
+b78af18.plants.wave.wave5,46/50
+b78af18.plants.wave.wave6,44/45
+b78af18.plants.key0305f97a,"5 rows, 5 caught"
+b78af18.plant_keys.hashes,15
+b78af18.plant_keys.rows_covered,75 of 195
+b78af18.record.lines,1418
+b78af18.coverage.rows,849
+b78af18.coverage.tiers,"{'1': 783, '2': 66}"
+b78af18.coverage.authority,"{'berkeley': 117, 'mpfr-exact': 414, 'project-exact': 207, 'project-exact+berkeley-check': 111}"
+b78af18.run_sh.testfloat_lines,0
+b78af18.run_sh.berkeley_lines,0
+coverage.header,name|std_name|clause|dest|sources|rounding|flags|wave|status|authority|vectors|comparison|tier|claim
+a49991f.commits,216
+a49991f.commits_without_trailer,0 []
+b78af18.commits,221
+b78af18.commits_without_trailer,0 []
+tag.v1.0.0.type,tag
+tag.v1.0.0.commit,957fdae
+957fdae.date,2026-11-01T17:49:18-07:00
+cdc40ae.ancestor_of_a49991f,yes
+a49991f.ancestor_of_b78af18,yes
+a49991f.commits_before_b78af18,5
+RECORD@a49991f mentions caf00b0,1
+RECORD@a49991f mentions 8751b11,1
+RECORD@a49991f lines mentioning 'delta',2
+"workspace worktrees entries (now, not at report time)",138
+lead.md line of the 'method case report written' heading,884
+lead.md lines before the full audit sweep heading,878
+lead.md total lines (now),1012
+usage rows at a49991f by agent-name prefix and model: auditor / muse-spark-1.3,5
+usage rows at a49991f by agent-name prefix and model: auditor / muse-wonder-full-1.0,1
+usage rows at a49991f by agent-name prefix and model: ias15 / muse-wonder-full-1.0,2
+usage rows at a49991f by agent-name prefix and model: lead / muse-wonder-full-1.0,1
+usage rows at a49991f by agent-name prefix and model: other / muse-spark-1.3,6
+usage rows at a49991f by agent-name prefix and model: other / muse-wonder-full-1.0,12
+usage rows at a49991f by agent-name prefix and model: parcel / muse-spark-1.3,2
+usage rows at a49991f by agent-name prefix and model: parcel / muse-wonder-full-1.0,25
+usage rows at a49991f by agent-name prefix and model: regater / muse-wonder-full-1.0,2
+usage rows at a49991f by agent-name prefix and model: study / muse-spark-1.3,3
+usage rows at a49991f by agent-name prefix and model: study / muse-wonder-full-1.0,21
+"usage rows at a49991f by agent-name prefix and model: verifier-like (verifier, rechecker) / muse-spark-1.3",43
+"usage rows at a49991f by agent-name prefix and model: verifier-like (verifier, rechecker) / muse-wonder-full-1.0",3
+usage rows at a49991f by agent-name prefix and model: video / muse-wonder-full-1.0,2
+"first verifier usage rows (wave, agent, model)","[('polish', 'verifier-polish1', 'muse-spark-1.3'), ('wave0', 'verifier-approval', 'muse-spark-1.3'), ('wave0', 'verifier-extractor', 'muse-spark-1.3'), ('wave0', 'verifier-p0', 'muse-spark-1.3'), ('wave0', 'verifier-phase0', 'muse-wonder-full-1.0'), ('wave0', 'verifier-sf0', 'muse-spark-1.3')]"
+"wave6 missed plant (verifier, plant, shape)","[('verifier-w6metrics', 5, 'wave6 verifier pass mislabelled wave5; per-wave tables break')]"
+tree files at a49991f excluding the fenced folders (each non-fenced root entry listed on its own),296
+tree top-level counts excluding the fenced folders,"{'video': 90, 'tests': 80, 'board': 32, 'docs': 22, 'src': 16, 'demo': 15, 'site': 13, 'examples': 7, 'tools': 6, '(root)': 5, 'compat': 4, 'tables': 3, '.github': 2, 'include': 1}"
+"library core files (src, include, compat) share of that tree",21 of 296
+briefs files (ledger/briefs),101
+briefs containing 'memory ceiling',18
+briefs containing 'memory ceiling' or ulimit or 'memory cap',22
+briefs containing 'script file' or 'no long inline',82

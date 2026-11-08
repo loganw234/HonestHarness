@@ -1,0 +1,82 @@
+# id@@obs@@claim (short)@@measure_keys (";" list of keys in data/case_report_measures.csv, may be empty)@@source checked@@result@@reason
+# result: holds | partly | doesn't | unverifiable. obs 0 = The setting and Timeline; 18 = Cost table. Proposals are not judged.
+# Sources: K/H/R = library docs at b78af18 or a49991f (named); L = ledger/lead.md; AS/A2/AF = adherence audits; REPORT = scratch/audit-full/REPORT.md.
+CR01@@0@@849 instantiations (783 Tier 1 + 66 Tier 2)@@a49991f.coverage.rows;a49991f.coverage.tiers@@docs/COVERAGE.tsv at a49991f@@holds@@Recounted: 849 rows, tiers 783 and 66
+CR02@@0@@Sealed at tag v1.0.0 on 2026-11-01@@tag.v1.0.0.type;tag.v1.0.0.commit;957fdae.date@@git cat-file, git log at 957fdae@@holds@@Annotated tag at 957fdae, commit dated 2026-11-01 17:49 -0700
+CR03@@0@@Hackathon window 2026-10-26 to 2026-11-04@@@@docs/KICKOFF.md:144 at b78af18@@holds@@"the hackathon window (ends 2026-11-04)"; the kit's ten days begin 10-26 (START-HERE.md:3)
+CR04@@0@@IAS15 on six RP2040 boards bit-identical, 2,001/2,001 records each@@@@L:676; R:850 at a49991f ("Six-board IAS15 (appended 2026-10-28)")@@holds@@L:676 "6/6 COMPARE PASS at R2000 (2,001 records each"; not re-run
+CR05@@0@@Kit sha256 confirmed against the owner's retained copy@@@@L:643; R:1028-1030 as the seal auditor cites it (AS:136)@@holds@@Confirmed 2026-10-28
+CR06@@0@@Kit's fingerprint audit waived@@@@K:196-198@@holds@@"Waive fingerprint audit, the tooling wasnt finished"
+CR07@@0@@Format parity adopted@@@@L:427-433 (heading 2026-10-27 14:43:57)@@holds@@Owner format-parity rule, SF-1 revised
+CR08@@0@@Standing permission to push and merge@@@@L:36@@holds@@Owner word 2026-10-26 10:48:17
+CR09@@0@@Verifiers on Muse Spark from Wave 1 on; parcels mostly on Muse Wonder@@usage rows at a49991f by agent-name prefix and model: verifier-like (verifier, rechecker) / muse-spark-1.3;usage rows at a49991f by agent-name prefix and model: verifier-like (verifier, rechecker) / muse-wonder-full-1.0;usage rows at a49991f by agent-name prefix and model: parcel / muse-wonder-full-1.0@@usage.jsonl at a49991f, agent-name prefixes (my route; P1 owns the by-role counts)@@holds@@Verifier-like agents 43 Spark and 3 Wonder (all three Wonder rows are Wave 0: verifier-phase0, rechecker-phase0, rechecker2-phase0); parcel agents 25 Wonder and 2 Spark
+CR10@@0@@Every AI commit carries a Co-Authored-By trailer naming its model@@a49991f.commits;a49991f.commits_without_trailer@@git log message bodies at a49991f@@holds@@0 of 216 commits lack a Co-Authored-By line; I did not check that each names the right model
+CR11@@0@@A public remote from day one@@@@K:26,38@@holds@@Public repository chosen at kickoff, 2026-10-26
+CR12@@0@@Six RP2040 boards under a lock file@@@@L has 12 mentions of board.lock (grep -c); L:676@@partly@@Boards (genuine plus five clones) and the lock are in the ledger; whether every board run took the lock is not checked
+CR13@@0@@Metrics extracted from the harness's session records rather than transcripts@@@@H rows 6-7@@partly@@H calls the same session JSONL files "a transcript of each agent" and reads usage from them, so the contrast does not hold literally
+CR14@@0@@Wave 6 included an adherence audit graded ADHERENT WITH SLIPS and a frozen audit-bundle v2@@@@AS:3 (audit); the bundle is fenced@@partly@@The audit holds; the bundle's existence is stated by the audits but I did not open it (fence)
+CR15@@1@@Attempt A returned CLEAN, was voided, disclosed in the merge body, RECORD and plant row@@@@L:876; git log --grep=void at a49991f (610ee45)@@holds@@Merge 610ee45's message mentions the void; L:876 names attempt A void and attempt B (verifier-psbench2b)
+CR16@@1@@The valid attempt caught 5 of 5@@a49991f.plants.key0305f97a@@plants.jsonl at a49991f, key 0305f97a@@holds@@5 rows, 5 caught (the rows carry attempt A's name; tie by key)
+CR17@@1@@The copy is one worktree among about 90@@workspace worktrees entries (now, not at report time)@@listing of the workspace worktrees directory (now)@@unverifiable@@138 entries now, after the toy round began; the count at report time is not recoverable
+CR18@@1@@Attempt A's scripts were all rooted in the real branch and its log labels the real tip@@@@scratch/verifier-psbench2 not opened@@unverifiable@@Evidence is in the voided attempt's scratch, which I did not open
+CR19@@1@@Round 6's observation 5 noted a parcel's design file can serve as a reference copy@@@@CASE-STUDY-6.md:152-163 at f42242e@@holds@@Obs 5, "The reference copy", says so
+CR20@@2@@The Wave-6 miss (44/45) was a wave-label plant@@a49991f.plants.wave.wave6;wave6 missed plant (verifier, plant, shape)@@plants.jsonl at a49991f@@holds@@44/45; the missed shape reads "wave6 verifier pass mislabelled wave5; per-wave tables break"
+CR21@@2@@182 of 190 plants caught overall@@a49991f.plants.caught;a49991f.rows.plants@@plants.jsonl at a49991f@@holds@@182 caught of 190 rows
+CR22@@2@@Plant sets grew metadata shapes from then on, by lead habit@@@@not checked@@unverifiable@@A claim about the lead's habit; the shape texts of the post-seal rows are P1's
+CR23@@3@@Twice (wave6-ci, polish) a real fix landed after planted verification; both stand in RECORD as disclosed slips@@RECORD@a49991f mentions caf00b0;RECORD@a49991f mentions 8751b11@@R at a49991f; AS:176@@holds@@Each commit is named once in RECORD at a49991f; AS:176 says merged on lead re-proof (CI, merged-tree standard), not on a word alone
+CR24@@3@@An independent delta spot-check was improvised and used for the README redesign's two findings@@RECORD@a49991f lines mentioning 'delta'@@R at a49991f and lead.md, searched "delta"@@unverifiable@@No entry I found describes it; the RECORD hits for "delta" are unrelated
+CR25@@4@@The errors that survived longest were lead-authored@@@@lead_errors.csv (my task 3)@@partly@@Lead errors stood longest in the claim files (E11, E12, E23), but a verifier also passed M1; the comparison is a judgement
+CR26@@4@@A spine miscount of parcels (20 for 19), caught by the parcel it briefed@@@@lead.md and ledger/*.md searched for "20 for 19", "spine"@@unverifiable@@No hit in the files I searched
+CR27@@4@@A lead cd fix made following prose's ordinals wrong, caught as a genuine finding@@@@not found@@unverifiable@@No hit
+CR28@@4@@Every restatement script asserts each replaced string occurs exactly once@@@@scratch/lead holds landing-message files only by my name search@@unverifiable@@I did not open the lead's scripts
+CR29@@4@@The final adherence audit graded the lead/parcel distinction; it ran once, at the end@@@@A2:32; AS:176@@doesn't@@The distinction was graded by the first adherence audit (A2:32, 10-28), and three adherence audits ran (10-28, 10-29, 11-01)
+CR30@@5@@Three times a verifier's structured result came back spilled or empty@@@@lead.md and verifier ledgers searched for "spill", "empty"@@unverifiable@@No hit; the evidence would be in session logs, out of scope
+CR31@@5@@A verifier dispatch died because a schema property name (notes) is reserved@@@@searched "reserved", "notes"@@unverifiable@@No hit
+CR32@@6@@One parcel died mid-run on a provider quota error, leaving untracked drafts@@@@L:691@@partly@@L:691 records a first aug child stopped and "continuation 1 provider-failed unstarted"; quota and untracked drafts are not stated
+CR33@@6@@A resume path the harness rejects (UNC script path)@@@@searched "UNC"@@unverifiable@@No hit; K:95-97 records a related \\?\ path refusal for the kit gate
+CR34@@7@@An agent's prototype script had an unbounded memory bug, outlived its agent and paged the owner's machine@@@@L:608-613; A2:347@@holds@@It was a study agent's script (study-sf2-algebraic, not a parcel); 43.4 GB working set; stopped by a sibling study agent
+CR35@@7@@An exhaustive-sweep parcel ran 9.5 hours without a checkpoint@@@@searched "9.5"@@unverifiable@@No hit
+CR36@@7@@After the incident every brief carried a memory ceiling and no second runaway occurred@@briefs containing 'memory ceiling';briefs containing 'memory ceiling' or ulimit or 'memory cap';briefs files (ledger/briefs)@@ledger/briefs/*.md, grep by phrase@@partly@@18 of 101 brief files contain "memory ceiling" (22 with ulimit or memory cap); I cannot date each brief against the incident. No second runaway appears in the audits' incident lists (AF:129)
+CR37@@7@@Briefs adopted "no long inline shell; script files" as a standing rule@@briefs containing 'script file' or 'no long inline'@@ledger/briefs/*.md@@partly@@82 of 101 briefs mention script files; whether that is the stated standing rule is not checked
+CR38@@8@@COVERAGE named Berkeley for 228 rows@@a49991f.coverage.authority@@docs/COVERAGE.tsv at a49991f@@holds@@117 "berkeley" plus 111 "project-exact+berkeley-check" = 228
+CR39@@8@@The README said each row is "gated against" Berkeley@@@@scratch/verifier-readme/report.md:18; REPORT.md:23-33@@partly@@README names three alternatives ("Berkeley TestFloat 3e, MPFR, or an exact reference"), so "each row ... against it" drops two
+CR40@@8@@No gate at HEAD executes TestFloat@@a49991f.run_sh.testfloat_lines;a49991f.run_sh.berkeley_lines@@tools/run.sh at a49991f; REPORT M1@@holds@@tools/run.sh has 0 lines naming TestFloat or Berkeley; I did not search every script
+CR41@@8@@It surfaced only in the final audit@@@@escapes.csv M1@@holds@@No earlier entry raised it; verifier-readme examined the sentence and marked it Agree
+CR42@@8@@The final audit's brief happened to include "does the gate do what the sentence says"@@@@the audit's brief not found among ledger/briefs@@unverifiable@@No brief for the full audit in ledger/briefs by name
+CR43@@9@@Interval digest restamped in README, BOARD and demo but not the website, stale on the live site until the audit@@@@REPORT M2@@holds@@REPORT M2 (lead-verified); I did not fetch the live site
+CR44@@9@@An old RECORD paragraph quotes bench medians the regenerated BENCH.md superseded@@@@REPORT N14; R:1340 at a49991f@@holds@@The 29-row run is at R:1340; the audit marks it superseded
+CR45@@9@@Release notes cited a bench run one round after it was replaced@@@@not checked@@unverifiable@@Release notes are outside the files read
+CR46@@10@@site/data.json base stamp names the merge commit but counts include later-appended rows; two auditors flagged it@@@@REPORT N17; audit-full/site-video.md and repo-hygiene.md mention the stamp@@holds@@Two area files mention it; I did not compare wording
+CR47@@11@@The bench capture window is 60 s, the suite outgrew it, and the committed path cannot reproduce the records@@@@board/read_until.py:37,46 at a49991f; REPORT M4@@partly@@The 60 s window is in the code (t_end = time.time() + 60); the overrun is the audit's finding, which I did not run
+CR48@@12@@Board lock and ledger resolve relative to the main checkout; two parcels invented the same override@@@@searched "MSF_LEDGER"@@unverifiable@@No hit
+CR49@@12@@Round 6 defined two roots in every dispatch; this round did not adopt that clause@@@@WORKFLOW.md:22-25; H "Where the ledger is"@@holds@@The round used one absolute path in briefs and said so
+CR50@@13@@Audit-bundle v1's manifest was CRLF and fails literal sha256sum -c@@@@AS:310 (SD-11)@@unverifiable@@The seal auditor says so; the bundle is fenced
+CR51@@13@@v2 swept in duplicate repo trees (159 MB) before pruning@@@@fence@@unverifiable@@Inside the fenced bundle
+CR52@@14@@Power-only USB cables made boards look dead@@@@L:415-417@@holds@@"several of the clone connections used power-only cables"
+CR53@@14@@Clone boards' LED is a WS2812 on a different pin@@@@L:676@@holds@@"clones are RP2040-Zeros (WS2812 GP16)"
+CR54@@14@@One run script still flashes untargeted by default@@@@REPORT N11@@holds@@The audit's finding (ias15_run.sh); not re-run
+CR55@@14@@The board lock is check-then-create, and a killed holder bricks later runs@@@@REPORT N8, N9@@holds@@Audit findings; not re-run
+CR56@@14@@An unchecked delete damaged the owner's machine the week the project began@@@@K:116-118@@holds@@K:116 "rmtree damage found: winget alias deleted"
+CR57@@15@@Early commits landed without ledger entries until the owner corrected course@@@@L:181@@holds@@L:181 "owner caught the gap"
+CR58@@15@@The owner said "it doesn't have to wait until the end of waves"@@@@searched lead.md@@unverifiable@@No hit; the words may be in the transcript
+CR59@@15@@Postseal agents are unrowed in usage and passes by cutoff design@@@@REPORT N20; R:1288 at a49991f@@holds@@N20: all 4 postseal parcels among 8 unrowed briefed agents
+CR60@@15@@1,418,065,198 billed tokens at the cutoff (input 1,410,803,658 + output 7,261,540)@@a49991f.usage.input;a49991f.usage.output;a49991f.usage.input_plus_output@@usage.jsonl at a49991f@@holds@@Recomputed from the 128 rows
+CR61@@16@@A licensing study answered PARTLY/PARTLY@@@@L:839@@holds@@Heading "Spark licence study PARTLY/PARTLY"
+CR62@@16@@Posture: repo cut silent, soundtrack on the owner's channel, safelisted@@@@L:856, L:866, L:846 ("repo cut silent for music licensing"); AS:241@@holds@@Unlisted YouTube link in README and MUSIC.md
+CR63@@17@@Hash-first plant keys were never gamed across 190 plants@@a49991f.plant_keys.hashes;a49991f.plant_keys.rows_covered@@plant_keys.sha256 and plants.jsonl at a49991f@@partly@@Hash-first covers 70 of 190 rows; for the other 120 the key hashes were not committed before dispatch (RECORD discloses it). "Never gamed" cannot be shown by absence
+CR64@@17@@The void attempt failed by absence, not by peeking@@@@scratch not opened@@unverifiable@@Same as CR18
+CR65@@17@@Detailed commit bodies with hashes made the audit reconstructible@@@@A2:253; AS:236@@holds@@Auditors cite bodies carrying counts, hashes and ledger stamps
+CR66@@17@@The cold judge-map dry run from a fresh clone caught nothing@@@@L:866@@holds@@"every Start-here step PASS cold"
+CR67@@17@@Ownership questions in one batch with a recommended answer were answered in minutes and never reopened@@@@K:156-163; L:643-645; A2:309@@partly@@SF-0's nine were approved in one answer; the SF-2 P1 gloss was re-asked and re-confirmed (L:643-645)
+CR68@@18@@Cost table: 128 usage rows, 131 passes@@a49991f.rows.usage;a49991f.rows.passes@@docs/metrics at a49991f@@holds@@Counted
+CR69@@18@@190 planted, 182 caught (Wave 6 44/45; post-seal 20/20)@@a49991f.plants.caught;a49991f.plants.wave.wave6;a49991f.plants.wave.postseal@@plants.jsonl at a49991f@@holds@@Counted at a49991f
+CR70@@18@@49 rows in briefs.jsonl@@a49991f.rows.briefs@@docs/metrics/briefs.jsonl at a49991f@@holds@@Counted
+CR71@@18@@Wall clock 2026-10-26 to the 2026-11-01 seal, 7 days@@957fdae.date@@git log at 957fdae; library first commit date (lead's first look: 2026-10-26 10:50)@@holds@@Calendar days 10-26 to 11-01 inclusive are 7
+CR72@@18@@docs/RECORD.md about 1,400 lines@@a49991f.record.lines@@docs/RECORD.md at a49991f (the commit the report cites); b78af18 has 1,418@@holds@@1,400 lines at a49991f
+CR73@@18@@audit-bundle-v2: 1,841 frozen files, 8.6 MB@@@@fence@@unverifiable@@Inside the fenced bundle
+CR74@@18@@The lead's ledger about 880 lines@@lead.md line of the 'method case report written' heading;lead.md lines before the full audit sweep heading@@ledger/lead.md@@holds@@878 lines before the full-audit entry; the case-report entry begins at line 884
+CR75@@18@@Gate costs: smoke about 25 s, standard 55 to 76 s@@@@scratch/audit-full/REPORT.md:16 ("standard PASS (76 s) and smoke PASS (25 s)"); L:127 (standard 54s)@@partly@@The record shows 54 s for standard (L:127) and 76 s (REPORT line 16); 55 is the case report's own figure and appears in no record I read. Smoke 25 s holds (REPORT line 16)
+CR76@@18@@Exhaustive one-time sweeps ran hours@@@@not checked@@unverifiable@@Durations are in parcel reports I did not read
+CR77@@18@@The owner was away about 8 h mid-project with the queue running on standing permission@@@@L:639@@holds@@"heading out ~8 h; continue as usual"
+CR78@@18@@The film's closing visual compares the owner's messages with the token total@@@@media not read@@unverifiable@@The film is a media file
+CR79@@18@@The library itself is a minority of the tree@@library core files (src, include, compat) share of that tree@@git ls-tree at a49991f, each non-fenced root entry listed on its own@@holds@@By file count only: 21 of 296 files are src, include and compat (fenced folders skipped, as the lead ruled)

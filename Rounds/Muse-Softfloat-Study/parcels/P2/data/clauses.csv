@@ -1,0 +1,172 @@
+id,file,line,clause,kind,also_in,marking,evidence,note
+C001,START-HERE.md,19,Run the kit's gate and stop if it does not end PASS,rule,WORKFLOW.md:13,DONE,K:95-97; L:2,Passed via Git Bash only; sandboxed PowerShell refused (K:95-97)
+C002,START-HERE.md,21,Run the gate's --control to show each check can fail,rule,,UNKNOWN,"searched K:95-110, L:2-14, ledger/README.md, verifier-phase0.md for ""--control"": no hit",
+C003,START-HERE.md,26,Read CLEAN-ROOM.md before anything else,rule,,DONE,K:111-115; L:2,
+C004,START-HERE.md,14,Keep the record that is half of what the hackathon makes,mechanism,,DONE,R:1-1418; seven metrics files at b78af18 (counted by P1/lead),
+C005,START-HERE.md,34,"Escalate at once what cannot wait for a read moment, ledger entry first",rule,method/parcelround/METHOD.md:608,ADAPTED,H row 2-3; L:16; ledger/urgent/ (14 files),"Child has no mid-run message to the lead, so the file channel carries it (H)"
+C006,START-HERE.md,36,No commit or push without Logan's word (rule 7),rule,OWNER.md:62,ADAPTED,K:52-55; L:36-43,Standing push and merge permission given 2026-10-26 10:48:17; lead reading marked as the lead's
+C007,START-HERE.md,38,Do not change the kit; fill copies in the project repository,rule,,DONE,"K:97 ""Kit untouched""; H:1-3",
+C008,START-HERE.md,139,"Run kit tools as commands, never import them (no __pycache__)",rule,,UNKNOWN,"searched K, H, L headings: no hit",
+C009,WORKFLOW.md,15,"Settle with Logan the standing rules, rule 7's scope, the caps and the verifiers' tier",rule,OWNER.md:29;START-HERE.md:36,ADAPTED,"K:69-91 (defaults, ""proposed, not yet settled line by line""); A2:309; AS:136 (D10 closed, kit-zip and P1 confirmed 10-28)",Applied as lead-proposed defaults; line-by-line confirmation never recorded (A2:309)
+C010,WORKFLOW.md,17,Make the project repository with a private remote,rule,,ADAPTED,"K:26-27, K:38-40","Public remote, at Logan's word"
+C011,WORKFLOW.md,18,Fill docs/HARNESS.md and docs/BOARD.md from the templates,rule,HARNESS.md:3;BOARD.md:4,DONE,H:1-42; docs/BOARD.md exists at b78af18,
+C012,WORKFLOW.md,19,Record Logan's answers verbatim with their date,rule,OWNER.md:128;method/parcelround/METHOD.md:1388,DONE,"K:9-30, K:146-198",Lead readings marked as the lead's (K:156)
+C013,WORKFLOW.md,20,"Make the ledger outside every worktree, from the ledger README template",mechanism,START-HERE.md:32;method/parcelround/METHOD.md:508,DONE,"ledger/README.md (125 lines); H ""Where the ledger is""; A2:142",
+C014,WORKFLOW.md,21,Give each agent a scratch directory of its own,rule,method/parcelround/METHOD.md:337,DONE,H last paragraphs; scratch/ holds one folder per agent,
+C015,WORKFLOW.md,22,Keep every secret out of every directory an agent is given,rule,,ADAPTED,H row 12; A2:71,"Keys sat in scratch/lead/, a directory every agent could technically read; the record states the blinding rests on instruction and disclosure (H row 12)"
+C016,WORKFLOW.md,22-23,Each brief gives the ledger's absolute path,rule,method/parcelround/METHOD.md:491,DONE,"H ""Where the ledger is"" (the one absolute path a brief carries)",
+C017,WORKFLOW.md,24,"Name places by roots, never by an absolute path in entries and reports",rule,,ADAPTED,"L:22 (verifier-phase0 found absolute home paths in HARNESS and AGENTS; restated); H ""reports and this file never carry the absolute home path""",First published draft broke it; caught by verifier-phase0
+C018,WORKFLOW.md,26,Arm the escalation channel and test it at dispatch,mechanism,method/parcelround/METHOD.md:619,DONE,L:16; ledger/urgent/test-escalation-channel-test.md; K/L: test escalation files in urgent/ (11 test rows in escalations.jsonl),
+C019,WORKFLOW.md,28,"File channel: urgent/ file renamed into place, with a watcher",mechanism,method/parcelround/METHOD.md:698,ADAPTED,H row 3 (Monitor armed inline on urgent/); L:18,"Lead noted the Monitor path ""untested"" at the test (L:19)"
+C020,WORKFLOW.md,29,"Arm the watcher from an inline command, not a script file",rule,,DONE,"H row 3 ""a Monitor armed inline by each agent""",Per the filled table; not checked against a transcript
+C021,WORKFLOW.md,31,"With harness messages, the sender writes the question in its own ledger first",rule,method/parcelround/METHOD.md:608,DONE,"H row 2 ""Ledger entry always first""; L:163-166 (parcel-f32 escalation ledger entry before ruling)",
+C022,WORKFLOW.md,33,The three read moments stay the floor,rule,ROLES.md:64;method/parcelround/METHOD.md:515,UNKNOWN,"H row 3 names them as the floor; searched briefs w1-f32, w5-attr, w6-augint, verify-w4trig: no ""three moments"" text",No parcel ledger was read for the act
+C023,WORKFLOW.md,40,Phase 1: read-only surveyors report facts with source and tag,mechanism,method/parcelround/METHOD.md:96,DONE,K:45-48; ledger/S1.md to S4.md; scratch/S1 to S4,
+C024,WORKFLOW.md,48,A surveyor edits nothing and marks measured against read,rule,method/parcelround/METHOD.md:528,DONE,K:47-48 (READ tags); L entries carry Measured/Believed lines,A2:142: twelve W4/W5 ledgers lacked the stamp/shape
+C025,WORKFLOW.md,52,"Phase 2: the lead writes the study SF-0 (questions, authority, refusals, gates and controls, P0, parcels, metrics)",mechanism,method/honest/METHOD.md:27,DONE,L:79-107; docs/studies/SF-0.md,
+C026,WORKFLOW.md,62,"The study ends on a verifier re-check with no (a) or (b), or the draft cap",rule,,DONE,"L:86-102 (verifier-sf0, rechecker-sf0, rechecker2-sf0 READY at the study cap)",
+C027,WORKFLOW.md,63,Logan approves the plan after its verifier,rule,ROLES.md:28;method/parcelround/METHOD.md:1187,DONE,L:100-107,"SF-2: approved before its verifier reported, A2:309 (inverted order, then re-checked)"
+C028,WORKFLOW.md,68,P0 is the seam made once before any parcel splits,mechanism,method/parcelround/METHOD.md:141;method/parcelround/METHOD.md:144,DONE,L:121-139,
+C029,WORKFLOW.md,76,P0 passes a verifier READY before any parcel that reads it is dispatched,rule,ROLES.md:29,DONE,"L:139-145 (verifier-p0 READY 23a740f, then Wave 1 at 21:43)",
+C030,WORKFLOW.md,82,"Brief: owned and forbidden files, each forbidden file's owner named",rule,method/parcelround/METHOD.md:262;method/parcelround/METHOD.md:266,DONE,A2:107; B w1-f32,
+C031,WORKFLOW.md,83,Brief: a named negative control,rule,ROLES.md:67;method/parcelround/METHOD.md:359,DONE,B w1-f32:136; A2:107 (w5-attr has named controls),
+C032,WORKFLOW.md,84,Brief: a time box and a scope ceiling,rule,OWNER.md:94,ADAPTED,B w1-f32:27-29; A2:107; AF:129; AS:140 (D11),"Time boxes on all W6 rows; scope ceilings thinned from W4, explicit ceiling_text instead of hard ceilings; one box of 2,880 min cannot bind (A2:107)"
+C033,WORKFLOW.md,85,Brief: what READY means,rule,method/parcelround/METHOD.md:295,SKIPPED,A2:107 (w5-attr: no READY definition); AF:129,Reason not given
+C034,WORKFLOW.md,86,Brief last line: anything you found that this brief got wrong,rule,method/honest/WITH-PARCELROUND.md:106;method/parcelround/METHOD.md:373,ADAPTED,B w1-f32:108-109; A2:107; corrections.jsonl (24 rows at b78af18),"Present in W1 briefs; dropped from later parcel briefs (A2:107, AF:129)"
+C035,WORKFLOW.md,88,Check every path and function a brief names before it goes out,rule,method/parcelround/METHOD.md:239,UNKNOWN,"searched L, A2/AF/AS: no record of a pre-dispatch check",Briefs' errors were found afterward (corrections.jsonl)
+C036,WORKFLOW.md,89,Design first where the brief says so: the parcel stops until the lead answers,rule,ROLES.md:66,DONE,L:151-162; A2:107; AS:207,
+C037,WORKFLOW.md,91,The parcel tests quickly and hands long runs to the lead,rule,OWNER.md:43;ROLES.md:68,DONE,K:78; L:283-301 (lead board and long runs),
+C038,WORKFLOW.md,92,Verify on a planted copy from the verifier template,mechanism,method/honest/METHOD.md:641,DONE,A2:32 (13 planted-copy verifications); AS:176 (10/10 in the seal span),
+C039,WORKFLOW.md,93,"Send back by rule 1: regression or wrong answer goes back, a false sentence is restated at the merge; re-check scoped to the verifier that found it",rule,OWNER.md:38;method/parcelround/METHOD.md:1092,ADAPTED,L:22-35; H row 4,"Re-checks went to a fresh agent with the findings quoted, because a finished child cannot be resumed with its tools (H row 4)"
+C040,WORKFLOW.md,96,"Merge serially, the gate after each merge, never while a suite runs",rule,ROLES.md:33;method/parcelround/METHOD.md:1217,DONE,A2:253 (14/14 merges on the lead's first-parent chain); L:249,
+C041,WORKFLOW.md,98,An integration verifier checks the lead's merges and remakes each with git merge-tree,mechanism,method/parcelround/METHOD.md:1313,ADAPTED,A2:271; AF:90 (S4); AS:164 (D14),"The role never ran as an agent; the lead ran merge-tree and labelled it ""lead-merge""; 65 plant rows said ""integration"" (erratum R:1004)"
+C042,WORKFLOW.md,100,"A record entry per wave, tables made by tools/round_metrics.py",mechanism,METRICS.md:28,ADAPTED,"R:13,321,421,522,604; A2:142; AF:69",Per-wave skeleton did not survive Waves 4-5 (A2:142); metrics repaired later (AF:69)
+C043,WORKFLOW.md,103,At each wave boundary read the ledger whole and fold it into the next briefs,rule,method/parcelround/METHOD.md:208,UNKNOWN,searched L headings and A2/AF/AS: no hit,
+C044,WORKFLOW.md,107,The lead holds the board; a parcel asks for board time,rule,BOARD.md:9,DONE,H row 9; A2:271,
+C045,WORKFLOW.md,111,Phase 6: keys revealed and the grading recorded,mechanism,WORKFLOW.md:150,ADAPTED,A2:71; AF:48; AS:113,"Grades landed per wave, not once at the end"
+C046,WORKFLOW.md,112,Final record entry with metrics and the lead's slips,mechanism,method/parcelround/METHOD.md:1246,DONE,R:990-1249 (seal entries); AS:124,
+C047,WORKFLOW.md,113,Archive the ledger with its timestamps,mechanism,,UNKNOWN,"searched R tail, L tail (lines 860-1012): audit-bundle is fenced and not opened",Cannot be resolved without the fenced bundle or the lead's folder
+C048,WORKFLOW.md,114,Find and stop what agents left running,rule,ROLES.md:41;method/parcelround/METHOD.md:1255,UNKNOWN,"L:608-613 (one runaway script, stopped); no end-of-round sweep entry found",
+C049,WORKFLOW.md,115,The summary to Logan carries the cost,rule,ROLES.md:42;method/parcelround/METHOD.md:1265,UNKNOWN,"searched L (grep ""summary"", ""cost""), R ""Cost/summary"": cost entries not found",The case report (11-01) has a cost table; whether it was the summary is for task 4
+C050,WORKFLOW.md,127,"Planted protocol 1: the lead drafts the key before the verifier is dispatched, in its own scratch",rule,,DONE,A2:71 (13 key files + drafts in scratch/lead/keys),
+C051,WORKFLOW.md,130,"Planted protocol 2: plant.py make builds the copy (detached, no remote, no refs)",mechanism,,DONE,A2:71 (4 of 13 sampled); AS:93,
+C052,WORKFLOW.md,138,"Planted protocol 3: the key's sha256 goes in the ledger, and in a commit where Logan lets the lead commit",rule,method/honest/METHOD.md:641,ADAPTED,A2:71; AF:48; AS:93,"Ledger only for Waves 1-5 (hashes never committed before dispatch); hash-only commits adopted for the 10 seal parcels, timestamp-proven (AS:93)"
+C053,WORKFLOW.md,141,Planted protocol 4: the parcel's own tip stays out of the ledger until its verifier reports,rule,,UNKNOWN,searched L:169-181; no record either way,
+C054,WORKFLOW.md,143,"Planted protocol 5: verifier treats findings as real, reads the parcel ledger after its own view, works in a clone of the copy",rule,ROLES.md:93,UNKNOWN,"B verify-w4trig:1-12 fences the parcel branch, keys, scratch/lead and lead.md (an instruction); no verifier report read for the act",
+C055,WORKFLOW.md,147,Planted protocol 6: rulings on copy-only findings wait in the lead's scratch until the reveal,rule,,UNKNOWN,searched L:169-181: no record either way,
+C056,WORKFLOW.md,149,Planted protocol 7: the copy moves out of reach once its verifier reports,rule,,SKIPPED,A2:71; AF:48,All 13 early copies still sat in worktrees/verify*/; reason not given
+C057,WORKFLOW.md,150,Planted protocol 8: one reveal when every planted verifier has reported; the integration verifier checks the grading with plant.py check,mechanism,WORKFLOW.md:181,ADAPTED,"A2:71; AF:48; AS:113; L:175,241,307",Reveal and grading per wave; graded shapes sat in plants.jsonl inside later copies (A2:71); no recorded owner decision for it
+C058,WORKFLOW.md,176,Cap: the study takes at most three drafts and two re-checks,rule,,DONE,K:87-89; L:86-102,"SF-0 stopped ""at study cap"" (L:100)"
+C059,WORKFLOW.md,177,Verifier passes: the loose cap after three shrinking NOT READYs,rule,OWNER.md:55,NA,"L:22-35, L:86-102: the longest NOT READY chain found is two",Precondition (three NOT READYs with shrinking reasons) not seen
+C060,WORKFLOW.md,181,One round of several waves: keys revealed once near the end,rule,,SKIPPED,"A2:71 cites SF-0 5.2 ""revealed once near the end"" and no owner decision changing it",Practised per wave; reason not given
+C061,WORKFLOW.md,195,The lead plans around Logan's hours; decisions wait for him in the ledger,rule,OWNER.md:125;ROLES.md:47,DONE,L:639; A2:309,
+C062,ROLES.md,63,A parcel checks it is on its base commit in the right repository and says so in the ledger,rule,method/parcelround/METHOD.md:317;method/parcelround/METHOD.md:400,DONE,"AS:207 (all parcel ledgers carry base, branch, worktree, brief); H row 1",
+C063,ROLES.md,64,A parcel reads the ledger at three moments,rule,WORKFLOW.md:33;method/parcelround/METHOD.md:515,UNKNOWN,see C022,
+C064,ROLES.md,69,A parcel discloses any boundary it crossed,rule,method/parcelround/METHOD.md:463,UNKNOWN,AS:207 names three branch pushes the record discloses; no parcel report read for the act,
+C065,ROLES.md,70,A parcel stops its own background work before it reports,rule,method/parcelround/METHOD.md:438,UNKNOWN,"L:608-613 (a runaway script stopped by a sibling agent, not its owner; A2:347)",
+C066,ROLES.md,74,"A parcel never pushes, merges, rebases or commits to main",rule,method/parcelround/METHOD.md:370,ADAPTED,A2:107 (14 merges all the lead's); AS:207,"Three parcel branches (not main) were pushed to origin, one by brief design (AS:207, SD-5)"
+C067,ROLES.md,75,A parcel never weakens an assertion to make something pass,rule,,UNKNOWN,no record read for the act,
+C068,ROLES.md,76,A parcel never fixes outside its scope; it reports,rule,,DONE,"A2:107 (tininess/ingest and runner bugs escalated, not edited); L:271-282",
+C069,ROLES.md,77,No agent changes any git configuration,rule,OWNER.md:97,UNKNOWN,no record read for the act,
+C070,ROLES.md,78,No agent deletes what it did not create; stop only own processes by PID,rule,OWNER.md:99,ADAPTED,L:608-613; A2:347,"Runaway script stopped by a sibling study agent, not its owner (A2:347)"
+C071,ROLES.md,79,No agent reads another agent's scratch directory,rule,ROLES.md:98,ADAPTED,H row 12; B verify-w4trig:6-10,"One shared filesystem, so only instruction and disclosure; stated as a limit (H row 12)"
+C072,ROLES.md,87,Verifier re-runs the gate from a clean build in a clone of the copy,rule,method/parcelround/METHOD.md:962,DONE,"sampled 3 verifier ledgers: verifier-w4seam.md:3 (smoke and standard re-run on the copy, FAIL at drift_check); verifier-w4interval.md:1-5 (probes from script files); verifier-w4trig.md:1-5",Sample of 3 of 46 verifier passes; not all read
+C073,ROLES.md,89,Verifier re-runs the negative control or builds one,rule,method/parcelround/METHOD.md:964,UNKNOWN,as C072,
+C074,ROLES.md,90,Verifier diffs the change against the ownership list,rule,method/parcelround/METHOD.md:965,UNKNOWN,as C072,
+C075,ROLES.md,91,"Verifier checks every claim in a comment, document or commit message",rule,method/parcelround/METHOD.md:1026,DONE,sampled: verifier-w4seam.md:3 (found a wrong COVERAGE cell and a VECTORS sentence),Sample of 3
+C076,ROLES.md,92,"Verifier states what it ran, command by command",rule,method/parcelround/METHOD.md:1008,DONE,"sampled: verifier-w4interval.md:3-5 (""All probes ran from script files""); verifier-w4trig.md:1-5",Sample of 3
+C077,ROLES.md,93,Verifier forms its own view before reading the parcel's file,rule,WORKFLOW.md:143,UNKNOWN,sampled verifier-w4trig.md:6-8 lists the parcel ledger among governing texts read; order of reading not shown,
+C078,ROLES.md,97,A verifier never fixes anything,rule,method/parcelround/METHOD.md:998,DONE,"sampled: copy ""never modified"" in verifier-w4trig.md:5 and verifier-w4interval.md:4-5; one two-line signfix at verifier-w4trig.md:57 is called a diagnostic",Sample of 3
+C079,ROLES.md,100,"A verifier classes findings (a), (b) or note; only (a) and (b) send work back",rule,OWNER.md:38;method/honest/METHOD.md:641,ADAPTED,R:1004-1012 (erratum); AF:90; AS:61,8 early passes rows carried sent_back true where nothing was sent back; 58 then 85 rows lack the field
+C080,ROLES.md,22,"Logan's words kept as he gave them, with dates; the lead's reading marked",rule,OWNER.md:128,DONE,"K:3-4,52,156; A2:142",
+C081,ROLES.md,30,"The lead owns the seam tests, which belong to no parcel",mechanism,method/parcelround/METHOD.md:1200,UNKNOWN,"L:451-469 (Step 0a seam implemented in w4-seam, verified); no seam-test entry by name",
+C082,ROLES.md,37,"The lead owns the record, including its own slips",rule,method/parcelround/METHOD.md:1246,DONE,"L:22-35 (""Slip (lead)""); R slips attributed (A2:142)",
+C083,ROLES.md,38,"The lead owns the files that state the project's claims, which must be one voice",rule,method/parcelround/METHOD.md:1212,ADAPTED,A2:187; AF:105; AS:75,README carried false universals for 5 audits' span (D4 repaired at the seal)
+C084,ROLES.md,39-40,The lead owns the ledger's README and folds the ledger into the record at the end,mechanism,,UNKNOWN,ledger/README.md exists; no folding entry found,
+C085,ROLES.md,44,"The lead's own work (seam, fixes, merges, record) goes past a verifier",rule,method/parcelround/METHOD.md:1172,SKIPPED,A2:32: 12 of 44 lead commits named a verifier; ~30 reached main unverified; AF:25; AS:310 (SD-7),"Reason not given; the false universal was later restated (HARNESS line 20, README)"
+C086,ROLES.md,51,The lead never merges on the strength of a report,rule,method/parcelround/METHOD.md:1281,DONE,"L:325-331; L:469 (""merge-tree standard PASS"" run by the lead)",Auditor did not test this directly
+C087,ROLES.md,52,The lead never merges while a suite is running,rule,method/parcelround/METHOD.md:1292,UNKNOWN,no record read for the act,
+C088,ROLES.md,53,The lead never acts on an escalation it has not checked,rule,method/parcelround/METHOD.md:781,DONE,L:163-166 (ruling after re-deriving the parcel's examples by hand); L:217-222,
+C089,ROLES.md,54,The lead resolves conflicts from what git says is conflicted,rule,method/parcelround/METHOD.md:1285,DONE,"AS:124 (D9: two briefs.jsonl conflicts resolved as clean unions, # Conflicts: kept); A2:253",
+C090,ROLES.md,55,Freeze what is audited: an auditor reads a committed SHA,rule,method/parcelround/METHOD.md:1301,DONE,"A2:3, AF:3, AS:3 (freeze point stated in each)",A2 notes main moved at dispatch (889ec2e to 7c3819c) in the audit's first minutes
+C092,OWNER.md,46,Standing rules 3/5: model tiers by task difficulty,rule,,ADAPTED,"K:79; L:51-57; A2:309 (""parcels Wonder, verifiers Spark"")","Meta models: lead and parcels on muse-wonder-full-1.0, verifiers on muse-spark-1.3 via Workflow (L:51-57)"
+C093,OWNER.md,48,Standing rule 4: very small fixes by the lead plus a verifier,rule,,UNKNOWN,"K:80 ""apply""; no instance classed",
+C095,OWNER.md,68,"Standing rule 8: on a pause, commit where you are and leave a resume note",rule,method/parcelround/METHOD.md:532,UNKNOWN,"L:639 (owner heading out, carry on); no pause announced in the files read",
+C096,OWNER.md,71,Standing rule 9: no agent loads the machine on purpose,rule,,ADAPTED,L:608-613; A2:347,One runaway script (43.4 GB working set) reported by the owner; corrective rule added (A2:347)
+C097,OWNER.md,73,"Standing rule 10: the record is restated in place until pushed, append-only after",rule,method/honest/METHOD.md:491,ADAPTED,"K:6,85; A2:142; AF:129; AS:124","Post-push restatement 25d6b82 (A2:142) and a 1-deletion reflow 26e86ce (AF:129), both disclosed"
+C098,OWNER.md,98,Leads' rule: wait on one quiet event; do not report a wait,rule,,UNKNOWN,no record read for the act,
+C099,OWNER.md,100,"Leads' rule: delete scratch by the exact path recorded, never by prefix",rule,,UNKNOWN,no record read for the act,
+C100,OWNER.md,102,Leads' rule: open your own tab and act on it by its id,rule,,UNKNOWN,no browser use found in the files read,
+C101,OWNER.md,112,"The lead asks Logan first: commits and pushes, models and tiers, scope, how the PDF is held",rule,method/parcelround/METHOD.md:1372,DONE,K:120-135,
+C102,OWNER.md,118,The kit's additions: ask first on any exception to a standing rule,rule,,UNKNOWN,no exception recorded in K or L headings,
+C103,OWNER.md,119,Ask first on any suspected contact with cft-fp256,rule,CLEAN-ROOM.md:40,NA,A2:222; AF:129; AS:241 (clean-room scans found none),
+C104,OWNER.md,120,"Ask first on anything that would put his name, address or data before a third party",rule,,DONE,L:109 (asked the exact copyright-holder string),Only instance seen
+C105,OWNER.md,125,"Unattended, the lead decides what the standards decide and leaves Logan's questions in the ledger",rule,ROLES.md:47,DONE,L:639-645,
+C106,AGENTS.md,4-5,Copy the seed notes into the project repository and keep them short and true,rule,,ADAPTED,A2:3 (muse-softfloat/AGENTS.md); b78af18 AGENTS.md is 139 lines against the seed's 47,
+C107,AGENTS.md,6,Delete an agent-notes entry the day it stops being true,rule,,UNKNOWN,no record read for the act,
+C108,AGENTS.md,11,"P0 writes the front door (one command that answers ""does it still hold?"")",mechanism,method/honest/METHOD.md:789,DONE,"A2:271 (tools/run.sh, inventory before verdicts)",
+C109,CLEAN-ROOM.md,3,cft-fp256 is off limits in every form,rule,OWNER.md:119,DONE,A2:222; AF:129; AS:241,"Held, per all three adherence audits"
+C110,CLEAN-ROOM.md,25-26,"No clone of cft-fp256 sits in, under or beside any directory an agent or its harness is given",rule,,SKIPPED,K:111-115; H row 8,Clones with cft in their names sat beside the workspace (names only listed); no mechanical fence; disclosed to Logan
+C111,CLEAN-ROOM.md,27,The lead checks the harness's own context loading with Logan on day 1 and records it,rule,,DONE,H row 11; K:111-115,
+C112,CLEAN-ROOM.md,34,Record a third-party source's licence before copying,rule,,DONE,"A2:222 (fetches.jsonl 5/5 rows with name, URL, version, sha256, licence)",
+C113,CLEAN-ROOM.md,38,"If a search lands in cft-fp256, do not open it",rule,,NA,no landing recorded in the files read,
+C114,CLEAN-ROOM.md,40,"If you opened it: stop, write the URL in your ledger, escalate",rule,,NA,no opening recorded,
+C115,CLEAN-ROOM.md,70,Logan's fingerprint audit at each wave's close and at the end,mechanism,METRICS.md:60,SKIPPED,K:196-198,"Waived by Logan 2026-10-27: tooling unfinished; ""a waiver, not a completed audit"""
+C116,METRICS.md,3-4,Every figure comes from a named source; an agent's estimate is never the source,rule,,ADAPTED,"H rows 6-7 and ""usage log's format""; A2:142; AF:69",Extractor tools/extract_session_metrics.py; passes/usage froze at 39 rows for Waves 4-5 until repaired
+C117,METRICS.md,11,"Tokens, messages and model of each from the harness log, transcribed and marked if from counters",mechanism,,DONE,H rows 6-7; usage.jsonl 128 rows,
+C118,METRICS.md,13,Minutes per pass from the transcript's stamps,mechanism,,UNKNOWN,R:127-131 reports minutes; method not checked,
+C119,METRICS.md,15,Gate runs from the runner's JSONL record,mechanism,,UNKNOWN,"docs/metrics at b78af18 holds usage, passes, plants, briefs, corrections, escalations, fetches: no gate-run file",Whether the runner keeps its own log not checked
+C120,METRICS.md,16,"Findings and classes from the verifier's report, confirmed or rejected by the lead in the ledger",mechanism,,DONE,passes.jsonl (131 rows); L entries grade each pass,
+C121,METRICS.md,17,Plants caught from the lead's grading against the key; key sha256 recorded before dispatch,mechanism,WORKFLOW.md:138,ADAPTED,AS:93; AF:48,Hash-before-dispatch for Waves 1-5 rested on the ledger alone
+C122,METRICS.md,18,"Brief corrections counted from each report's ""what this brief got wrong"" with the lead's acceptance",mechanism,,ADAPTED,corrections.jsonl 24 rows; AF:185; AS:284,Frozen at 16 rows for Waves 4-5; 6 rows appended later; auditor candidates remain unadjudicated
+C123,METRICS.md,19,Escalation latency from the ledger's stamps,mechanism,,ADAPTED,escalations.jsonl 23 rows; AF:69; AS:310,"Frozen at 13 rows then repaired; test rows omit ""answered""; 3 W6 revision rounds unrowed (SD-4)"
+C124,METRICS.md,23,The record says which of the six agent-written rows rest on what,rule,,UNKNOWN,"searched R, K: no table of that kind found",
+C125,METRICS.md,28,"Make the tables with tools/round_metrics.py, per wave and whole",mechanism,WORKFLOW.md:100,DONE,R:127-131 (tables in RECORD); AF:69 (selftest 43/0),
+C126,METRICS.md,39,Each table names the kit version and the first twelve hex digits of each input's sha256,rule,,UNKNOWN,R tables not read for the header,
+C127,METRICS.md,50,Count as Logan's recent waves counted; say how where not,rule,,DONE,"H ""usage log's format""; R:127",
+C128,METRICS.md,54,Compare output tokens and minutes across harnesses; tokens read only within one harness,rule,,UNKNOWN,no cross-harness comparison read in R,
+C129,BOARD.md,9,One holder at a time; the lead holds the board and grants slots,rule,WORKFLOW.md:107,DONE,H row 9; A2:271,
+C130,BOARD.md,11,The lock is a file <ledger>/board.lock; take it before touching the board,mechanism,,UNKNOWN,"L has 12 mentions of board.lock (L:123,183,249,255 and others), the lead's own account that board runs were under the lock; AS:153-162 (D13) finds no ledger/board.lock in any source it could read and neither augint ledger citing the lock or serial","Basis: the act is asserted only by the lead's own entries; the one independent audit could not corroborate it. A lock file removed on release would be absent, so absence proves nothing either way. AS (and AF) never opened lead.md. Earlier mark was DONE"
+C131,BOARD.md,12,Remove the lock by its exact path; a lock the holder did not write is not theirs to remove,rule,,UNKNOWN,no record read for the act,
+C132,BOARD.md,14,"Every board result names the ELF sha256, commit, flags and board id",rule,method/honest/METHOD.md:438,DONE,AS:153 (serial corroborated three ways); L:295,
+C133,BOARD.md,17,"A board run goes in the record with command, output and what it showed",rule,,DONE,"R:221; L:295,535",
+C134,BOARD.md,20,"A board result is checked against the authority, never the board's own earlier result",rule,,DONE,AS:153 (710/710 host == board); L:295 (compare PASS 2001/2001),
+C136,PROJECT.md,25,"The standard is the contract, not the authority; the study names an executable authority and Logan approves",rule,method/honest/METHOD.md:27,DONE,K:156-163; L:107; A2:222,
+C137,PROJECT.md,28,The IEEE PDF goes in no repository or zip; the record cites it by clause,rule,CLEAN-ROOM.md:76,DONE,A2:222; K:65-67,
+C138,PROJECT.md,35,Each of the nine questions goes to Logan with the lead's proposal beside it,rule,WORKFLOW.md:53,DONE,K:127-132; L:100-107 (SF-0 section 12 recommendations approved),
+C140,method/parcelround/METHOD.md,58,One file owns each shared fact; everyone else includes it,mechanism,method/honest/METHOD.md:346,DONE,"A2:222; A2:271 (generated lists, COVERAGE.tsv 822 rows)",
+C141,method/parcelround/METHOD.md,64,Derive counts and name lists; never transcribe them,rule,,ADAPTED,A2:187; AF:105; AS:86,README counts went stale at each wave until re-derived by script at the seal
+C142,method/parcelround/METHOD.md,195,A seam's refusal belongs in every backend,rule,method/honest/METHOD.md:153,UNKNOWN,"A2:222 (refusals named, e.g. pow/powr); backends not compared",
+C143,method/parcelround/METHOD.md,201,A value statement names the measurement that would falsify it,rule,,UNKNOWN,no record read for the act,
+C144,method/parcelround/METHOD.md,213,"Name a base commit ""at or after"" and put the exact tip in the brief",rule,,UNKNOWN,"AS:207 shows base recorded in parcel ledgers; the ""at or after"" form not checked",
+C145,method/parcelround/METHOD.md,228,A figure the documents quote has a script in the tree,rule,,ADAPTED,AS:253 (auditor's claims.py); about 200 lead scripts sat in scratch/lead (A2:271),Scripts outside the repository tree
+C146,method/parcelround/METHOD.md,353,A prohibition is written as the command to use,rule,,UNKNOWN,no record read for the act,
+C147,method/parcelround/METHOD.md,427,A parcel that spawns a subagent says so in the ledger and does not finish while one runs,rule,,UNKNOWN,"H row 5 sets it ""by brief rule""; no instance read",
+C148,method/parcelround/METHOD.md,522,Write a ledger entry when it would change another agent's work,rule,,UNKNOWN,no record read for the act,
+C149,method/parcelround/METHOD.md,560,"Stamps are substituted from date, not typed",rule,START-HERE.md:32;method/parcelround/METHOD.md:568,ADAPTED,H row 13; A2:142; L:181 (BACKFILL after the 7.1-hour Wave 1 gap),"Twelve W4/W5 ledgers carry no ledger.sh stamp; H says the tool is ""the sanctioned heading stamper, not the only"""
+C150,method/parcelround/METHOD.md,578,A correction is linked from the entry it corrects,rule,,UNKNOWN,R:1004 erratum is appended; link form not checked,
+C151,method/parcelround/METHOD.md,644,Push plus pull: a watcher never replaces the read moments,rule,WORKFLOW.md:33,UNKNOWN,see C022,
+C152,method/parcelround/METHOD.md,739,Arm the lead's watcher with the first dispatch and keep it armed,rule,,UNKNOWN,L:18 says the wake path was untested; no later record,
+C153,method/parcelround/METHOD.md,808,The lead's watcher skips the lead's own file,rule,,DONE,"H row 3 (""skipping lead.md"")",
+C154,method/parcelround/METHOD.md,815,A gate that cannot fail is not a gate,rule,method/honest/METHOD.md:219;method/honest/WITH-PARCELROUND.md:32,DONE,A2:271 (run.sh permanent named negative controls),
+C155,method/parcelround/METHOD.md,858,The lead's code goes through the same gates as a parcel's,rule,,DONE,"L:249,325,469 (standard PASS after each merge)",
+C156,method/parcelround/METHOD.md,1096,Side notes get a step of their own in every round,rule,,UNKNOWN,no record read for the act,
+C157,method/parcelround/METHOD.md,1113,A stated limit is tested,rule,,UNKNOWN,no record read for the act,
+C158,method/parcelround/METHOD.md,1262,The docs sweep in the lead's idle time during the round,rule,,UNKNOWN,"L:734-749 (stale-info polish audit, cleanup) is a candidate; not matched to the rule",
+C159,method/parcelround/METHOD.md,1388,The owner's standing rules are carried round to round,rule,,DONE,K:69-91,
+C160,method/parcelround/METHOD.md,1397,"Read the log, not the exit code",rule,method/honest/METHOD.md:397,ADAPTED,AF:129; AS:168,Gate-log paths uncited in merge bodies until adopted (D15)
+C161,method/parcelround/METHOD.md,1421,Re-brief from what comes back,rule,,UNKNOWN,no record read for the act,
+C162,method/parcelround/METHOD.md,1427,A send-back needs no re-brief: the harness resumes the agent,rule,,ADAPTED,H row 4,Resume loses the tool grant; a new agent is briefed with the findings
+C163,method/honest/METHOD.md,27,HF 1: name an authority that cannot argue,mechanism,PROJECT.md:25,DONE,A2:222; K:156-163,
+C164,method/honest/METHOD.md,153,HF 2: refuse by name instead of guessing,mechanism,WORKFLOW.md:56,DONE,A2:222 (pow/powr refused; table of refusals),
+C165,method/honest/METHOD.md,219,HF 3: watch every gate fail,mechanism,WORKFLOW.md:57,DONE,A2:271,
+C166,method/honest/METHOD.md,346,"HF 4: one fact, one place; generate the rest",mechanism,WORKFLOW.md:70,DONE,A2:222,
+C167,method/honest/METHOD.md,397,HF 5: exit codes are not reports,mechanism,,ADAPTED,see C160,
+C168,method/honest/METHOD.md,438,HF 6: the artifact carries its own provenance,mechanism,BOARD.md:14,DONE,AS:153,
+C169,method/honest/METHOD.md,491,HF 7: the record is append-only and dated,mechanism,OWNER.md:73,ADAPTED,"AS:201 (metrics byte-prefix intact, 0 deletions); AF:129; A2:142","One post-push restatement, one reflow; rule 10 allows restating until a push"
+C170,method/honest/METHOD.md,548,"HF 8: uncertainty travels in the value (MEASURED, BELIEVED tags)",mechanism,,DONE,"K:60; H ""MEASURED or BELIEVED""",
+C171,method/honest/METHOD.md,641,"HF 9: when the deliverable is a judgement, control the judge (plant faults)",mechanism,WORKFLOW.md:119,DONE,"plants.jsonl 195 rows, 187 caught (P1 owns the rate)",
+C172,method/honest/METHOD.md,789,HF 10: one front door and a list of what bites,mechanism,AGENTS.md:11,DONE,A2:271,
+C173,method/honest/WITH-PARCELROUND.md,21,Build HonestFramework first: its sections 1-3 are what a parcel's gate is measured against,rule,,DONE,L:79-145 (authority and gates in SF-0 and P0 before Wave 1),
+C174,method/honest/ADOPTING.md,11,Adopting on an existing project: Steps 0 to 8,mechanism,,NA,"project begun at kickoff, not retrofitted",
+C175,method/parcelround/ADOPTION.md,4-5,ADOPTION.md is the adoption-state table of the method repository,mechanism,,NA,"a state table of the source method, not an obligation on a round",
