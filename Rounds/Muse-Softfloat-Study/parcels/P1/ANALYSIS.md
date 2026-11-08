@@ -19,7 +19,7 @@ Parcel P1, branch `study-muse-p1`. It answers Q2 and supplies the figures for Q5
 - **Recall.** On the library's 195 plants the verifiers caught 187 (0.959, Wilson 95% 0.921 to 0.979). 185 rows can be tied to muse-spark-1.3: 178 caught (0.962). 10 rows have no recorded model: 9 caught. (T7, T8.)
 - **Where the 8 misses fall.** None in code (87 of 87 caught). 4 in claims in docs (56 of 60), 2 in test data (32 of 34), 2 in metadata or provenance (6 of 8; too few to rank). (T6.) The toy round graded 220 of 220 plants caught, per copy, with no shape.
 - **Trust in the lead's grading.** From a seeded sample of 38 library plants (all 8 misses and 30 catches) graded blind from hash-verified keys and the verifiers' own reports, 36 agree with the lead, 2 I grade "unclear" (not comparable), and none is overturned. Agreement shows consistency with the verifiers' reports, not how hard the plants were.
-- **Genuine findings and send-backs.** I enumerated 35 findings that were not plants. The record's a and b counts tie out for 43 of 46 passes and are explained for the other 3. Of the 15 `sent_back` rows I find a documented post-verdict revision after 8 and none after 7; the erratum implies 7 and 8 (section 4.3).
+- **Genuine findings and send-backs.** I enumerated 35 findings that were not plants. The record's a and b counts tie out for 43 of 46 passes and are explained for the other 3. Of the 15 `sent_back` rows I find a documented post-verdict revision after 8 and none after 7; the erratum implies 7 and 8 (section 4.3). Five of my 8 revisions (passes lines 8, 13, 16, 42, 43) are the lead's own prose restated in place, not parcel revisions; read strictly as parcel revision rounds the count is 3 or fewer (section 4.3).
 - **Limits that matter.** Nothing here measures how hard the plants were: the lead planted, chose the shapes and graded. The toy's keys were not available, so the toy has no per-plant class and no key-based re-grade.
 
 ---
@@ -133,12 +133,12 @@ What the record says of why:
 - 90 rows: 44 `dispatched`, 44 `verdict`, 2 `lead_trim`. The 44 dispatched rows hold 44 distinct copy heads and 44 distinct key hashes.
 - The 44 verdict rows hold 220 plants, 220 caught, and each names a verifier report under `scratch/toy1/` or `scratch/toy2/`. 18 verdict rows list `extra_findings`, 26 in all. No row has a shape or a per-plant grade.
 - Parcels by prefix (figures.json `parcels_by_prefix`): toy1 15, toy2 12, toy3 3, toy4 8, toy5 6.
-- `docs/RECORD.md` (410 lines) states two cumulatives, "180/180 across 36 parcels" and "200/200 across 41 parcels", and "75 planted defects, 75 caught" for the first 15 cartridges. It never uses "missed", "not caught" or "uncaught". Its last cumulative lags the file by 3 parcels (15 plants).
+- `docs/RECORD.md` (410 lines) states two cumulatives, "180/180 across 36 parcels" and "200/200 across 41 parcels", and "75 planted defects, 75 caught" for the first 15 cartridges. It never uses "missed", "not caught" or "uncaught". Its last cumulative (200 plants) lags the file's 220 by 20 plants. The record is also inconsistent with itself: at five plants a parcel, 41 parcels hold 205 plants, so "200/200 across 41 parcels" is 5 short (the 36-parcel figure, 180, is 36 times 5).
 - The metrics README says the key stays "in workspace scratch" and only its SHA-256 is committed before dispatch.
 
 ### 1.8 The plan's section 4 first-look figures
 
-`figures.json` holds `plan_s4_check`, 41 figures with the plan's (or the lead's first look) value and my recomputed value. All 41 agree; `plan_s4_disagreements` is empty. One wrinkle: the plan's library last-commit time "04:18" is the author date (04:18:39); the committer date is 04:20:16. Nothing in section 4 needed correcting.
+`figures.json` holds `plan_s4_check`, 43 figures with the plan's (or the lead's first look) value and my recomputed value. All 43 agree; `plan_s4_disagreements` is empty. One wrinkle: the plan's library last-commit time "04:18" is the author date (04:18:39); the committer date is 04:20:16. Nothing in section 4 needed correcting.
 
 ---
 
@@ -282,7 +282,7 @@ Script `passes_check.py` (reads `findings.csv`, `sent_back_evidence.csv`, passes
 
 35 non-plant findings, by hand from the verifiers' ledger files (`<muse>/ledger/verifier-*.md`), their `report.md` files and the lead's grading lines. Each row of `findings.csv` gives the finding, its kit class (a or b, and whether the verifier tagged it), my rubric class, its disposition and its source.
 - 14 are from the five non-plant NOT READY passes (passes lines 8, 13, 16, 42, 43; all kit class b, all claim in docs). Their disposition is "restated in place" or a redraft (RECORD.md chain tables, lines 34-37 and 200-203; the rechecks passed them).
-- 19 are from 11 plant passes that had a surplus of findings over caught plants (passes lines 25, 26, 32, 67, 71, 87, 94, 96, 98, 116, 131).
+- 18 are from 11 plant passes that had a surplus of findings over caught plants (passes lines 25, 26, 32, 67, 71, 87, 94, 96, 98, 116, 131; by line from findings.csv: 25 one, 26 one, 32 one, 67 two, 71 two, 87 two, 94 one, 96 four, 98 one, 116 two, 131 one). The four groups are 14 + 18 + 2 + 1 = 35, and findings.csv holds 34 rows of kit class a or b plus the one note.
 - 2 are from `verifier-psreadme` (no passes row; `lead.md` line 871; fixed in `56ba4a9`).
 - 1 is a note (polish1's out-of-scope observation, lead.md line 746; the record does not count it).
 
@@ -367,7 +367,7 @@ HonestHarness R1 ran other models as verifiers on ParcelRound round 6's planted 
 | comparison | made? | confounds |
 |---|---|---|
 | headline recall, library round (187/195, 0.959) with ParcelRound 5 and 6 (4/4, 10/10) | with caveats, as ranges only | the earlier rounds' plants were 2 per copy, in prose; the library round's were 5 per copy across code, data and prose; the earlier verifiers were Claude Opus or Sonnet; the planters differ (an Opus lead each time; here Wonder); the work differs (a method's own documents against a softfloat library); n of 4 and 10 gives intervals far wider than the library round's |
-| library round with HonestHarness R2 (11/12, Haiku verifiers) | with caveats | R2's plants are 2 per copy and mixed code and brief errors; the verifiers were Haiku; the planter an Opus-class lead (not recorded in the lines I read); n = 12 |
+| library round with HonestHarness R2 (11/12, Haiku verifiers) | with caveats | R2's plants are 2 per copy and mixed code and brief errors; the verifiers were Haiku; the planter was the round's lead, whose model I did not find named in the lines I read; n = 12 |
 | library round with HonestHarness R1 (10/10, Sonnet verifiers) | with caveats | as above; Sonnet verifiers, 2 plants per copy |
 | recall by plant class across rounds | left out | the earlier rounds record no class; their plants are almost all prose, so the code and test-data cells have no counterpart |
 | recall by wave, verifier or model across rounds | left out | different taxonomies; n of 2 to 12 per cell |
@@ -375,7 +375,7 @@ HonestHarness R1 ran other models as verifiers on ParcelRound round 6's planted 
 | DeepSeek flash on round 6's plants (31/40) with Spark on the library's plants (178/185) | left out | different plants, planters, harness (an API loop in a sandbox) and grader (the HonestHarness R1 lead, checked by a Sonnet verifier); runs, not copies |
 | tokens or cost per verifier pass across rounds | left out | the earlier records do not give tokens by role in a comparable form |
 
-What I will stand behind: muse-spark-1.3 as verifier caught 0.96 of the lead's plants, including every code plant (87 of 87), and its 8 misses are all in docs, test data and metadata. I believe the earlier rounds' figures for Claude verifiers (10/10, 8/8, 11/12) are not distinguishable from it at the sizes involved, but the confounds above mean the sample cannot show it.
+What I will stand behind, by the model table T7: the 185 plant rows tied to muse-spark-1.3 were caught 178 times (0.962), so Spark has 7 misses (test data 2, claim in docs 4, metadata 1: rows 5, 54, 56, 60, 73, 114, 124). The 8th miss (row 170, metadata, verifier-w6metrics) sits with a verifier whose model is not recorded. All 87 code plants were caught: 86 on rows tied to Spark and 1 (a verifier-w6captions plant) on a row whose model is not recorded. I believe the earlier rounds' figures for Claude verifiers (10/10, 8/8, 11/12) are not distinguishable from Spark's at the sizes involved, but the confounds above mean the sample cannot show it.
 
 ---
 
@@ -404,7 +404,7 @@ What I will stand behind: muse-spark-1.3 as verifier caught 0.96 of the lead's p
 ## 9. What the brief or plan got wrong, or left soft
 
 - **The brief's "up to 10 graded plants" for the toy.** The toy has no per-plant grade; I sampled copies and compared counts.
-- **The plan's section 4** is correct on all 41 figures I recomputed; only its "04:18" is an author date (the committer date is 04:20:16).
+- **The plan's section 4** is correct on all 43 figures I recomputed (figures.json `plan_s4_check` has 43 entries); only its "04:18" is an author date (the committer date is 04:20:16).
 - **verifier-PL2's note** that lead.md line 876 calls the first bench run superseded did not hold when I read the line.
 - **The 7 verifiers with no usage row also have no passes row** (the brief did not say).
 - **ParcelRound 4 has 20 lines matching "plant", but no planted copy went to a verifier.** The plan's "ParcelRound rounds 4 to 6" is right for 5 and 6; round 4's plants were gate tests.
@@ -416,4 +416,4 @@ What I will stand behind: muse-spark-1.3 as verifier caught 0.96 of the lead's p
 
 - No fenced path (`audit-bundle*`, the Claude audit reports) was opened, listed or searched. My git use at LIB was `show`, `log` and `rev-list` only; I ran no recursive `ls-tree` or `git grep`.
 - I read the keys folder (hash-matched keys only; drafts not opened) and the verifier reports of the sampled verifiers by name. I read `<muse>/scratch/toy1/` and `toy2/` files named in the toy's verdict rows, nothing else under `scratch/lead/`. I listed `<muse>/scratch/` at one level and named `<muse>/scratch/verifier-*` folders.
-- No file under `<muse>` was written. I started no background process.
+- No file under `<muse>` was written. I started two background processes of my own: a watcher that polled for ANALYSIS.md, and the gate run, which the harness moved to the background. Both had exited before I reported.
