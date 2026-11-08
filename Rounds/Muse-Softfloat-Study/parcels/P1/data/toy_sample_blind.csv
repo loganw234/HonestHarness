@@ -1,0 +1,11 @@
+sample_id,parcel,copy_head7,key_prefix,plants,lead_caught,verifier_report,extra_findings
+T01,toy1-carousel,4b10656,78613a0c,5,5,scratch/toy1/verify-carousel.md,1
+T02,toy1-input,5bb4147,699bd1bd,5,5,scratch/toy1/verify-input.md,3
+T03,toy1-timebank,bca5ada,119ebc1a,5,5,scratch/toy1/verify-timebank.md,3
+T04,toy2-gravity,8d3a52a,c4a80a37,5,5,scratch/toy2/verify-gravity.md,0
+T05,toy2-inputcore,9f0ada6,c055ecb5,5,5,scratch/toy2/verify-inputcore.md,0
+T06,toy2-seismo,88ffb08,96040b8c,5,5,scratch/toy2/verify-seismo.md,0
+T07,toy3-heartbeat,7738af1,839d40c8,5,5,scratch/toy2/verify-heartbeat.md,0
+T08,toy3-session,c583484,63bdc8a1,5,5,scratch/toy2/verify-session.md,0
+T09,toy4-shepherd,053b51d,cf5b3b2d,5,5,scratch/toy2/verify-shepherd.md,0
+T10,toy5-display,7595c10,75c09474,5,5,scratch/toy2/verify-display.md,0

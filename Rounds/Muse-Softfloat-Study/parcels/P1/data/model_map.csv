@@ -1,0 +1,8 @@
+verifier,model,source
+verifier-psbench,muse-spark-1.3,"<muse>/ledger/lead.md line 866 (""both Spark verifiers""; mapped from the unambiguous word Spark)"
+verifier-psciwindows,muse-spark-1.3,"<muse>/ledger/lead.md line 866 (""both Spark verifiers""; mapped from the unambiguous word Spark)"
+verifier-psreadme,muse-spark-1.3,"<muse>/ledger/lead.md line 871 (""verifier-psreadme (Spark)""; mapped from the unambiguous word Spark)"
+verifier-psbench2,muse-spark-1.3,"<muse>/ledger/lead.md line 876 (the rows carry attempt B's grades; ""Attempt B verifier-psbench2b (Spark ...)""; attempt A's model is not recorded)"
+verifier-psedge,muse-spark-1.3,"<muse>/ledger/lead.md line 891 (""verifier-psedge (Spark ...)""; mapped from the unambiguous word Spark)"
+verifier-w6captions,not recorded,no line in <muse>/ledger/lead.md (856) or docs/RECORD.md (1239) names its model
+verifier-w6metrics,not recorded,no line in <muse>/ledger/lead.md (856) or docs/RECORD.md (1241) names its model

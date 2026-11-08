@@ -1,0 +1,3 @@
+project,n,caught,missed,recall,wilson95_lo,wilson95_hi,note
+library,195,187,8,0.959,0.921,0.979,
+toy (plants inside verdict rows),220,220,0,1.000,0.983,1.0,

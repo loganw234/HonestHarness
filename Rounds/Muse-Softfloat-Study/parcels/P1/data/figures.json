@@ -1,0 +1,911 @@
+{
+ "agents_without_rows_summary": {
+  "agents_appearing_anywhere": 144,
+  "missing_both": 17,
+  "missing_passes": 17,
+  "missing_usage": 17
+ },
+ "briefs_by_wave": {
+  "polish": 1,
+  "postseal": 5,
+  "wave1": 4,
+  "wave2": 2,
+  "wave3": 3,
+  "wave4": 11,
+  "wave5": 12,
+  "wave6": 12
+ },
+ "corrections": {
+  "accepted": {
+   "True": 24
+  },
+  "by_wave": {
+   "wave1": 7,
+   "wave2": 2,
+   "wave3": 7,
+   "wave4": 5,
+   "wave5": 2,
+   "wave6": 1
+  },
+  "n": 24
+ },
+ "escalations": {
+  "means": {
+   "file": 23
+  },
+  "n": 23,
+  "real": 12,
+  "real_latency_seconds": {
+   "answered": 12,
+   "max": 3864.0,
+   "median": 141.5,
+   "min": 38.0,
+   "unanswered": 0
+  },
+  "real_rows": [
+   {
+    "from": "parcel-f32",
+    "latency_s": 143.0,
+    "wave": "wave1"
+   },
+   {
+    "from": "parcel-f64",
+    "latency_s": 38.0,
+    "wave": "wave1"
+   },
+   {
+    "from": "parcel-f64",
+    "latency_s": 2465.0,
+    "wave": "wave1"
+   },
+   {
+    "from": "parcel-xf",
+    "latency_s": 71.0,
+    "wave": "wave2"
+   },
+   {
+    "from": "parcel-str",
+    "latency_s": 121.0,
+    "wave": "wave3"
+   },
+   {
+    "from": "parcel-str",
+    "latency_s": 101.0,
+    "wave": "wave3"
+   },
+   {
+    "from": "parcel-str",
+    "latency_s": 91.0,
+    "wave": "wave3"
+   },
+   {
+    "from": "parcel-w5alg1",
+    "latency_s": 1394.0,
+    "wave": "wave5"
+   },
+   {
+    "from": "parcel-w5alg2",
+    "latency_s": 3864.0,
+    "wave": "wave5"
+   },
+   {
+    "from": "verifier-w6ci",
+    "latency_s": 187.0,
+    "wave": "wave6"
+   },
+   {
+    "from": "verifier-polish1",
+    "latency_s": 140.0,
+    "wave": "polish"
+   },
+   {
+    "from": "parcel-w6judgemap",
+    "latency_s": 244.0,
+    "wave": "wave6"
+   }
+  ],
+  "test": 11,
+  "test_latency_seconds": {
+   "answered": 6,
+   "max": 438.0,
+   "median": 179.0,
+   "min": 19.0,
+   "unanswered": 5
+  },
+  "unanswered_rows": [
+   {
+    "from": "video-final",
+    "test": true,
+    "wave": "wave3"
+   },
+   {
+    "from": "study-tier2-kissfft",
+    "test": true,
+    "wave": "wave4"
+   },
+   {
+    "from": "study-tier2-clause9",
+    "test": true,
+    "wave": "wave4"
+   },
+   {
+    "from": "study-tier2-interval",
+    "test": true,
+    "wave": "wave4"
+   },
+   {
+    "from": "study-tier2-architecture",
+    "test": true,
+    "wave": "wave4"
+   }
+  ]
+ },
+ "library_commits": {
+  "count": 221,
+  "first": "2026-10-26 10:50:22 -0700",
+  "first_author_date": "2026-10-26 10:50:22 -0700",
+  "last": "2026-11-03 04:20:16 -0700",
+  "last_author_date": "2026-11-03 04:18:39 -0700",
+  "main_sha": "b78af1801d3e2bd123fed82d933414af661a9e9a"
+ },
+ "library_row_counts": {
+  "briefs": 50,
+  "corrections": 24,
+  "escalations": 23,
+  "fetches": 5,
+  "passes": 131,
+  "plants": 195,
+  "usage": 128
+ },
+ "misses": [
+  {
+   "key_prefix": "71ef8ff1",
+   "model": "muse-spark-1.3",
+   "plant": 5,
+   "verifier": "verifier-w1f32",
+   "wave": "wave1"
+  },
+  {
+   "key_prefix": "e356f249",
+   "model": "muse-spark-1.3",
+   "plant": 4,
+   "verifier": "verifier-readme",
+   "wave": "readme"
+  },
+  {
+   "key_prefix": "a90480af",
+   "model": "muse-spark-1.3",
+   "plant": 1,
+   "verifier": "verifier-sf2",
+   "wave": "wave5"
+  },
+  {
+   "key_prefix": "a90480af",
+   "model": "muse-spark-1.3",
+   "plant": 5,
+   "verifier": "verifier-sf2",
+   "wave": "wave5"
+  },
+  {
+   "key_prefix": "d85e64c8",
+   "model": "muse-spark-1.3",
+   "plant": 3,
+   "verifier": "verifier-w5alg1",
+   "wave": "wave5"
+  },
+  {
+   "key_prefix": "8a5c7589",
+   "model": "muse-spark-1.3",
+   "plant": 4,
+   "verifier": "verifier-w5metrics",
+   "wave": "wave5"
+  },
+  {
+   "key_prefix": "26c14c81",
+   "model": "muse-spark-1.3",
+   "plant": 4,
+   "verifier": "verifier-polish1",
+   "wave": "polish"
+  },
+  {
+   "key_prefix": "beff2b21",
+   "model": "no usage row",
+   "plant": 5,
+   "verifier": "verifier-w6metrics",
+   "wave": "wave6"
+  }
+ ],
+ "passes_by_role": {
+  "author": 31,
+  "fixer": 4,
+  "surveyor": 50,
+  "verifier": 46
+ },
+ "passes_by_wave_role": {
+  "polish": {
+   "surveyor": 10,
+   "verifier": 1
+  },
+  "wave0": {
+   "author": 1,
+   "surveyor": 16,
+   "verifier": 10
+  },
+  "wave1": {
+   "author": 2,
+   "fixer": 2,
+   "surveyor": 1,
+   "verifier": 5
+  },
+  "wave2": {
+   "author": 2,
+   "surveyor": 2,
+   "verifier": 2
+  },
+  "wave3": {
+   "author": 2,
+   "surveyor": 3,
+   "verifier": 1
+  },
+  "wave4": {
+   "author": 4,
+   "surveyor": 6,
+   "verifier": 6
+  },
+  "wave5": {
+   "author": 11,
+   "fixer": 1,
+   "surveyor": 8,
+   "verifier": 14
+  },
+  "wave6": {
+   "author": 9,
+   "fixer": 1,
+   "surveyor": 4,
+   "verifier": 7
+  }
+ },
+ "plan_s4_check": [
+  {
+   "agrees": true,
+   "figure": "library commits",
+   "plan_or_lead_value": 221,
+   "recomputed": 221
+  },
+  {
+   "agrees": true,
+   "figure": "library last commit (author date, hh:mm)",
+   "plan_or_lead_value": "04:18",
+   "recomputed": "04:18"
+  },
+  {
+   "agrees": true,
+   "figure": "toy commits",
+   "plan_or_lead_value": 224,
+   "recomputed": 224
+  },
+  {
+   "agrees": true,
+   "figure": "toy last commit (hh:mm)",
+   "plan_or_lead_value": "16:39",
+   "recomputed": "16:39"
+  },
+  {
+   "agrees": true,
+   "figure": "usage rows",
+   "plan_or_lead_value": 128,
+   "recomputed": 128
+  },
+  {
+   "agrees": true,
+   "figure": "passes rows",
+   "plan_or_lead_value": 131,
+   "recomputed": 131
+  },
+  {
+   "agrees": true,
+   "figure": "plants rows",
+   "plan_or_lead_value": 195,
+   "recomputed": 195
+  },
+  {
+   "agrees": true,
+   "figure": "briefs rows",
+   "plan_or_lead_value": 50,
+   "recomputed": 50
+  },
+  {
+   "agrees": true,
+   "figure": "corrections rows",
+   "plan_or_lead_value": 24,
+   "recomputed": 24
+  },
+  {
+   "agrees": true,
+   "figure": "escalations rows",
+   "plan_or_lead_value": 23,
+   "recomputed": 23
+  },
+  {
+   "agrees": true,
+   "figure": "fetches rows",
+   "plan_or_lead_value": 5,
+   "recomputed": 5
+  },
+  {
+   "agrees": true,
+   "figure": "wonder usage rows",
+   "plan_or_lead_value": 69,
+   "recomputed": 69
+  },
+  {
+   "agrees": true,
+   "figure": "wonder input tokens",
+   "plan_or_lead_value": 733186697,
+   "recomputed": 733186697
+  },
+  {
+   "agrees": true,
+   "figure": "wonder output tokens",
+   "plan_or_lead_value": 3972310,
+   "recomputed": 3972310
+  },
+  {
+   "agrees": true,
+   "figure": "spark usage rows",
+   "plan_or_lead_value": 59,
+   "recomputed": 59
+  },
+  {
+   "agrees": true,
+   "figure": "spark input tokens",
+   "plan_or_lead_value": 677616961,
+   "recomputed": 677616961
+  },
+  {
+   "agrees": true,
+   "figure": "spark output tokens",
+   "plan_or_lead_value": 3289230,
+   "recomputed": 3289230
+  },
+  {
+   "agrees": true,
+   "figure": "tokens input+output",
+   "plan_or_lead_value": 1418065198,
+   "recomputed": 1418065198
+  },
+  {
+   "agrees": true,
+   "figure": "cached tokens",
+   "plan_or_lead_value": 1379156504,
+   "recomputed": 1379156504
+  },
+  {
+   "agrees": true,
+   "figure": "author passes",
+   "plan_or_lead_value": 31,
+   "recomputed": 31
+  },
+  {
+   "agrees": true,
+   "figure": "surveyor passes",
+   "plan_or_lead_value": 50,
+   "recomputed": 50
+  },
+  {
+   "agrees": true,
+   "figure": "verifier passes",
+   "plan_or_lead_value": 46,
+   "recomputed": 46
+  },
+  {
+   "agrees": true,
+   "figure": "fixer passes",
+   "plan_or_lead_value": 4,
+   "recomputed": 4
+  },
+  {
+   "agrees": true,
+   "figure": "NOT READY",
+   "plan_or_lead_value": 37,
+   "recomputed": 37
+  },
+  {
+   "agrees": true,
+   "figure": "READY",
+   "plan_or_lead_value": 9,
+   "recomputed": 9
+  },
+  {
+   "agrees": true,
+   "figure": "sent_back true rows",
+   "plan_or_lead_value": 15,
+   "recomputed": 15
+  },
+  {
+   "agrees": true,
+   "figure": "plants caught",
+   "plan_or_lead_value": 187,
+   "recomputed": 187
+  },
+  {
+   "agrees": true,
+   "figure": "plants missed",
+   "plan_or_lead_value": 8,
+   "recomputed": 8
+  },
+  {
+   "agrees": true,
+   "figure": "graded_by lead",
+   "plan_or_lead_value": 195,
+   "recomputed": 195
+  },
+  {
+   "agrees": true,
+   "figure": "verifier passes on spark",
+   "plan_or_lead_value": 43,
+   "recomputed": 43
+  },
+  {
+   "agrees": true,
+   "figure": "verifier passes on wonder",
+   "plan_or_lead_value": 3,
+   "recomputed": 3
+  },
+  {
+   "agrees": true,
+   "figure": "verifiers without usage row",
+   "plan_or_lead_value": 7,
+   "recomputed": 7
+  },
+  {
+   "agrees": true,
+   "figure": "their plant rows",
+   "plan_or_lead_value": 35,
+   "recomputed": 35
+  },
+  {
+   "agrees": true,
+   "figure": "test escalations",
+   "plan_or_lead_value": 11,
+   "recomputed": 11
+  },
+  {
+   "agrees": true,
+   "figure": "real escalations",
+   "plan_or_lead_value": 12,
+   "recomputed": 12
+  },
+  {
+   "agrees": true,
+   "figure": "rows checked_by integration",
+   "plan_or_lead_value": 65,
+   "recomputed": 65
+  },
+  {
+   "agrees": true,
+   "figure": "distinct key_sha256",
+   "plan_or_lead_value": 39,
+   "recomputed": 39
+  },
+  {
+   "agrees": true,
+   "figure": "toy dispatched rows",
+   "plan_or_lead_value": 44,
+   "recomputed": 44
+  },
+  {
+   "agrees": true,
+   "figure": "toy verdict rows",
+   "plan_or_lead_value": 44,
+   "recomputed": 44
+  },
+  {
+   "agrees": true,
+   "figure": "toy lead_trim rows",
+   "plan_or_lead_value": 2,
+   "recomputed": 2
+  },
+  {
+   "agrees": true,
+   "figure": "toy plants in verdict rows",
+   "plan_or_lead_value": 220,
+   "recomputed": 220
+  },
+  {
+   "agrees": true,
+   "figure": "toy caught",
+   "plan_or_lead_value": 220,
+   "recomputed": 220
+  },
+  {
+   "agrees": true,
+   "figure": "toy total rows",
+   "plan_or_lead_value": 90,
+   "recomputed": 90
+  }
+ ],
+ "plan_s4_disagreements": [],
+ "plant_verifiers_without_usage_row": {
+  "names": [
+   "verifier-psbench",
+   "verifier-psbench2",
+   "verifier-psciwindows",
+   "verifier-psedge",
+   "verifier-psreadme",
+   "verifier-w6captions",
+   "verifier-w6metrics"
+  ],
+  "of_which_with_passes_row": [],
+  "plant_rows": 35
+ },
+ "plants_by_grade": {
+  "caught": 187,
+  "missed": 8
+ },
+ "plants_by_model": {
+  "muse-spark-1.3": {
+   "caught": 153,
+   "n": 160,
+   "verifiers": 32
+  },
+  "muse-wonder-full-1.0": {
+   "caught": 0,
+   "n": 0,
+   "verifiers": 0
+  },
+  "no usage row": {
+   "caught": 34,
+   "n": 35,
+   "verifiers": 7
+  }
+ },
+ "plants_by_wave": {
+  "polish": {
+   "caught": 4,
+   "n": 5
+  },
+  "postseal": {
+   "caught": 25,
+   "n": 25
+  },
+  "readme": {
+   "caught": 9,
+   "n": 10
+  },
+  "site": {
+   "caught": 10,
+   "n": 10
+  },
+  "wave1": {
+   "caught": 9,
+   "n": 10
+  },
+  "wave2": {
+   "caught": 10,
+   "n": 10
+  },
+  "wave3": {
+   "caught": 5,
+   "n": 5
+  },
+  "wave4": {
+   "caught": 25,
+   "n": 25
+  },
+  "wave5": {
+   "caught": 46,
+   "n": 50
+  },
+  "wave6": {
+   "caught": 44,
+   "n": 45
+  }
+ },
+ "plants_checked_by": {
+  "integration": 65,
+  "lead-merge": 130
+ },
+ "plants_distinct_key_sha256": 39,
+ "plants_graded_by": {
+  "lead": 195
+ },
+ "plants_rows_with_note": 174,
+ "plants_verifiers": 39,
+ "roles_in_passes_rows": [
+  "author",
+  "fixer",
+  "surveyor",
+  "verifier"
+ ],
+ "sent_back_erratum_not_revision": 8,
+ "sent_back_erratum_remaining": 7,
+ "sent_back_raw": 15,
+ "sent_back_rows": [
+  {
+   "agent": "verifier-phase0",
+   "later_author_or_fixer_rows_same_work": [],
+   "passes_line": 8,
+   "wave": "wave0",
+   "work": "phase0-scaffold"
+  },
+  {
+   "agent": "rechecker-phase0",
+   "later_author_or_fixer_rows_same_work": [],
+   "passes_line": 13,
+   "wave": "wave0",
+   "work": "phase0-scaffold"
+  },
+  {
+   "agent": "verifier-wave0",
+   "later_author_or_fixer_rows_same_work": [],
+   "passes_line": 16,
+   "wave": "wave0",
+   "work": "wave0-record"
+  },
+  {
+   "agent": "verifier-w1f64",
+   "later_author_or_fixer_rows_same_work": [],
+   "passes_line": 25,
+   "wave": "wave1",
+   "work": "binary64 homogeneous core (173 instantiations)"
+  },
+  {
+   "agent": "verifier-w1f32",
+   "later_author_or_fixer_rows_same_work": [],
+   "passes_line": 26,
+   "wave": "wave1",
+   "work": "binary32 homogeneous core (173 instantiations)"
+  },
+  {
+   "agent": "verifier-w2xf",
+   "later_author_or_fixer_rows_same_work": [],
+   "passes_line": 32,
+   "wave": "wave2",
+   "work": "cross-format binary32/64 with binary16 sources (126 instantiations)"
+  },
+  {
+   "agent": "verifier-w2f16",
+   "later_author_or_fixer_rows_same_work": [],
+   "passes_line": 33,
+   "wave": "wave2",
+   "work": "binary16 homogeneous core (236 instantiations)"
+  },
+  {
+   "agent": "verifier-w3str",
+   "later_author_or_fixer_rows_same_work": [],
+   "passes_line": 37,
+   "wave": "wave3",
+   "work": "decimal/hex character conversions (12 instantiations)"
+  },
+  {
+   "agent": "verifier-sf0",
+   "later_author_or_fixer_rows_same_work": [],
+   "passes_line": 42,
+   "wave": "wave0",
+   "work": "SF-0 plan of record"
+  },
+  {
+   "agent": "rechecker-sf0",
+   "later_author_or_fixer_rows_same_work": [],
+   "passes_line": 43,
+   "wave": "wave0",
+   "work": "SF-0 plan of record"
+  },
+  {
+   "agent": "verifier-readme",
+   "later_author_or_fixer_rows_same_work": [],
+   "passes_line": 67,
+   "wave": "wave5",
+   "work": "post-Tier-2 README update"
+  },
+  {
+   "agent": "verifier-sf2",
+   "later_author_or_fixer_rows_same_work": [],
+   "passes_line": 71,
+   "wave": "wave5",
+   "work": "SF-2 plan of record"
+  },
+  {
+   "agent": "verifier-w5twiddledoc",
+   "later_author_or_fixer_rows_same_work": [
+    [
+     88,
+     "parcel-w5twiddledoc",
+     "fixer",
+     2
+    ]
+   ],
+   "passes_line": 87,
+   "wave": "wave5",
+   "work": "Fork B MPFR twiddle-provenance derivation record (docs/TWIDDLES.md + d"
+  },
+  {
+   "agent": "verifier-polish1",
+   "later_author_or_fixer_rows_same_work": [],
+   "passes_line": 110,
+   "wave": "polish",
+   "work": "Post-close stale-information cleanup from the Spark audit (site plant "
+  },
+  {
+   "agent": "verifier-w6ci",
+   "later_author_or_fixer_rows_same_work": [],
+   "passes_line": 116,
+   "wave": "wave6",
+   "work": "Library CI on Linux: GitHub Actions smoke+standard jobs on Ubuntu (.gi"
+  }
+ ],
+ "sent_back_with_later_author_or_fixer_same_work": 1,
+ "tokens_by_model": {
+  "muse-spark-1.3": {
+   "cached": 664524584,
+   "input": 677616961,
+   "input_plus_output": 680906191,
+   "output": 3289230,
+   "usage_rows": 59
+  },
+  "muse-wonder-full-1.0": {
+   "cached": 714631920,
+   "input": 733186697,
+   "input_plus_output": 737159007,
+   "output": 3972310,
+   "usage_rows": 69
+  }
+ },
+ "tokens_by_role": {
+  "author": {
+   "cached": 475428223,
+   "input": 485845099,
+   "input_plus_output": 488089401,
+   "output": 2244302,
+   "usage_rows": 28
+  },
+  "author+fixer": {
+   "cached": 6873063,
+   "input": 7101595,
+   "input_plus_output": 7149199,
+   "output": 47604,
+   "usage_rows": 1
+  },
+  "fixer": {
+   "cached": 14444438,
+   "input": 14778009,
+   "input_plus_output": 14849256,
+   "output": 71247,
+   "usage_rows": 3
+  },
+  "surveyor": {
+   "cached": 266667026,
+   "input": 276331105,
+   "input_plus_output": 278307766,
+   "output": 1976661,
+   "usage_rows": 50
+  },
+  "verifier": {
+   "cached": 615743754,
+   "input": 626747850,
+   "input_plus_output": 629669576,
+   "output": 2921726,
+   "usage_rows": 46
+  }
+ },
+ "tokens_total": {
+  "cached": 1379156504,
+  "input": 1410803658,
+  "input_plus_output": 1418065198,
+  "note": "the record does not say whether cached is inside input; total here is input+output",
+  "output": 7261540,
+  "rows_cached_exceeds_input": 0,
+  "rows_with_cached": 128
+ },
+ "toy": {
+  "by_status": {
+   "dispatched": 44,
+   "lead_trim": 2,
+   "verdict": 44
+  },
+  "checked_by": {
+   "lead-merge": 90
+  },
+  "dispatched_distinct_copy_head": 44,
+  "dispatched_distinct_key_sha256": 44,
+  "parcels_by_prefix": {
+   "toy1": 15,
+   "toy2": 12,
+   "toy3": 3,
+   "toy4": 8,
+   "toy5": 6
+  },
+  "rows": 90,
+  "verdict_caught": 220,
+  "verdict_extra_findings_total": 26,
+  "verdict_plants": 220,
+  "verdict_rows_with_extra_findings": 18,
+  "verdict_rows_with_verifier_report": 44
+ },
+ "toy_commits": {
+  "count": 224,
+  "first": "2026-11-03 20:05:02 -0700",
+  "first_author_date": "2026-11-03 20:05:02 -0700",
+  "last": "2026-11-07 16:39:34 -0700",
+  "last_author_date": "2026-11-07 16:39:34 -0700",
+  "main_sha": "084f98b29e292d0674dfa4eb9fe119c3990c726d"
+ },
+ "toy_record": {
+  "75_of_75_statement": true,
+  "cumulative_statements": [
+   {
+    "caught": 180,
+    "parcels": 36,
+    "plants": 180
+   },
+   {
+    "caught": 200,
+    "parcels": 41,
+    "plants": 200
+   }
+  ],
+  "lines": 410,
+  "mentions_missed_or_not_caught": 0
+ },
+ "verifier_ab_by_wave": {
+  "polish": {
+   "a": 4,
+   "b": 0
+  },
+  "wave0": {
+   "a": 0,
+   "b": 14
+  },
+  "wave1": {
+   "a": 4,
+   "b": 7
+  },
+  "wave2": {
+   "a": 4,
+   "b": 7
+  },
+  "wave3": {
+   "a": 1,
+   "b": 4
+  },
+  "wave4": {
+   "a": 12,
+   "b": 14
+  },
+  "wave5": {
+   "a": 55,
+   "b": 24
+  },
+  "wave6": {
+   "a": 29,
+   "b": 8
+  }
+ },
+ "verifier_ab_total": {
+  "a": 109,
+  "b": 78
+ },
+ "verifier_ab_total_all_rows": {
+  "a": 109,
+  "b": 78
+ },
+ "verifier_model_split": {
+  "muse-spark-1.3": 43,
+  "muse-wonder-full-1.0": 3
+ },
+ "verifier_passes_by_wave": {
+  "polish": 1,
+  "wave0": 10,
+  "wave1": 5,
+  "wave2": 2,
+  "wave3": 1,
+  "wave4": 6,
+  "wave5": 14,
+  "wave6": 7
+ },
+ "verifier_verdicts": {
+  "NOT READY": 37,
+  "READY": 9
+ }
+}

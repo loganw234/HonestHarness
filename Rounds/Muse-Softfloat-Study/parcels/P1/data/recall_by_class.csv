@@ -1,0 +1,7 @@
+class,n,caught,missed,recall,wilson95_lo,wilson95_hi,note
+code,87,87,0,1.000,0.958,1.0,
+claim in docs,60,56,4,0.933,0.841,0.974,
+test data,34,32,2,0.941,0.809,0.984,
+metadata or provenance,8,6,2,0.750,0.409,0.929,n < 10: too small to rank
+other,3,3,0,1.000,0.438,1.0,n < 10: too small to rank
+record arithmetic,3,3,0,1.000,0.438,1.0,n < 10: too small to rank

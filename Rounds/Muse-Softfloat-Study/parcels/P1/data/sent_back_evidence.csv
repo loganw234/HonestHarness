@@ -1,0 +1,16 @@
+passes_line,revision_followed,evidence
+8,yes,docs/RECORD.md@b78af18 line 36-37 chain table: Phase 0 scaffold sent back "twice - the lead restated its own prose each time" (aec2295 to e6dd094 to 31e464e)
+13,yes,same chain table; rechecker2-phase0 passed the 28-byte clause deletion (<muse>/ledger/verifier-rechecker2-phase0.md 10:40:20)
+16,yes,docs/RECORD.md@b78af18 chain table: the Wave 0 entry sent back "once - restated in place before push"
+25,no,docs/RECORD.md@b78af18 lines 389-392: Wave 1's local merges preceded the planted verifiers' reports and "grading left no genuine send-back"
+26,no,same lines; <muse>/ledger/lead.md line 178 calls the verifier's (a) findings copy artifacts
+32,no,wave 2 planted verdict on a planted copy; no post-verdict parcel commit in the passes rows (believed; lead.md line 243 grades the findings as plants)
+33,no,as row 32
+37,no,wave 3 planted verdict on a planted copy; lead.md line 309 grades the findings as plants (believed no revision)
+42,yes,docs/RECORD.md@b78af18 SF-0 chain table: "twice - restated" (draft 1 33c59f9 to draft 2 4f7f870 to draft 3 828b8f1)
+43,yes,same chain table
+67,yes,verifier-w5metrics ledger 2026-10-29: sent_back true sourced for verifier-readme (commit d87c87c)
+71,yes,verifier-w5metrics ledger: sent_back true sourced for verifier-sf2 (commit f3eea91); docs/RECORD.md@b78af18 lines 1021-1022 (five SF-2-draft corrections)
+87,yes,verifier-w5metrics ledger: sent_back true sourced for verifier-w5twiddledoc (commit a41f026); passes.jsonl line 88 is a fixer pass 2 on the same work
+110,no,lead.md line 746: planted copy graded; the one real observation was fixed pre-merge (8751b11) and is not a revision round of the verdict (believed)
+116,no,planted copy of the CI work; the passes row sets sent_back true but I found no post-verdict revision commit named (believed; not proven either way)
