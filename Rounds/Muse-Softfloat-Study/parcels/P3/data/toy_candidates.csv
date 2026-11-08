@@ -1,0 +1,490 @@
+proposal,source,line,stem,text
+P1,TOY:docs/RECORD.md,340,provenance,"provenance bytes differ, nothing else does. The internal"
+P1,TOY:docs/TOY-0.md,149,provenance,"amendments applied from the start: provenance gate for verifiers,"
+P1,TOY:docs/metrics/README.md,14,provenance,(provenance gate: it must quote the copy's HEAD; this file
+P1,MUSE:ledger/lead.md,891,provenance,"Owner: random committed vector often boring; add random edge-case button showing why the library is useful. parcel-psedge (wonder): 19-entry curated EDGE_DECK in site/app.js (subnormal UF+INX, overflo"
+P1,MUSE:ledger/lead.md,897,\bHEAD\b,Owner asked whether the toy system is parcel-ready and elected the viewer as a permanent feature via WebAssembly on a GitHub page. Hardened the contract before any cartridge wave: descriptor carries d
+P1,MUSE:ledger/lead.md,935,provenance,"ALL 15 T1 PARCELS RETURNED + LEAD-REVIEWED (every commit owned-files-only, trailers exact, trees clean). Merge phase posture: toy gets its own plant ledger at docs/metrics/plants.jsonl (sealed library"
+P1,MUSE:ledger/lead.md,937,provenance,"Merge 1/15 LANDED: toy1-carousel. Plant ledger started in toy repo (docs/metrics/, 7db9913, pushed). Planted copy 4b10656; key sha256 78613a0c committed pre-dispatch (32acade). Verifier (01a1a4d1-6b10"
+P1,MUSE:ledger/lead.md,953,provenance,"WAVE T1 CLOSED (toy main 9b74fa8, pushed): merges 12-15 landed - fft (b7860e7; lead fft_test PASS bd852da6), input (791c7df), timebank (9c2cf30), checkpoint (50ed8d8). Final gates on closed tree: chec"
+P2,TOY:docs/RECORD.md,252,allowlist,generalized to a feed-cart allowlist after going stale
+P2,TOY:docs/RECORD.md,300,export,TOYSESSION1 session export. The companion emu session mode
+P2,TOY:docs/RECORD.md,301,export,replays an exported log natively and was delta-proven
+P2,TOY:docs/RECORD.md,302,export,end-to-end: a browser-exported synspec session replays to
+P2,TOY:docs/TOY-0.md,43,clone,"RP2040-Zero clones) run the sim core headless, and the host screen"
+P2,MUSE:ledger/lead.md,951,plant\.py,"Merges 8-11/15 LANDED: orrery (5/5; board first attempt cut off by 900 s window at step 1500/2000 all-correct -> window raised 2400 (491b3da) then 3600 at mandelbrot; landing b00476e), cloud (5/5; MEA"
+P2,MUSE:ledger/lead.md,968,allowlist,"T2b BATCH 2 CLOSED on-device: board gate at 82bb5a2 PASS (11:06-11:56, 17 carts host==board every step; gpend/seismo first on-device feed proofs, stream 46ac78e9 generated on-Pico). Batch-1 14-cart ga"
+P2,MUSE:ledger/lead.md,970,allowlist,"WAVE T2 COMPLETE (toy main through 41f0ef9 + RECORD): T2b batch 3 landed - attitude (merge after 8219abd verdict; lead gates PASS proof bd0ec1ae exact; allowlist+pins 50fd9f3), synspec (874c1e5; pins "
+P3,TOY:docs/RECORD.md,163,citation,"(each planted-verified 5/5 as documents: citations,"
+P3,TOY:docs/RECORD.md,164,arithmetic,"arithmetic, and internal consistency checked against the"
+P3,TOY:docs/RECORD.md,225,label,"ids, in-state labelling, gyro dial derivation; checkpoint"
+P3,TOY:docs/RECORD.md,245,count,"from step counters, tilt field; proof 0011689c), gpend"
+P3,TOY:docs/RECORD.md,339,label,byte streams under an honest REPLAY label - the nine
+P3,TOY:docs/RECORD.md,340,provenance,"provenance bytes differ, nothing else does. The internal"
+P3,TOY:docs/RECORD.md,356,label,on-device remains a labelled ESTIMATE - the board gate
+P3,TOY:docs/WAVE-T2.md,42,count,"not blockers (field-count wording, helper ownership,"
+P3,TOY:docs/TOY-0.md,14,arithmetic,"binary64 arithmetic, so any state the toy reaches can be re-derived"
+P3,TOY:docs/TOY-0.md,46,arithmetic,"Because the library's arithmetic is integer C, the same sim core"
+P3,TOY:docs/TOY-0.md,104,count,"function microscope, stagnation/augmented counters, interval lens,"
+P3,TOY:docs/TOY-0.md,149,provenance,"amendments applied from the start: provenance gate for verifiers,"
+P3,TOY:docs/metrics/README.md,14,provenance,(provenance gate: it must quote the copy's HEAD; this file
+P3,MUSE:ledger/lead.md,891,provenance,"Owner: random committed vector often boring; add random edge-case button showing why the library is useful. parcel-psedge (wonder): 19-entry curated EDGE_DECK in site/app.js (subnormal UF+INX, overflo"
+P3,MUSE:ledger/lead.md,905,label,"Wave T1 return 2: toy1-harmonograph PASS, commit ad7376d (lead-verified owned-files-only + trailer). 32928-byte state (2048-pt trail ring), proof 6000 -> 05b7c173e9e0b8b5 crossing 3 pattern changes, 1"
+P3,MUSE:ledger/lead.md,917,arithmetic,"Wave T1 return 7: toy1-lorenz PASS, commit feb3961 (lead-verified owned-files-only + trailer). 61560-byte state (1280-slot dual-twin 3D trail, cap arithmetic shown), proof 20000 -> 1c2f925917fce45e, ~"
+P3,MUSE:ledger/lead.md,921,label,"Wave T1 return 9: toy1-microscope PASS, commit 52a90c3 (lead-verified owned-files-only + trailer). sqrt at binade boundary x=2 chosen deliberately (x-spacing doubles across centre, y-spacing constant "
+P3,MUSE:ledger/lead.md,923,arithmetic,"Wave T1 return 10 (first study): toy1-timebank PASS, commit 8693d89 (docs/study-timebank.md only, 934 lines; lead-verified). HEADLINE: dense full-state banking arithmetically dead (every-step 45-172 G"
+P3,MUSE:ledger/lead.md,925,arithmetic,"Wave T1 return 11 (study): toy1-checkpoint PASS, commit 14dc584 (docs/study-checkpoint.md only, 797 lines; lead-verified). Format: 64-byte LE byte-serialised header (TOYCKPT1, envelope ver, cart NAME "
+P3,MUSE:ledger/lead.md,929,count,"Wave T1 return 13: toy1-mandelbrot PASS, commit 371d56e (lead-verified owned-files-only + trailer). 96x96 split grid (top msf32 / bottom msf64, sanctioned direct-call exception flagged), 18488-byte st"
+P3,MUSE:ledger/lead.md,933,label,"Wave T1 return 15 (study+utility): toy1-fft PASS, commit 7d550a3 (4 new files only: core/toy_fft.{h,c}, tools/fft_test.c, docs/study-fft.md; lead-verified). Own iterative radix-2 binary64 FFT from the"
+P3,MUSE:ledger/lead.md,935,provenance,"ALL 15 T1 PARCELS RETURNED + LEAD-REVIEWED (every commit owned-files-only, trailers exact, trees clean). Merge phase posture: toy gets its own plant ledger at docs/metrics/plants.jsonl (sealed library"
+P3,MUSE:ledger/lead.md,937,provenance,"Merge 1/15 LANDED: toy1-carousel. Plant ledger started in toy repo (docs/metrics/, 7db9913, pushed). Planted copy 4b10656; key sha256 78613a0c committed pre-dispatch (32acade). Verifier (01a1a4d1-6b10"
+P3,MUSE:ledger/lead.md,939,count,"Merge 2/15 LANDED: toy1-stagnation. Verifier 5/5 (rounding-mode plant, aug-tail plant, start32 off-by-one, memset, ceiling tick) + design confirmed by independent derivation/counter-simulation. Regist"
+P3,MUSE:ledger/lead.md,943,count,Merge 4/15 LANDED: toy1-harmonograph (verifier 5/5 incl. interaction analysis D2/D3 both needed for 1507 + pixel-measured 0.995R safety catch; counterfactual closure). Merged d23f1fd; check/WASM/board
+P3,MUSE:ledger/lead.md,951,count,"Merges 8-11/15 LANDED: orrery (5/5; board first attempt cut off by 900 s window at step 1500/2000 all-correct -> window raised 2400 (491b3da) then 3600 at mandelbrot; landing b00476e), cloud (5/5; MEA"
+P3,MUSE:ledger/lead.md,953,label,"WAVE T1 CLOSED (toy main 9b74fa8, pushed): merges 12-15 landed - fft (b7860e7; lead fft_test PASS bd852da6), input (791c7df), timebank (9c2cf30), checkpoint (50ed8d8). Final gates on closed tree: chec"
+P3,MUSE:ledger/lead.md,964,count,"T2b batch 1 ALL LANDED on toy main (pushed 710327c): verifications 15/15 plants caught (julia copy 1e155ee, sigcore b154a11, clock e9799d0; each verifier counterfactually reproduced its parcel report)"
+P3,MUSE:ledger/lead.md,996,count,"SENSORS LIVE (2026-11-06): toy5-sensors 2d0465c lead-flashed. IMU QMI8658C OK (who 0x05 rev 0x7c, 596 ok/2 err in 60 s). Still-desk stats (596 samples): a=(-71,+173,-961) mg sd ~0.6 mg/axis, |a|=978.8"
+P3,TOYMSG:scratch/toy1/msg-plant-mock.txt,7,count,0-based counter) - lead reconciles to proof-step numbering
+P3,TOYMSG:scratch/toy1/msg-plant-tsig.txt,6,label,honest REPLAY labelling differs by design (9 state bytes);
+P3,TOYMSG:scratch/toy2/msg-display-plant.txt,6,count,order and fill byte count. Key hash recorded hash-only
+P4,TOY:docs/RECORD.md,231,delta,"proof final 012134f7). Lead merge fixes, each delta-checked:"
+P4,TOY:docs/RECORD.md,301,delta,replays an exported log natively and was delta-proven
+P4,TOY:docs/WAVE-T2.md,33,delta,milliturn delta) for the turn-the-device gesture; its
+P4,TOY:docs/TOY-0.md,150,delta,"delta checks for post-copy fixes, report-file-first."
+P4,TOY:docs/metrics/README.md,16,after the verdict,"3. After the verdict, the row is completed in place (records"
+P4,MUSE:ledger/lead.md,893,lead fix,"Owner then reported -0/+0 signs lost in decimal input fields. Cause: page-side bitsToDecimal used String(v) and String(-0)===""0"" (runs always used hex bits; display only, pre-existing in the function,"
+P4,MUSE:ledger/lead.md,919,scoped,"Wave T1 return 8: toy1-intervallens PASS, commit 196d78f (lead-verified owned-files-only + trailer). API reality established with header cites: sealed library has NO interval type (zero `interval` mat"
+P4,MUSE:ledger/lead.md,937,lead fix,"Merge 1/15 LANDED: toy1-carousel. Plant ledger started in toy repo (docs/metrics/, 7db9913, pushed). Planted copy 4b10656; key sha256 78613a0c committed pre-dispatch (32acade). Verifier (01a1a4d1-6b10"
+P4,MUSE:ledger/lead.md,943,delta,Merge 4/15 LANDED: toy1-harmonograph (verifier 5/5 incl. interaction analysis D2/D3 both needed for 1507 + pixel-measured 0.995R safety catch; counterfactual closure). Merged d23f1fd; check/WASM/board
+P4,MUSE:ledger/lead.md,951,delta,"Merges 8-11/15 LANDED: orrery (5/5; board first attempt cut off by 900 s window at step 1500/2000 all-correct -> window raised 2400 (491b3da) then 3600 at mandelbrot; landing b00476e), cloud (5/5; MEA"
+P4,MUSE:ledger/lead.md,964,delta,"T2b batch 1 ALL LANDED on toy main (pushed 710327c): verifications 15/15 plants caught (julia copy 1e155ee, sigcore b154a11, clock e9799d0; each verifier counterfactually reproduced its parcel report)"
+P4,MUSE:ledger/lead.md,978,lead fix,"toy4 MERGES LANDED + PUSHED (toy main 93789f9, 22 carts): solclock 3804e90 + pin f16131a, shell 10771f5, feedckpt f0db322, pond 55adb37 + pin 93789f9. Verifications 5/5 each (copies e596224f/b110abcf/"
+P4,MUSE:ledger/lead.md,987,scoped,RP2350 ON-DEVICE PROOF PASS (2026-11-06 19:32-19:56): all 23 carts on Waveshare RP2350-Touch-AMOLED-1.75 serial 9FBDB21D21F41425 matched host emu at every reported step (scratch/toy2/flash-2350-proof.
+P5,TOY:docs/RECORD.md,251,assert,proof cc3111b9). sigcore_test registry assertion was
+P5,TOY:docs/RECORD.md,272,audit,"this parcel; disassembly audit: 0 VFP instructions, one"
+P5,MUSE:ledger/lead.md,966,assert,"T2b batch 2 ALL RETURNED, verifications dispatched: toy2-gravity 8709d39 (KDK sandbox, proof 0011689c; copy 8d3a52a key c4a80a37), toy2-gpend 87180f5 (first feed cart, proof 651bc7de, sig= stream 46ac"
+P5,MUSE:ledger/lead.md,978,audit,"toy4 MERGES LANDED + PUSHED (toy main 93789f9, 22 carts): solclock 3804e90 + pin f16131a, shell 10771f5, feedckpt f0db322, pond 55adb37 + pin 93789f9. Verifications 5/5 each (copies e596224f/b110abcf/"
+P6,TOY:docs/RECORD.md,21,report,host hash at every reported step. A first board run failed only
+P6,TOY:docs/RECORD.md,62,report,pinned at all 8 proof report points from the lead's native
+P6,TOY:docs/RECORD.md,63,report,"run), board budget PASS with host == board at every reported"
+P6,TOY:docs/RECORD.md,72,report,from the lead run (identical to the parcel report). The
+P6,TOY:docs/RECORD.md,79,report,the parcel report. The sqrt-at-2 zoom reaches its 8-ulp-wide
+P6,TOY:docs/RECORD.md,86,report,hashes identical to the parcel report. Pattern life on the
+P6,TOY:docs/RECORD.md,93,report,identical to the parcel report. The one-ulp twins separate
+P6,TOY:docs/RECORD.md,99,report,hashes identical to the parcel report. On-device tallies match
+P6,TOY:docs/RECORD.md,105,report,the parcel report; the 3000-step recurrence hash matches
+P6,TOY:docs/RECORD.md,114,report,the parcel report (Mercury's 87.9694-day period and radius
+P6,TOY:docs/RECORD.md,123,report,"lead at merge, 6000 -> 1000 steps (report every 250), after a"
+P6,TOY:docs/RECORD.md,178,report,reported step. Two proof horizons were trimmed at merge on
+P6,TOY:docs/RECORD.md,195,report,identical to the parcel report). It spectra the figure-8's
+P6,TOY:docs/RECORD.md,229,report,"morning report; warp defaults live 1x, playback 16x), and"
+P6,TOY:docs/RECORD.md,235,report,at every reported step on the genuine Pico (first attempt
+P6,TOY:docs/RECORD.md,256,report,gate PASSes host == board at every reported step - gpend
+P6,TOY:docs/RECORD.md,275,report,report describes an escalated external proof gate
+P6,TOY:docs/RECORD.md,284,report,reported step on the genuine RP2040. The gallery is now
+P6,TOY:docs/RECORD.md,319,report,"reported step, heartbeat's chest stream generated on the"
+P6,TOY:docs/RECORD.md,366,report,PASSes host == board at every reported step
+P6,TOY:docs/RECORD.md,381,report,reproduced host == RP2350 at every reported step (24m45s
+P6,TOY:docs/RECORD.md,393,truncat,select truncate window commands (the panel stayed black
+P6,TOY:docs/WAVE-T1.md,31,report,"| toy1-timebank | Time layer: wall-clock abstraction, pacing/banking buffers, morning-report data | overnight banking, active hours, morning report |"
+P6,TOY:docs/WAVE-T1.md,39,report,"orbital & synth spectra (FFT), morning report (timebank). These"
+P6,TOY:docs/WAVE-T2.md,58,report,"report v1), cartridges `julia` (touch-c), `gravity`"
+P6,TOY:docs/TOY-0.md,76,report,"pickup = wake + morning report). On device, core 0 integrates and"
+P6,TOY:docs/TOY-0.md,107,report,"vendored), orbital spectrum, attitude ball, morning report."
+P6,TOY:docs/TOY-0.md,148,report,"for anything beyond lead-sized changes, with the case-report"
+P6,TOY:docs/TOY-0.md,150,report,"delta checks for post-copy fixes, report-file-first."
+P6,MUSE:ledger/lead.md,891,report,"Owner: random committed vector often boring; add random edge-case button showing why the library is useful. parcel-psedge (wonder): 19-entry curated EDGE_DECK in site/app.js (subnormal UF+INX, overflo"
+P6,MUSE:ledger/lead.md,893,report,"Owner then reported -0/+0 signs lost in decimal input fields. Cause: page-side bitsToDecimal used String(v) and String(-0)===""0"" (runs always used hex bits; display only, pre-existing in the function,"
+P6,MUSE:ledger/lead.md,895,report,Submission confirmed in by owner; muse-softfloat is sealed/untouched from here. New private repo loganw234/muse-softfloat-toy created under the workspace for the follow-on desk-toy project (library co
+P6,MUSE:ledger/lead.md,899,report,"Owner elected Wave T1: ""dispatch parcels for each which can be made now, along with the small studies, as well as one to see if we could feed emulated signals to test with."" Plan committed to toy main"
+P6,MUSE:ledger/lead.md,901,report,"Wave T1 dispatch began: root agent pool is 8 slots including lead, so the wave runs in tranches. Tranche 1 (7 parcels, wonder, report-file-first to scratch/toy1/, board runs fenced to lead-merge, <3 G"
+P6,MUSE:ledger/lead.md,909,report,"Wave T1 return 4: toy1-cloud PASS, commit 3f89628 (lead-verified owned-files-only + trailer). 12 fig8 copies k-ulped, 56592-byte state, proof 6000 -> 9ce75d833b5f2ae8, 10000-step 4dab19a52d4418b8, ~2."
+P6,MUSE:ledger/lead.md,923,report,"Wave T1 return 10 (first study): toy1-timebank PASS, commit 8693d89 (docs/study-timebank.md only, 934 lines; lead-verified). HEADLINE: dense full-state banking arithmetically dead (every-step 45-172 G"
+P6,MUSE:ledger/lead.md,935,report,"ALL 15 T1 PARCELS RETURNED + LEAD-REVIEWED (every commit owned-files-only, trailers exact, trees clean). Merge phase posture: toy gets its own plant ledger at docs/metrics/plants.jsonl (sealed library"
+P6,MUSE:ledger/lead.md,937,report,"Merge 1/15 LANDED: toy1-carousel. Plant ledger started in toy repo (docs/metrics/, 7db9913, pushed). Planted copy 4b10656; key sha256 78613a0c committed pre-dispatch (32acade). Verifier (01a1a4d1-6b10"
+P6,MUSE:ledger/lead.md,939,report,"Merge 2/15 LANDED: toy1-stagnation. Verifier 5/5 (rounding-mode plant, aug-tail plant, start32 off-by-one, memset, ceiling tick) + design confirmed by independent derivation/counter-simulation. Regist"
+P6,MUSE:ledger/lead.md,941,report,Merge 3/15 LANDED: toy1-microscope (verifier 5/5 incl. demo-pacing plant caught via empty-box sheets; extra report-wording nit banked). Merged e6201fc via union resolver (scratch/toy1/resolve_registry
+P6,MUSE:ledger/lead.md,951,report,"Merges 8-11/15 LANDED: orrery (5/5; board first attempt cut off by 900 s window at step 1500/2000 all-correct -> window raised 2400 (491b3da) then 3600 at mandelbrot; landing b00476e), cloud (5/5; MEA"
+P6,MUSE:ledger/lead.md,953,report,"WAVE T1 CLOSED (toy main 9b74fa8, pushed): merges 12-15 landed - fft (b7860e7; lead fft_test PASS bd852da6), input (791c7df), timebank (9c2cf30), checkpoint (50ed8d8). Final gates on closed tree: chec"
+P6,MUSE:ledger/lead.md,955,report,"WAVE T2 OPENED (toy main b266193, pushed after one transient GitHub failure): owner decisions - RP2350-1.85C PRIMARY (sensors+microSD), always plugged, manual time/zone set, warp unpreferred (paramete"
+P6,MUSE:ledger/lead.md,957,report,"T2a ALL LANDED: orbitspec (6060352, verifier 5/5, board PASS 13 carts - first toy_fft on Pico firmware; argmax bin 17 coherent), inputcore (978012f, verifier 5/5 incl. drain-fate carry implemented; le"
+P6,MUSE:ledger/lead.md,962,report,"T2b batch 1 ALL RETURNED, verifications dispatched: toy2-julia PASS-return commit 310f11e (first interactive cart; parcel flagged real seam gap - board CMake lacked toy_input.c despite study-input 10."
+P6,MUSE:ledger/lead.md,964,report,"T2b batch 1 ALL LANDED on toy main (pushed 710327c): verifications 15/15 plants caught (julia copy 1e155ee, sigcore b154a11, clock e9799d0; each verifier counterfactually reproduced its parcel report)"
+P6,MUSE:ledger/lead.md,968,report,"T2b BATCH 2 CLOSED on-device: board gate at 82bb5a2 PASS (11:06-11:56, 17 carts host==board every step; gpend/seismo first on-device feed proofs, stream 46ac78e9 generated on-Pico). Batch-1 14-cart ga"
+P6,MUSE:ledger/lead.md,975,report,"toy4 PREP ROUND (post-compaction lead resume): toy4-flashckpt merged 20ad118, toy4-fluidstudy study merged 274daf8 (+lead f32-range fix 25aa9c8), toy4-tsig merged 594d339 - each 5/5 verified, verdicts"
+P6,MUSE:ledger/lead.md,981,report,"toy4 ROUND CLOSED (toy main 9c5bb1a, 23 carts): shepherd verifier 5/5 (copy 053b51d3), merged ed7029b, pin 02fdeb5; cumulative plants 180/180 across 36 parcels. Board capture window parameterized (460"
+P6,MUSE:ledger/lead.md,987,report,RP2350 ON-DEVICE PROOF PASS (2026-11-06 19:32-19:56): all 23 carts on Waveshare RP2350-Touch-AMOLED-1.75 serial 9FBDB21D21F41425 matched host emu at every reported step (scratch/toy2/flash-2350-proof.
+P6,MUSE:ledger/lead.md,996,report,"SENSORS LIVE (2026-11-06): toy5-sensors 2d0465c lead-flashed. IMU QMI8658C OK (who 0x05 rev 0x7c, 596 ok/2 err in 60 s). Still-desk stats (596 samples): a=(-71,+173,-961) mg sd ~0.6 mg/axis, |a|=978.8"
+P6,MUSE:ledger/lead.md,999,report,"TOUCH PROVEN (2026-11-06): touchfix 0717a5a lead-flashed; owner-operated run: normal=OK rc=0, 8 DOWN/8 UP, two-finger ids 0+1, 753 touch lines, x 6..455 y 9..451, int_falls=774; touch_nack=51 + no_rep"
+P6,MUSE:ledger/lead.md,1003,truncat,PRESENTER ON GLASS (2026-11-06): blackfix 9fdafa4 lead-flashed with self-test ON; owner saw RED/GREEN/BLUE/fig8 - stale-TXSTALL CS truncation convicted as root cause (drain fix alone rehabilitates per
+P6,MUSE:ledger/lead.md,1009,report,"SHELL LIVE + OWNER-OPERATED (2026-11-06/07): toy5-shell 4 commits (33ebd51 shell runner, 5df0d57 stationary long-press, 05c13d5 IRQ touch + tap-launch, b0803ff I2C self-heal + RTC UTC/tz sentinel). Th"
+P6,TOYMSG:scratch/toy1/msg-plant-attitude.txt,4,report,"7c278db, planted copy 9a01bfb). Note: the parcel report's"
+P6,TOYMSG:scratch/toy2/msg-display-plant.txt,11,report,flashed. Parcel report scratch/toy2/toy5-display.md.
+P6,TOYMSG:scratch/toy2/msg-livefeed-plant.txt,10,report,in the parcel report. Report scratch/toy2/toy5-livefeed.md.
+P6,TOYMSG:scratch/toy2/msg-pace-plant.txt,11,report,30 ms budget. Parcel report scratch/toy2/toy5-pace.md.
+P6,TOYMSG:scratch/toy2/msg-pond-plant.txt,8,report,Parcel report: scratch/toy2/toy4-pond.md (proof 400 steps
+P6,TOYMSG:scratch/toy2/msg-presenter-plant.txt,11,report,report scratch/toy2/toy5-presenter.md.
+P6,TOYMSG:scratch/toy2/msg-sensors-plant.txt,10,report,Parcel report scratch/toy2/toy5-sensors.md.
+P6,TOYMSG:scratch/toy2/msg-shell-plant.txt,5,recover,"civil leap rule, tz RAM sentinel, bus recovery threshold,"
+P6,TOYMSG:scratch/toy2/msg-shell-plant.txt,11,report,"1 touch + 1 IMU error, zero wedges. Parcel report"
+P7,TOY:docs/RECORD.md,235,attempt,at every reported step on the genuine Pico (first attempt
+P7,MUSE:ledger/lead.md,901,fresh,"Wave T1 dispatch began: root agent pool is 8 slots including lead, so the wave runs in tranches. Tranche 1 (7 parcels, wonder, report-file-first to scratch/toy1/, board runs fenced to lead-merge, <3 G"
+P7,MUSE:ledger/lead.md,921,void,"Wave T1 return 9: toy1-microscope PASS, commit 52a90c3 (lead-verified owned-files-only + trailer). sqrt at binade boundary x=2 chosen deliberately (x-spacing doubles across centre, y-spacing constant "
+P7,MUSE:ledger/lead.md,923,dead,"Wave T1 return 10 (first study): toy1-timebank PASS, commit 8693d89 (docs/study-timebank.md only, 934 lines; lead-verified). HEADLINE: dense full-state banking arithmetically dead (every-step 45-172 G"
+P7,MUSE:ledger/lead.md,937,attempt,"Merge 1/15 LANDED: toy1-carousel. Plant ledger started in toy repo (docs/metrics/, 7db9913, pushed). Planted copy 4b10656; key sha256 78613a0c committed pre-dispatch (32acade). Verifier (01a1a4d1-6b10"
+P7,MUSE:ledger/lead.md,943,dead,Merge 4/15 LANDED: toy1-harmonograph (verifier 5/5 incl. interaction analysis D2/D3 both needed for 1507 + pixel-measured 0.995R safety catch; counterfactual closure). Merged d23f1fd; check/WASM/board
+P7,MUSE:ledger/lead.md,951,attempt,"Merges 8-11/15 LANDED: orrery (5/5; board first attempt cut off by 900 s window at step 1500/2000 all-correct -> window raised 2400 (491b3da) then 3600 at mandelbrot; landing b00476e), cloud (5/5; MEA"
+P7,MUSE:ledger/lead.md,968,attempt,"T2b BATCH 2 CLOSED on-device: board gate at 82bb5a2 PASS (11:06-11:56, 17 carts host==board every step; gpend/seismo first on-device feed proofs, stream 46ac78e9 generated on-Pico). Batch-1 14-cart ga"
+P7,MUSE:ledger/lead.md,1000,attempt,"PRESENTER BLACK GLASS (2026-11-06): toy_product 70f0d96 lead-flashed: serial perfect, no FLUSH-ERR, glass black (owner). Reflashed toy_display_test: lit correctly - bug isolated to presenter/product p"
+P7,MUSE:ledger/lead.md,1012,fresh,"SHELL MERGED (561cd11) + RECORD hardware day (d307057), pushed. Gates: product_input_test 163 PASS, check PASS, RP2350 4 targets + RP2040 0 warnings. Cumulative 200/200 across 41 parcels. toy5-livefee"
+P8,TOY:docs/RECORD.md,35,checkpoint,"study before parcels use them (input/settings, checkpoint"
+P8,TOY:docs/RECORD.md,64,window,step on the genuine Pico (E66440A2CB6F5C2B). Two Windows-host
+P8,TOY:docs/RECORD.md,115,window,range reproduce on-device). The board capture window was
+P8,TOY:docs/RECORD.md,119,window,"- a window limit, not a failure)."
+P8,TOY:docs/RECORD.md,140,window,inside a 3600 s capture window. All ten Wave T1 cartridges
+P8,TOY:docs/RECORD.md,162,checkpoint,"`input`, `timebank`, and `checkpoint` studies landed last"
+P8,TOY:docs/RECORD.md,172,checkpoint,"studies (input, signals, timebank, checkpoint, fft). Every"
+P8,TOY:docs/RECORD.md,185,checkpoint,"input/signals seams, time banking, checkpointing, spectra on"
+P8,TOY:docs/RECORD.md,201,checkpoint,The input/settings seam and checkpoint core then landed
+P8,TOY:docs/RECORD.md,207,checkpoint,"checkpointing (64-byte header, CRC-32 + FNV identity,"
+P8,TOY:docs/RECORD.md,225,checkpoint,"ids, in-state labelling, gyro dial derivation; checkpoint"
+P8,TOY:docs/RECORD.md,274,process,verified 5/5. Note on process honesty: the attitude parcel
+P8,TOY:docs/RECORD.md,333,checkpoint,cartridges checkpointable: position is step x
+P8,TOY:docs/RECORD.md,341,checkpoint,flash checkpoint backend compiles against A/B slots at the
+P8,TOY:docs/RECORD.md,367,window,"(20:41-21:36, window raised to 5400 s via"
+P8,TOY:docs/RECORD.md,368,window,"TOY_BOARD_WINDOW); solclock ae761075, pond d38a0974 and"
+P8,TOY:docs/RECORD.md,393,window,select truncate window commands (the panel stayed black
+P8,TOY:docs/RECORD.md,408,checkpoint,"numbers, and the flash checkpoint power-cut behaviour."
+P8,TOY:docs/WAVE-T1.md,31,wall,"| toy1-timebank | Time layer: wall-clock abstraction, pacing/banking buffers, morning-report data | overnight banking, active hours, morning report |"
+P8,TOY:docs/WAVE-T1.md,32,checkpoint,"| toy1-checkpoint | Checkpoint format & versioning (state bytes + header, flash layout) | power-loss resume on device |"
+P8,TOY:docs/WAVE-T2.md,1,checkpoint,"# Wave T2 — seams live: input, signals, time, checkpoints, spectra"
+P8,TOY:docs/WAVE-T2.md,13,checkpoint,checkpointing still protects against unplug/power loss.
+P8,TOY:docs/WAVE-T2.md,39,checkpoint,"- Checkpoint descriptor tail: input fields first, then"
+P8,TOY:docs/WAVE-T2.md,43,checkpoint,"drain-fate detail, timebank units/DST passage, checkpoint"
+P8,TOY:docs/WAVE-T2.md,51,checkpoint,| toy2-ckpt | checkpoint core | TOYCKPT1 format + state_version + emu save/load + resume-continuity proofs |
+P8,TOY:docs/TOY-0.md,26,process,"double coprocessor — deliberately unused by the sim core, §3),"
+P8,TOY:docs/TOY-0.md,30,wall,"- 6-axis IMU, RTC chip (real wall-clock for active-hours scheduling"
+P8,TOY:docs/TOY-0.md,59,wall,"every platform. No heap, no platform headers, no wall clock. A"
+P8,TOY:docs/TOY-0.md,61,checkpoint,"framebuffer, expose its state bytes for hashing/checkpointing."
+P8,TOY:docs/TOY-0.md,64,wall,2. **Time layer**: decouples sim time from wall time. Pacing mode
+P8,MUSE:ledger/lead.md,895,memory,Submission confirmed in by owner; muse-softfloat is sealed/untouched from here. New private repo loganw234/muse-softfloat-toy created under the workspace for the follow-on desk-toy project (library co
+P8,MUSE:ledger/lead.md,897,checkpoint,Owner asked whether the toy system is parcel-ready and elected the viewer as a permanent feature via WebAssembly on a GitHub page. Hardened the contract before any cartridge wave: descriptor carries d
+P8,MUSE:ledger/lead.md,899,checkpoint,"Owner elected Wave T1: ""dispatch parcels for each which can be made now, along with the small studies, as well as one to see if we could feed emulated signals to test with."" Plan committed to toy main"
+P8,MUSE:ledger/lead.md,901,ceiling,"Wave T1 dispatch began: root agent pool is 8 slots including lead, so the wave runs in tranches. Tranche 1 (7 parcels, wonder, report-file-first to scratch/toy1/, board runs fenced to lead-merge, <3 G"
+P8,MUSE:ledger/lead.md,903,window,"Wave T1 first return: toy1-carousel PASS, commit 6854647 (lead-verified: exactly the 4 owned files, trailer correct, clean tree). Three choreographies (fig-8, Lagrange 1772 analytic, Euler 1767 analyt"
+P8,MUSE:ledger/lead.md,905,checkpoint,"Wave T1 return 2: toy1-harmonograph PASS, commit ad7376d (lead-verified owned-files-only + trailer). 32928-byte state (2048-pt trail ring), proof 6000 -> 05b7c173e9e0b8b5 crossing 3 pattern changes, 1"
+P8,MUSE:ledger/lead.md,907,checkpoint,"Wave T1 return 3: toy1-pendwave PASS, commit 7cf8fef (lead-verified owned-files-only + trailer). N=20 ring, 1016-byte state, elliptic F-corrected lengths so nonlinear frequencies land exactly on (20+k"
+P8,MUSE:ledger/lead.md,913,checkpoint,"Both freed slots refilled with studies: toy1-input (01a1a4c1-e25a) and toy1-signals (01a1a4c1-e3d8, the owners emulated-signals question, with standalone prototype mandated). Remaining tranche 2: time"
+P8,MUSE:ledger/lead.md,915,checkpoint,"Wave T1 return 6: toy1-stagnation PASS, commit 3c476b9 (lead-verified owned-files-only + trailer). 128-byte state; freeze steps predicted analytically = observed = independent Python struct cross-chec"
+P8,MUSE:ledger/lead.md,917,window,"Wave T1 return 7: toy1-lorenz PASS, commit feb3961 (lead-verified owned-files-only + trailer). 61560-byte state (1280-slot dual-twin 3D trail, cap arithmetic shown), proof 20000 -> 1c2f925917fce45e, ~"
+P8,MUSE:ledger/lead.md,919,checkpoint,"Wave T1 return 8: toy1-intervallens PASS, commit 196d78f (lead-verified owned-files-only + trailer). API reality established with header cites: sealed library has NO interval type (zero `interval` mat"
+P8,MUSE:ledger/lead.md,923,checkpoint,"Wave T1 return 10 (first study): toy1-timebank PASS, commit 8693d89 (docs/study-timebank.md only, 934 lines; lead-verified). HEADLINE: dense full-state banking arithmetically dead (every-step 45-172 G"
+P8,MUSE:ledger/lead.md,925,window,"Wave T1 return 11 (study): toy1-checkpoint PASS, commit 14dc584 (docs/study-checkpoint.md only, 797 lines; lead-verified). Format: 64-byte LE byte-serialised header (TOYCKPT1, envelope ver, cart NAME "
+P8,MUSE:ledger/lead.md,929,wall,"Wave T1 return 13: toy1-mandelbrot PASS, commit 371d56e (lead-verified owned-files-only + trailer). 96x96 split grid (top msf32 / bottom msf64, sanctioned direct-call exception flagged), 18488-byte st"
+P8,MUSE:ledger/lead.md,939,ceiling,"Merge 2/15 LANDED: toy1-stagnation. Verifier 5/5 (rounding-mode plant, aug-tail plant, start32 off-by-one, memset, ceiling tick) + design confirmed by independent derivation/counter-simulation. Regist"
+P8,MUSE:ledger/lead.md,949,wall,Merge 7/15 LANDED: toy1-pendwave (verifier 5/5). Merged 4649bb7; check/WASM/board PASS; landing 8753140 pushed with live-pacing caveat recorded in toy RECORD (75 steps/frame time-lapse; RP2040 30 fps 
+P8,MUSE:ledger/lead.md,951,window,"Merges 8-11/15 LANDED: orrery (5/5; board first attempt cut off by 900 s window at step 1500/2000 all-correct -> window raised 2400 (491b3da) then 3600 at mandelbrot; landing b00476e), cloud (5/5; MEA"
+P8,MUSE:ledger/lead.md,953,window,"WAVE T1 CLOSED (toy main 9b74fa8, pushed): merges 12-15 landed - fft (b7860e7; lead fft_test PASS bd852da6), input (791c7df), timebank (9c2cf30), checkpoint (50ed8d8). Final gates on closed tree: chec"
+P8,MUSE:ledger/lead.md,962,wall,"T2b batch 1 ALL RETURNED, verifications dispatched: toy2-julia PASS-return commit 310f11e (first interactive cart; parcel flagged real seam gap - board CMake lacked toy_input.c despite study-input 10."
+P8,MUSE:ledger/lead.md,970,checkpoint,"WAVE T2 COMPLETE (toy main through 41f0ef9 + RECORD): T2b batch 3 landed - attitude (merge after 8219abd verdict; lead gates PASS proof bd0ec1ae exact; allowlist+pins 50fd9f3), synspec (874c1e5; pins "
+P8,MUSE:ledger/lead.md,978,wall,"toy4 MERGES LANDED + PUSHED (toy main 93789f9, 22 carts): solclock 3804e90 + pin f16131a, shell 10771f5, feedckpt f0db322, pond 55adb37 + pin 93789f9. Verifications 5/5 each (copies e596224f/b110abcf/"
+P8,MUSE:ledger/lead.md,981,window,"toy4 ROUND CLOSED (toy main 9c5bb1a, 23 carts): shepherd verifier 5/5 (copy 053b51d3), merged ed7029b, pin 02fdeb5; cumulative plants 180/180 across 36 parcels. Board capture window parameterized (460"
+P8,MUSE:ledger/lead.md,1000,window,"PRESENTER BLACK GLASS (2026-11-06): toy_product 70f0d96 lead-flashed: serial perfect, no FLUSH-ERR, glass black (owner). Reflashed toy_display_test: lit correctly - bug isolated to presenter/product p"
+P8,MUSE:ledger/lead.md,1003,window,PRESENTER ON GLASS (2026-11-06): blackfix 9fdafa4 lead-flashed with self-test ON; owner saw RED/GREEN/BLUE/fig8 - stale-TXSTALL CS truncation convicted as root cause (drain fix alone rehabilitates per
+P8,MUSE:ledger/lead.md,1009,timeout,"SHELL LIVE + OWNER-OPERATED (2026-11-06/07): toy5-shell 4 commits (33ebd51 shell runner, 5df0d57 stationary long-press, 05c13d5 IRQ touch + tap-launch, b0803ff I2C self-heal + RTC UTC/tz sentinel). Th"
+P8,TOYMSG:scratch/toy1/msg-plant-checkpoint.txt,1,checkpoint,Plant ledger: toy1-checkpoint verification dispatched
+P8,TOYMSG:scratch/toy1/msg-plant-checkpoint.txt,4,checkpoint,"study parcel toy1-checkpoint (parcel commit 14dc584,"
+P9,TOY:docs/RECORD.md,217,historical,historical record of how it started.
+P9,TOY:docs/RECORD.md,276,never existed,(att_verify.py) that never existed; the verifier confirmed
+P9,TOY:docs/WAVE-T2.md,37,mechanism,"separate optional feed mechanism in T2b, designed against"
+P9,TOY:docs/TOY-0.md,4,seal,lead after the muse-softfloat hackathon submission closed. The sealed
+P9,TOY:docs/TOY-0.md,71,claim,frame claim to be a stepped state. A scrolling short state hash in
+P9,TOY:docs/TOY-0.md,130,seal,"- muse-softfloat submodule: MIT, pinned at the sealed tag."
+P9,TOY:docs/metrics/README.md,5,seal,ledger here (the sealed library's ledger does not grow).
+P9,TOY:docs/metrics/README.md,22,claim,verified the unplanted claims either.
+P9,MUSE:ledger/lead.md,891,claim,"Owner: random committed vector often boring; add random edge-case button showing why the library is useful. parcel-psedge (wonder): 19-entry curated EDGE_DECK in site/app.js (subnormal UF+INX, overflo"
+P9,MUSE:ledger/lead.md,895,seal,Submission confirmed in by owner; muse-softfloat is sealed/untouched from here. New private repo loganw234/muse-softfloat-toy created under the workspace for the follow-on desk-toy project (library co
+P9,MUSE:ledger/lead.md,899,seal,"Owner elected Wave T1: ""dispatch parcels for each which can be made now, along with the small studies, as well as one to see if we could feed emulated signals to test with."" Plan committed to toy main"
+P9,MUSE:ledger/lead.md,909,claim,"Wave T1 return 4: toy1-cloud PASS, commit 3f89628 (lead-verified owned-files-only + trailer). 12 fig8 copies k-ulped, 56592-byte state, proof 6000 -> 9ce75d833b5f2ae8, 10000-step 4dab19a52d4418b8, ~2."
+P9,MUSE:ledger/lead.md,919,seal,"Wave T1 return 8: toy1-intervallens PASS, commit 196d78f (lead-verified owned-files-only + trailer). API reality established with header cites: sealed library has NO interval type (zero `interval` mat"
+P9,MUSE:ledger/lead.md,935,seal,"ALL 15 T1 PARCELS RETURNED + LEAD-REVIEWED (every commit owned-files-only, trailers exact, trees clean). Merge phase posture: toy gets its own plant ledger at docs/metrics/plants.jsonl (sealed library"
+P9,MUSE:ledger/lead.md,953,seal,"WAVE T1 CLOSED (toy main 9b74fa8, pushed): merges 12-15 landed - fft (b7860e7; lead fft_test PASS bd852da6), input (791c7df), timebank (9c2cf30), checkpoint (50ed8d8). Final gates on closed tree: chec"
+P9,MUSE:ledger/lead.md,964,executed,"T2b batch 1 ALL LANDED on toy main (pushed 710327c): verifications 15/15 plants caught (julia copy 1e155ee, sigcore b154a11, clock e9799d0; each verifier counterfactually reproduced its parcel report)"
+P9,MUSE:ledger/lead.md,968,seal,"T2b BATCH 2 CLOSED on-device: board gate at 82bb5a2 PASS (11:06-11:56, 17 carts host==board every step; gpend/seismo first on-device feed proofs, stream 46ac78e9 generated on-Pico). Batch-1 14-cart ga"
+P9,MUSE:ledger/lead.md,1000,claim,"PRESENTER BLACK GLASS (2026-11-06): toy_product 70f0d96 lead-flashed: serial perfect, no FLUSH-ERR, glass black (owner). Reflashed toy_display_test: lit correctly - bug isolated to presenter/product p"
+P9,TOYMSG:scratch/toy1/msg-plant-attitude.txt,8,claim,"judge proof claims by rerun only, and the lead will record"
+P10,TOY:docs/RECORD.md,7,pinned,"Repository created (private), library pinned as submodule at"
+P10,TOY:docs/RECORD.md,43,pinned,pinned from the native/board runs before deployment.
+P10,TOY:docs/RECORD.md,62,pinned,pinned at all 8 proof report points from the lead's native
+P10,TOY:docs/RECORD.md,71,pinned,then check/WASM/board PASS on merged main with hashes pinned
+P10,TOY:docs/RECORD.md,78,pinned,check/WASM/board PASS with lead-pinned hashes identical to
+P10,TOY:docs/RECORD.md,85,pinned,"planted copy), then check/WASM/board PASS with lead-pinned"
+P10,TOY:docs/RECORD.md,92,pinned,"evidence), then check/WASM/board PASS with lead-pinned hashes"
+P10,TOY:docs/RECORD.md,98,pinned,"the enclosure), then check/WASM/board PASS with lead-pinned"
+P10,TOY:docs/RECORD.md,104,pinned,check/WASM/board PASS with lead-pinned hashes identical to
+P10,TOY:docs/RECORD.md,113,pinned,check/WASM/board PASS with lead-pinned hashes identical to
+P10,TOY:docs/RECORD.md,156,pinned,"bound), lead fft_test rerun PASS with the pinned output hash"
+P10,TOY:docs/RECORD.md,239,pinned,julia pinned from the lead rerun on the live site.
+P10,TOY:docs/RECORD.md,251,registry,proof cc3111b9). sigcore_test registry assertion was
+P10,TOY:docs/RECORD.md,253,registry,twice on registry growth. All lead gates PASS on merged
+P10,TOY:docs/RECORD.md,255,pinned,"carts pinned from lead reruns), and the 17-cartridge board"
+P10,TOY:docs/RECORD.md,270,pinned,never run cartridge maths (the unpinned build silently
+P10,TOY:docs/RECORD.md,282,pinned,"WASM PASS with every proof pinned from lead reruns, and"
+P10,TOY:docs/RECORD.md,331,pinned,whose frame fingerprints are pinned (f13/f15/f16/f18).
+P10,TOY:docs/RECORD.md,358,pinned,"gravity sandbox: a pinned anchor, scheduled LCG spawns,"
+P10,TOY:docs/TOY-0.md,6,pinned,"consumed as a pinned submodule (`libs/muse-softfloat` at tag `v1.0.0`,"
+P10,TOY:docs/TOY-0.md,123,pinned,"hashes with values pinned from the native/board runs, so a website"
+P10,TOY:docs/TOY-0.md,130,pinned,"- muse-softfloat submodule: MIT, pinned at the sealed tag."
+P10,TOY:docs/metrics/README.md,22,claims,verified the unplanted claims either.
+P10,MUSE:ledger/lead.md,895,pinned,Submission confirmed in by owner; muse-softfloat is sealed/untouched from here. New private repo loganw234/muse-softfloat-toy created under the workspace for the follow-on desk-toy project (library co
+P10,MUSE:ledger/lead.md,897,registry,Owner asked whether the toy system is parcel-ready and elected the viewer as a permanent feature via WebAssembly on a GitHub page. Hardened the contract before any cartridge wave: descriptor carries d
+P10,MUSE:ledger/lead.md,901,registry,"Wave T1 dispatch began: root agent pool is 8 slots including lead, so the wave runs in tranches. Tranche 1 (7 parcels, wonder, report-file-first to scratch/toy1/, board runs fenced to lead-merge, <3 G"
+P10,MUSE:ledger/lead.md,933,pinned,"Wave T1 return 15 (study+utility): toy1-fft PASS, commit 7d550a3 (4 new files only: core/toy_fft.{h,c}, tools/fft_test.c, docs/study-fft.md; lead-verified). Own iterative radix-2 binary64 FFT from the"
+P10,MUSE:ledger/lead.md,935,registry,"ALL 15 T1 PARCELS RETURNED + LEAD-REVIEWED (every commit owned-files-only, trailers exact, trees clean). Merge phase posture: toy gets its own plant ledger at docs/metrics/plants.jsonl (sealed library"
+P10,MUSE:ledger/lead.md,937,pinned,"Merge 1/15 LANDED: toy1-carousel. Plant ledger started in toy repo (docs/metrics/, 7db9913, pushed). Planted copy 4b10656; key sha256 78613a0c committed pre-dispatch (32acade). Verifier (01a1a4d1-6b10"
+P10,MUSE:ledger/lead.md,939,registry,"Merge 2/15 LANDED: toy1-stagnation. Verifier 5/5 (rounding-mode plant, aug-tail plant, start32 off-by-one, memset, ceiling tick) + design confirmed by independent derivation/counter-simulation. Regist"
+P10,MUSE:ledger/lead.md,941,registry,Merge 3/15 LANDED: toy1-microscope (verifier 5/5 incl. demo-pacing plant caught via empty-box sheets; extra report-wording nit banked). Merged e6201fc via union resolver (scratch/toy1/resolve_registry
+P10,MUSE:ledger/lead.md,949,registry,Merge 7/15 LANDED: toy1-pendwave (verifier 5/5). Merged 4649bb7; check/WASM/board PASS; landing 8753140 pushed with live-pacing caveat recorded in toy RECORD (75 steps/frame time-lapse; RP2040 30 fps 
+P10,MUSE:ledger/lead.md,951,registry,"Merges 8-11/15 LANDED: orrery (5/5; board first attempt cut off by 900 s window at step 1500/2000 all-correct -> window raised 2400 (491b3da) then 3600 at mandelbrot; landing b00476e), cloud (5/5; MEA"
+P10,MUSE:ledger/lead.md,957,registry,"T2a ALL LANDED: orbitspec (6060352, verifier 5/5, board PASS 13 carts - first toy_fft on Pico firmware; argmax bin 17 coherent), inputcore (978012f, verifier 5/5 incl. drain-fate carry implemented; le"
+P10,MUSE:ledger/lead.md,962,registry,"T2b batch 1 ALL RETURNED, verifications dispatched: toy2-julia PASS-return commit 310f11e (first interactive cart; parcel flagged real seam gap - board CMake lacked toy_input.c despite study-input 10."
+P10,MUSE:ledger/lead.md,966,registry,"T2b batch 2 ALL RETURNED, verifications dispatched: toy2-gravity 8709d39 (KDK sandbox, proof 0011689c; copy 8d3a52a key c4a80a37), toy2-gpend 87180f5 (first feed cart, proof 651bc7de, sig= stream 46ac"
+P10,MUSE:ledger/lead.md,968,registry,"T2b BATCH 2 CLOSED on-device: board gate at 82bb5a2 PASS (11:06-11:56, 17 carts host==board every step; gpend/seismo first on-device feed proofs, stream 46ac78e9 generated on-Pico). Batch-1 14-cart ga"
+P10,TOYMSG:scratch/toy1/msg-plant-attitude.txt,8,claims,"judge proof claims by rerun only, and the lead will record"
+P11,TOY:docs/RECORD.md,124,stamp,timestamped on-device measurement: 434.4 ms/step on the
+P11,TOY:docs/RECORD.md,136,stamp,"binary32 half has collapsed), after a timestamped on-device"
+P11,TOY:docs/RECORD.md,147,regenerat,regeneration and TSIG replay (60 s desk IMU stream
+P11,TOY:docs/RECORD.md,179,stamp,"timestamped on-device measurements (cloud 434 ms/step,"
+P11,TOY:docs/RECORD.md,296,generated,"the state hash never moves), settings controls generated"
+P11,TOY:docs/RECORD.md,305,stamp,the normative 1-based proof-step stamp was adopted and the
+P11,TOY:docs/RECORD.md,319,generated,"reported step, heartbeat's chest stream generated on the"
+P11,TOY:docs/RECORD.md,340,provenance,"provenance bytes differ, nothing else does. The internal"
+P11,TOY:docs/TOY-0.md,31,stamp,"and event timestamps), audio codec + microphone (a real audio"
+P11,TOY:docs/TOY-0.md,149,provenance,"amendments applied from the start: provenance gate for verifiers,"
+P11,TOY:docs/metrics/README.md,14,provenance,(provenance gate: it must quote the copy's HEAD; this file
+P11,MUSE:ledger/lead.md,891,provenance,"Owner: random committed vector often boring; add random edge-case button showing why the library is useful. parcel-psedge (wonder): 19-entry curated EDGE_DECK in site/app.js (subnormal UF+INX, overflo"
+P11,MUSE:ledger/lead.md,895,regenerat,Submission confirmed in by owner; muse-softfloat is sealed/untouched from here. New private repo loganw234/muse-softfloat-toy created under the workspace for the follow-on desk-toy project (library co
+P11,MUSE:ledger/lead.md,935,provenance,"ALL 15 T1 PARCELS RETURNED + LEAD-REVIEWED (every commit owned-files-only, trailers exact, trees clean). Merge phase posture: toy gets its own plant ledger at docs/metrics/plants.jsonl (sealed library"
+P11,MUSE:ledger/lead.md,937,provenance,"Merge 1/15 LANDED: toy1-carousel. Plant ledger started in toy repo (docs/metrics/, 7db9913, pushed). Planted copy 4b10656; key sha256 78613a0c committed pre-dispatch (32acade). Verifier (01a1a4d1-6b10"
+P11,MUSE:ledger/lead.md,951,stamp,"Merges 8-11/15 LANDED: orrery (5/5; board first attempt cut off by 900 s window at step 1500/2000 all-correct -> window raised 2400 (491b3da) then 3600 at mandelbrot; landing b00476e), cloud (5/5; MEA"
+P11,MUSE:ledger/lead.md,953,provenance,"WAVE T1 CLOSED (toy main 9b74fa8, pushed): merges 12-15 landed - fft (b7860e7; lead fft_test PASS bd852da6), input (791c7df), timebank (9c2cf30), checkpoint (50ed8d8). Final gates on closed tree: chec"
+P11,MUSE:ledger/lead.md,968,generated,"T2b BATCH 2 CLOSED on-device: board gate at 82bb5a2 PASS (11:06-11:56, 17 carts host==board every step; gpend/seismo first on-device feed proofs, stream 46ac78e9 generated on-Pico). Batch-1 14-cart ga"
+P11,MUSE:ledger/lead.md,972,stamp,"toy3 ROUND CLOSED (toy main through 05eee5a + RECORD): owner chose full web mock device (panels 240/360/466/480+custom, wheel/rim dial, tilt pad) over pushing the terminal emulator - mock = UI driver "
+P11,TOYMSG:scratch/toy1/msg-plant-mock.txt,6,stamp,"differ on paper (browser stamps steps_done+1, emu reads"
+P12,TOY:docs/RECORD.md,97,probe,independent exact-range probe is now the standing way to check
+P12,TOY:docs/RECORD.md,237,probe,proven alive by reboot probe; the comparison was completed
+P12,TOY:docs/TOY-0.md,27,variant,"16 MB flash, USB-C, lithium battery support, speaker-box variants"
+P12,TOY:docs/metrics/README.md,11,scratch,"in workspace scratch; only its SHA-256 is committed here,"
+P12,MUSE:ledger/lead.md,893,scratch,"Owner then reported -0/+0 signs lost in decimal input fields. Cause: page-side bitsToDecimal used String(v) and String(-0)===""0"" (runs always used hex bits; display only, pre-existing in the function,"
+P12,MUSE:ledger/lead.md,899,scratch,"Owner elected Wave T1: ""dispatch parcels for each which can be made now, along with the small studies, as well as one to see if we could feed emulated signals to test with."" Plan committed to toy main"
+P12,MUSE:ledger/lead.md,901,scratch,"Wave T1 dispatch began: root agent pool is 8 slots including lead, so the wave runs in tranches. Tranche 1 (7 parcels, wonder, report-file-first to scratch/toy1/, board runs fenced to lead-merge, <3 G"
+P12,MUSE:ledger/lead.md,903,probe,"Wave T1 first return: toy1-carousel PASS, commit 6854647 (lead-verified: exactly the 4 owned files, trailer correct, clean tree). Three choreographies (fig-8, Lagrange 1772 analytic, Euler 1767 analyt"
+P12,MUSE:ledger/lead.md,909,probe,"Wave T1 return 4: toy1-cloud PASS, commit 3f89628 (lead-verified owned-files-only + trailer). 12 fig8 copies k-ulped, 56592-byte state, proof 6000 -> 9ce75d833b5f2ae8, 10000-step 4dab19a52d4418b8, ~2."
+P12,MUSE:ledger/lead.md,915,probe,"Wave T1 return 6: toy1-stagnation PASS, commit 3c476b9 (lead-verified owned-files-only + trailer). 128-byte state; freeze steps predicted analytically = observed = independent Python struct cross-chec"
+P12,MUSE:ledger/lead.md,919,probe,"Wave T1 return 8: toy1-intervallens PASS, commit 196d78f (lead-verified owned-files-only + trailer). API reality established with header cites: sealed library has NO interval type (zero `interval` mat"
+P12,MUSE:ledger/lead.md,941,scratch,Merge 3/15 LANDED: toy1-microscope (verifier 5/5 incl. demo-pacing plant caught via empty-box sheets; extra report-wording nit banked). Merged e6201fc via union resolver (scratch/toy1/resolve_registry
+P12,MUSE:ledger/lead.md,947,probe,"Merge 6/15 LANDED: toy1-intervallens (verifier 5/5, 2033/4000 strict enclosure failures probed, IN/OUT swap convicted by geometry). Merged 2735c7a; check/WASM/board PASS; landing 1b16362 pushed. Pendw"
+P12,MUSE:ledger/lead.md,951,scratch,"Merges 8-11/15 LANDED: orrery (5/5; board first attempt cut off by 900 s window at step 1500/2000 all-correct -> window raised 2400 (491b3da) then 3600 at mandelbrot; landing b00476e), cloud (5/5; MEA"
+P12,MUSE:ledger/lead.md,955,scratch,"WAVE T2 OPENED (toy main b266193, pushed after one transient GitHub failure): owner decisions - RP2350-1.85C PRIMARY (sensors+microSD), always plugged, manual time/zone set, warp unpreferred (paramete"
+P12,MUSE:ledger/lead.md,957,scratch,"T2a ALL LANDED: orbitspec (6060352, verifier 5/5, board PASS 13 carts - first toy_fft on Pico firmware; argmax bin 17 coherent), inputcore (978012f, verifier 5/5 incl. drain-fate carry implemented; le"
+P12,MUSE:ledger/lead.md,964,probe,"T2b batch 1 ALL LANDED on toy main (pushed 710327c): verifications 15/15 plants caught (julia copy 1e155ee, sigcore b154a11, clock e9799d0; each verifier counterfactually reproduced its parcel report)"
+P12,MUSE:ledger/lead.md,968,probe,"T2b BATCH 2 CLOSED on-device: board gate at 82bb5a2 PASS (11:06-11:56, 17 carts host==board every step; gpend/seismo first on-device feed proofs, stream 46ac78e9 generated on-Pico). Batch-1 14-cart ga"
+P12,MUSE:ledger/lead.md,972,variant,"toy3 ROUND CLOSED (toy main through 05eee5a + RECORD): owner chose full web mock device (panels 240/360/466/480+custom, wheel/rim dial, tilt pad) over pushing the terminal emulator - mock = UI driver "
+P12,MUSE:ledger/lead.md,984,scratch,"KIT ARRIVED (2026-11-06): Waveshare RP2350-Touch-AMOLED-1.75 (466x466), owner-connected running factory demo on COM15, serial 9FBDB21D21F41425. Parts from vendor wiki/pin image: CO5300 AMOLED QSPI (CS"
+P12,MUSE:ledger/lead.md,987,scratch,RP2350 ON-DEVICE PROOF PASS (2026-11-06 19:32-19:56): all 23 carts on Waveshare RP2350-Touch-AMOLED-1.75 serial 9FBDB21D21F41425 matched host emu at every reported step (scratch/toy2/flash-2350-proof.
+P12,TOYMSG:scratch/toy1/msg-plant-batch2.txt,6,scratch,dispatched; keys stay in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-carousel.txt,6,scratch,stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-checkpoint.txt,6,scratch,dispatched; the key itself stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-ckpt.txt,6,scratch,stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-clock.txt,6,scratch,stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-cloud.txt,6,scratch,stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-fft.txt,6,scratch,stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-flashckpt.txt,5,scratch,key stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-fluidstudy.txt,5,scratch,edits). Committed before dispatch; key stays in scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-harmonograph.txt,6,scratch,key itself stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-heartbeat.txt,5,scratch,key stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-input.txt,6,scratch,the key itself stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-inputcore.txt,6,scratch,stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-intervallens.txt,6,scratch,key itself stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-julia.txt,6,scratch,stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-lorenz.txt,6,scratch,stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-mandelbrot.txt,6,scratch,key itself stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-microscope.txt,6,scratch,stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-orbitspec.txt,6,scratch,stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-orrery.txt,6,scratch,stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-pendwave.txt,6,scratch,stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-rp2350.txt,5,scratch,key stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-shell-feed.txt,5,scratch,Committed before dispatch; keys stay in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-sigcore.txt,6,scratch,stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-signals.txt,6,scratch,stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-solclock.txt,5,scratch,key stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-stagnation.txt,6,scratch,stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-synspec.txt,5,scratch,key stays in workspace scratch.
+P12,TOYMSG:scratch/toy1/msg-plant-timebank.txt,6,scratch,the key itself stays in workspace scratch.
+P12,TOYMSG:scratch/toy2/msg-display-plant.txt,11,scratch,flashed. Parcel report scratch/toy2/toy5-display.md.
+P12,TOYMSG:scratch/toy2/msg-livefeed-plant.txt,10,scratch,in the parcel report. Report scratch/toy2/toy5-livefeed.md.
+P12,TOYMSG:scratch/toy2/msg-pace-plant.txt,11,scratch,30 ms budget. Parcel report scratch/toy2/toy5-pace.md.
+P12,TOYMSG:scratch/toy2/msg-pond-plant.txt,8,scratch,Parcel report: scratch/toy2/toy4-pond.md (proof 400 steps
+P12,TOYMSG:scratch/toy2/msg-presenter-plant.txt,11,scratch,report scratch/toy2/toy5-presenter.md.
+P12,TOYMSG:scratch/toy2/msg-sensors-plant.txt,10,scratch,Parcel report scratch/toy2/toy5-sensors.md.
+P12,TOYMSG:scratch/toy2/msg-shell-plant.txt,12,scratch,scratch/toy2/toy5-shell.md.
+P13,TOY:docs/WAVE-T2.md,67,worktree,"Unchanged from T1: parcels in worktrees, planted-copy"
+P13,MUSE:ledger/lead.md,899,worktree,"Owner elected Wave T1: ""dispatch parcels for each which can be made now, along with the small studies, as well as one to see if we could feed emulated signals to test with."" Plan committed to toy main"
+P13,MUSE:ledger/lead.md,901,worktree,"Wave T1 dispatch began: root agent pool is 8 slots including lead, so the wave runs in tranches. Tranche 1 (7 parcels, wonder, report-file-first to scratch/toy1/, board runs fenced to lead-merge, <3 G"
+P13,MUSE:ledger/lead.md,935,resolve,"ALL 15 T1 PARCELS RETURNED + LEAD-REVIEWED (every commit owned-files-only, trailers exact, trees clean). Merge phase posture: toy gets its own plant ledger at docs/metrics/plants.jsonl (sealed library"
+P13,MUSE:ledger/lead.md,939,resolve,"Merge 2/15 LANDED: toy1-stagnation. Verifier 5/5 (rounding-mode plant, aug-tail plant, start32 off-by-one, memset, ceiling tick) + design confirmed by independent derivation/counter-simulation. Regist"
+P13,MUSE:ledger/lead.md,941,resolve,Merge 3/15 LANDED: toy1-microscope (verifier 5/5 incl. demo-pacing plant caught via empty-box sheets; extra report-wording nit banked). Merged e6201fc via union resolver (scratch/toy1/resolve_registry
+P13,MUSE:ledger/lead.md,951,worktree,"Merges 8-11/15 LANDED: orrery (5/5; board first attempt cut off by 900 s window at step 1500/2000 all-correct -> window raised 2400 (491b3da) then 3600 at mandelbrot; landing b00476e), cloud (5/5; MEA"
+P13,MUSE:ledger/lead.md,953,worktree,"WAVE T1 CLOSED (toy main 9b74fa8, pushed): merges 12-15 landed - fft (b7860e7; lead fft_test PASS bd852da6), input (791c7df), timebank (9c2cf30), checkpoint (50ed8d8). Final gates on closed tree: chec"
+P13,MUSE:ledger/lead.md,968,worktree,"T2b BATCH 2 CLOSED on-device: board gate at 82bb5a2 PASS (11:06-11:56, 17 carts host==board every step; gpend/seismo first on-device feed proofs, stream 46ac78e9 generated on-Pico). Batch-1 14-cart ga"
+P13,MUSE:ledger/lead.md,987,worktree,RP2350 ON-DEVICE PROOF PASS (2026-11-06 19:32-19:56): all 23 carts on Waveshare RP2350-Touch-AMOLED-1.75 serial 9FBDB21D21F41425 matched host emu at every reported step (scratch/toy2/flash-2350-proof.
+P13,MUSE:ledger/lead.md,990,worktree,DISPLAY LIT (2026-11-06 20:14 + rerun): toy5-display parcel 445e1a79 lead-flashed via picotool reset interface (no owner BOOTSEL needed once our firmware runs). Power verdict: zero AXP2101 writes (pan
+P13,MUSE:ledger/lead.md,1009,resolve,"SHELL LIVE + OWNER-OPERATED (2026-11-06/07): toy5-shell 4 commits (33ebd51 shell runner, 5df0d57 stationary long-press, 05c13d5 IRQ touch + tap-launch, b0803ff I2C self-heal + RTC UTC/tz sentinel). Th"
+P13,MUSE:ledger/lead.md,1012,resolve,"SHELL MERGED (561cd11) + RECORD hardware day (d307057), pushed. Gates: product_input_test 163 PASS, check PASS, RP2350 4 targets + RP2040 0 warnings. Cumulative 200/200 across 41 parcels. toy5-livefee"
+P14,TOY:docs/RECORD.md,73,freeze,binary16/32/64 lanes freeze at 257/1025/2049 exactly as
+P14,TOY:docs/RECORD.md,252,allowlist,generalized to a feed-cart allowlist after going stale
+P14,TOY:docs/WAVE-T1.md,22,freeze,| toy1-stagnation | `stagnation` | f16/f32/f64 accumulation freeze + augmented resurrection |
+P14,MUSE:ledger/lead.md,903,CRLF,"Wave T1 first return: toy1-carousel PASS, commit 6854647 (lead-verified: exactly the 4 owned files, trailer correct, clean tree). Three choreographies (fig-8, Lagrange 1772 analytic, Euler 1767 analyt"
+P14,MUSE:ledger/lead.md,915,freeze,"Wave T1 return 6: toy1-stagnation PASS, commit 3c476b9 (lead-verified owned-files-only + trailer). 128-byte state; freeze steps predicted analytically = observed = independent Python struct cross-chec"
+P14,MUSE:ledger/lead.md,917,freeze,"Wave T1 return 7: toy1-lorenz PASS, commit feb3961 (lead-verified owned-files-only + trailer). 61560-byte state (1280-slot dual-twin 3D trail, cap arithmetic shown), proof 20000 -> 1c2f925917fce45e, ~"
+P14,MUSE:ledger/lead.md,935,frozen,"ALL 15 T1 PARCELS RETURNED + LEAD-REVIEWED (every commit owned-files-only, trailers exact, trees clean). Merge phase posture: toy gets its own plant ledger at docs/metrics/plants.jsonl (sealed library"
+P14,MUSE:ledger/lead.md,937,CRLF,"Merge 1/15 LANDED: toy1-carousel. Plant ledger started in toy repo (docs/metrics/, 7db9913, pushed). Planted copy 4b10656; key sha256 78613a0c committed pre-dispatch (32acade). Verifier (01a1a4d1-6b10"
+P14,MUSE:ledger/lead.md,968,allowlist,"T2b BATCH 2 CLOSED on-device: board gate at 82bb5a2 PASS (11:06-11:56, 17 carts host==board every step; gpend/seismo first on-device feed proofs, stream 46ac78e9 generated on-Pico). Batch-1 14-cart ga"
+P14,MUSE:ledger/lead.md,970,allowlist,"WAVE T2 COMPLETE (toy main through 41f0ef9 + RECORD): T2b batch 3 landed - attitude (merge after 8219abd verdict; lead gates PASS proof bd0ec1ae exact; allowlist+pins 50fd9f3), synspec (874c1e5; pins "
+P15,TOY:docs/RECORD.md,13,genuine,runs the same steps on the genuine Pico; host == board state hash
+P15,TOY:docs/RECORD.md,19,serial,"Board budget PASS on the genuine Pico (serial E66440A2CB6F5C2B,"
+P15,TOY:docs/RECORD.md,64,genuine,step on the genuine Pico (E66440A2CB6F5C2B). Two Windows-host
+P15,TOY:docs/RECORD.md,184,genuine,genuine Pico; Wave T2 (interactive/sensor cartridges on the
+P15,TOY:docs/RECORD.md,224,lock,"feed -> apply -> step everywhere, parameter-block stream"
+P15,TOY:docs/RECORD.md,227,lock,"(runner-owned clock with placement guard, TOYBANK1 sparse"
+P15,TOY:docs/RECORD.md,235,genuine,at every reported step on the genuine Pico (first attempt
+P15,TOY:docs/RECORD.md,252,stale,generalized to a feed-cart allowlist after going stale
+P15,TOY:docs/RECORD.md,278,genuine,"genuine, the narrative is not, and both facts are recorded"
+P15,TOY:docs/RECORD.md,284,genuine,reported step on the genuine RP2040. The gallery is now
+P15,TOY:docs/RECORD.md,323,lock,"## toy4 prep round lands: shell, seeks, science clock, pond, shepherd (2026-11-04)"
+P15,TOY:docs/RECORD.md,329,lock,"forwarding with an ESC/button exit gesture, clock-set and"
+P15,TOY:docs/RECORD.md,330,lock,an idle clockface - proven host-side by a scripted emu tour
+P15,TOY:docs/RECORD.md,341,flash,flash checkpoint backend compiles against A/B slots at the
+P15,TOY:docs/RECORD.md,342,flash,flash end (compile-proven only until the kit's power-cut
+P15,TOY:docs/RECORD.md,347,lock,Three cartridges join the gallery. solclock is the science
+P15,TOY:docs/RECORD.md,348,lock,"clock: equation of time to ~0.04 min at the four extremes,"
+P15,TOY:docs/RECORD.md,368,lock,"TOY_BOARD_WINDOW); solclock ae761075, pond d38a0974 and"
+P15,TOY:docs/RECORD.md,373,flash,flash power-cut proof are next.
+P15,TOY:docs/RECORD.md,389,lock,"carts, RTC clockface - owner-operated on glass."
+P15,TOY:docs/RECORD.md,397,lock,sensor bus until a 9-clock self-heal was added. Frame
+P15,TOY:docs/RECORD.md,408,flash,"numbers, and the flash checkpoint power-cut behaviour."
+P15,TOY:docs/WAVE-T1.md,16,lock,| toy1-orrery | `orrery` | Keplerian solar-system orrery clock |
+P15,TOY:docs/WAVE-T1.md,27,lock,| branch | study | unblocks |
+P15,TOY:docs/WAVE-T1.md,31,lock,"| toy1-timebank | Time layer: wall-clock abstraction, pacing/banking buffers, morning-report data | overnight banking, active hours, morning report |"
+P15,TOY:docs/WAVE-T1.md,32,flash,"| toy1-checkpoint | Checkpoint format & versioning (state bytes + header, flash layout) | power-loss resume on device |"
+P15,TOY:docs/WAVE-T2.md,15,lock,on the touchscreen; no network time). Clock-unset is a
+P15,TOY:docs/WAVE-T2.md,41,genuine,"- Genuine study errata found by T1 verifiers are T2 inputs,"
+P15,TOY:docs/WAVE-T2.md,42,lock,"not blockers (field-count wording, helper ownership,"
+P15,TOY:docs/WAVE-T2.md,57,lock,clock-core (toy_clock + keyframe banking/playback + morning
+P15,TOY:docs/TOY-0.md,27,flash,"16 MB flash, USB-C, lithium battery support, speaker-box variants"
+P15,TOY:docs/TOY-0.md,30,lock,"- 6-axis IMU, RTC chip (real wall-clock for active-hours scheduling"
+P15,TOY:docs/TOY-0.md,38,flash,"- RP2040, 264 KB SRAM, 16 MB flash, USB-C, battery header"
+P15,TOY:docs/TOY-0.md,42,genuine,Until either arrives: the six existing boards (genuine Pico + five
+P15,TOY:docs/TOY-0.md,59,lock,"every platform. No heap, no platform headers, no wall clock. A"
+P15,TOY:docs/TOY-0.md,143,flash,"- `tools/run.sh board` — build the core-only firmware, flash the"
+P15,TOY:docs/TOY-0.md,144,serial,"genuine Pico by serial under the shared board lock, read the state"
+P15,TOY:docs/TOY-0.md,152,lock,## 8. Open questions for the owner (none blocking v0)
+P15,MUSE:ledger/lead.md,891,lock,"Owner: random committed vector often boring; add random edge-case button showing why the library is useful. parcel-psedge (wonder): 19-entry curated EDGE_DECK in site/app.js (subnormal UF+INX, overflo"
+P15,MUSE:ledger/lead.md,911,lock,"Wave T1 return 5: toy1-orrery PASS, commit 59651e3 (lead-verified owned-files-only + trailer). JPL Table 1 (Standish) elements J2000 fetched+transcribed, fixed-5-Newton Kepler in cycles, residual 1.1e"
+P15,MUSE:ledger/lead.md,923,lock,"Wave T1 return 10 (first study): toy1-timebank PASS, commit 8693d89 (docs/study-timebank.md only, 934 lines; lead-verified). HEADLINE: dense full-state banking arithmetically dead (every-step 45-172 G"
+P15,MUSE:ledger/lead.md,925,serial,"Wave T1 return 11 (study): toy1-checkpoint PASS, commit 14dc584 (docs/study-checkpoint.md only, 797 lines; lead-verified). Format: 64-byte LE byte-serialised header (TOYCKPT1, envelope ver, cart NAME "
+P15,MUSE:ledger/lead.md,927,serial,"Wave T1 return 12 (study+prototype): toy1-signals PASS, commit 22bbdd7 (6 new files only: core/toy_signal.{h,c}+toy_signal_sin.inc, tools/signal_proto.c, tools/gen_sin_table.py, docs/study-signals.md;"
+P15,MUSE:ledger/lead.md,931,lock,"Wave T1 return 14 (study): toy1-input PASS, commit 0053ef8 (docs/study-input.md only, 1381 lines; lead-verified). Recommendation: optional pre-step apply() callback via APPENDED descriptor fields (NUL"
+P15,MUSE:ledger/lead.md,935,serial,"ALL 15 T1 PARCELS RETURNED + LEAD-REVIEWED (every commit owned-files-only, trailers exact, trees clean). Merge phase posture: toy gets its own plant ledger at docs/metrics/plants.jsonl (sealed library"
+P15,MUSE:ledger/lead.md,937,genuine,"Merge 1/15 LANDED: toy1-carousel. Plant ledger started in toy repo (docs/metrics/, 7db9913, pushed). Planted copy 4b10656; key sha256 78613a0c committed pre-dispatch (32acade). Verifier (01a1a4d1-6b10"
+P15,MUSE:ledger/lead.md,953,genuine,"WAVE T1 CLOSED (toy main 9b74fa8, pushed): merges 12-15 landed - fft (b7860e7; lead fft_test PASS bd852da6), input (791c7df), timebank (9c2cf30), checkpoint (50ed8d8). Final gates on closed tree: chec"
+P15,MUSE:ledger/lead.md,955,lock,"WAVE T2 OPENED (toy main b266193, pushed after one transient GitHub failure): owner decisions - RP2350-1.85C PRIMARY (sensors+microSD), always plugged, manual time/zone set, warp unpreferred (paramete"
+P15,MUSE:ledger/lead.md,957,lock,"T2a ALL LANDED: orbitspec (6060352, verifier 5/5, board PASS 13 carts - first toy_fft on Pico firmware; argmax bin 17 coherent), inputcore (978012f, verifier 5/5 incl. drain-fate carry implemented; le"
+P15,MUSE:ledger/lead.md,962,serial,"T2b batch 1 ALL RETURNED, verifications dispatched: toy2-julia PASS-return commit 310f11e (first interactive cart; parcel flagged real seam gap - board CMake lacked toy_input.c despite study-input 10."
+P15,MUSE:ledger/lead.md,964,lock,"T2b batch 1 ALL LANDED on toy main (pushed 710327c): verifications 15/15 plants caught (julia copy 1e155ee, sigcore b154a11, clock e9799d0; each verifier counterfactually reproduced its parcel report)"
+P15,MUSE:ledger/lead.md,966,stale,"T2b batch 2 ALL RETURNED, verifications dispatched: toy2-gravity 8709d39 (KDK sandbox, proof 0011689c; copy 8d3a52a key c4a80a37), toy2-gpend 87180f5 (first feed cart, proof 651bc7de, sig= stream 46ac"
+P15,MUSE:ledger/lead.md,970,lock,"WAVE T2 COMPLETE (toy main through 41f0ef9 + RECORD): T2b batch 3 landed - attitude (merge after 8219abd verdict; lead gates PASS proof bd0ec1ae exact; allowlist+pins 50fd9f3), synspec (874c1e5; pins "
+P15,MUSE:ledger/lead.md,972,flash,"toy3 ROUND CLOSED (toy main through 05eee5a + RECORD): owner chose full web mock device (panels 240/360/466/480+custom, wheel/rim dial, tilt pad) over pushing the terminal emulator - mock = UI driver "
+P15,MUSE:ledger/lead.md,975,lock,"toy4 PREP ROUND (post-compaction lead resume): toy4-flashckpt merged 20ad118, toy4-fluidstudy study merged 274daf8 (+lead f32-range fix 25aa9c8), toy4-tsig merged 594d339 - each 5/5 verified, verdicts"
+P15,MUSE:ledger/lead.md,978,lock,"toy4 MERGES LANDED + PUSHED (toy main 93789f9, 22 carts): solclock 3804e90 + pin f16131a, shell 10771f5, feedckpt f0db322, pond 55adb37 + pin 93789f9. Verifications 5/5 each (copies e596224f/b110abcf/"
+P15,MUSE:ledger/lead.md,981,lock,"toy4 ROUND CLOSED (toy main 9c5bb1a, 23 carts): shepherd verifier 5/5 (copy 053b51d3), merged ed7029b, pin 02fdeb5; cumulative plants 180/180 across 36 parcels. Board capture window parameterized (460"
+P15,MUSE:ledger/lead.md,984,serial,"KIT ARRIVED (2026-11-06): Waveshare RP2350-Touch-AMOLED-1.75 (466x466), owner-connected running factory demo on COM15, serial 9FBDB21D21F41425. Parts from vendor wiki/pin image: CO5300 AMOLED QSPI (CS"
+P15,MUSE:ledger/lead.md,987,serial,RP2350 ON-DEVICE PROOF PASS (2026-11-06 19:32-19:56): all 23 carts on Waveshare RP2350-Touch-AMOLED-1.75 serial 9FBDB21D21F41425 matched host emu at every reported step (scratch/toy2/flash-2350-proof.
+P15,MUSE:ledger/lead.md,990,serial,DISPLAY LIT (2026-11-06 20:14 + rerun): toy5-display parcel 445e1a79 lead-flashed via picotool reset interface (no owner BOOTSEL needed once our firmware runs). Power verdict: zero AXP2101 writes (pan
+P15,MUSE:ledger/lead.md,993,lock,"toy5-display VERIFIED + MERGED (608e4a6, pushed): verifier 5/5 on copy 7595c109 (cumulative 185/185, 37 parcels). Lead gates PASS: display_test, RP2350+RP2040 builds 0 warnings, check PASS. toy5-prese"
+P15,MUSE:ledger/lead.md,996,flash,"SENSORS LIVE (2026-11-06): toy5-sensors 2d0465c lead-flashed. IMU QMI8658C OK (who 0x05 rev 0x7c, 596 ok/2 err in 60 s). Still-desk stats (596 samples): a=(-71,+173,-961) mg sd ~0.6 mg/axis, |a|=978.8"
+P15,MUSE:ledger/lead.md,999,flash,"TOUCH PROVEN (2026-11-06): touchfix 0717a5a lead-flashed; owner-operated run: normal=OK rc=0, 8 DOWN/8 UP, two-finger ids 0+1, 753 touch lines, x 6..455 y 9..451, int_falls=774; touch_nack=51 + no_rep"
+P15,MUSE:ledger/lead.md,1000,serial,"PRESENTER BLACK GLASS (2026-11-06): toy_product 70f0d96 lead-flashed: serial perfect, no FLUSH-ERR, glass black (owner). Reflashed toy_display_test: lit correctly - bug isolated to presenter/product p"
+P15,MUSE:ledger/lead.md,1003,lock,PRESENTER ON GLASS (2026-11-06): blackfix 9fdafa4 lead-flashed with self-test ON; owner saw RED/GREEN/BLUE/fig8 - stale-TXSTALL CS truncation convicted as root cause (drain fix alone rehabilitates per
+P15,MUSE:ledger/lead.md,1006,lock,"toy5-pace VERIFIED + MERGED (1b7f69c, pushed): verifier 5/5 copy c0ee6e30 (cumulative 195/195, 40 parcels). Lead gates PASS. Owner decisions recorded: 360-upscale KEEP (native 466 misses by 2,088 B; t"
+P15,MUSE:ledger/lead.md,1009,lock,"SHELL LIVE + OWNER-OPERATED (2026-11-06/07): toy5-shell 4 commits (33ebd51 shell runner, 5df0d57 stationary long-press, 05c13d5 IRQ touch + tap-launch, b0803ff I2C self-heal + RTC UTC/tz sentinel). Th"
+P15,MUSE:ledger/lead.md,1012,flash,"SHELL MERGED (561cd11) + RECORD hardware day (d307057), pushed. Gates: product_input_test 163 PASS, check PASS, RP2350 4 targets + RP2040 0 warnings. Cumulative 200/200 across 41 parcels. toy5-livefee"
+P15,TOYMSG:scratch/toy1/msg-plant-clock.txt,1,lock,Plant ledger: toy2-clock verification dispatched
+P15,TOYMSG:scratch/toy1/msg-plant-clock.txt,4,lock,"toy2-clock (parcel commit 4af77eb, planted copy e9799d0)."
+P15,TOYMSG:scratch/toy1/msg-plant-flashckpt.txt,1,flash,Plant ledger: toy4-flashckpt verification dispatched
+P15,TOYMSG:scratch/toy1/msg-plant-flashckpt.txt,3,flash,Hash-only key row for parcel toy4-flashckpt (parcel commit
+P15,TOYMSG:scratch/toy1/msg-plant-solclock.txt,1,lock,Plant ledger: toy4-solclock verification dispatched
+P15,TOYMSG:scratch/toy1/msg-plant-solclock.txt,3,lock,Hash-only key row for parcel toy4-solclock (parcel commit
+P15,TOYMSG:scratch/toy2/msg-display-plant.txt,7,genuine,before verifier dispatch. Note: the GENUINE parcel UF2 was
+P15,TOYMSG:scratch/toy2/msg-display-plant.txt,8,flash,lead-flashed before planting and the owner confirmed the
+P15,TOYMSG:scratch/toy2/msg-display-plant.txt,11,flash,flashed. Parcel report scratch/toy2/toy5-display.md.
+P15,TOYMSG:scratch/toy2/msg-livefeed-plant.txt,7,genuine,hash-only before dispatch. Genuine parcel lead-flashed
+P15,TOYMSG:scratch/toy2/msg-pace-plant.txt,7,genuine,hash recorded hash-only before dispatch. Genuine parcel
+P15,TOYMSG:scratch/toy2/msg-pace-plant.txt,8,flash,lead-flashed 2026-11-06: flush 62.7 -> 54.5 ms/frame
+P15,TOYMSG:scratch/toy2/msg-presenter-plant.txt,7,genuine,recorded hash-only before dispatch. Genuine parcel
+P15,TOYMSG:scratch/toy2/msg-presenter-plant.txt,8,flash,lead-flashed 2026-11-06: self-test RED/GREEN/BLUE all
+P15,TOYMSG:scratch/toy2/msg-sensors-plant.txt,7,genuine,dispatch. Genuine parcel lead-flashed 2026-11-06: IMU/RTC
+P15,TOYMSG:scratch/toy2/msg-shell-plant.txt,7,genuine,Key hash recorded hash-only before dispatch. Genuine
+P15,TOYMSG:scratch/toy2/msg-shell-plant.txt,8,flash,parcel lead-flashed through three live fix rounds
+P16,TOY:docs/RECORD.md,3,append,"Dated entries, appended as work lands. Failures stay in."
+P16,TOY:docs/RECORD.md,59,plants\.jsonl,verification scored 5/5 (`docs/metrics/plants.jsonl` — this
+P16,TOY:docs/RECORD.md,123,at merge,"lead at merge, 6000 -> 1000 steps (report every 250), after a"
+P16,TOY:docs/RECORD.md,134,at merge,"trimmed by the lead at merge, 896 -> 672 steps (exactly six"
+P16,TOY:docs/RECORD.md,175,plants\.jsonl,recorded in `docs/metrics/plants.jsonl` — and every cartridge
+P16,TOY:docs/RECORD.md,178,at merge,reported step. Two proof horizons were trimmed at merge on
+P16,TOY:docs/RECORD.md,203,append,"six appended descriptor fields, 32-byte integer events"
+P16,TOY:docs/RECORD.md,208,append,"`state_version` appended last, emu save/load with proven"
+P16,TOY:docs/RECORD.md,222,plants\.jsonl,(planted tallies in docs/metrics/plants.jsonl): SIG-1 signal
+P16,TOY:docs/RECORD.md,223,append,"feed seam (feed + sig_spec appended after state_version,"
+P16,TOY:docs/WAVE-T2.md,26,append,- Events follow study-input: appended descriptor fields
+P16,TOY:docs/WAVE-T2.md,40,append,`state_version`; signals fields append after those in T2b.
+P16,TOY:docs/WAVE-T2.md,68,plants\.jsonl,independent verification (`docs/metrics/plants.jsonl`)
+P16,TOY:docs/metrics/README.md,1,metrics,# Toy metrics — plant ledger
+P16,TOY:docs/metrics/README.md,12,plants\.jsonl,"in `plants.jsonl`, **before** the verifier is dispatched."
+P16,TOY:docs/metrics/README.md,17,append,"are restated pre-push, append-only after) with caught/missed"
+P16,TOY:docs/metrics/README.md,18,lead-merge,per plant. New rows carry `checked_by: lead-merge`.
+P16,MUSE:ledger/lead.md,899,at merge,"Owner elected Wave T1: ""dispatch parcels for each which can be made now, along with the small studies, as well as one to see if we could feed emulated signals to test with."" Plan committed to toy main"
+P16,MUSE:ledger/lead.md,901,lead-merge,"Wave T1 dispatch began: root agent pool is 8 slots including lead, so the wave runs in tranches. Tranche 1 (7 parcels, wonder, report-file-first to scratch/toy1/, board runs fenced to lead-merge, <3 G"
+P16,MUSE:ledger/lead.md,903,at merge,"Wave T1 first return: toy1-carousel PASS, commit 6854647 (lead-verified: exactly the 4 owned files, trailer correct, clean tree). Three choreographies (fig-8, Lagrange 1772 analytic, Euler 1767 analyt"
+P16,MUSE:ledger/lead.md,905,at merge,"Wave T1 return 2: toy1-harmonograph PASS, commit ad7376d (lead-verified owned-files-only + trailer). 32928-byte state (2048-pt trail ring), proof 6000 -> 05b7c173e9e0b8b5 crossing 3 pattern changes, 1"
+P16,MUSE:ledger/lead.md,907,at merge,"Wave T1 return 3: toy1-pendwave PASS, commit 7cf8fef (lead-verified owned-files-only + trailer). N=20 ring, 1016-byte state, elliptic F-corrected lengths so nonlinear frequencies land exactly on (20+k"
+P16,MUSE:ledger/lead.md,921,at merge,"Wave T1 return 9: toy1-microscope PASS, commit 52a90c3 (lead-verified owned-files-only + trailer). sqrt at binade boundary x=2 chosen deliberately (x-spacing doubles across centre, y-spacing constant "
+P16,MUSE:ledger/lead.md,927,at merge,"Wave T1 return 12 (study+prototype): toy1-signals PASS, commit 22bbdd7 (6 new files only: core/toy_signal.{h,c}+toy_signal_sin.inc, tools/signal_proto.c, tools/gen_sin_table.py, docs/study-signals.md;"
+P16,MUSE:ledger/lead.md,929,at merge,"Wave T1 return 13: toy1-mandelbrot PASS, commit 371d56e (lead-verified owned-files-only + trailer). 96x96 split grid (top msf32 / bottom msf64, sanctioned direct-call exception flagged), 18488-byte st"
+P16,MUSE:ledger/lead.md,931,append,"Wave T1 return 14 (study): toy1-input PASS, commit 0053ef8 (docs/study-input.md only, 1381 lines; lead-verified). Recommendation: optional pre-step apply() callback via APPENDED descriptor fields (NUL"
+P16,MUSE:ledger/lead.md,933,metrics,"Wave T1 return 15 (study+utility): toy1-fft PASS, commit 7d550a3 (4 new files only: core/toy_fft.{h,c}, tools/fft_test.c, docs/study-fft.md; lead-verified). Own iterative radix-2 binary64 FFT from the"
+P16,MUSE:ledger/lead.md,935,plants\.jsonl,"ALL 15 T1 PARCELS RETURNED + LEAD-REVIEWED (every commit owned-files-only, trailers exact, trees clean). Merge phase posture: toy gets its own plant ledger at docs/metrics/plants.jsonl (sealed library"
+P16,MUSE:ledger/lead.md,937,metrics,"Merge 1/15 LANDED: toy1-carousel. Plant ledger started in toy repo (docs/metrics/, 7db9913, pushed). Planted copy 4b10656; key sha256 78613a0c committed pre-dispatch (32acade). Verifier (01a1a4d1-6b10"
+P16,MUSE:ledger/lead.md,951,plants\.jsonl,"Merges 8-11/15 LANDED: orrery (5/5; board first attempt cut off by 900 s window at step 1500/2000 all-correct -> window raised 2400 (491b3da) then 3600 at mandelbrot; landing b00476e), cloud (5/5; MEA"
+P16,MUSE:ledger/lead.md,955,append,"WAVE T2 OPENED (toy main b266193, pushed after one transient GitHub failure): owner decisions - RP2350-1.85C PRIMARY (sensors+microSD), always plugged, manual time/zone set, warp unpreferred (paramete"
+P16,MUSE:ledger/lead.md,957,at merge,"T2a ALL LANDED: orbitspec (6060352, verifier 5/5, board PASS 13 carts - first toy_fft on Pico firmware; argmax bin 17 coherent), inputcore (978012f, verifier 5/5 incl. drain-fate carry implemented; le"
+P16,MUSE:ledger/lead.md,959,append,"REPO PUBLIC (owner-elected, toy main 4f0e595): README + TOY-0 private wording updated (MIT unchanged, full text already in LICENSE; GitHub detects MIT), RECORD append notes flip (earlier private entri"
+P16,MUSE:ledger/lead.md,962,at merge,"T2b batch 1 ALL RETURNED, verifications dispatched: toy2-julia PASS-return commit 310f11e (first interactive cart; parcel flagged real seam gap - board CMake lacked toy_input.c despite study-input 10."
+P16,MUSE:ledger/lead.md,968,at merge,"T2b BATCH 2 CLOSED on-device: board gate at 82bb5a2 PASS (11:06-11:56, 17 carts host==board every step; gpend/seismo first on-device feed proofs, stream 46ac78e9 generated on-Pico). Batch-1 14-cart ga"
+P16,MUSE:ledger/lead.md,975,plants\.jsonl,"toy4 PREP ROUND (post-compaction lead resume): toy4-flashckpt merged 20ad118, toy4-fluidstudy study merged 274daf8 (+lead f32-range fix 25aa9c8), toy4-tsig merged 594d339 - each 5/5 verified, verdicts"
+P16,TOYMSG:scratch/toy1/msg-plant-attitude.txt,9,at merge,the discrepancy at merge.
+P16,TOYMSG:scratch/toy1/msg-plant-mock.txt,8,at merge,at merge with an end-to-end browser-log-to-emu hash test.
+P16,TOYMSG:scratch/toy1/msg-plant-tsig.txt,7,at merge,lead accepts the honest semantics at merge.
+P16,TOYMSG:scratch/toy2/msg-livefeed-plant.txt,9,at merge,tilt/chest) still owed at merge time - recorded as such
+P16,TOYMSG:scratch/toy2/msg-pond-plant.txt,7,plants\.jsonl,"docs/metrics/plants.jsonl before verifier dispatch, per method."
+P17,TOY:docs/RECORD.md,340,provenance,"provenance bytes differ, nothing else does. The internal"
+P17,TOY:docs/TOY-0.md,149,provenance,"amendments applied from the start: provenance gate for verifiers,"
+P17,TOY:docs/metrics/README.md,14,provenance,(provenance gate: it must quote the copy's HEAD; this file
+P17,MUSE:ledger/lead.md,891,provenance,"Owner: random committed vector often boring; add random edge-case button showing why the library is useful. parcel-psedge (wonder): 19-entry curated EDGE_DECK in site/app.js (subnormal UF+INX, overflo"
+P17,MUSE:ledger/lead.md,895,font,Submission confirmed in by owner; muse-softfloat is sealed/untouched from here. New private repo loganw234/muse-softfloat-toy created under the workspace for the follow-on desk-toy project (library co
+P17,MUSE:ledger/lead.md,935,provenance,"ALL 15 T1 PARCELS RETURNED + LEAD-REVIEWED (every commit owned-files-only, trailers exact, trees clean). Merge phase posture: toy gets its own plant ledger at docs/metrics/plants.jsonl (sealed library"
+P17,MUSE:ledger/lead.md,937,provenance,"Merge 1/15 LANDED: toy1-carousel. Plant ledger started in toy repo (docs/metrics/, 7db9913, pushed). Planted copy 4b10656; key sha256 78613a0c committed pre-dispatch (32acade). Verifier (01a1a4d1-6b10"
+P17,MUSE:ledger/lead.md,953,provenance,"WAVE T1 CLOSED (toy main 9b74fa8, pushed): merges 12-15 landed - fft (b7860e7; lead fft_test PASS bd852da6), input (791c7df), timebank (9c2cf30), checkpoint (50ed8d8). Final gates on closed tree: chec"
+P17,MUSE:ledger/lead.md,959,licen[cs]e,"REPO PUBLIC (owner-elected, toy main 4f0e595): README + TOY-0 private wording updated (MIT unchanged, full text already in LICENSE; GitHub detects MIT), RECORD append notes flip (earlier private entri"
+P17,MUSE:ledger/lead.md,984,image,"KIT ARRIVED (2026-11-06): Waveshare RP2350-Touch-AMOLED-1.75 (466x466), owner-connected running factory demo on COM15, serial 9FBDB21D21F41425. Parts from vendor wiki/pin image: CO5300 AMOLED QSPI (CS"
+P18,TOY:docs/metrics/README.md,13,cold,2. An independent verifier reviews the planted copy cold

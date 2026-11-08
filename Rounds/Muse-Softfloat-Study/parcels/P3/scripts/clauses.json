@@ -1,0 +1,686 @@
+{
+ "_note": "Written before any search hit was seen. Each proposal is split into clauses; each clause has case-insensitive regex stems. The stems are the search, not the judgement: the marks are made by reading the hits (data/marks.csv).",
+ "P1": {
+  "clauses": {
+   "c1": {
+    "desc": "provenance is the verifier's first recorded act",
+    "stems": [
+     "provenance",
+     "first recorded act",
+     "first act",
+     "first entry",
+     "first thing"
+    ]
+   },
+   "c2": {
+    "desc": "the copy's HEAD is quoted",
+    "stems": [
+     "\\bHEAD\\b",
+     "copy_head",
+     "rev-parse"
+    ]
+   },
+   "c3": {
+    "desc": "one line only the copy holds is quoted",
+    "stems": [
+     "only the copy",
+     "copy-only",
+     "only that copy",
+     "line that only",
+     "only it holds"
+    ]
+   },
+   "c4": {
+    "desc": "before any check counts",
+    "stems": [
+     "before any check",
+     "before checking",
+     "before (?:it|he|they) (?:check|read)",
+     "no check counts"
+    ]
+   }
+  }
+ },
+ "P2": {
+  "clauses": {
+   "c1": {
+    "desc": "handover by allowlist: the verifier's world is the copy plus named evidence paths",
+    "stems": [
+     "allowlist",
+     "allow-list",
+     "whitelist",
+     "named evidence",
+     "evidence paths?"
+    ]
+   },
+   "c2": {
+    "desc": "the real branch is made unreachable (separate clone, detached export, no ref to the real tip)",
+    "stems": [
+     "unreachable",
+     "no ref to",
+     "detached export",
+     "separate clone",
+     "git archive",
+     "cannot reach",
+     "can't reach",
+     "not reachable",
+     "export of"
+    ]
+   },
+   "c3": {
+    "desc": "a fence or prohibition alone is not enough",
+    "stems": [
+     "merely forbid",
+     "not merely",
+     "fence",
+     "forbidden",
+     "may not read",
+     "must not read",
+     "off-limits"
+    ]
+   },
+   "c4": {
+    "desc": "round 6's reference-copy note",
+    "stems": [
+     "reference copy",
+     "reference-copy"
+    ]
+   }
+  }
+ },
+ "P3": {
+  "clauses": {
+   "c1": {
+    "desc": "plant sets include metadata shapes (labels, counts of counts, provenance fields)",
+    "stems": [
+     "metadata",
+     "provenance field",
+     "\\blabels?\\b",
+     "counts?-of-counts",
+     "tallies",
+     "stamp"
+    ]
+   },
+   "c2": {
+    "desc": "briefs require per-field checks",
+    "stems": [
+     "per-field",
+     "each field",
+     "field by field",
+     "every field",
+     "each number",
+     "each count",
+     "recount"
+    ]
+   },
+   "c3": {
+    "desc": "never counts against an expected list",
+    "stems": [
+     "expected list",
+     "against an expected",
+     "count of (?:the )?plants",
+     "number of plants",
+     "plant shapes?",
+     "\\bshapes?\\b"
+    ]
+   }
+  }
+ },
+ "P4": {
+  "clauses": {
+   "c1": {
+    "desc": "a change after the copy is built goes past a delta check scoped to the diff",
+    "stems": [
+     "delta",
+     "scoped to the diff",
+     "only the diff",
+     "diff from",
+     "diff-scoped"
+    ]
+   },
+   "c2": {
+    "desc": "the check is independent",
+    "stems": [
+     "independent",
+     "fresh verifier",
+     "second verifier",
+     "different verifier"
+    ]
+   },
+   "c3": {
+    "desc": "a verifier-finding fix included; changes after verification",
+    "stems": [
+     "after the (?:copy|verif|plant)",
+     "fix(?:es)? after",
+     "post-verif",
+     "changed after",
+     "bytes (?:it|they|he) did not see",
+     "re-?verif"
+    ]
+   },
+   "c4": {
+    "desc": "'the verifier already saw the parcel' never covers unseen bytes",
+    "stems": [
+     "already saw",
+     "already verified",
+     "already seen",
+     "already read",
+     "did not see"
+    ]
+   }
+  }
+ },
+ "P5": {
+  "clauses": {
+   "c1": {
+    "desc": "lead landing edits made by script with occurrence-count asserts",
+    "stems": [
+     "by script",
+     "scripted",
+     "assert",
+     "occurrence",
+     "occurs exactly"
+    ]
+   },
+   "c2": {
+    "desc": "a recount before writing",
+    "stems": [
+     "recount",
+     "re-count",
+     "recomput"
+    ]
+   },
+   "c3": {
+    "desc": "the adherence audit runs at each wave close, not once at the end",
+    "stems": [
+     "adherence",
+     "wave close",
+     "each wave",
+     "every wave",
+     "per wave",
+     "audit at"
+    ]
+   },
+   "c4": {
+    "desc": "the audit grades the lead/parcel distinction",
+    "stems": [
+     "lead/parcel",
+     "lead and parcel",
+     "lead's own",
+     "lead does not",
+     "lead never",
+     "lead must not"
+    ]
+   }
+  }
+ },
+ "P6": {
+  "clauses": {
+   "c1": {
+    "desc": "the report artifact is a file in the agent's scratch",
+    "stems": [
+     "report file",
+     "report artifact",
+     "report\\.md",
+     "report to a file",
+     "report in a file",
+     "write (?:the|its|your) report"
+    ]
+   },
+   "c2": {
+    "desc": "the result channel carries a compact summary and the path",
+    "stems": [
+     "summary and the path",
+     "compact summary",
+     "result channel",
+     "final message"
+    ]
+   },
+   "c3": {
+    "desc": "a spilled, truncated or empty result is recovered from the file, never re-run",
+    "stems": [
+     "spill",
+     "truncat",
+     "empty result",
+     "recovered from the file",
+     "never re-?run",
+     "not re-?run",
+     "re-?run for"
+    ]
+   }
+  }
+ },
+ "P7": {
+  "clauses": {
+   "c1": {
+    "desc": "a dead or voided attempt is named as such in the record",
+    "stems": [
+     "\\bvoid",
+     "dead attempt",
+     "abandoned attempt",
+     "discarded attempt"
+    ]
+   },
+   "c2": {
+    "desc": "its tree and outputs are untrusted; the retry starts clean",
+    "stems": [
+     "untrusted",
+     "clean checkout",
+     "fresh checkout",
+     "start(?:s)? from a clean",
+     "from scratch"
+    ]
+   },
+   "c3": {
+    "desc": "grades come from the valid attempt only",
+    "stems": [
+     "valid attempt",
+     "only the valid",
+     "retry",
+     "re-?dispatch",
+     "redo"
+    ]
+   }
+  }
+ },
+ "P8": {
+  "clauses": {
+   "c1": {
+    "desc": "briefs carry resource ceilings by default (memory, wall clock, process count)",
+    "stems": [
+     "ceiling",
+     "\\bmemory\\b",
+     "wall[- ]clock",
+     "process count",
+     "ulimit",
+     "\\bGB\\b"
+    ]
+   },
+   "c2": {
+    "desc": "time-boxes",
+    "stems": [
+     "time[- ]?box",
+     "timebox"
+    ]
+   },
+   "c3": {
+    "desc": "long parcels checkpoint progress the lead can read without asking",
+    "stems": [
+     "checkpoint",
+     "progress file",
+     "progress note",
+     "resume note",
+     "heartbeat"
+    ]
+   },
+   "c4": {
+    "desc": "an agent owns every process it starts until it kills or hands it over",
+    "stems": [
+     "background process",
+     "orphan",
+     "stop every",
+     "kill",
+     "processes? (?:it|they|you) started",
+     "own process"
+    ]
+   }
+  }
+ },
+ "P9": {
+  "clauses": {
+   "c1": {
+    "desc": "an authority is recorded with its execution mode",
+    "stems": [
+     "execution mode",
+     "executed in the gate",
+     "executed at generation",
+     "historical",
+     "weakest"
+    ]
+   },
+   "c2": {
+    "desc": "prose may claim only the weakest mode still true",
+    "stems": [
+     "claims? only",
+     "no stronger than",
+     "claims? more than",
+     "overclaim",
+     "stronger than"
+    ]
+   },
+   "c3": {
+    "desc": "a claim-vs-mechanism pass is a named step at each seal",
+    "stems": [
+     "claim[- ]vs",
+     "claim versus",
+     "mechanism",
+     "does the gate do",
+     "what the gate"
+    ]
+   },
+   "c4": {
+    "desc": "authority",
+    "stems": [
+     "authorit"
+    ]
+   }
+  }
+ },
+ "P10": {
+  "clauses": {
+   "c1": {
+    "desc": "a claim registry names every surface carrying a load-bearing literal",
+    "stems": [
+     "registry",
+     "every surface",
+     "all surfaces",
+     "load-bearing",
+     "literals?"
+    ]
+   },
+   "c2": {
+    "desc": "single-sourcing",
+    "stems": [
+     "single[- ]sourc",
+     "single source",
+     "source of truth",
+     "one place"
+    ]
+   },
+   "c3": {
+    "desc": "a restamp runs the registry; generated surfaces are entries, not exceptions",
+    "stems": [
+     "restamp",
+     "re-stamp",
+     "generated (?:surface|file|table)",
+     "site data"
+    ]
+   }
+  }
+ },
+ "P11": {
+  "clauses": {
+   "c1": {
+    "desc": "a generated file's stamp names the newest commit its contents were counted from",
+    "stems": [
+     "provenance stamp",
+     "stamp",
+     "generated from",
+     "counted from",
+     "generated at"
+    ]
+   },
+   "c2": {
+    "desc": "regeneration happens after the landing appends counted rows",
+    "stems": [
+     "regenerat",
+     "after the append",
+     "after appending",
+     "stale (?:count|stamp)",
+     "stamp says"
+    ]
+   },
+   "c3": {
+    "desc": "or the stamp says which rows it excludes",
+    "stems": [
+     "excludes? (?:those|the) rows",
+     "rows it excludes",
+     "newest commit"
+    ]
+   }
+  }
+ },
+ "P12": {
+  "clauses": {
+   "c1": {
+    "desc": "the front-door rule",
+    "stems": [
+     "front[- ]door"
+    ]
+   },
+   "c2": {
+    "desc": "evidence is produced by the committed path",
+    "stems": [
+     "committed path",
+     "committed tree",
+     "committed code",
+     "scratch variant",
+     "scratch copy",
+     "the tree it ships"
+    ]
+   },
+   "c3": {
+    "desc": "a needed variant is promoted into the tree, or the claim is scoped to the scratch path, in the same parcel",
+    "stems": [
+     "promot",
+     "scope(?:d)? the claim",
+     "scoped to the scratch",
+     "claim is scoped"
+    ]
+   }
+  }
+ },
+ "P13": {
+  "clauses": {
+   "c1": {
+    "desc": "every dispatch defines its roots (<repos>, <scratch>, <ledger>)",
+    "stems": [
+     "<repos>",
+     "<scratch>",
+     "<ledger>",
+     "roots?\\b",
+     "defines its roots"
+    ]
+   },
+   "c2": {
+    "desc": "kit scripts resolve the workspace from any worktree, not the main checkout's layout",
+    "stems": [
+     "any worktree",
+     "from a worktree",
+     "main checkout",
+     "workspace root",
+     "resolve"
+    ]
+   },
+   "c3": {
+    "desc": "no absolute paths in written records",
+    "stems": [
+     "absolute path"
+    ]
+   }
+  }
+ },
+ "P14": {
+  "clauses": {
+   "c1": {
+    "desc": "the freeze recipe ends with the consumer's exact verification command on the target shell",
+    "stems": [
+     "sha256sum",
+     "consumer",
+     "exact verification command",
+     "exact command",
+     "target shell"
+    ]
+   },
+   "c2": {
+    "desc": "manifests are written LF",
+    "stems": [
+     "\\bLF\\b",
+     "CRLF",
+     "line ending",
+     "autocrlf"
+    ]
+   },
+   "c3": {
+    "desc": "the bundle is built from an allowlist",
+    "stems": [
+     "allowlist",
+     "bundle",
+     "freeze",
+     "frozen"
+    ]
+   },
+   "c4": {
+    "desc": "a bundle that verifies only under a tolerant reader is not frozen",
+    "stems": [
+     "tolerant",
+     "lenient",
+     "only verifies under"
+    ]
+   }
+  }
+ },
+ "P15": {
+  "clauses": {
+   "c1": {
+    "desc": "an environment inventory before first flash (serials, variants, cables proven by data)",
+    "stems": [
+     "inventory",
+     "serials?",
+     "cable",
+     "variant",
+     "first flash"
+    ]
+   },
+   "c2": {
+    "desc": "target by serial always",
+    "stems": [
+     "by serial",
+     "serial number"
+    ]
+   },
+   "c3": {
+    "desc": "an atomic lock (mkdir) with pid/host/time and a named stale recovery",
+    "stems": [
+     "mkdir",
+     "atomic",
+     "lock\\b",
+     "lockfile",
+     "stale",
+     "\\bpid\\b"
+    ]
+   },
+   "c4": {
+    "desc": "hardware in the loop",
+    "stems": [
+     "hardware",
+     "board",
+     "RP2040"
+    ]
+   }
+  }
+ },
+ "P16": {
+  "clauses": {
+   "c1": {
+    "desc": "metrics rows append at merge time, in the same step as the ledger entry",
+    "stems": [
+     "at merge",
+     "merge time",
+     "same step",
+     "same commit",
+     "appended at",
+     "append(?:s|ed)? (?:at|with|in)"
+    ]
+   },
+   "c2": {
+    "desc": "metrics rows",
+    "stems": [
+     "metrics",
+     "usage row",
+     "passes row",
+     "\\brows\\b"
+    ]
+   },
+   "c3": {
+    "desc": "so no end-of-round refresh parcel exists",
+    "stems": [
+     "refresh",
+     "backfill",
+     "back-fill",
+     "catch-up",
+     "end of the round",
+     "end-of-round",
+     "cutoff"
+    ]
+   }
+  }
+ },
+ "P17": {
+  "clauses": {
+   "c1": {
+    "desc": "an asset-provenance file beside the clean-room file",
+    "stems": [
+     "asset",
+     "clean[- ]room"
+    ]
+   },
+   "c2": {
+    "desc": "every non-code asset names its source, licence and permitted surfaces",
+    "stems": [
+     "licen[cs]e",
+     "permitted surfaces",
+     "rights",
+     "attribution",
+     "provenance"
+    ]
+   },
+   "c3": {
+    "desc": "unresolved rights default to ship silent, host elsewhere, never commit the raw asset",
+    "stems": [
+     "never commit",
+     "raw asset",
+     "ship silent",
+     "host elsewhere",
+     "third-party"
+    ]
+   }
+  }
+ },
+ "P18": {
+  "clauses": {
+   "c1": {
+    "desc": "the seal sequence ends with a cold dry run on a fresh public clone",
+    "stems": [
+     "cold",
+     "dry run",
+     "dry-run",
+     "fresh clone",
+     "fresh public clone",
+     "clean clone"
+    ]
+   },
+   "c2": {
+    "desc": "walked through the judge map exactly as written",
+    "stems": [
+     "judge map",
+     "walk(?:ed)? through",
+     "walkthrough",
+     "as written",
+     "follow the README"
+    ]
+   },
+   "c3": {
+    "desc": "by an agent that did not write the map",
+    "stems": [
+     "did not write",
+     "not the author",
+     "who did not",
+     "fresh agent",
+     "never saw",
+     "cold read",
+     "outsider"
+    ]
+   }
+  }
+ },
+ "_context": [
+  "P8.c2",
+  "P9.c4",
+  "P10.c2",
+  "P12.c1",
+  "P15.c4",
+  "P16.c2"
+ ],
+ "_context_note": "Amended after the first searches, before any mark was read: these clauses restate the base the case report names (or the setting), not the operative step, so they are marked but not counted when a proposal's mark is derived."
+}
