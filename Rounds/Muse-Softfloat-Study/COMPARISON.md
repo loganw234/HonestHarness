@@ -1,6 +1,10 @@
 # The comparison: three Claude audits, the Muse audits, the case report, and this study
 
-2026-11-08. This file was written after the report's draft 3 (`6002f90`) was verified. This is draft 2. It takes verifier-C's pass 1 on draft 1 (`bc058e5`): five wrong items, five restates and ten notes (`reports/verifier-C.md`). It also fixes three errors the lead found while checking them: two items it had listed as found only by the Claude audits, and the Muse column's scope.
+2026-11-08. This file was written after the report's draft 3 (`6002f90`) was verified. This is draft 3. Both of verifier-C's passes are in `reports/verifier-C.md`.
+- **Draft 2** took verifier-C's pass 1 on draft 1 (`bc058e5`): five wrong items, five restates and ten notes.
+  - It also fixed three errors the lead found while checking them: two items it had listed as found only by the Claude audits, and the Muse column's scope.
+- **Draft 3** takes verifier-C's pass 2 on draft 2 (`23b0267`): one restate and four notes.
+  - The lead fixed them and checked each line by command, since verifier-C's passes were spent.
 - **The order.** The lead read the three Claude audit reports then, for the first time. It lifted the fence for itself alone (the ledger, 11:12:13), and fetched the reports at Logan's approval (12:22:43). Of the study's other agents, only the comparison's verifier, verifier-C, has read them.
 - **Its sources:**
   - the three reports, at the branch tips below;
@@ -8,7 +12,7 @@
   - the case report;
   - this study's report.
 
-  A finding is named by its report's own ID. The Muse audits' findings are named by P2's IDs: `M`, `S`, `N` and `T` for the full audit, and `A` for the adherence audits' slips.
+  A finding is named by its report's own ID. The Muse audits' findings are named by P2's IDs: `M`, `S`, `N` and `T` for the full audit, and `A` for the adherence audits' slips. Outside the Muse column, a slip is written "P2's A01" and so on, so that it is not read as one of Claude audit A's IDs, which are written "A H1" and so on.
 
 ## The audits
 
@@ -48,15 +52,23 @@ The Muse column cites P2's IDs. This study's column cites the report's questions
 | Evidence paths outside the gate (workloads, site, bench capture) | M4 | F-15 | | Loosely, M4 (major): a committed bench budget its capture window cannot complete | obs 11, its P12 | Q3 |
 | The board lock, check-then-create | L16 | F-20 | | N8 (minor) | obs 14, its P15 | Q3: the "stale lock" escape (N9) |
 | `data.json`'s base stamp naming a tree without its counted rows | L18 | | L11 | N17 (minor) | obs 10, its P11 | Q3: an F1 escape (N17) |
-| Post-verdict fixes merged without a re-check | M14 | | | A27, the seal adherence audit's slip | obs 3, its P4 | Q4; P2's slip A27 |
-| The public claim that a verifier precedes every merge, against the record | H1 | F-17 (a) | L12 | Slips A16 and A32 on the claims; A01, A02, A03 and A06 on the record | | Q1: about 30 of 44 lead commits unverified (A02); Q3: A16 and A32 among the 24 slips the record had not raised |
+| Post-verdict fixes merged without a re-check | M14 | | | A27, the seal adherence audit's slip | obs 3, its P4 | Q4; P2's A27 |
+| The public claims about the verification protocol, against the record: a verifier before every merge, and the defects pre-ledgered | H1 | F-17 (a) | L12 | A16 and A32 on the claims; A01, A02, A03 and A06 on the record | | Q1: about 30 of 44 lead commits unverified (P2's A02); Q3: P2's A16 and A32 among the 24 slips the record had not raised |
 | Media taking most of the clone | L19 | F-09 | L13 | N22 (minor) | | Q3: an escape, in no family |
 
-**Three rows have an entry in every column:** the Berkeley sentence, the stale site interval and the rounding value. Two columns lean on the full audit there. This study's cells come from P2's table of the Muse audits' findings, and the case report names the rounding value only in its disposition of them.
+**Three rows have an entry in every column:** the Berkeley sentence, the stale site interval and the rounding value. In those rows, two kinds of cell are not independent of the full audit:
+- this study's cells, which come from P2's table of the Muse audits' findings;
+- the case report's rounding cell, which is its disposition of the full audit's findings.
 
-**On the protocol row, the Muse adherence audits came first.**
-- A H1 cites the final adherence audit's own grade of the README's universal claim, "STILL OPEN".
-- It adds a count of its own: for 120 of 160 plants, no key hash was committed before the grades landed. The adherence audit A2 found the same for Waves 1 to 5 (A06).
+**On the protocol row, the earliest Muse audits came first.**
+- **The first adherence audit** (P2's `A2`, 2026-10-28) found the README's universal claim false (P2's A16). It also found the record behind it:
+  - Wave 1's merges came before their verdicts (P2's A01);
+  - the IAS15 Pico firmware parcel was merged with no verifier (P2's A03), and with no planted copy. The Muse lead's ledger says so at l303: "No planted-copy verification was run for this branch";
+  - about 30 of 44 lead commits had no named verifier (P2's A02);
+  - key hashes were not committed before dispatch in Waves 1 to 5 (P2's A06).
+- **The final adherence audit** (2026-10-29) graded the universal claim "STILL OPEN". A H1 cites that grade from the bundle.
+- **The seal audit's slip, P2's A32,** came after the Claude audits.
+- **A H1 adds a count of its own:** for 120 of 160 plants, no key hash was committed before the grades landed.
 
 ## What only the Claude audits found
 
@@ -88,7 +100,7 @@ None of the Muse audits, the case report or this study found these. That is by P
   - **Planted sentences landed as accepted brief corrections:** A M10. See below.
   - **Ledger entries extended in place under earlier timestamps:** A M11.
     - A says the project's auditors never opened the lead's ledger. P2 found that the first adherence audit read its headings and sampled its bodies; the final and seal audits say they never opened it.
-    - The adherence audits did find in-place edits elsewhere: passes rows restated after a push (A14), and a pushed RECORD paragraph reflowed (A36).
+    - The adherence audits did find in-place edits elsewhere: passes rows restated after a push (P2's A14), and a pushed RECORD paragraph reflowed (P2's A36).
   - **The frozen bundle silently dropped the KissFFT trail:** A M12, C M6.
 - **What the plant score measures** (A O1). Plants on the lead's own work were missed 4 of 25 times, against 3 of 135 on parcel work.
 
@@ -113,7 +125,7 @@ None of the Muse audits, the case report or this study found these. That is by P
   - **The Muse record** landed them as accepted corrections. P2 took them, as `CJ17` to `CJ19`, for genuine errors in the lead's SF-2 draft.
   - **So the report's Q4 overcounted.** Of the 47 error rows, 42 are the lead's own genuine errors: P2's 45 lead-owned rows, by the owner column of `data/lead_errors.csv`, less `CJ17` to `CJ19`. The 3 plants are not, though the lead's landing of them as corrections is a record error of its own. Q4 says so from draft 4.
 - **Its report left out the IAS15 parcel's unverified merge** until draft 5.
-  - P2's table has it, as the adherence audit A2's slip `A03`, which the round itself had raised: the merge body disclosed it.
+  - P2's table has it, as the first adherence audit's slip, P2's `A03`. The round itself had raised it: the merge body disclosed it.
   - P2's clause table has no row for a parcel merged without verification, and its nearest clause, C085 (the lead's own work), is marked skipped.
   - The report's draft 5 names it in Q1.
 
