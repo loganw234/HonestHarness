@@ -2,6 +2,8 @@
 
 2026-11-08. The lead is Claude Opus 5.5, in Claude Code. The plan of record is `PLAN.md` beside this file (`5197b2a`).
 
+This is draft 2. It takes verifier-R's pass 1 on draft 1 (`35873c2`), which found no wrong figure, 8 restates and 9 notes (`reports/verifier-R.md`).
+
 This report answers the plan's six questions from three parcels' analyses, which sit beside it. Each analysis was verified twice, once on a planted copy and once on its fix:
 
 | Parcel | Analysis | Covers | Final commit |
@@ -10,7 +12,12 @@ This report answers the plan's six questions from three parcels' analyses, which
 | P2 | `parcels/P2/ANALYSIS.md` | transfer, the escapes and the lead | `06f1a45` |
 | P3 | `parcels/P3/ANALYSIS.md` | the proposals | `5c8f4f9` |
 
-A citation such as "P1 §2.3" names a section of one of them. Every figure here is either in a parcel's analysis, with its script and source, or was read by the lead by command from the parcels' final commits. The study's ledger, archived beside this report, holds every step.
+A citation such as "P1 §2.3" names a section of one of them. Every figure here comes from one of three places:
+- a parcel's analysis, with its script and source;
+- the parcels' final commits, read by the lead by command;
+- the Muse record, cited where the figure is used.
+
+The study's ledger, archived beside this report, holds every step. The lead's model is the one its harness gives it, which the study's briefs have every agent take from its own system prompt.
 
 ## The answers, in brief
 
@@ -25,27 +32,34 @@ A citation such as "P1 §2.3" names a section of one of them. Every figure here 
     - two it labels new: a copy with no route back to the real branch, and a board lock;
     - one it calls an adoption: defining the roots in every dispatch. The round did not use that one.
 - **Q2, verification by a smaller model.** muse-spark-1.3 caught 178 of the 185 plants tied to it (0.962).
-  - That includes every code plant tied to it: 86 of the round's 87, and the other 87th was caught too.
-  - Its 7 misses were claims in docs, test data and metadata.
+  - That counts 25 rows whose model the ledger names. On usage rows alone, it caught 153 of 160 (0.956).
+  - All 87 code plants were caught: 86 tied to Spark, and 1 to a verifier whose model is not recorded.
+  - Spark's 7 misses were all outside code: in claims in docs, test data and metadata.
   - A blind re-grade of 38 plants agreed with the lead on 36, and 2 were unclear. None was overturned.
   - The plants were the Wonder lead's, chosen and graded by it. So this is recall on that lead's planting, not on real defects.
-- **Q3, escapes.** Of the final audit's 43 findings, 33 had not been raised by the round's own verification.
-  - The largest family is a fact kept in several places and restamped in some (14). Next is a claim about what the gate executes that it no longer executes (5).
-  - No defect was found in the shipped arithmetic.
-- **Q4, the lead.** 47 errors are the lead's or were caught against it, and its own prose was the least-verified text. That is the same pattern ParcelRound's round 6 recorded under an Opus lead.
+- **Q3, escapes.** Of the final audit's 43 findings, 33 escaped the round's own verification: 32 were never raised, and 1 was examined and passed.
+  - The largest family is a fact kept in several places and restamped in only some (14).
+  - Next is declared configuration standing in for executed work (5).
+  - The final audit found no defect in the shipped math surface.
+  - A search for a finding that comes back empty shows only that its terms did not match.
+- **Q4, the lead.** Of 47 error rows, 45 are the lead's own, and its own prose was the least-verified text. That is the same pattern ParcelRound's round 6 recorded under an Opus lead.
 - **Q5, the case report.**
   - **Its claims:** of 79 checkable claims, 45 hold, 12 partly, 1 does not, and 21 cannot be checked from the files read.
   - **Its 18 proposals:** none is already a full rule in the methods at the kit's pins, 14 are there in part, 3 are absent, and 1 sits only in a case study.
   - **Its "new" labels:** 6 of the 9 proposals it labels "new" have a clause already in the texts.
   - **The toy round** fully practised 1 of the proposals and partly practised 12.
 - **Q6, roles.** This is field evidence, not a measurement.
-  - A smaller verifier model caught value faults (code, figures, citations) nearly always, and missed mostly claims whose meaning was wrong.
-  - That pattern recurs in this study's own Haiku verifiers, and in HonestHarness round 1's replay of DeepSeek flash.
+  - A smaller verifier model caught every code plant. Its misses fell in claims in docs, test data and metadata.
+  - Two of those misses were values the verifier saw and accepted.
+  - A similar shape appears in this study's own Haiku verifiers, and in HonestHarness round 1's replay of DeepSeek flash.
   - The lead's weakness in its own text appears with both a Muse lead and an Opus lead.
 
 ## The setting
 
-muse-softfloat is an IEEE 754-2019 softfloat library for the RP2040. It has 849 instantiations: 783 in Tier 1 and 66 in Tier 2. It was built for a hackathon that ran to 2026-11-04 and was sealed at `v1.0.0` on 2026-11-01.
+muse-softfloat is an IEEE 754-2019 softfloat library for the RP2040.
+- **Its size:** 849 instantiations, 783 in Tier 1 and 66 in Tier 2 (P2's CR01, recounted at `a49991f`).
+- **Its window:** a hackathon that ran to 2026-11-04 (`docs/KICKOFF.md` l144 at `b78af18`).
+- **Its seal:** `v1.0.0` on 2026-11-01 (P2's CR02).
 - **The harness:** Muse Code.
 - **The models:**
   - muse-wonder-full-1.0 was the lead and ran most parcels;
@@ -111,7 +125,7 @@ The differences fit the kit's own rewrite rules. The lines were not checked one 
   | not shown | 2 |
 
 - **The one not used** is the rule that every dispatch defines its roots (`<repos>`, `<scratch>`). It was in the kit (`WORKFLOW.md` l24), and the record carries no root names (P3 §2).
-- **The case report's observation 12** describes the cost of skipping it: two parcels each invented the same override to reach the ledger. Its P13 proposes the clause the kit already had.
+- **The case report's observation 12** describes the cost of skipping it: two parcels each invented the same override to reach the ledger. P2 could not check that claim from the files it read (its CR48). The report's P13 proposes the clause the kit already had.
 
 ## Q2: verification by a smaller model
 
@@ -127,7 +141,10 @@ The differences fit the kit's own rewrite rules. The lines were not checked one 
 | record arithmetic | 3 | 3 |
 | **all** | **195** | **187** (0.959; Wilson 95% 0.921 to 0.979) |
 
-- **By model:** 185 rows are tied to muse-spark-1.3, and 178 of them were caught (0.962). 10 rows have no recorded model, and 9 of them were caught.
+- **By model:** 185 rows are tied to muse-spark-1.3, and 178 of them were caught (0.962).
+  - Those 185 include 25 rows whose model the Muse lead's ledger names.
+  - On usage rows alone, Spark caught 153 of 160 (0.956).
+  - 10 rows have no recorded model, and 9 of them were caught.
 - **Wonder as verifier:** it ran 3 passes and holds no plant rows, so it cannot be measured.
 
 **The misses.** All 8 are outside code.
@@ -139,7 +156,11 @@ The differences fit the kit's own rewrite rules. The lines were not checked one 
 - **2 are test data:** a boundary value weakened in a generator, and an exact decider dropping boundary results.
 - **2 are metadata:** a stamp fabricated, and a wave label changed.
 
-The two metadata misses were made by two different verifiers. The second counted rows against the list it expected and never read the field it was meant to check, as the case report's observation 2 says.
+**Two of the misses were values the verifier saw and accepted.** The library's `plants.jsonl` at `b78af18` records them, in the notes of its rows 56 and 5:
+- the inflated sum, which the verifier "repeated" in its own recomputation and endorsed;
+- the generator's drift, which it saw and "filed benign".
+
+**The wave-label miss was a counting habit.** By row 170's note, verifier-w6metrics "counted appended agents by expected list ... without checking per-row wave fields", which is the case report's observation 2.
 
 **The lead's grading.** P1 re-graded a seeded sample of 38 plants: all 8 misses and 30 catches. It worked blind, from hash-verified keys and the verifiers' own reports.
 - 36 agree with the lead.
@@ -150,7 +171,10 @@ If both unclear plants counted as caught, recall would be 189 of 195. The sample
 
 **Genuine findings and send-backs.**
 - **Findings:** P1 enumerated 35 findings that were not plants. The record's counts of findings by class tie out for 43 of the 46 verifier passes, and are explained for the other 3.
-- **Send-backs:** 15 pass rows mark a send-back. A revision followed 8 of them. But 5 of those 8 are the lead's own prose restated in place, so at most 3 were parcel revision rounds (P1 §4.3). The record's erratum says 7 and 8, and names no rows.
+- **Send-backs:** 15 pass rows mark a send-back.
+  - **The erratum** (`docs/RECORD.md` from l1004) says 8 of them were not parcel revision rounds. That leaves 7, and it names none.
+  - **P1's reading runs the other way:** a documented revision followed 8, and none followed 7.
+  - **Strictly,** 5 of those 8 were the lead's own prose restated in place, so at most 3 were parcel revision rounds (P1 §4.3).
 
 **Attempts.** P1 tabulated 10 attempts that the record voids or redoes (P1 §5).
 - **The plainest** is the comparison bench's first verifier. It returned CLEAN after checking the real branch, not the copy.
@@ -169,7 +193,7 @@ If both unclear plants counted as caught, recall would be 189 of 195. The sample
 
 - **ParcelRound 4's plants** tested its gates; no planted copy went to a verifier.
 - **These rounds' plants were 2 a copy** and almost all prose. The library round's were 5 a copy, across code, data and prose. The planters and the work differ as well.
-- **So no ranking is made.** P1 judges the Claude rounds' figures not distinguishable from Spark's at these sizes, and says the sample cannot show it either way.
+- **So no ranking is made.** P1 believes the Claude rounds' figures are not distinguishable from Spark's at these sizes, and says the sample cannot show it either way.
 
 ## Q3: what escaped
 
@@ -185,22 +209,28 @@ P2 searched the round's own record, from before the final audit, for each of the
 - **33 escaped:** the 32 not raised, and the 1 examined and passed.
 - **By HonestFramework's failure families,** the escapes are:
   - a fact kept in several places and restamped in only some (F1), 14;
-  - a claim about executed work that rests on declared configuration (C3), 5;
+  - declared configuration instead of executed work (C3), 5;
   - F2, 2;
   - E1, 2;
   - 10 that fit no family, including races, supply chain and a stale lock.
 - **The sharpest is the audit's M1.** A verifier checked the README's sentence that each row is "gated against" Berkeley TestFloat. It checked against the coverage table's authority column, and marked it Agree. The committed gate names neither TestFloat nor Berkeley.
 - **Of 36 slips the adherence audits found,** the round's own record had not raised 24.
 
-No defect was found in the shipped arithmetic. The escapes were in what the record and the docs said about the work: claims that had outlived the mechanism or the number behind them.
+**The limits P2 states on these counts:**
+- A search that comes back empty shows only that its terms did not match. 16 of the 33 escapes had no hit at all.
+- For the slips, P2 relies partly on the auditors' own accounts of what the round had recorded. The final and seal audits never opened the lead's ledger.
+
+The final audit found no defect in the shipped math surface (`<muse>/scratch/audit-full/REPORT.md`, "Verdict shape"). The escapes were in what the record and the docs said about the work: claims that had outlived the mechanism or the number behind them.
 
 ## Q4: the lead's own errors
 
-P2 found 47 rows (P2 §Task 3):
+P2 found 47 error rows, 45 of them the lead's own by their owner column (P2 §Task 3):
 - all 24 of the brief corrections, 22 of which are the lead's own: 11 faults in briefs, 4 in its own code or tools, and 7 in its own texts;
 - 23 more, from the ledger, the record and the audits.
 
-**Who caught them:** parcels, verifiers, the audits, and the lead itself (eight times). Code defects the lead introduced were fixed before the seal. Faults in the record and the claims reached `main`, and several stand at the seal as history with an erratum.
+**Who caught them:** parcels, verifiers, the audits, and the lead itself (eight times).
+- **The four code defects** in the lead's seam (correction rows 4 to 7) were fixed before the seal.
+- **Faults in the record and the claims** reached `main`, and several stand at the seal as history with an erratum.
 
 **The pattern is round 6's observation 12.** ParcelRound's round 6, under an Opus lead, found the lead's own sentences claiming more than their sources, and its restatements overreaching the same way. This round shows the same pattern: in its first phase, two restatements in a row each kept or added a false claim.
 
@@ -233,7 +263,9 @@ The confounds stop any comparison of rates: a different lead model, a record wri
 
 - **The "new" labels.** Of the 9 the report labels "new", 6 have a clause already present as a rule, as advice or in part.
 - **The kit already held a clause of P2** (the copy with no route back) **and of P15** (the board lock), both labelled new. It also held a clause of P13 (the roots), which the report labels an adoption.
-- **Since the pins,** no proposal has entered a method text. The only newer method commit is ParcelRound's case study 7, which repeats P4's scoped re-check.
+- **Since the pins,** no proposal has entered a method text.
+  - The only commits above the pins are two on ParcelRound's `case-study-7` branch. They add a case study and a zip, and change no method text.
+  - That case study repeats P4's scoped re-check.
 
 **The toy round** (P3 §3):
 - It fully practised 1 proposal (P6), partly practised 12, and was silent on 5.
@@ -249,25 +281,35 @@ The confounds stop any comparison of rates: a different lead model, a record wri
 ## Q6: what this says about roles (field evidence, not a row of the table)
 
 What the record supports:
-- **A smaller model can hold the verifier role on value faults.** muse-spark-1.3 caught every code plant tied to it, and 0.962 of its plants overall.
-  - Its misses fell where a verifier must judge whether a sentence still means what its sources mean, not whether a value matches.
-  - The same split shows elsewhere:
-    - this study's Haiku verifiers missed 1 of 15 plants (below), a prose claim false against the parcel's own tables;
-    - HonestHarness round 1's replay caught DeepSeek flash 24 of 24 on plants that changed a figure or a reference, against 7 of 16 on plants that changed meaning or shape (P1 §6.3).
-  - These are three settings, with different planters, plants and harnesses. The split is a recurring pattern, not a measurement.
-- **The lead role's weak point is its own text,** for a Muse lead as for an Opus one.
-  - The escapes were claims about the work: kept in several places, restamped by hand, or resting on declared configuration.
-  - Those are the cases where the case report's P9 and P10 (an authority's execution mode; a registry of load-bearing literals) would have the most to catch.
-- **Structure substituted for model strength where it was enforced.**
-  - The wrong-tree verifier was caught because its scripts were kept. Its successor passed a provenance gate.
-  - Hash-first keys and bit-identical workload proofs left grading little to argue about.
+- **A smaller model held the verifier role for this round's plants.**
+  - muse-spark-1.3 caught 178 of the 185 plants tied to it (0.962), or 153 of 160 (0.956) on usage rows alone.
+  - All 87 code plants were caught.
+  - The misses were all outside code, by the artifact each plant altered: claims in docs, test data and metadata.
+  - Two were values the verifier saw and accepted: a sum it recomputed and endorsed wrong, and a regeneration drift it filed as benign.
+- **A similar shape appears in two other settings.**
+  - This study's Haiku verifiers caught 14 of 15 plants. Their miss was a prose sentence false against its parcel's own tables.
+  - HonestHarness round 1's replay caught DeepSeek flash 24 of 24 on plants that changed a figure or a reference, against 7 of 16 on plants that changed meaning or shape (P1 §6.3).
+
+  The planters, plants and harnesses differ across the three. Together they suggest the weakest ground is where a verifier must judge prose against its sources, or distrust a value it has recomputed itself. That is a recurring pattern, not a measurement.
+- **The lead role's weak point was its own text,** for a Muse lead as for an Opus one (Q4).
+  - The escapes were claims about the work: kept in several places, restamped by hand, or resting on declared configuration (Q3).
+  - The case report's P9 and P10 are written for those cases: an authority's execution mode, and a registry of load-bearing literals. Whether they would have caught them is not tested here.
+- **Structure worked where it was enforced.**
+  - The wrong-tree attempt was exposed because its scripts were kept. Its successor passed a provenance gate (P1 §5).
+  - The record also credits hash-first keys and bit-identical workload proofs:
+    - hash-first keys covered 70 of the 190 plants at the case report's commit (P2 §Task 4);
+    - this study did not re-run the workload proofs.
 
 What it cannot support:
 - a ranking of muse-spark-1.3 against Claude verifiers;
 - the plants' difficulty;
 - any claim about the Muse models outside this harness and this round.
 
-**For HonestHarness's table.** A measurement would replay the library round's 39 planted copies against verifier models at a fixed protocol, as round 1's QS4 replayed ParcelRound round 6's copies. It would grade by the keys, with recall by class. The keys, the copies' commits and the plants' classes are all on record (P1's `data/`).
+**For HonestHarness's table.** A measurement would replay the library round's 39 planted copies against verifier models at a fixed protocol, as round 1's QS4 replayed ParcelRound round 6's copies. It would grade by the keys, with recall by class. What is on record for it:
+- **The keys** sit in the Muse lead's scratch folder, each matched to its plants rows by hash (P1 §3.1).
+- **The plants' classes** are in P1's `data/`.
+- **Whether each planted copy's repository still exists** was not checked.
+- **The toy round's keys** were not found.
 
 ## What running this study showed about the methods
 
@@ -282,8 +324,10 @@ The study ran the same methods with Claude agents: three Sonnet parcels, Haiku v
   - P3: 2 wrong citations and 9 restates.
 
   Their second passes left P1 READY, one restate in P2 and two in P3. The lead checked those last changes, since the passes were spent.
-- **The fence by instruction did not hold by itself.** Two agents walked the fenced folders by recursive listing. Both disclosed it, and neither read content (the ledger, 08:30:26 and 09:31:32). A pathspec guard then made the fence mechanical, which is the case report's observation 1 and its P2.
-- **A shared ledger exposes the planting style.** One verifier's findings describe its copy's plants to any verifier that reads them. The study held every grading until the last planted-copy verifier had reported. muse-softfloat's own audit found the same leak, through the plant ledger inside later copies.
+- **The fence by instruction did not hold by itself.** Two agents walked the fenced folders by recursive listing. Both disclosed it, and neither read content (the ledger, 08:30:26 and 09:31:32). This is the case report's observation 1, and the reason for its P2.
+  - A pathspec rule then gave the fence a mechanical form for git listings.
+  - Agents still had to choose to use it, so the fence stayed short of the allowlist P2 asks for.
+- **A shared ledger exposes the planting style.** One verifier's findings describe its copy's plants to any verifier that reads them. The study held every grading until the last planted-copy verifier had reported. muse-softfloat's own audit found the same leak, through the plant ledger inside later copies (P2 §Task 1, harness row 12).
 - **The report channel.** This harness refuses a subagent's report file. Three parcels and one verifier met the refusal.
   - The parcels sent their analyses as text. The lead wrote each file verbatim, and recorded its hash, and the parcel read it back.
   - So the case report's P6 depends on the harness.
