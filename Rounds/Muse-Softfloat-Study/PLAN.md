@@ -1,6 +1,7 @@
-# HonestHarness: how muse-softfloat ran the methods (plan of record, draft 4)
+# HonestHarness: how muse-softfloat ran the methods (plan of record, draft 4, approved)
 
-Draft 4, 2026-11-08. The lead is Claude Opus 5.5, in Claude Code. The study
+Draft 4, 2026-11-08, approved by Logan the same day (see "Approved" at the
+end). The lead is Claude Opus 5.5, in Claude Code. The study
 begins only at Logan's approval and go. Its ledger is
 `<repos>/honestharness-muse-ledger/`.
 
@@ -347,3 +348,13 @@ message after the reset, as in round 2.
 3. Wave 1.
 4. Wave 2.
 5. Logan's OK to publish.
+
+## Approved
+
+Approved on 2026-11-08, between 09:01:25 and 09:02:20 -0700. Those are two
+clock readings that bracket the answer: the ledger's entry sending the plan
+to Logan, and a reading taken after it.
+
+He answered through the question tool. The question was "Approve the
+muse-softfloat study's plan of record (draft 4, commit 3f49931) and start
+it?" His answer, verbatim: "Approve and go (Recommended)".
