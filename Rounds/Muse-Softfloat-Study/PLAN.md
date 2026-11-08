@@ -1,6 +1,6 @@
-# HonestHarness: how muse-softfloat ran the methods (plan of record, draft 3)
+# HonestHarness: how muse-softfloat ran the methods (plan of record, draft 4)
 
-Draft 3, 2026-11-08. The lead is Claude Opus 5.5, in Claude Code. The study
+Draft 4, 2026-11-08. The lead is Claude Opus 5.5, in Claude Code. The study
 begins only at Logan's approval and go. Its ledger is
 `<repos>/honestharness-muse-ledger/`.
 
@@ -20,9 +20,18 @@ begins only at Logan's approval and go. Its ledger is
   - three sentences said more than their sources: Logan's quoted words, the
     cached tokens, and the auditors' models;
   - three notes.
-- **Draft 3** takes all seven, each checked first by command. verifier-PL's
-  passes are spent, so a fresh verifier checks only the change from draft 2
-  before the plan goes to Logan.
+- **Draft 3** (`0080bef`) takes all seven, each checked first by command.
+  verifier-PL's passes are spent, so a fresh verifier checks only the change
+  from draft 2 before the plan goes to Logan.
+- **verifier-PL2's delta check** came back NOT READY:
+  - no wrong fact;
+  - one sentence that said more than its source: the audits row;
+  - three notes: the `a` and `b` classes' definitions, the seal audit's
+    place against the fence, and the first bench run's rows.
+- **Draft 4** takes all four, each checked first by command. As the lead
+  decided before dispatching verifier-PL2 (the ledger, 08:41:30), the loop
+  stops here. The lead states these last fixes to Logan, rather than sending
+  them to another verifier.
 
 ## §1 The question
 
@@ -135,7 +144,7 @@ repository.
 | Its record | `docs/RECORD.md`, `docs/KICKOFF.md`, `docs/HARNESS.md`, `docs/studies/SF-0.md` to `SF-2.md` at `b78af18` | |
 | The toy repository | `<muse>/muse-softfloat-toy` | `main` at `084f98b`: 224 commits, 2026-11-03 20:05 to 2026-11-07 16:39. `docs/RECORD.md` is 410 lines. `docs/metrics/plants.jsonl` has 90 rows, in a different schema: two rows for each of 44 parcel copies, plus 2 `lead_trim` rows. It is graded per copy, with no shape for each plant. By script over that file: 44 `dispatched` rows; 44 `verdict` rows, which hold 220 plants, all caught, and name each copy's verifier report; and 2 `lead_trim` rows, which record proofs cut down |
 | The workspace ledger | `<muse>/ledger/` | 118 top-level files. `lead.md` is 1,012 lines; its last heading is at line 889 (2026-11-02), and the toy round's entries follow it without headings. `briefs/` holds 101 files and `urgent/` 14 |
-| The audits | `<muse>/ledger/auditor-*.md`; `<muse>/scratch/` folders `audit-full/`, `audit-adherence-2/`, `audit-adherence-final/`, `audit-adherence-seal/`, `audit-wave1/`, `audit-wave2/` and `audit-final/` | The adherence audits graded ADHERENT WITH SLIPS at `7c3819c` (10-28), `bc807e6` (10-29) and `751d1d6` (the seal, 11-01). The full identify-only audit ran at `a49991f` (11-01). Six of the audit agents have usage rows, all on Muse models. The seal audit's agent, `auditor-adherence-seal`, has none; `docs/RECORD.md` records its audit at line 1251 |
+| The audits | `<muse>/ledger/auditor-*.md`; `<muse>/scratch/` folders `audit-full/`, `audit-adherence-2/`, `audit-adherence-final/`, `audit-adherence-seal/`, `audit-wave1/`, `audit-wave2/` and `audit-final/` | The adherence audits graded ADHERENT WITH SLIPS at `7c3819c` (10-28), `bc807e6` (10-29) and `751d1d6` (the seal, 11-01). The full identify-only audit ran at `a49991f` (11-01). Six `auditor-*` agents have usage rows, all on Muse models. The full audit's eight auditors have none; its report names their models (`audit-full/REPORT.md` line 4: the library's on Wonder, the rest on Spark). `auditor-adherence-seal` has none either; the lead's ledger names it as Spark (`lead.md` line 856), and `docs/RECORD.md` records its audit from line 1251. That report's original is in `scratch/audit-adherence-seal/`, outside the fence. The copy frozen into `audit-bundle-v2` is fenced, like the rest of that folder |
 | The case report | `<muse>/CASE-REPORT-muse-softfloat.md` | Dated 2026-11-01 in the lead's ledger (`lead.md` line 884); the file was last modified 2026-11-02. It cites `a49991f`, five commits before `main` |
 | The kit | `<muse>/softfloat-bootstrap-kit/` | `MANIFEST.txt` pins ParcelRound `f42242e`, HonestFramework `65447fd`, QRO-Crate `8afeede` and cft-fp256 `39f9801` |
 | The plant keys | `<muse>/scratch/lead/keys/` | 78 files. The plants rows hold 39 distinct `key_sha256` values, and each matches one of those files. `docs/metrics/plant_keys.sha256` holds 15 hashes, covering 75 of the 195 rows. Each key is checked against its rows' `key_sha256` before use, with `plant_keys.sha256` as a partial second check |
@@ -226,15 +235,19 @@ Q6 and the comparison with earlier rounds.
    class and disposition (sent back, restated, or limit).
    - They come from the passes rows and the verifiers' ledgers.
    - Send-backs count only proven revision rounds.
-   - The kit names the classes `a` and `b` (`METRICS.md` line 30, and
-     `tools/round_metrics.py`'s docstring). P1 cites where each class is
-     defined.
+   - The kit defines the classes. (a) is a regression. (b) is a wrong
+     answer, which includes a sentence that claims more than is true. A note
+     is a third class, and is not counted. The sources are `ROLES.md` line 100
+     and `GLOSSARY.md` lines 27-28. `METRICS.md` line 30 counts them as `a`
+     and `b`.
 5. The voided attempt, and any other attempt the record voids or redoes.
    Plant rows are tied to attempts by `key_sha256`.
    - The comparison bench's plant rows are named `verifier-psbench2`, which
      was the voided attempt A's name.
    - They hold attempt B's grades: `verifier-psbench2b`, on the copy whose
      key is `0305f97a` (`<muse>/ledger/lead.md` line 876).
+   - The five rows named `verifier-psbench` (key `c7e98cc5`, all caught) are
+     the first post-seal bench parcel's. P1 says how the record treats them.
 6. Earlier rounds with planted copies: ParcelRound rounds 4 to 6, and
    HonestHarness rounds 1 and 2. For each, the plant counts, the recall, and
    the shapes of the misses, with the models given by role and who planted
