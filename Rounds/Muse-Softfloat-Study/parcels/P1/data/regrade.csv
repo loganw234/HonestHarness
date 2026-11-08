@@ -1,0 +1,49 @@
+project,sample_id,stratum,wave,verifier_or_parcel,plant,class,key_prefix,key_hash_verified,p1_grade,lead_grade,agree,evidence_file_under_muse,evidence_line,note
+library,L01,miss,polish,verifier-polish1,4,claim in docs,26c14c81,yes,missed,missed,yes,scratch/verifier-polish1/report.md,26,"verifier read the planted ""all four"" sentence and reconciled it with the five-mode enum; no finding"
+library,L02,miss,readme,verifier-readme,4,claim in docs,e356f249,yes,missed,missed,yes,scratch/verifier-readme/report.md,27,"README L49-56 refused/deferred list marked ""Agree"
+library,L03,miss,wave1,verifier-w1f32,5,test data,71ef8ff1,yes,missed,missed,yes,scratch/verifier-w1f32/report.md,100-105,"verifier saw the 16 differing conv-int lines (7fffffff vs 7ffffffe) and wrote ""benign drift""; no finding"
+library,L04,miss,wave5,verifier-sf2,1,claim in docs,a90480af,yes,missed,missed,yes,scratch/verifier-sf2/report.md,26,"verifier recomputed 822+27 and wrote ""855 - correct""; endorsed the planted figure"
+library,L05,miss,wave5,verifier-sf2,5,claim in docs,a90480af,yes,unclear,missed,not comparable (unclear),scratch/verifier-sf2/report.md,166-170,"verifier names ""pow/powr (deferred; priced GO)"" as U7 ""unsourced"" but says the deferral matches SF-1 Sec.7; the plant's text is named but not called a contradiction"
+library,L06,miss,wave5,verifier-w5alg1,3,test data,d85e64c8,yes,missed,missed,yes,scratch/verifier-w5alg1/report.md,21;104,boundary probe on 17595 decisions and a duplicate regen found nothing; the generator edit is not named
+library,L07,miss,wave5,verifier-w5metrics,4,metadata or provenance,8a5c7589,yes,unclear,missed,not comparable (unclear),scratch/verifier-w5metrics/report.md,88-100,"the planted answered stamp is named as UNRESOLVED U1 and expressly ""not a fabrication finding"""
+library,L08,miss,wave6,verifier-w6metrics,5,metadata or provenance,beff2b21,yes,missed,missed,yes,scratch/verifier-w6metrics/report.md,74-76,coverage note N4 reports no gap; the mislabelled wave field is not named
+library,L09,catch:polish,polish,verifier-polish1,3,claim in docs,26c14c81,yes,caught,caught,yes,scratch/verifier-polish1/report.md,17,link ../TWIDDLES.md named
+library,L10,catch:polish,polish,verifier-polish1,2,claim in docs,26c14c81,yes,caught,caught,yes,scratch/verifier-polish1/report.md,11-13,F2 data.json caught 120 vs 114
+library,L11,catch:postseal,postseal,verifier-psreadme,1,claim in docs,f5d7b66a,yes,caught,caught,yes,scratch/verifier-psreadme/report_extracted.json,16,F1 859 vs 849
+library,L12,catch:postseal,postseal,verifier-psciwindows,3,code,c8464f51,yes,caught,caught,yes,scratch/verifier-psciwindows/report.md,28,smoke-logs renamed smoke-log
+library,L13,catch:postseal,postseal,verifier-psbench,1,claim in docs,c7e98cc5,yes,caught,caught,yes,scratch/verifier-psbench/report.md,42,F2 median 357.31 a dropped digit
+library,L14,catch:postseal,postseal,verifier-psciwindows,5,code,c8464f51,yes,caught,caught,yes,ledger/verifier-psciwindows.md,22,windows standard step runs smoke
+library,L15,catch:readme,readme,verifier-readme,5,claim in docs,e356f249,yes,caught,caught,yes,scratch/verifier-readme/report.md,19;44,F2 1463946 vs 146442
+library,L16,catch:site,site,verifier-w5demo,4,test data,5caf7fdb,yes,caught,caught,yes,scratch/verifier-w5demo/report.md,39,expected-kissfft.txt row 1 last nibble
+library,L17,catch:wave1,wave1,verifier-w1f64,5,test data,e6bbc65c,yes,caught,caught,yes,scratch/verifier-w1f64/report.md,40-42,F_UNF 0x04 should be 0x08
+library,L18,catch:wave2,wave2,verifier-w2xf,2,code,c589a477,yes,caught,caught,yes,scratch/verifier-w2xf/report.md,22-25,fma_f16_f32_f64 addend FMT32 should be FMT64
+library,L19,catch:wave3,wave3,verifier-w3str,1,code,63fe450a,yes,caught,caught,yes,scratch/verifier-w3str/report.md,36-38,dec_round_inc ties-to-even ignores last_kept
+library,L20,catch:wave3,wave3,verifier-w3str,5,test data,63fe450a,yes,caught,caught,yes,scratch/verifier-w3str/report.md,64,0xabcdeeep10 vs committed 0xabcdefp10
+library,L21,catch:wave4,wave4,verifier-w4seam,4,metadata or provenance,80c99a9b,yes,caught,caught,yes,scratch/verifier-w4seam/report.md,7,COVERAGE line 8 authority cell
+library,L22,catch:wave4,wave4,verifier-w4seam,5,claim in docs,80c99a9b,yes,caught,caught,yes,scratch/verifier-w4seam/report.md,4,MAX_PROV 256 vs 128
+library,L23,catch:wave4,wave4,verifier-w4seam,2,code,80c99a9b,yes,caught,caught,yes,scratch/verifier-w4seam/report.md,6,maximum row flags=no
+library,L24,catch:wave4,wave4,verifier-w4trig,5,test data,ec0d8227,yes,caught,caught,yes,scratch/verifier-w4trig/report.md,108,stale committed vector trig-f64.vec:3
+library,L25,catch:wave5,wave5,verifier-w5twiddledoc,3,claim in docs,2cf0f2c7,yes,caught,caught,yes,scratch/verifier-w5twiddledoc/report.md,49,F3 never-unmodified inversion
+library,L26,catch:wave5,wave5,verifier-w5exp2,1,code,8e186bd5,yes,caught,caught,yes,scratch/verifier-w5exp2/report.md,20-28,cut <= swallows x == E_tie
+library,L27,catch:wave5,wave5,verifier-w5readme3,5,test data,17ae218e,yes,caught,caught,yes,scratch/verifier-w5readme3/report.md,49,F5 vectors-sample idx 1258
+library,L28,catch:wave5,wave5,verifier-w5metrics,5,metadata or provenance,8a5c7589,yes,caught,caught,yes,scratch/verifier-w5metrics/report.md,111,briefs base 5a80126 does not exist
+library,L29,catch:wave5,wave5,verifier-w5metrics,1,record arithmetic,8a5c7589,yes,caught,caught,yes,scratch/verifier-w5metrics/report.md,169,F2 verifier-extractor output tokens 84350 vs 34350
+library,L30,catch:wave5,wave5,verifier-w5readme3,2,claim in docs,17ae218e,yes,caught,caught,yes,scratch/verifier-w5readme3/report.md,41,F2 README 68-70 benefit claimed realized in the shipped workload
+library,L31,catch:wave5,wave5,verifier-w5alg1,4,code,d85e64c8,yes,caught,caught,yes,scratch/verifier-w5alg1/report.md,89-93,r_sqrt claim C-ULP refused by gen_tables
+library,L32,catch:wave6,wave6,verifier-w6sanitize,2,test data,be4c5af0,yes,caught,caught,yes,scratch/verifier-w6sanitize/report.md,38,INT_MAX-100 canary never overflows
+library,L33,catch:wave6,wave6,verifier-w6judgemap,1,claim in docs,4dcf5c2a,yes,caught,caught,yes,scratch/verifier-w6judgemap/report.md,21-24,map step 1 gives 180 s 1920x1080
+library,L34,catch:wave6,wave6,verifier-w6examples,4,code,c9625a57,yes,caught,caught,yes,scratch/verifier-w6examples/report.md,46-50,F4 CI runs build.sh regen
+library,L35,catch:wave6,wave6,verifier-w6metrics,4,metadata or provenance,beff2b21,yes,caught,caught,yes,scratch/verifier-w6metrics/report.md,54-55,N1 (a note in the verifier's own class) names the own-row base f01dc96 vs brief cdc40ae
+library,L36,catch:wave6,wave6,verifier-w6captions,4,other,339c61fc,yes,caught,caught,yes,scratch/verifier-w6captions/report.md,65,invalid WebVTT comma timestamp
+library,L37,catch:wave6,wave6,verifier-w6metrics,2,record arithmetic,beff2b21,yes,caught,caught,yes,scratch/verifier-w6metrics/report.md,37,same trailing-zero signature 33692 to 336920
+library,L38,catch:wave6,wave6,verifier-w6examples,5,test data,c9625a57,yes,caught,caught,yes,scratch/verifier-w6examples/report.md,96,"fix F1 ""in both main.c files"" (pico mirrors the wrong constant)"
+toy,T01,copy,,toy1-carousel,,,78613a0c,NO key available,"count only: D1-D5 plus D6 (minor, report-only)","5/5 caught, 1 extra",consistent,scratch/toy1/verify-carousel.md,24-95,lead.md line 937 lists the five plants (fig8 IC digit; Lagrange 762; memset removal; 240-hardcode; proof 40000) and the report's D3; D2; D4; D5; D1 match them one by one; D6 is the extra
+toy,T02,copy,,toy1-input,,,699bd1bd,NO key available,count only: D1-D9 plus M1 (minor),"5/5 caught, 3 extra",consistent,scratch/toy1/verify-input.md,51-62,"9 defects named, 5 + 3 extras = 8; D4, D7 and D8 match the three extras the row lists; D9 is a minor item the row does not list; no key and no lead list of the five plants, so only the count is checked"
+toy,T03,copy,,toy1-timebank,,,119ebc1a,NO key available,count only: D1-D8 plus a minor-findings section,"5/5 caught, 3 extra",consistent,scratch/toy1/verify-timebank.md,79-195,"8 defects = 5 + 3 extras; the row's extras (SI MB label, DST backwards, morning-report example) match D1/D2, D7, D8"
+toy,T04,copy,,toy2-gravity,,,c4a80a37,NO key available,count only: D1-D5,"5/5 caught, 0 extra",consistent,scratch/toy2/verify-gravity.md,77-135,count only
+toy,T05,copy,,toy2-inputcore,,,c055ecb5,NO key available,count only: D1-D5,"5/5 caught, 0 extra",consistent,scratch/toy2/verify-inputcore.md,58-143,count only
+toy,T06,copy,,toy2-seismo,,,96040b8c,NO key available,count only: D1-D5,"5/5 caught, 0 extra",consistent,scratch/toy2/verify-seismo.md,68-124,count only
+toy,T07,copy,,toy3-heartbeat,,,839d40c8,NO key available,count only: D1-D5,"5/5 caught, 0 extra",consistent,scratch/toy2/verify-heartbeat.md,49-99,count only
+toy,T08,copy,,toy3-session,,,63bdc8a1,NO key available,count only: 5 numbered defects,"5/5 caught, 0 extra",consistent,scratch/toy2/verify-session.md,71-85,count only
+toy,T09,copy,,toy4-shepherd,,,cf5b3b2d,NO key available,count only: D-1 to D-5 (convicted),"5/5 caught, 0 extra",consistent,scratch/toy2/verify-shepherd.md,148-168,count only
+toy,T10,copy,,toy5-display,,,75c09474,NO key available,count only: D1-D5,"5/5 caught, 0 extra",consistent,scratch/toy2/verify-display.md,31-40,count only

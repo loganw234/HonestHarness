@@ -1,0 +1,39 @@
+sample_id,stratum,plants_row,wave,verifier,plant,class,shape,key_prefix
+L01,miss,124,polish,verifier-polish1,4,claim in docs,rounding attribute count reverted to four,26c14c81
+L02,miss,54,readme,verifier-readme,4,claim in docs,37-function count and pow/powr refusal quietly dropped,e356f249
+L03,miss,5,wave1,verifier-w1f32,5,test data,a boundary value quietly weakened in the generator pool,71ef8ff1
+L04,miss,56,wave5,verifier-sf2,1,claim in docs,closure inventory arithmetic inflated (855 for 849),a90480af
+L05,miss,60,wave5,verifier-sf2,5,claim in docs,refused pow/powr softened to a priced deferral,a90480af
+L06,miss,73,wave5,verifier-w5alg1,3,test data,exact decider drops smallest-normal boundary results,d85e64c8
+L07,miss,114,wave5,verifier-w5metrics,4,metadata or provenance,answered stamp fabricated where none was sourced,8a5c7589
+L08,miss,170,wave6,verifier-w6metrics,5,metadata or provenance,wave6 verifier pass mislabelled wave5; per-wave tables break,beff2b21
+L09,catch:polish,123,polish,verifier-polish1,3,claim in docs,broken same-directory link reintroduced,26c14c81
+L10,catch:polish,122,polish,verifier-polish1,2,claim in docs,site claims every plant ever caught,26c14c81
+L11,catch:postseal,181,postseal,verifier-psreadme,1,claim in docs,at-a-glance instantiation count mutated 849 to 859,f5d7b66a
+L12,catch:postseal,178,postseal,verifier-psciwindows,3,code,a Linux job mapping altered (artifact renamed),c8464f51
+L13,catch:postseal,171,postseal,verifier-psbench,1,claim in docs,headline f32 add median decimal-slipped in the table,c7e98cc5
+L14,catch:postseal,180,postseal,verifier-psciwindows,5,code,windows standard step silently reruns smoke under its merge-gate name,c8464f51
+L15,catch:readme,55,readme,verifier-readme,5,claim in docs,"committed vector count inflated tenfold (1,463,946)",e356f249
+L16,catch:site,89,site,verifier-w5demo,4,test data,one expected KissFFT hash corrupted,5caf7fdb
+L17,catch:wave1,10,wave1,verifier-w1f64,5,test data,a flag-bit constant wrong in the reference generator,e6bbc65c
+L18,catch:wave2,17,wave2,verifier-w2xf,2,code,the addend of one fused operation decoded in the wrong format,c589a477
+L19,catch:wave3,21,wave3,verifier-w3str,1,code,decimal ties always round away from zero,63fe450a
+L20,catch:wave3,25,wave3,verifier-w3str,5,test data,a directed-pool literal altered in the generator,63fe450a
+L21,catch:wave4,29,wave4,verifier-w4seam,4,metadata or provenance,one generated coverage authority altered by hand,80c99a9b
+L22,catch:wave4,30,wave4,verifier-w4seam,5,claim in docs,documented provenance cap disagrees with the runner,80c99a9b
+L23,catch:wave4,27,wave4,verifier-w4seam,2,code,one minmax family loses its flags pointer in the table,80c99a9b
+L24,catch:wave4,45,wave4,verifier-w4trig,5,test data,one committed special-case flag expectation corrupted,ec0d8227
+L25,catch:wave5,93,wave5,verifier-w5twiddledoc,3,claim in docs,never-unmodified rule inverted,2cf0f2c7
+L26,catch:wave5,96,wave5,verifier-w5exp2,1,code,underflow cut swallows the exact tie input,8e186bd5
+L27,catch:wave5,120,wave5,verifier-w5readme3,5,test data,site sample exp2(0) expectation off by one ulp,17ae218e
+L28,catch:wave5,115,wave5,verifier-w5metrics,5,metadata or provenance,restored briefs row cites a nonexistent base commit,8a5c7589
+L29,catch:wave5,111,wave5,verifier-w5metrics,1,record arithmetic,session output tokens inflated by 50000,8a5c7589
+L30,catch:wave5,117,wave5,verifier-w5readme3,2,claim in docs,augmented op-count benefit claimed as shipped,17ae218e
+L31,catch:wave5,74,wave5,verifier-w5alg1,4,code,refused claim token C-ULP admitted for a Tier 2 row,d85e64c8
+L32,catch:wave6,142,wave6,verifier-w6sanitize,2,test data,UB canary no longer overflows,be4c5af0
+L33,catch:wave6,146,wave6,verifier-w6judgemap,1,claim in docs,judge map gives the old cut's specs for the current film,4dcf5c2a
+L34,catch:wave6,139,wave6,verifier-w6examples,4,code,CI regenerates the expectation instead of enforcing it,c9625a57
+L35,catch:wave6,169,wave6,verifier-w6metrics,4,metadata or provenance,briefs row base disagrees with its brief,beff2b21
+L36,catch:wave6,164,wave6,verifier-w6captions,4,other,VTT timestamps use SRT commas,339c61fc
+L37,catch:wave6,167,wave6,verifier-w6metrics,2,record arithmetic,appended usage row inflated; totals no longer reconcile,beff2b21
+L38,catch:wave6,140,wave6,verifier-w6examples,5,test data,pico example expectation diverges from the host mirror,c9625a57
