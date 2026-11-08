@@ -1,8 +1,20 @@
-# HonestHarness: how muse-softfloat ran the methods (plan of record, draft 1)
+# HonestHarness: how muse-softfloat ran the methods (plan of record, draft 2)
 
-Draft 1, 2026-11-08. The lead is Claude Opus 5.5, in Claude Code. The study
+Draft 2, 2026-11-08. The lead is Claude Opus 5.5, in Claude Code. The study
 begins only at Logan's approval and go. Its ledger is
 `<repos>/honestharness-muse-ledger/`.
+
+## History
+
+- **Draft 1** (`227c553`) went to verifier-PL, on Haiku. It came back NOT
+  READY (the ledger, 08:30:26):
+  - four facts were wrong: the send-back count, the key check, which earlier
+    rounds had planted copies, and recall by model;
+  - five sentences said more than their sources;
+  - six notes.
+- **Draft 2** takes all of them. Each was checked first by the lead's own
+  command. Draft 2 also tightens the fence on searches, and records that the
+  harness refused a subagent's report file.
 
 ## §1 The question
 
@@ -21,14 +33,17 @@ kit. Four things changed at once:
 - **The harness:** Muse Code, in place of Claude Code.
 - **The models,** from Meta's Muse family:
   - muse-wonder-full-1.0 was the lead and ran most parcels;
-  - muse-spark-1.3 was the verifier.
+  - muse-spark-1.3 ran 43 of the 46 verifier passes, and muse-wonder-full-1.0
+    ran the other 3. This counts by the model in each agent's usage row.
 - **The domain:** an IEEE 754-2019 softfloat library, with hardware in the
   loop.
-- **A hard deadline.**
+- **A fixed window:** the hackathon's, which ended 2026-11-04
+  (`docs/KICKOFF.md` line 144). The kit's own calendar was "not strict"
+  (line 43).
 
-Most of the methods' evidence so far came from rounds led by Claude Opus. The
-study asks what this run says about the methods when the harness, the models
-and the domain change.
+In Logan's words, "a lot of the prior samples" came from Opus-level models.
+The study asks what this run says about the methods when the harness, the
+models and the domain change.
 
 **The questions:**
 - **Q1, transfer.** Which of the kit's method clauses did the round carry out
@@ -36,10 +51,16 @@ and the domain change.
   harness force a fallback?
 - **Q2, verification by a smaller model.** How did muse-spark-1.3 do as the
   verifier?
-  - its recall on the planted faults, by the shape of the fault, by wave and
-    by project;
-  - its genuine findings, and the send-backs they caused;
-  - the attempt voided because it checked the wrong tree.
+  - **Its recall on the planted faults,** by the shape of the fault, by wave
+    and by project.
+    - The model comes from the verifier's usage row, or from the ledger
+      where there is no row.
+    - 7 verifiers, holding 35 plant rows, have no usage row.
+  - **Its genuine findings,** and the send-backs they caused.
+    - The record's erratum (`docs/RECORD.md` from line 1004) reads
+      `sent_back` as true only on proven revision rounds.
+    - 8 of the 15 rows marked true were not revision rounds.
+  - **The attempt voided** because it checked the wrong tree.
 
   How far can the lead's grading be trusted? A re-grade sample answers that.
 - **Q3, escapes.** What reached the seal unflagged? That covers the final
@@ -104,21 +125,26 @@ repository.
 | The library repository | `<muse>/muse-softfloat` (github.com/loganw234/muse-softfloat) | `main` at `b78af18`: 221 commits, 2026-10-26 10:50 to 2026-11-03 04:18. Tag `v1.0.0` at `957fdae` |
 | Its metrics | `docs/metrics/*.jsonl` at `b78af18` | usage 128 rows, passes 131, plants 195, briefs 50, corrections 24, escalations 23, fetches 5 |
 | Its record | `docs/RECORD.md`, `docs/KICKOFF.md`, `docs/HARNESS.md`, `docs/studies/SF-0.md` to `SF-2.md` at `b78af18` | |
-| The toy repository | `<muse>/muse-softfloat-toy` | `main` at `084f98b`: 224 commits, 2026-11-03 20:05 to 2026-11-07 16:39. `docs/RECORD.md` is 410 lines. `docs/metrics/plants.jsonl` has 90 rows, in a different schema |
+| The toy repository | `<muse>/muse-softfloat-toy` | `main` at `084f98b`: 224 commits, 2026-11-03 20:05 to 2026-11-07 16:39. `docs/RECORD.md` is 410 lines. `docs/metrics/plants.jsonl` has 90 rows, in a different schema: two rows for each of 44 parcel copies, plus 2 `lead_trim` rows. It is graded per copy, with no shape for each plant (verifier-PL) |
 | The workspace ledger | `<muse>/ledger/` | 118 top-level files. `lead.md` is 1,012 lines; its last heading is at line 889 (2026-11-02), and the toy round's entries follow it without headings. `briefs/` holds 101 files and `urgent/` 14 |
-| The audits | `<muse>/ledger/auditor-*.md`; `<muse>/scratch/audit-*/` | The adherence audits graded ADHERENT WITH SLIPS at `7c3819c` (10-28), `bc807e6` (10-29) and `751d1d6` (the seal, 11-01). The full identify-only audit ran at `a49991f` (11-01) |
-| The case report | `<muse>/CASE-REPORT-muse-softfloat.md` | Written 11-02, citing `a49991f`, five commits before `main` |
+| The audits | `<muse>/ledger/auditor-*.md`; `<muse>/scratch/` folders `audit-full/`, `audit-adherence-2/`, `audit-adherence-final/`, `audit-adherence-seal/`, `audit-wave1/`, `audit-wave2/` and `audit-final/` | The adherence audits graded ADHERENT WITH SLIPS at `7c3819c` (10-28), `bc807e6` (10-29) and `751d1d6` (the seal, 11-01). The full identify-only audit ran at `a49991f` (11-01). The auditors are Muse agents, by their usage rows |
+| The case report | `<muse>/CASE-REPORT-muse-softfloat.md` | Dated 2026-11-01 in the lead's ledger (`lead.md` line 884); the file was last modified 2026-11-02. It cites `a49991f`, five commits before `main` |
 | The kit | `<muse>/softfloat-bootstrap-kit/` | `MANIFEST.txt` pins ParcelRound `f42242e`, HonestFramework `65447fd`, QRO-Crate `8afeede` and cft-fp256 `39f9801` |
-| The plant keys | `<muse>/scratch/lead/` | 532 entries. Each key is checked against `plant_keys.sha256` before use |
-| Earlier rounds | ParcelRound at `f42242e` (case studies 1-6, `archive/`); HonestFramework at `65447fd`; HonestHarness round 1 (its archive on main) and round 2 (`<repos>/honestharness-r2-ledger/`, with keys in `keys/`) | Read at commits |
+| The plant keys | `<muse>/scratch/lead/keys/` | 78 files. The plants rows hold 39 distinct `key_sha256` values, and each matches one of those files. `docs/metrics/plant_keys.sha256` holds 15 hashes, covering 75 of the 195 rows. Each key is checked against its rows' `key_sha256` before use, with `plant_keys.sha256` as a partial second check |
+| Earlier rounds with planted copies | ParcelRound at `f42242e`: rounds 4 to 6. Rounds 4 and 5 are graded in their case studies' prose, and round 6's archive holds its keys. HonestHarness round 1 (its archive on main) and round 2 (`<repos>/honestharness-r2-ledger/`, with keys in `keys/`) | Read at commits. ParcelRound's rounds 1 to 3 had no planted copies, and nor did round 7 (`CASE-STUDY-7.md`, on the branch `case-study-7` at `894d125`, outside the kit) |
+| HonestFramework | `<repos>/HonestFramework` at `65447fd` | The kit's pin |
 
 **The first look,** from the lead's script over the metrics at `b78af18`
 (the study recomputes all of it):
 - 187 of 195 plants were graded caught. The lead graded every plant.
-- There were 46 verifier passes: 37 NOT READY and 9 READY, and 15 sent work
-  back.
-- 1,418,065,198 tokens over 128 usage rows: muse-wonder-full-1.0 has 69 rows
-  and muse-spark-1.3 has 59.
+- There were 46 verifier passes, 37 NOT READY and 9 READY.
+  - 15 rows mark `sent_back` as true.
+  - The record's erratum reads 8 of those as not revision rounds.
+- 1,418,065,198 tokens, input plus output as the rows give them, over 128
+  usage rows.
+  - muse-wonder-full-1.0 has 69 rows and muse-spark-1.3 has 59.
+  - The rows' cached tokens, 1,379,156,504 in all, are part of input: no row's
+    cached count exceeds its input. They are not added again.
 
 ## §5 Rules and fences
 
@@ -135,8 +161,14 @@ repository.
   `audit-bundle/` or `audit-bundle-v2/` at any commit, or any branch, file or
   bundle that holds the Claude audit reports. After that, only the lead reads
   them, for the comparison.
+- **Searches name their directories.** Never run `find` or `grep -r` from
+  `<muse>` or from the library repository's root, because both trees hold
+  the fenced folders. This was tightened after verifier-PL's pass 1, the
+  ledger at 08:30:26.
 - **Never read:** the IEEE 754 text (`754-2019.pdf`), the media files, and the
   Muse session transcripts, which Logan's decision leaves out of scope.
+- **The lead's folder,** `<repos>/honestharness-muse-lead/`, holds the lead's
+  drafts and keys. No agent reads it.
 - **Privacy.**
   - No absolute path, owner address or key goes in any committed file or
     ledger entry.
@@ -149,9 +181,11 @@ repository.
 - **Two practices adopted from the case report, as a test of them:**
   - its P1: a verifier's first ledger entry quotes its copy's HEAD and one
     line that only the copy holds;
-  - its P6: every agent writes its report as a file in its scratch directory
-    before its final message, and that message carries a summary and the
-    path.
+  - its P6, amended to fit this harness: every agent writes its findings in
+    its ledger file first, and its report comes back as its final message.
+    The lead files that message verbatim in the ledger's `reports/`. Claude
+    Code refused verifier-PL's report file and asked for the findings as text
+    instead, which is a data point on P6.
 
 ## §6 The work
 
@@ -166,19 +200,30 @@ Q6 and the comparison with earlier rounds.
    named commits.
 2. Class every plant's shape with a written rubric. The classes are code;
    test data; a claim in the docs; metadata or provenance; record
-   arithmetic; and other. Each plant is listed with its class and the reason
-   for it. Recall is given by class, wave, verifier, model and project.
-3. Re-grade a sample: all 8 misses and a stratified sample of 30 catches. Each
-   is re-graded from its key, whose hash is checked first, and from the
-   verifier's own report or ledger. The result is the sample's agreement with
-   the lead's grades.
+   arithmetic; and other.
+   - Each plant is listed with its class and the reason for it.
+   - Recall is given by class, wave, verifier, model and project.
+   - The toy's rows are graded per copy, with no shape for each plant. Its
+     classes come from its keys and its verifiers' reports, as far as they
+     allow. Where they don't, P1 says so.
+3. Re-grade a sample: all 8 misses and a stratified sample of 30 catches.
+   - Each is re-graded from its key and from the verifier's own report or
+     ledger. The key's hash is checked first, against its rows'
+     `key_sha256`.
+   - The result is the sample's agreement with the lead's grades.
+   - The 65 rows marked `checked_by: integration` are read as run by the
+     lead, as the record's erratum says.
 4. The genuine findings: each verifier pass's non-plant findings, with their
-   class and disposition (sent back, restated, or limit). They come from the
-   passes rows and the verifiers' ledgers.
+   class and disposition (sent back, restated, or limit).
+   - They come from the passes rows and the verifiers' ledgers.
+   - Send-backs count only proven revision rounds.
 5. The voided attempt, and any other attempt the record voids or redoes.
-6. Earlier rounds: plant counts, recall and the shapes of the misses for
-   ParcelRound rounds 1-6 and HonestHarness rounds 1-2. Each round's models
-   are given by role, with who planted and who graded.
+   Plant rows are tied to attempts by `key_sha256`: the comparison bench's
+   voided attempt A shares its verifier's name with attempt B.
+6. Earlier rounds with planted copies: ParcelRound rounds 4 to 6, and
+   HonestHarness rounds 1 and 2. For each, the plant counts, the recall, and
+   the shapes of the misses, with the models given by role and who planted
+   and who graded. Rounds 1 to 3 and 7 are named as having no planted copies.
 
 **P2, transfer, escapes and the lead.** It answers Q1, Q3 and Q4, and checks
 the case report against the record for Q5. It covers the library round.
