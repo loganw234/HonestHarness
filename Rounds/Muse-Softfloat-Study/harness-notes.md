@@ -2,7 +2,7 @@
 
 Each note gives what the lead did by hand, and what would make it a mechanism.
 - The lead wrote them at the study's close, from the ledger. Each cites its entries by time on 2026-11-08, unless dated otherwise. A time is an entry of the lead's `lead.md`, unless the note names an agent's own file.
-- This is draft 2. It takes verifier-N's pass 1 (`reports/verifier-N.md`).
+- This is draft 3. Draft 2 took verifier-N's pass 1, and draft 3 takes its pass 2 (`reports/verifier-N.md`). The lead made draft 3's changes and checked each by command, since verifier-N's passes were spent (14:24:39).
 - The report's section "What running this study showed about the methods" covers the methods. These notes cover the harness and the lead's own practice.
 
 1. **The harness refuses a subagent's report file.**
@@ -12,7 +12,8 @@ Each note gives what the lead did by hand, and what would make it a mechanism.
      - P1's, with a draft in P1's scratch directory (09:41:11).
    - The agents could write their scripts and tables. Only report-like prose was refused (09:34:05). An Edit to an existing file was accepted, for P3's own one-line correction (10:06:34).
    - So each parcel sent its text as messages in numbered parts. The lead built each file from them and recorded its hash (09:36:39, 09:38:17 and 09:41:11). It removed only each part's header line, and joined the parts with one blank line.
-   - Each parcel read its file back (P3's own file, 09:46:32; P1's, 09:47:27; P2's, 09:51:12). P1 and P2 checked the file's structure and sections, not each byte against their messages.
+   - Each parcel read back the file the lead wrote, by its hash (P3's own file, 09:46:32; P1's, 09:47:27; P2's, 09:51:12). P1 and P2 checked its structure and sections, not each byte against their messages.
+   - P3 then changed one line before it committed, a correction it disclosed (09:48:41).
    - The revisions took the same road.
      - P1 and P2 sent their changed lines. The lead applied each one where its old text occurred exactly once (10:07:34, 10:10:17).
      - P3 edited its own file (10:06:34).
@@ -33,8 +34,8 @@ Each note gives what the lead did by hand, and what would make it a mechanism.
    - **Mechanism:** a study's README names its durable places from the start, and scratch holds only what can be lost.
 5. **The reinstalled Miniconda breaks the tests through `SSL_CERT_FILE`.**
    - Its activation script sets the variable to a file that a Windows install lacks, and two tests failed on it (round 2's ledger, 2026-10-26 10:04:27).
-   - The lead's entries record each of its gates in S0 as run with the variable removed by name.
-   - The parcels' common brief gives them the same command (`briefs/_common.md`). Their own reports of their gates do not say how they ran them.
+   - The lead's entries name the variable as removed for its gates in S0. 08:11:55 sets the rule, and the gate entries run from 08:17:33 to 14:20:38.
+   - The parcels' common brief gives them the same command (`briefs/_common.md`). P1's and P3's ledger files name it as a next step, but no parcel's record of a gate says how the gate ran (14:24:39).
    - **Mechanism:** before the tests, the gate checks that `SSL_CERT_FILE`, if set, names a file that exists, and refuses with that reason if not.
 6. **The gate outran the shell tool's limit.**
    - Earlier, a gate ran detached, by the lead's slip of backgrounding it twice. Its end was then waited on by a polling loop on its log (11:03:40).
@@ -53,9 +54,9 @@ Each note gives what the lead did by hand, and what would make it a mechanism.
      - the second by a script over the audit copies.
    - **Mechanism:** keep the crosswalk of finding IDs as data, and compute every "only" or "all" claim from it.
 9. **A count was given the wrong name.**
-   - The 12:28:59 entry gave a count of matching lines as "times". By the same pattern, one report has 4 matching lines and 5 matches (13:02:05).
-   - The lead counted lines with `grep -c`, and matches with `grep -o` piped to `wc -l`. The entry that takes this draft records the commands.
-   - **Mechanism:** each count is recorded with its command.
+   - The 12:28:59 entry gave "2 and 4 times". By the counts the lead recorded at 13:02:05, those are matching lines: one report has 4 matching lines and 5 matches.
+   - The lead's account of its commands came after both counts, at 14:06:42: `grep -c` for the lines, and `grep -o` piped to `wc -l` for the matches. No entry records the command of the 12:28:59 count.
+   - **Mechanism:** each count is recorded with its command, when it is made.
 10. **A context compaction fell between a report's arrival and its filing.**
     - The lead recovered verifier-C's first report, verbatim, from the session's own transcript, to file it (13:39:25).
     - **Mechanism:** each report is filed verbatim the moment it arrives, before any other step.
@@ -66,8 +67,8 @@ Each note gives what the lead did by hand, and what would make it a mechanism.
 12. **The planted copies were built and keyed by the lead's own script.**
     - The lead's `make_copy.py` built each copy (09:48:41, 09:50:30 and 09:52:36):
       - a `--no-local` clone of `study-muse` alone, with no remote;
-      - one commit on the base, and no object of the parcel's commit;
-      - a check that only the planted files differ.
+      - one commit on the base, and no object of the parcel's commit.
+    - The script exits with "CHECK FAILED" unless the files that differ from the parcel's commit are exactly the planted ones (14:24:39). The entries record the counts it found: 3 of 38 files for P3, 2 of 42 for P1, and 3 of 28 for P2.
     - The lead recorded each key's hash here before dispatch, and kept the keys in its own folder until the last planted-copy verifier had reported.
     - **Mechanism:** the method's own tool builds the copy, checks it, and commits the key's hash, in one step.
 13. **The lead lifted a fence for itself.**
