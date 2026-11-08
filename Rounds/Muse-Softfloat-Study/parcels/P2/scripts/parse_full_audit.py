@@ -64,7 +64,7 @@ def main():
             fid, sev = f"T{nt}", "nit"
         rows.append([fid, sev, "audit-full/REPORT.md", i, tag if sev == "minor" else "", re.sub(r"\s+", " ", text).strip()])
     with open(a.out, "w", newline="", encoding="utf-8") as fh:
-        w = csv.writer(fh)
+        w = csv.writer(fh, lineterminator="\n")
         w.writerow(["id", "severity", "source", "line", "area", "text"])
         w.writerows(rows)
     from collections import Counter

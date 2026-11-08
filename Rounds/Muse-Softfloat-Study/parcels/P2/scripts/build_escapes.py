@@ -38,7 +38,7 @@ def main():
         rows.append([sid, "adherence audit " + s[1], "slip", "audit report line %s" % s[2], s[3], "", own,
                      "yes" if own in ("not-raised", "examined-passed") else "no", s[5], s[6], s[7], s[8], s[9]])
     with open(a.out, "w", newline="", encoding="utf-8") as fh:
-        w = csv.writer(fh)
+        w = csv.writer(fh, lineterminator="\n")
         w.writerow(["id", "from", "severity", "source", "finding", "search_hits", "own_verification", "escape", "evidence",
                     "earlier_audit", "failure_family", "mechanism", "why_not_caught"])
         w.writerows(rows)

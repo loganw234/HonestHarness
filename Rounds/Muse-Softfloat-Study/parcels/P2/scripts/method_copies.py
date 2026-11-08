@@ -52,7 +52,7 @@ def main():
             rows.append([key, f, "identical" if same else "differs", len(sl), len(cl),
                          f"+{ins}/-{dele}; first hunk {first}" if not same else ""])
     with open(a.out, "w", newline="", encoding="utf-8") as fh:
-        w = csv.writer(fh)
+        w = csv.writer(fh, lineterminator="\n")
         w.writerow(["method", "file", "result", "source_lines", "kit_lines", "diff"])
         w.writerows(rows)
     for r in rows:

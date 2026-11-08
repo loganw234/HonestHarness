@@ -62,7 +62,7 @@ def main():
                     hits.append((label, i, re.sub(r"[A-Za-z]:[/\][^\s]*", "<path>", re.sub(r"\s+", " ", t.strip()))[:110]))
         out.append([fid, rx, len(hits), " || ".join(f"{h[0]}:{h[1]} {h[2]}" for h in hits[:a.max])])
     with open(a.out, "w", newline="", encoding="utf-8") as fh:
-        w = csv.writer(fh)
+        w = csv.writer(fh, lineterminator="\n")
         w.writerow(["id", "regex", "hit_count", "first_hits"])
         w.writerows(out)
     for r in out:

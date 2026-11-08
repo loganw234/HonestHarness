@@ -70,7 +70,7 @@ def main():
         print("\n".join(errors))
         return 1
     with open(a.out, "w", newline="", encoding="utf-8") as fh:
-        w = csv.writer(fh)
+        w = csv.writer(fh, lineterminator="\n")
         w.writerow(["id", "file", "line", "clause", "kind", "also_in", "marking", "evidence", "note"])
         w.writerows(rows)
     print("rows", len(rows))

@@ -50,7 +50,7 @@ def main():
         assert len(p) == 11, (len(p), p[0])
         rows.append([p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8], p[9], p[10]])
     with open(a.out, "w", newline="", encoding="utf-8") as fh:
-        w = csv.writer(fh)
+        w = csv.writer(fh, lineterminator="\n")
         w.writerow(["id", "source", "what", "owner", "caught_by", "caught_at", "introduced", "fixed",
                     "introduced_ancestor_of_main", "fixed_ancestor_of_seal", "fixed_ancestor_of_main",
                     "reached_main", "reached_seal", "note"])

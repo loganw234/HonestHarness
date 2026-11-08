@@ -127,7 +127,7 @@ def main():
     put("briefs containing 'memory ceiling' or ulimit or 'memory cap'", sum(1 for t in txt.values() if re.search(r"(?i)memory ceiling|ulimit|memory cap", t)))
     put("briefs containing 'script file' or 'no long inline'", sum(1 for t in txt.values() if re.search(r"(?i)script files?|no long inline", t)))
     with open(a.out, "w", newline="", encoding="utf-8") as fh:
-        w = csv.writer(fh)
+        w = csv.writer(fh, lineterminator="\n")
         w.writerow(["key", "value"])
         w.writerows(out)
     for k, v in out:

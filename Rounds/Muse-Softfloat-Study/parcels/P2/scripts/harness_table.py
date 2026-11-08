@@ -36,7 +36,7 @@ def main():
         cur[int(n)] = (v, e)
     assert sorted(cur) == list(range(1, 15))
     with open(a.out, "w", newline="", encoding="utf-8") as fh:
-        w = csv.writer(fh)
+        w = csv.writer(fh, lineterminator="\n")
         w.writerow(["row", "mechanism", "kit_fallback", "round_answer", "round_used", "verdict", "evidence"])
         for i, (k, f) in enumerate(zip(kr, fr), 1):
             assert k[0].startswith(f[0][:15]) or f[0].startswith(k[0][:15]), (i, k[0], f[0])  # same mechanism; the filled table shortens some names

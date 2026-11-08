@@ -46,7 +46,7 @@ as its own clause. Dedupe, as the lead ruled: an obligation is listed once at th
 - **Unknown (49)** are mostly acts only a parcel's or verifier's own report would show (reading the ledger at three moments,
   disclosing a crossing, not weakening an assertion). I sampled three verifier ledgers (`verifier-w4seam`, `-w4interval`,
   `-w4trig`) for the verifier duties and marked those DONE on that sample. I did not read the other verifier and parcel
-  reports in full. C130 (the board lock) moved from done to unknown: the lead's own entries say board runs were under the lock (12 mentions of board.lock in lead.md), but the seal audit finds no ledger/board.lock and no parcel or verifier ledger citing it (`audit-adherence-seal/report.md` l158-162), so the act rests on the lead's word alone.
+  reports in full. C130 (the board lock) moved from done to unknown: the lead's own entries say board runs were under the lock (12 mentions of board.lock in lead.md), but the seal audit finds no ledger/board.lock and checked only `ledger/parcel-w6augint.md` and `ledger/verifier-w6augint.md`, neither of which cites the lock (`audit-adherence-seal/report.md` l158-161), so the act rests on the lead's word alone.
 - **Reliance outside the 15 texts (not clauses, as the lead ruled).** The round leaned on obligations that live in the kit's
   `tools/` and `templates/`: `tools/plant.py` (the copies and their checks, `WORKFLOW.md:127-158`), `tools/ledger.sh`,
   `tools/round_metrics.py` (`AF:69`: selftest 43/0), and the templates for briefs and verifiers (`B w1-f32` follows the brief

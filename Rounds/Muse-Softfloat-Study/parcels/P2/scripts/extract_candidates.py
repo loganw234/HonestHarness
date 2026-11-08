@@ -46,7 +46,7 @@ def main():
                 n += 1
         per[f] = (len(lines), n)
     with open(a.out, "w", newline="", encoding="utf-8") as fh:
-        w = csv.writer(fh)
+        w = csv.writer(fh, lineterminator="\n")
         w.writerow(["file", "line", "kinds", "text"])
         w.writerows(rows)
     tl = tc = 0

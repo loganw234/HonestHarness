@@ -31,7 +31,7 @@ def main():
         print("ERRORS", errs)
         return 1
     with open(a.out, "w", newline="", encoding="utf-8") as fh:
-        w = csv.writer(fh)
+        w = csv.writer(fh, lineterminator="\n")
         w.writerow(["id", "observation", "claim", "measured", "source", "result", "reason"])
         w.writerows(rows)
     print("claims", len(rows), dict(Counter(r[5] for r in rows)))
