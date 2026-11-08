@@ -2,7 +2,7 @@
 
 2026-11-08. The lead is Claude Opus 5.5, in Claude Code. The plan of record is `PLAN.md` beside this file (`5197b2a`).
 
-This is draft 5.
+This is draft 6.
 - **Draft 2** took verifier-R's pass 1 on draft 1 (`35873c2`): no wrong figure, 8 restates and 9 notes (`reports/verifier-R.md`).
 - **Draft 3** takes verifier-R's pass 2, which found five small new faults and no wrong figure.
   - The lead fixed them and checked each line by command, since verifier-R's passes were spent.
@@ -11,6 +11,7 @@ This is draft 5.
 - **Draft 5** takes verifier-C's pass 1 on the comparison and draft 4 (`reports/verifier-C.md`).
   - Q4's first lines now carry the corrected count, and its source.
   - Q1 names the IAS15 parcel's unverified merge, which the comparison found missing from this report.
+- **Draft 6** takes a finding of verifier-N's, from its pass 1 on the harness notes (`reports/verifier-N.md`). The report channel's lines now cite the refusals, and say how the files were built and read back.
 
 This report answers the plan's six questions from three parcels' analyses, which sit beside it. Each analysis was verified twice, once on a planted copy and once on its fix:
 
@@ -346,8 +347,9 @@ The study ran the same methods with Claude agents: three Sonnet parcels, Haiku v
   - A pathspec rule then gave the fence a mechanical form for git listings.
   - Agents still had to choose to use it, so the fence stayed short of the allowlist the case report's P2 asks for.
 - **A shared ledger exposes the planting style.** One verifier's findings describe its copy's plants to any verifier that reads them. The study held every grading until the last planted-copy verifier had reported. muse-softfloat's own audit found the same leak, through the plant ledger inside later copies (P2 §Task 1, harness row 12).
-- **The report channel.** This harness refuses a subagent's report file. Three parcels and one verifier met the refusal.
-  - The parcels sent their analyses as text. The lead wrote each file verbatim, and recorded its hash, and the parcel read it back.
+- **The report channel.** This harness refuses a subagent's report file. Three parcels and one verifier met the refusal (the ledger, 08:30:26, 09:34:05 and 09:41:11; P2's own file, 09:34:00).
+  - The parcels sent their analyses as text. The lead built each file from the parts, removing only their header lines, and recorded its hash.
+  - Each parcel read its file back. Two of them checked its structure, rather than each byte against their messages.
   - So the case report's P6 depends on the harness.
 - **The provenance-first rule** was reordered once. A small verifier wrote its provenance entry after its first checks, and said so.
 - **The gate's privacy check** stopped one parcel's commit on an absolute path copied into a data file. Another parcel scrubbed the owner's address from its data before the gate.
