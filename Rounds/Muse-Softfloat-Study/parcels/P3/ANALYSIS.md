@@ -127,7 +127,7 @@ Whether the round "paid for" skipping P13 is P2's step 4, not mine.
 
 ## 3. Task 2: the toy round (`data/toy_practice.csv`, `data/toy_provenance.csv`)
 
-Counts: PRACTISED 2 (P6, P16), PARTLY 11 (P1, P2, P3, P4, P5, P7, P8, P9, P10, P12, P15),
+Counts: PRACTISED 1 (P6), PARTLY 12 (P1, P2, P3, P4, P5, P7, P8, P9, P10, P12, P15, P16),
 SILENT 5 (P11, P13, P14, P17, P18), by `toy_round` in `data/proposals.csv`. The strongest evidence:
 
 - **P1 in part: the copy's HEAD is quoted; the copy-only line is not shown.** The toy's metrics README: "provenance gate: it must quote the
@@ -142,8 +142,9 @@ SILENT 5 (P11, P13, P14, P17, P18), by `toy_round` in `data/proposals.csv`. The 
 - **P8 in part: a memory ceiling and a wall window are shown, not process ownership or checkpointing.** The same dispatch had "<3 GB child-command ceilings" (l901);
   the board capture window was raised as the registry grew (`TOY:docs/RECORD.md` l115-119).
   Process ownership and checkpointing are not shown.
-- **P16 practised for the plant ledger.** Key hash committed before the verifier is
-  dispatched, the verdict row completed at the merge (README l9-18). The toy keeps only a plant ledger.
+- **P16 in part: merge-time rows for the plant ledger only.** Key hash committed before the verifier is
+  dispatched, the verdict row completed at the merge (README l9-18). The toy keeps only a plant ledger,
+  and the proposal's "no end-of-round refresh" clause is not shown.
 - **P4 in part.** "Lead merge fixes, each delta-checked" (RECORD l231), by the lead, not
   by an independent checker.
 - **P2 in part, not strongly.** The toy fences its ledger from the verifier "by name"

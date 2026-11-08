@@ -29,7 +29,7 @@ P8,c2,context,RULE-K,KIT:WORKFLOW.md:178,RULE-K,time-boxes
 P8,c3,counted,ADVICE,PR:METHOD.md:532,ADVICE,long parcels checkpoint progress the lead can read without asking
 P8,c4,counted,RULE-M,PR:METHOD.md:438,RULE-M,an agent owns every process it starts until it kills or hands it over
 P9,c1,counted,ABSENT,HF:FAILURE-MODES.md:161,ADJACENT,an authority is recorded with its execution mode
-P9,c2,counted,RULE-M,PR:METHOD.md:1126,RULE-M,prose may claim only the weakest mode still true
+P9,c2,counted,PART,PR:METHOD.md:1126,PART,prose may claim only the weakest mode still true
 P9,c3,counted,ABSENT,PR:METHOD.md:875,ABSENT;ADJACENT,a claim-vs-mechanism pass is a named step at each seal
 P9,c4,context,RULE-M,HF:METHOD.md:27,RULE-M,authority
 P10,c1,counted,ABSENT,,ABSENT,a claim registry names every surface carrying a load-bearing literal
