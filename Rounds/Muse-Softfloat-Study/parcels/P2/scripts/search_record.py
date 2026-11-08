@@ -1,6 +1,8 @@
 """Task 2, step 2: search the round's own record for each finding's terms.
 
-usage: python -I search_record.py --repos <repos> --terms scripts/escape_terms.txt --out data/escape_search.csv
+usage: python -I search_record.py --repos <repos> --terms scripts/escape_terms.txt --out data/escape_search.csv [--max N]
+--max N keeps at most N hits per finding in first_hits (default 100, enough for every finding here). The script sets
+its own output encoding to UTF-8, so it needs no -X utf8 or PYTHONIOENCODING.
 terms file: id@@regex (case-insensitive; the regex is mine, taken from the finding's own words).
 
 Corpus (the round's own verification and record, before the audits it is compared with):
@@ -18,11 +20,12 @@ LIB_AUDIT = "a49991f2603f2ebd55f6287be1d691de78cf5c57"
 
 
 def main():
+    sys.stdout.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser()
     ap.add_argument("--repos", required=True)
     ap.add_argument("--terms", required=True)
     ap.add_argument("--out", required=True)
-    ap.add_argument("--max", type=int, default=6)
+    ap.add_argument("--max", type=int, default=100)
     a = ap.parse_args()
     muse = os.path.join(a.repos, "Muse-Softfloat")
     corpus = []  # (label, [lines])

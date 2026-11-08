@@ -26,11 +26,11 @@ as its own clause. Dedupe, as the lead ruled: an obligation is listed once at th
 
 | marking | rows |
 |---|---|
-| done as written | 76 |
+| done as written | 75 |
 | adapted | 35 |
 | skipped | 6 |
 | not applicable | 6 |
-| unknown | 48 |
+| unknown | 49 |
 
 - **Skipped (6),** each with its reason as the record gives it: the clean-room rule that no clone sits beside the workspace
   (C110, impossible on the desktop, disclosed at `K:111-115`); the owner's fingerprint audit (C115, waived, `K:196-198`);
@@ -43,10 +43,10 @@ as its own clause. Dedupe, as the lead ruled: an obligation is listed once at th
   "lead-merge", `A2:271`, `AF:90`), key hashes before dispatch (ledger only for Waves 1 to 5, hash-only commits from
   Wave 6, `AS:93`), the stamp rule (the kit's `ledger.sh` was "sanctioned, not only", `H` row 13), models (Wonder for lead
   and parcels, Spark for verifiers) and the standing push permission (`L:36`).
-- **Unknown (48)** are mostly acts only a parcel's or verifier's own report would show (reading the ledger at three moments,
+- **Unknown (49)** are mostly acts only a parcel's or verifier's own report would show (reading the ledger at three moments,
   disclosing a crossing, not weakening an assertion). I sampled three verifier ledgers (`verifier-w4seam`, `-w4interval`,
   `-w4trig`) for the verifier duties and marked those DONE on that sample. I did not read the other verifier and parcel
-  reports in full.
+  reports in full. C130 (the board lock) moved from done to unknown: the lead's own entries say board runs were under the lock (12 mentions of board.lock in lead.md), but the seal audit finds no ledger/board.lock and no parcel or verifier ledger citing it (`audit-adherence-seal/report.md` l158-162), so the act rests on the lead's word alone.
 - **Reliance outside the 15 texts (not clauses, as the lead ruled).** The round leaned on obligations that live in the kit's
   `tools/` and `templates/`: `tools/plant.py` (the copies and their checks, `WORKFLOW.md:127-158`), `tools/ledger.sh`,
   `tools/round_metrics.py` (`AF:69`: selftest 43/0), and the templates for briefs and verifiers (`B w1-f32` follows the brief
@@ -84,22 +84,24 @@ verdict. `data/escapes.csv` holds my verdict for the 43 and for 36 slips from th
 - **M1 is the sharpest.** `scratch/verifier-readme/report.md:18` checked the README sentence "gated against Berkeley
   TestFloat 3e, MPFR, or an exact reference" against the COVERAGE `authority` column and marked it Agree. `tools/run.sh`
   at `a49991f` has no line naming TestFloat or Berkeley. Family C3 (declared configuration instead of executed work);
-  the mechanism was "check every claim in a document" (`ROLES.md:91`) and HF section 3. The verifier read the declared
+  the mechanism was "check every claim in a comment, a document or a commit message" (`ROLES.md:91`) and HF section 3. The verifier read the declared
   authority, not what the gate runs.
 - **M2** (stale site figures after the Wave 6 restamp): family F1/F2; mechanism HF section 4 and ParcelRound's "a figure
   the documents quote has a script in the tree" (`METHOD.md:228`). The restamp was by hand across README, BOARD and demo.
 - **M4** (the committed bench path): C3. The 60 s window is in the code (`board/read_until.py:37`).
-- **M3 and S5** are partly raised: `verifier-w5attr` named the same default-arm hazard in another context (`:41`), the
-  augmented-parcel verifier cleared the cast case (`:120`); the test-only counters were disclosed as a design fact.
+- **M3 and S5** are partly raised: `scratch/verifier-w5attr/report.md:41` named the same default-arm hazard in another context, the
+  augmented-parcel verifier cleared the cast case (`scratch/verifier-w5aug/report.md:120`); the test-only counters were disclosed as a design fact.
 - Escapes by family (all 33): F1 14 (the list kept in several places), C3 5, F2 2, E1 2, and 10 where no family fits
   (races, supply chain, stale lock). Mechanisms are named in `escapes.csv`.
 - **Adherence-audit slips (36 rows):** 24 not raised by the round's own record before the audit, 2 partly, 10 raised (the
   lead's self-records or disclosures, such as `L:181`, `L:565-575`, the merge-body disclosures). FAILURE-MODES.md fits these
   process slips poorly, and many carry "none fits".
 
-**Limits.** A no-hit search shows only that my terms did not match. The adherence auditors never opened `lead.md`, so their
-"not raised" calls rest on narrower sources than mine; for these 36 rows I rely on the auditors' own accounts of what the
-round had recorded except where I give a `lead.md` line. Judgements on the 43 are mine.
+**Limits.** A no-hit search shows only that my terms did not match. The final and seal adherence audits say they never opened `lead.md`
+(`audit-adherence-final/report.md` l12, `audit-adherence-seal/report.md` l11); the first read its 101 headings and sampled its bodies
+(`audit-adherence-2/report.md` l25). So their "not raised" calls rest on narrower sources than mine, most of all in the later two audits;
+for these 36 rows I rely on the auditors' own accounts of what the round had recorded except where I give a `lead.md` line.
+Judgements on the 43 are mine.
 
 ## Task 3: the lead's errors (Q4)
 
@@ -111,7 +113,7 @@ round had recorded except where I give a `lead.md` line. Judgements on the 43 ar
   (rows 4 to 7, in P0, `23a740f`), 1 SF-0 text, 5 the SF-2 draft (rows 17 to 21), 1 the lead's merge body and RECORD count.
 - **Who caught them** (the `by` field): rows 1 to 16 parcels, 17 to 21 verifier-sf2, 22 parcel-w5metrics, 23 a verifier, 24 the
   seal auditor. Of the other 23: the phase-0 and wave-0 verifiers, the rechecker, the wave auditors and adherence audits, and
-  the lead itself (E01, E08, E14, E17, E18, E20).
+  the lead itself (E02, E06, E07, E08, E14, E17, E18, E20); E01 was caught by verifier-phase0.
 - **Reached main or the seal.** The tininess defect and the `eq` mapping (rows 4 to 6) and a smoke control (row 7) were in P0,
   an ancestor of main, until `53acb1a` and `b37fb12`, both ancestors of the seal, so fixed before it. Brief faults did not
   reach main as far as the rows show. Record and claim faults did reach main and several stand at the seal as history with an
@@ -132,18 +134,18 @@ The report has 17 observations (`grep -c` of its numbered headings) and 18 propo
 
 | result | claims |
 |---|---|
-| holds | 46 |
-| partly | 11 |
+| holds | 45 |
+| partly | 12 |
 | doesn't hold | 1 |
 | unverifiable | 21 |
 
 - **Holds, by recount:** the cost table's tokens (1,418,065,198 = 1,410,803,658 + 7,261,540, recomputed from 128 usage rows),
-  190 planted and 182 caught (Wave 6 44/45, post-seal 20/20), 849 rows (783 and 66), 49 briefs rows, RECORD 1,400 lines,
+  190 planted and 182 caught (Wave 6 44/45, post-seal 20/20), 849 rows (783 and 66), 49 briefs rows, RECORD 1,400 lines at `a49991f` (1,418 at `b78af18`),
   216 of 216 commits with a Co-Authored-By line, the 228 Berkeley-named COVERAGE rows (117 + 111), 5 of 5 on the valid bench
   attempt, and the Wave 6 miss being a wave-label shape.
 - **Doesn't hold (1):** "the final adherence audit graded the lead/parcel distinction; it ran once, at the end" (obs 4):
   the first adherence audit graded it on 10-28 (`A2:32`) and three adherence audits ran.
-- **Partly (11)** include: "hash-first plant keys were never gamed across 190 plants" (obs 17): hash-first covers 70 of 190
+- **Partly (12)** include: the gate costs (cost table): the record shows standard at 54 s (`lead.md` l127) and 76 s (`scratch/audit-full/REPORT.md` l16), and no 55 s; "hash-first plant keys were never gamed across 190 plants" (obs 17): hash-first covers 70 of 190
   rows (`plant_keys.sha256`), and absence cannot show "never gamed"; "the README said each row is gated against Berkeley"
   (obs 8): the README names three alternatives; "every brief carried a memory ceiling" (obs 7): 18 of 101 brief files contain
   the phrase; "never reopened" (obs 17): the SF-2 P1 gloss was re-asked (`L:643-645`); "metrics from session records rather
@@ -157,7 +159,7 @@ The report has 17 observations (`grep -c` of its numbered headings) and 18 propo
 
 | table | figure | route 1 | route 2 |
 |---|---|---|---|
-| clauses.csv | 171 rows, marks 76/35/6/6/48 | `build_clauses.py` | `csv` read + `sort | uniq -c`: 171; 35 ADAPTED, 76 DONE, 6 NA, 6 SKIPPED, 48 UNKNOWN |
+| clauses.csv | 171 rows, marks 75/35/6/6/49 | `build_clauses.py` | `csv` read + `sort | uniq -c`: 171; 35 ADAPTED, 75 DONE, 6 NA, 6 SKIPPED, 49 UNKNOWN |
 | clauses.csv | cited lines | `build_clauses.py` fragment check | `sed -n` on C018 (`WORKFLOW.md:26`), C088, C110, C130, C154: each line holds the clause |
 | escapes.csv | 22 minor, 15 nits | `parse_full_audit.py` | `awk` over `REPORT.md` bullets under "Minor" and "Nits": 22 and 15; `grep -c '^[1-6]\. '`: 6 majors |
 | lead_errors.csv | 24 corrections rows | `build_lead_errors.py` | `git show b78af18:docs/metrics/corrections.jsonl | grep -c .`: 24 |
@@ -168,10 +170,10 @@ The report has 17 observations (`grep -c` of its numbered headings) and 18 propo
 
 - Curation is judgement. The 171 clauses are my reading of what counts as one obligation, and the marks are my reading of
   the record; the check scripts prove the citations, not the marks.
-- 48 clauses are UNKNOWN; most need parcel and verifier reports I did not read in full.
+- 49 clauses are UNKNOWN; most need parcel and verifier reports I did not read in full.
 - The escape search proves only that my terms did not match. The area files of the full audit hold detail I did not itemize.
-- I rely on the adherence audits' own accounts for several marks and escapes (marked "A2", "AF", "AS"); they did not read
-  `lead.md`.
+- I rely on the adherence audits' own accounts for several marks and escapes (marked "A2", "AF", "AS"); the first sampled `lead.md`,
+  the final and seal audits did not open it.
 - Brief errors: "match byte for byte" is false for four of six method copies; the clause count came to 171, not 40 to 120;
   "every corrections row is a fault in a brief, so the lead's" is false for 2 of 24 rows; the plan's "audit files" glob and the
   fenced folders (see the fence entry in my ledger).

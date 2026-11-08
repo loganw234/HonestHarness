@@ -9,7 +9,7 @@ CR05@@0@@Kit sha256 confirmed against the owner's retained copy@@@@L:643; R:1028
 CR06@@0@@Kit's fingerprint audit waived@@@@K:196-198@@holds@@"Waive fingerprint audit, the tooling wasnt finished"
 CR07@@0@@Format parity adopted@@@@L:427-433 (heading 2026-10-27 14:43:57)@@holds@@Owner format-parity rule, SF-1 revised
 CR08@@0@@Standing permission to push and merge@@@@L:36@@holds@@Owner word 2026-10-26 10:48:17
-CR09@@0@@Verifiers on Muse Spark from Wave 1 on; parcels mostly on Muse Wonder@@usage rows at a49991f by agent-name prefix and model: verifier-like (verifier, rechecker) / muse-spark-1.3;usage rows at a49991f by agent-name prefix and model: verifier-like (verifier, rechecker) / muse-wonder-full-1.0;usage rows at a49991f by agent-name prefix and model: parcel / muse-wonder-full-1.0@@usage.jsonl at a49991f, agent-name prefixes (my route; P1 owns the by-role counts)@@holds@@Verifier-like agents 43 Spark and 3 Wonder (one of the 3 is verifier-phase0 in Wave 0); parcel agents 25 Wonder and 2 Spark
+CR09@@0@@Verifiers on Muse Spark from Wave 1 on; parcels mostly on Muse Wonder@@usage rows at a49991f by agent-name prefix and model: verifier-like (verifier, rechecker) / muse-spark-1.3;usage rows at a49991f by agent-name prefix and model: verifier-like (verifier, rechecker) / muse-wonder-full-1.0;usage rows at a49991f by agent-name prefix and model: parcel / muse-wonder-full-1.0@@usage.jsonl at a49991f, agent-name prefixes (my route; P1 owns the by-role counts)@@holds@@Verifier-like agents 43 Spark and 3 Wonder (all three Wonder rows are Wave 0: verifier-phase0, rechecker-phase0, rechecker2-phase0); parcel agents 25 Wonder and 2 Spark
 CR10@@0@@Every AI commit carries a Co-Authored-By trailer naming its model@@a49991f.commits;a49991f.commits_without_trailer@@git log message bodies at a49991f@@holds@@0 of 216 commits lack a Co-Authored-By line; I did not check that each names the right model
 CR11@@0@@A public remote from day one@@@@K:26,38@@holds@@Public repository chosen at kickoff, 2026-10-26
 CR12@@0@@Six RP2040 boards under a lock file@@@@L has 12 mentions of board.lock (grep -c); L:676@@partly@@Boards (genuine plus five clones) and the lock are in the ledger; whether every board run took the lock is not checked
@@ -62,7 +62,7 @@ CR58@@15@@The owner said "it doesn't have to wait until the end of waves"@@@@sea
 CR59@@15@@Postseal agents are unrowed in usage and passes by cutoff design@@@@REPORT N20; R:1288 at a49991f@@holds@@N20: all 4 postseal parcels among 8 unrowed briefed agents
 CR60@@15@@1,418,065,198 billed tokens at the cutoff (input 1,410,803,658 + output 7,261,540)@@a49991f.usage.input;a49991f.usage.output;a49991f.usage.input_plus_output@@usage.jsonl at a49991f@@holds@@Recomputed from the 128 rows
 CR61@@16@@A licensing study answered PARTLY/PARTLY@@@@L:839@@holds@@Heading "Spark licence study PARTLY/PARTLY"
-CR62@@16@@Posture: repo cut silent, soundtrack on the owner's channel, safelisted@@@@L:856, L:866; AS:241@@holds@@Unlisted YouTube link in README and MUSIC.md
+CR62@@16@@Posture: repo cut silent, soundtrack on the owner's channel, safelisted@@@@L:856, L:866, L:846 ("repo cut silent for music licensing"); AS:241@@holds@@Unlisted YouTube link in README and MUSIC.md
 CR63@@17@@Hash-first plant keys were never gamed across 190 plants@@a49991f.plant_keys.hashes;a49991f.plant_keys.rows_covered@@plant_keys.sha256 and plants.jsonl at a49991f@@partly@@Hash-first covers 70 of 190 rows; for the other 120 the key hashes were not committed before dispatch (RECORD discloses it). "Never gamed" cannot be shown by absence
 CR64@@17@@The void attempt failed by absence, not by peeking@@@@scratch not opened@@unverifiable@@Same as CR18
 CR65@@17@@Detailed commit bodies with hashes made the audit reconstructible@@@@A2:253; AS:236@@holds@@Auditors cite bodies carrying counts, hashes and ledger stamps
@@ -72,10 +72,10 @@ CR68@@18@@Cost table: 128 usage rows, 131 passes@@a49991f.rows.usage;a49991f.row
 CR69@@18@@190 planted, 182 caught (Wave 6 44/45; post-seal 20/20)@@a49991f.plants.caught;a49991f.plants.wave.wave6;a49991f.plants.wave.postseal@@plants.jsonl at a49991f@@holds@@Counted at a49991f
 CR70@@18@@49 rows in briefs.jsonl@@a49991f.rows.briefs@@docs/metrics/briefs.jsonl at a49991f@@holds@@Counted
 CR71@@18@@Wall clock 2026-10-26 to the 2026-11-01 seal, 7 days@@957fdae.date@@git log at 957fdae; library first commit date (lead's first look: 2026-10-26 10:50)@@holds@@Calendar days 10-26 to 11-01 inclusive are 7
-CR72@@18@@docs/RECORD.md about 1,400 lines@@a49991f.record.lines@@docs/RECORD.md at a49991f@@holds@@1,400 lines
+CR72@@18@@docs/RECORD.md about 1,400 lines@@a49991f.record.lines@@docs/RECORD.md at a49991f (the commit the report cites); b78af18 has 1,418@@holds@@1,400 lines at a49991f
 CR73@@18@@audit-bundle-v2: 1,841 frozen files, 8.6 MB@@@@fence@@unverifiable@@Inside the fenced bundle
 CR74@@18@@The lead's ledger about 880 lines@@lead.md line of the 'method case report written' heading;lead.md lines before the full audit sweep heading@@ledger/lead.md@@holds@@878 lines before the full-audit entry; the case-report entry begins at line 884
-CR75@@18@@Gate costs: smoke about 25 s, standard 55 to 76 s@@@@REPORT.md:17-20 ("standard PASS (76 s) and smoke PASS (25 s)"); L:127 (standard 54s)@@holds@@Both ends appear in the record
+CR75@@18@@Gate costs: smoke about 25 s, standard 55 to 76 s@@@@scratch/audit-full/REPORT.md:16 ("standard PASS (76 s) and smoke PASS (25 s)"); L:127 (standard 54s)@@partly@@The record shows 54 s for standard (L:127) and 76 s (REPORT line 16); 55 is the case report's own figure and appears in no record I read. Smoke 25 s holds (REPORT line 16)
 CR76@@18@@Exhaustive one-time sweeps ran hours@@@@not checked@@unverifiable@@Durations are in parcel reports I did not read
 CR77@@18@@The owner was away about 8 h mid-project with the queue running on standing permission@@@@L:639@@holds@@"heading out ~8 h; continue as usual"
 CR78@@18@@The film's closing visual compares the owner's messages with the token total@@@@media not read@@unverifiable@@The film is a media file
